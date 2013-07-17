@@ -33,15 +33,20 @@
     <Reference Include="Machine.Specifications">
       <HintPath>..\packages\Machine.Specifications.0.5.12\lib\net40\Machine.Specifications.dll</HintPath>
     </Reference>
+    <Reference Include="System" />
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions\When_I_try_to_calculate_an_equation_and_register_for_completion.cs" />
     <Compile Include="Extensions\When_I_try_to_calculate_an_equation_and_register_for_failure.cs" />
     <Compile Include="Extensions\When_I_try_to_calculate_an_equation_and_register_for_success.cs" />
+    <Compile Include="Extensions\When_I_try_to_calculate_an_equation_and_would_calculate_something_else_if_the_calculation_fails.cs" />
+    <Compile Include="Extensions\When_I_try_to_calculate_an_equation_and_would_return_something_else_if_the_calculation_fails.cs" />
+    <Compile Include="Extensions\When_I_try_to_divide_by_zero_and_return_something_else_instead.cs" />
     <Compile Include="Extensions\When_I_try_to_delete_a_file_and_register_for_completion.cs" />
     <Compile Include="Extensions\When_I_try_to_delete_a_file_and_register_for_failure.cs" />
     <Compile Include="Extensions\When_I_try_to_delete_a_file_and_register_for_success.cs" />
+    <Compile Include="Extensions\When_I_try_to_divide_by_zero_and_calculate_something_else_instead.cs" />
     <Compile Include="Extensions\When_I_try_to_divide_by_zero_and_register_for_completion.cs" />
     <Compile Include="Extensions\When_I_try_to_divide_by_zero_and_register_for_success.cs" />
     <Compile Include="Extensions\When_I_try_to_divide_by_zero_and_register_for_failure.cs" />

@@ -29,5 +29,26 @@ namespace NiceTry.Extensions {
             if (result.IsFailure)
                 runWhenFailure(result.Error);
         }
+
+        public static ITry OrElse(this ITry result,
+                                  Action orElse) {
+            return result.IsFailure
+                       ? Try.To(orElse)
+                       : result;
+        }
+
+        public static ITry<TValue> OrElse<TValue>(this ITry<TValue> result,
+                                                  Func<TValue> orElse) {
+            return result.IsFailure
+                       ? Try.To(orElse)
+                       : result;
+        }
+
+        public static ITry<TValue> OrElse<TValue>(this ITry<TValue> result,
+                                                  TValue orElse) {
+            return result.IsFailure
+                       ? new Success<TValue>(orElse)
+                       : result;
+        }
     }
 }

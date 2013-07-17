@@ -1,7 +1,7 @@
 ﻿using System;
 
 namespace NiceTry {
-    internal sealed class Success : ITry {
+    public sealed class Success : ITry {
         public bool IsSuccess {
             get { return true; }
         }
@@ -15,7 +15,7 @@ namespace NiceTry {
         }
     }
 
-    internal sealed class Success<TValue> : ITry<TValue> {
+    public sealed class Success<TValue> : ITry<TValue> {
         public Success(TValue value) {
             Value = value;
         }

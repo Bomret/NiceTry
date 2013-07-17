@@ -1,7 +1,7 @@
 ﻿using System;
 
 namespace NiceTry {
-    internal sealed class Failure : ITry {
+    public sealed class Failure : ITry {
         public Failure(Exception error) {
             Error = error;
         }
@@ -17,7 +17,7 @@ namespace NiceTry {
         public Exception Error { get; private set; }
     }
 
-    internal sealed class Failure<TValue> : ITry<TValue> {
+    public sealed class Failure<TValue> : ITry<TValue> {
         public Failure(Exception error) {
             Error = error;
         }
