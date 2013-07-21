@@ -1,6 +1,6 @@
 # NiceTry
 
-A (yet incomplete) port of the Try type of the Scala programming language () to the .NET platform, and some additions.
+A (yet incomplete) port of the Try type of the Scala programming language (http://www.scala-lang.org/) to the .NET platform, and some additions.
 
 ## Example
 
