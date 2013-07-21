@@ -30,7 +30,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\net35\</OutputPath>
+    <OutputPath>bin\Release\net45\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <DefineConstants Condition=" '$(TargetFrameworkVersion)' == 'v3.5' ">NET35</DefineConstants>
     <DefineConstants Condition=" '$(TargetFrameworkVersion)' == 'v4.0' ">NET40</DefineConstants>
