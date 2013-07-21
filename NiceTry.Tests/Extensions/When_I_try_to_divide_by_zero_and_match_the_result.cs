@@ -8,6 +8,8 @@ namespace NiceTry.Tests.Extensions {
         static Func<int> _divideByZero;
         static bool _successCallbackExecuted;
         static Exception _error;
+        static Action<int> _whenSuccess;
+        static Action<Exception> _whenFailure;
 
         Establish context = () => {
             _divideByZero = () => {
@@ -26,8 +28,5 @@ namespace NiceTry.Tests.Extensions {
         It should_execute_the_failure_callback = () => _error.ShouldNotBeNull();
 
         It should_not_execute_the_success_callback = () => _successCallbackExecuted.ShouldBeFalse();
-
-        static Action<int> _whenSuccess;
-        static Action<Exception> _whenFailure;
     }
 }
