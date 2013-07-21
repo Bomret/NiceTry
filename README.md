@@ -49,19 +49,19 @@ Try is a wrapper around a simple try/catch statement. It tries to execute the gi
 var result = Try.To(() => 2 + 4);
 ```
 
-The above example would evaluate the anonymous function '() => 2 + 4' and, since no exception will be thrown, return a Success of type int and store it in the variable 'result'. The result of the calculation is stored inside the Success and can be accessed using the 'Value' property:
+The above example would evaluate the anonymous function *() => 2 + 4* and, since no exception will be thrown, return a Success of type int and store it in the variable *result*. The result of the calculation is stored inside the Success and can be accessed using the *Value* property:
 
 ```csharp
 var six = result.Value;
 ```
 
-To find out if 'result' represents a Success or Failure it provides two boolean properties: 'IsSuccess' and 'IsFailure'. To be safe, you can either check those properties first or use the corresponding match extension:
+To find out if *result* represents a Success or Failure it provides two boolean properties: *IsSuccess* and *IsFailure*. To be safe, you can either check those properties first or use the corresponding match extension:
 
 ```csharp
 result.WhenSuccess(i => _six = i);
 ```
 
-If the above example would have thrown an exception, it could be accessed by the 'Error' property or the 'WhenFailure' extension:
+If the above example would have thrown an exception, it could be accessed by the *Error* property or the *WhenFailure* extension:
 
 ```csharp
 var error = result.Error;
@@ -113,14 +113,14 @@ Match allows to use a pattern matching like callback registration. The first fun
 var five = Try.To(() => 2 + 3).Get();
 ```
 
-Get is the most straight forward extension. It returns the value if the result is a Success or rethrows the exception, if one was encountered. In the above example *five* would be 5.
+Get is the most straight forward extension. It returns the value if the result is a Success or rethrows the exception, if one was encountered. In the above example *five* would be *5*.
 
 ### GetOrElse
 ```csharp
 var five = Try.To(() => 2 + 3).GetOrElse(-1);
 ```
 
-GetOrElse either returns the value, if the Try returned a Success, or the else value, if the Try returned a Failure. In the above example *five* would be 5. It would have been -1 if *() => 2 + 3* had thrown an exception.
+GetOrElse either returns the value, if the Try returned a Success, or the else value, if the Try returned a Failure. In the above example *five* would be *5*. It would have been *-1* if *() => 2 + 3* had thrown an exception.
 
 ## Combinators
 This library provides a growing number of combinators that empowers you to write concise and bloat-free code for error handling. Some of them, like **Map** and **OrElse** have already been shown in the topmost example.
@@ -145,7 +145,7 @@ var result = Try.To(() => 2 + 3)
 				.Map(i => i.ToString());
 ```
 
-Map allows to apply a function to the value of a Success. In the above example *result* would be a Success<string> with Value *'5'*.
+Map allows to apply a function to the value of a Success. In the above example *result* would be a Success<string> with Value *"5"*.
 
 ### Recover
 ```csharp
@@ -163,7 +163,7 @@ var result = Try.To(() => 2 + 3))
 					e => e.Message);
 ```
 
-Can be used to transform the result of a Try. The first function parameter transforms the resulting value if it is a Success, the second works on the exception if it is a Failure. In the above example *result* would be a Success<string> with Value *'5'*.
+Can be used to transform the result of a Try. The first function parameter transforms the resulting value if it is a Success, the second works on the exception if it is a Failure. In the above example *result* would be a Success<string> with Value *"5"*.
 
 ## Difference between extensions and combinators
 The difference between an extension and a combinator is that a combinator always returns a Succes or Failure and an extension is either void or returns something different than a Success or Failure.
