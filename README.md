@@ -2,6 +2,8 @@
 
 A (yet incomplete) port of the Try type of the Scala programming language (http://www.scala-lang.org/) to the .NET platform, and some additions.
 
+Also available on NuGet (http://www.nuget.org/packages/NiceTry/).
+
 ## Example
 
 Reading the content of a url as string and printing it to the console. If the user specifies an invalid url, a fallback url will be used.
