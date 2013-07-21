@@ -3,7 +3,8 @@ using Machine.Specifications;
 using NiceTry.Extensions;
 
 namespace NiceTry.Tests.Extensions {
-    internal class When_I_try_to_calculate_an_equation_and_would_return_something_else_if_the_calculation_fails {
+    [Subject(typeof (TryExtensions))]
+    internal class When_I_try_to_calculate_an_equation_and_would_return_a_try_that_contains_a_different_value_if_the_calculation_fails {
         static ITry<int> _result;
         static int _expectedResult;
         static Func<int> _add;

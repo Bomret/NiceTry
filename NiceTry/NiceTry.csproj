@@ -38,6 +38,7 @@
     <Compile Include="Failure.cs" />
     <Compile Include="ITry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Retry.cs" />
     <Compile Include="Success.cs" />
     <Compile Include="Try.cs" />
   </ItemGroup>

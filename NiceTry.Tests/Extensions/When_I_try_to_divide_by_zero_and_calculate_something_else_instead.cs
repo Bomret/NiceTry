@@ -3,6 +3,7 @@ using Machine.Specifications;
 using NiceTry.Extensions;
 
 namespace NiceTry.Tests.Extensions {
+    [Subject(typeof (TryExtensions))]
     internal class When_I_try_to_divide_by_zero_and_calculate_something_else_instead {
         static Func<int> _divideByZero;
         static ITry<int> _result;

@@ -3,7 +3,8 @@ using Machine.Specifications;
 using NiceTry.Extensions;
 
 namespace NiceTry.Tests.Extensions {
-    internal class When_I_try_to_divide_by_zero_and_return_something_else_instead {
+    [Subject(typeof (TryExtensions))]
+    internal class When_I_try_to_divide_by_zero_and_return_a_try_that_contains_a_different_value_instead {
         static Func<int> _divideByZero;
         static ITry<int> _result;
         static int _expectedResult;
