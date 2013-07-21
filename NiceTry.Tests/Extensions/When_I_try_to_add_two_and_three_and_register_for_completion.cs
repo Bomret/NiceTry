@@ -1,19 +1,21 @@
 ﻿using System;
 using Machine.Specifications;
+using NiceTry.Extensions;
 
-namespace NiceTry.Tests {
-    [Subject(typeof (Try))]
-    public class When_I_try_to_calculate_an_equation {
-        static Func<int> _calculateEquation;
+namespace NiceTry.Tests.Extensions {
+    [Subject(typeof (TryExtensions))]
+    internal class When_I_try_to_add_two_and_three_and_register_for_completion {
+        static Func<int> _addTwoAndThree;
         static ITry<int> _result;
         static int _expectedResult;
 
         Establish context = () => {
-            _calculateEquation = () => 2 + 3;
-            _expectedResult = _calculateEquation();
+            _addTwoAndThree = () => 2 + 3;
+            _expectedResult = _addTwoAndThree();
         };
 
-        Because of = () => _result = Try.To(_calculateEquation);
+        Because of = () => Try.To(_addTwoAndThree)
+                              .WhenComplete(result => _result = result);
 
         It should_contain_the_expected_result_in_the_success = () => _result.Value.ShouldEqual(_expectedResult);
 

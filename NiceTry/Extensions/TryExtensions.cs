@@ -2,6 +2,23 @@
 
 namespace NiceTry.Extensions {
     public static class TryExtensions {
+        public static void Match(this ITry result, Action whenSuccess, Action<Exception> whenFailure) {
+            if (result.IsSuccess)
+                whenSuccess();
+            else {
+                whenFailure(result.Error);
+            }
+        }
+
+        public static void Match<TValue>(this ITry<TValue> result, Action<TValue> whenSuccess,
+                                         Action<Exception> whenFailure) {
+            if (result.IsSuccess)
+                whenSuccess(result.Value);
+            else {
+                whenFailure(result.Error);
+            }
+        }
+
         public static void WhenComplete(this ITry result, Action<ITry> runWhenComplete) {
             runWhenComplete(result);
         }
@@ -41,45 +58,6 @@ namespace NiceTry.Extensions {
             return t.IsFailure
                        ? elseValue
                        : t.Value;
-        }
-
-        public static ITry OrElse(this ITry result,
-                                  Action orElse) {
-            return result.IsFailure
-                       ? Try.To(orElse)
-                       : result;
-        }
-
-        public static ITry<TValue> OrElse<TValue>(this ITry<TValue> result,
-                                                  Func<TValue> orElse) {
-            return result.IsFailure
-                       ? Try.To(orElse)
-                       : result;
-        }
-
-        public static ITry<TValue> OrElse<TValue>(this ITry<TValue> result,
-                                                  TValue orElse) {
-            return result.IsFailure
-                       ? new Success<TValue>(orElse)
-                       : result;
-        }
-
-        public static ITry<TNewValue> Map<TValue, TNewValue>(this ITry<TValue> t, Func<TValue, TNewValue> func) {
-            return t.IsFailure
-                       ? new Failure<TNewValue>(t.Error)
-                       : Try.To(() => func(t.Value));
-        }
-
-        public static ITry<TValue> Recover<TValue>(this ITry<TValue> t, Func<Exception, TValue> func) {
-            return t.IsFailure
-                       ? Try.To(() => func(t.Error))
-                       : t;
-        }
-
-        public static ITry Recover(this ITry t, Action<Exception> recover) {
-            return t.IsFailure
-                       ? Try.To(() => recover(t.Error))
-                       : t;
         }
     }
 }

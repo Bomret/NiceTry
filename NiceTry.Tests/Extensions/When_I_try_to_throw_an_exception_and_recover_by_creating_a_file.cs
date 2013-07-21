@@ -4,8 +4,8 @@ using Machine.Specifications;
 using NiceTry.Extensions;
 
 namespace NiceTry.Tests.Extensions {
-    [Subject(typeof (TryExtensions))]
-    internal class When_I_try_to_execute_an_Action_that_throws_an_exception_and_recover_by_creating_a_file {
+    [Subject(typeof (Combinators))]
+    internal class When_I_try_to_throw_an_exception_and_recover_by_creating_a_file {
         static ITry _result;
         static Action _throwException;
         static Action<Exception> _byCreatingFile;

@@ -4,7 +4,7 @@ using NiceTry.Extensions;
 
 namespace NiceTry.Tests.Extensions {
     [Subject(typeof (TryExtensions))]
-    public class When_I_try_to_execute_an_Action_that_throws_an_exception_and_register_for_success {
+    public class When_I_try_to_throw_an_exception_and_register_for_success {
         static Action _throwException;
         static bool _successCallbackExecuted;
 

@@ -3,11 +3,12 @@ using Machine.Specifications;
 using NiceTry.Extensions;
 
 namespace NiceTry.Tests.Extensions {
-    [Subject(typeof (TryExtensions))]
-    internal class When_I_try_to_divide_by_zero_and_return_a_try_that_contains_a_different_value_instead {
+    [Subject(typeof (Combinators))]
+    internal class When_I_try_to_divide_by_zero_and_add_one_and_three_instead {
         static Func<int> _divideByZero;
         static ITry<int> _result;
-        static int _expectedResult;
+        static int _four;
+        static Func<int> _addOneAndThree;
 
         Establish context = () => {
             _divideByZero = () => {
@@ -16,16 +17,16 @@ namespace NiceTry.Tests.Extensions {
                 return 5 / zero;
             };
 
-            _expectedResult = 0;
+            _addOneAndThree = () => 1 + 3;
+
+            _four = _addOneAndThree();
         };
 
         Because of = () => _result = Try.To(_divideByZero)
-                                        .OrElse(_expectedResult);
+                                        .OrElse(_addOneAndThree);
 
-        It should_not_return_a_failure = () => _result.IsFailure.ShouldBeFalse();
+        It should_contain_four_in_the_success = () => _result.Value.ShouldEqual(_four);
 
         It should_return_a_success = () => _result.IsSuccess.ShouldBeTrue();
-
-        It should_return_the_expected_else_value = () => _result.Value.ShouldEqual(_expectedResult);
     }
 }

@@ -4,10 +4,10 @@ using NiceTry.Extensions;
 
 namespace NiceTry.Tests.Extensions {
     [Subject(typeof (TryExtensions))]
-    internal class When_I_try_to_divide_by_zero_and_return_a_different_value_else_instead {
+    internal class When_I_try_to_divide_by_zero_and_return_zero_instead {
         static Func<int> _divideByZero;
         static int _result;
-        static int _expectedResult;
+        static int _zero;
 
         Establish context = () => {
             _divideByZero = () => {
@@ -16,12 +16,12 @@ namespace NiceTry.Tests.Extensions {
                 return 5 / zero;
             };
 
-            _expectedResult = 0;
+            _zero = 0;
         };
 
         Because of = () => _result = Try.To(_divideByZero)
-                                        .GetOrElse(_expectedResult);
+                                        .GetOrElse(_zero);
 
-        It should_return_the_expected_else_value = () => _result.ShouldEqual(_expectedResult);
+        It should_return_zero = () => _result.ShouldEqual(_zero);
     }
 }

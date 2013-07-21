@@ -4,8 +4,8 @@ using Machine.Specifications;
 using NiceTry.Extensions;
 
 namespace NiceTry.Tests.Extensions {
-    [Subject(typeof (TryExtensions))]
-    internal class When_I_try_to_divide_by_zero_and_map_a_function_the_result {
+    [Subject(typeof (Combinators))]
+    internal class When_I_try_to_divide_by_zero_and_would_convert_the_result_to_a_string {
         static Func<int> _divideByZero;
         static Func<int, string> _toString;
         static ITry<string> _result;

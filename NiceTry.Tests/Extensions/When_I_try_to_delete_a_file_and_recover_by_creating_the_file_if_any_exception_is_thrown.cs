@@ -4,7 +4,7 @@ using Machine.Specifications;
 using NiceTry.Extensions;
 
 namespace NiceTry.Tests.Extensions {
-    [Subject(typeof (TryExtensions))]
+    [Subject(typeof (Combinators))]
     internal class When_I_try_to_delete_a_file_and_recover_by_creating_the_file_if_any_exception_is_thrown {
         static ITry _result;
         static Action _deleteFile;
@@ -25,5 +25,7 @@ namespace NiceTry.Tests.Extensions {
         It should_delete_the_file = () => File.Exists(_testFile).ShouldBeFalse();
 
         It should_return_a_success = () => _result.IsSuccess.ShouldBeTrue();
+
+        Cleanup stuff = () => File.Delete(_testFile);
     }
 }

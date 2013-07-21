@@ -12,15 +12,12 @@ namespace NiceTry.Tests.Extensions {
 
         Establish context = () => {
             _testFile = Path.GetTempFileName();
+
             _deleteFile = () => File.Delete(_testFile);
         };
 
         Because of = () => Try.To(_deleteFile)
                               .WhenComplete(result => _result = result);
-
-        It should_not_contain_an_exception = () => _result.Error.ShouldBeNull();
-
-        It should_not_return_a_failure = () => _result.IsFailure.ShouldBeFalse();
 
         It should_return_a_success = () => _result.IsSuccess.ShouldBeTrue();
 

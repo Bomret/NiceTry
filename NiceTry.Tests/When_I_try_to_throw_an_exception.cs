@@ -1,10 +1,9 @@
 ﻿using System;
 using Machine.Specifications;
-using NiceTry.Extensions;
 
-namespace NiceTry.Tests.Extensions {
-    [Subject(typeof (TryExtensions))]
-    public class When_I_try_to_execute_an_Action_that_throws_an_exception_and_register_for_completion {
+namespace NiceTry.Tests {
+    [Subject(typeof (Try))]
+    public class When_I_try_to_throw_an_exception {
         static ITry _result;
         static Action _throwException;
         static Exception _expectedException;
@@ -15,10 +14,9 @@ namespace NiceTry.Tests.Extensions {
             _throwException = () => { throw _expectedException; };
         };
 
-        Because of = () => Try.To(_throwException)
-                              .WhenComplete(result => _result = result);
+        Because of = () => _result = Try.To(_throwException);
 
-        It should_contain_the_expected_exception_in_the_success = () => _result.Error.ShouldEqual(_expectedException);
+        It should_contain_the_exception_in_the_failure = () => _result.Error.ShouldEqual(_expectedException);
 
         It should_not_return_a_success = () => _result.IsSuccess.ShouldBeFalse();
 

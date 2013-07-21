@@ -19,10 +19,10 @@ namespace NiceTry.Tests {
 
         Because of = () => _result = Try.To(_divideByZero);
 
-        It should_contain_a_value_that_matches_the_value_types_default = () => _result.Value.ShouldEqual(default(int));
-
-        It should_contain_the_expected_exception_in_the_success =
+        It should_contain_a_DivideByZeroException_in_the_failure =
             () => _result.Error.ShouldBeOfType<DivideByZeroException>();
+
+        It should_contain_a_value_that_matches_the_value_types_default = () => _result.Value.ShouldEqual(default(int));
 
         It should_not_return_a_success = () => _result.IsSuccess.ShouldBeFalse();
 

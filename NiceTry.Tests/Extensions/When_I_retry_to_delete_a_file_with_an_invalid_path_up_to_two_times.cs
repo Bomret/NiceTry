@@ -5,12 +5,12 @@ using Machine.Specifications;
 namespace NiceTry.Tests.Extensions {
     [Subject(typeof (Retry))]
     internal class When_I_retry_to_delete_a_file_with_an_invalid_path_up_to_two_times {
-        static Action _deleteFile;
+        static Action _deleteFileWithInvalidPath;
         static ITry _result;
 
-        Establish context = () => { _deleteFile = () => File.Delete(string.Empty); };
+        Establish context = () => _deleteFileWithInvalidPath = () => File.Delete(string.Empty);
 
-        Because of = () => _result = Retry.To(_deleteFile);
+        Because of = () => _result = Retry.To(_deleteFileWithInvalidPath);
 
         It should_return_a_failure = () => _result.IsFailure.ShouldBeTrue();
     }

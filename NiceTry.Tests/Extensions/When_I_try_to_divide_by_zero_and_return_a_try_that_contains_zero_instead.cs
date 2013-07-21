@@ -4,10 +4,10 @@ using NiceTry.Extensions;
 
 namespace NiceTry.Tests.Extensions {
     [Subject(typeof (Combinators))]
-    internal class When_I_try_to_divide_by_zero_and_recover_with_zero_if_any_exception_is_thrown {
-        static ITry<int> _result;
+    internal class When_I_try_to_divide_by_zero_and_return_a_try_that_contains_zero_instead {
         static Func<int> _divideByZero;
-        static Func<Exception, int> _withZero;
+        static ITry<int> _result;
+        static int _zero;
 
         Establish context = () => {
             _divideByZero = () => {
@@ -16,14 +16,13 @@ namespace NiceTry.Tests.Extensions {
                 return 5 / zero;
             };
 
-            _withZero = error => 0;
+            _zero = 0;
         };
 
         Because of = () => _result = Try.To(_divideByZero)
-                                        .Recover(_withZero);
+                                        .OrElse(_zero);
 
-        It should_contain_zero_in_the_success = () => _result.Value.ShouldEqual(0);
-
+        It should_contain_zero_in_the_success = () => _result.Value.ShouldEqual(_zero);
         It should_return_a_success = () => _result.IsSuccess.ShouldBeTrue();
     }
 }
