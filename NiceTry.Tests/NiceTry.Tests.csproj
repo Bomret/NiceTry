@@ -52,6 +52,8 @@
     <Compile Include="Extensions\When_I_retry_to_delete_a_file_up_to_two_times_which_succeeds_the_second_time.cs" />
     <Compile Include="Extensions\When_I_retry_to_delete_a_file_with_an_invalid_path_up_to_two_times.cs" />
     <Compile Include="Extensions\When_I_retry_to_divide_by_zero_up_to_two_times.cs" />
+    <Compile Include="Extensions\When_I_try_to_add_three_to_a_failure.cs" />
+    <Compile Include="Extensions\When_I_try_to_add_three_to_a_success_that_contains_two.cs" />
     <Compile Include="Extensions\When_I_try_to_add_two_and_three_and_convert_the_result_to_a_string.cs" />
     <Compile Include="Extensions\When_I_try_to_add_two_and_three_and_get_the_result.cs" />
     <Compile Include="Extensions\When_I_try_to_add_two_and_three_and_match_the_result.cs" />
@@ -66,6 +68,7 @@
     <Compile Include="Extensions\When_I_try_to_delete_a_file_and_match_the_result.cs" />
     <Compile Include="Extensions\When_I_try_to_delete_a_file_and_recover_by_creating_the_file_if_any_exception_is_thrown.cs" />
     <Compile Include="Extensions\When_I_try_to_delete_a_file_and_transform_the_result_to_a_failure.cs" />
+    <Compile Include="Extensions\When_I_try_to_divide_a_try_that_contains_two_by_zero.cs" />
     <Compile Include="Extensions\When_I_try_to_divide_by_zero_and_get_the_result.cs" />
     <Compile Include="Extensions\When_I_try_to_divide_by_zero_and_match_the_result.cs" />
     <Compile Include="Extensions\When_I_try_to_divide_by_zero_and_transform_the_result_to_a_success_containing_a_message.cs" />

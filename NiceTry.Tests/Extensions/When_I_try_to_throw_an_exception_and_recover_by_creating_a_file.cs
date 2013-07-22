@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using Machine.Specifications;
-using NiceTry.Extensions;
 
 namespace NiceTry.Tests.Extensions {
     [Subject(typeof (Combinators))]

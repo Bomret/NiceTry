@@ -1,9 +1,8 @@
 ﻿using System;
 using Machine.Specifications;
-using NiceTry.Extensions;
 
 namespace NiceTry.Tests.Extensions {
-    [Subject(typeof (TryExtensions))]
+    [Subject(typeof (NiceTry.Extensions))]
     internal class When_I_try_to_divide_by_zero_and_register_for_completion {
         static Func<int> _divideByZero;
         static bool _failureCallbackExecuted;

@@ -1,6 +1,6 @@
-﻿using System;
+using System;
 
-namespace NiceTry.Extensions {
+namespace NiceTry {
     public static class Combinators {
         public static ITry OrElse(this ITry result,
                                   Action orElse) {
@@ -29,6 +29,12 @@ namespace NiceTry.Extensions {
                        : Try.To(() => func(t.Value));
         }
 
+        public static ITry<TNewValue> FlatMap<TValue, TNewValue>(this ITry<TValue> t, Func<TValue, ITry<TNewValue>> func) {
+            return t.IsFailure
+                       ? new Failure<TNewValue>(t.Error)
+                       : func(t.Value);
+        }
+
         public static ITry Recover(this ITry t, Action<Exception> recover) {
             return t.IsFailure
                        ? Try.To(() => recover(t.Error))
@@ -55,6 +61,16 @@ namespace NiceTry.Extensions {
             return result.IsSuccess
                        ? whenSuccess(result.Value)
                        : whenFailure(result.Error);
+        }
+
+        public static ITry<TValue> Filter<TValue>(this ITry<TValue> result,
+                                                  Func<TValue, bool> filter) {
+            if (result.IsFailure)
+                return result;
+
+            return result.FlatMap(v => filter(v)
+                                           ? result
+                                           : new Failure<TValue>(new InvalidOperationException()));
         }
     }
 }

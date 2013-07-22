@@ -1,9 +1,8 @@
 ﻿using System;
 using Machine.Specifications;
-using NiceTry.Extensions;
 
 namespace NiceTry.Tests.Extensions {
-    [Subject(typeof (TryExtensions))]
+    [Subject(typeof (NiceTry.Extensions))]
     public class When_I_try_to_throw_an_exception_and_register_for_success {
         static Action _throwException;
         static bool _successCallbackExecuted;

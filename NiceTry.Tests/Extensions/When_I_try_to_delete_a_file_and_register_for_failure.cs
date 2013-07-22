@@ -1,10 +1,9 @@
 ﻿using System;
 using System.IO;
 using Machine.Specifications;
-using NiceTry.Extensions;
 
 namespace NiceTry.Tests.Extensions {
-    [Subject(typeof (TryExtensions))]
+    [Subject(typeof (NiceTry.Extensions))]
     internal class When_I_try_to_delete_a_file_and_register_for_failure {
         static Action _deleteFile;
         static string _testFile;
