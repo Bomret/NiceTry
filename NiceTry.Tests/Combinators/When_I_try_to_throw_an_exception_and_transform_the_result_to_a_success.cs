@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 using Machine.Specifications;
 
-namespace NiceTry.Tests.Extensions {
-    [Subject(typeof (Combinators))]
+namespace NiceTry.Tests.Combinators {
+    [Subject(typeof (NiceTry.Combinators))]
     internal class When_I_try_to_throw_an_exception_and_transform_the_result_to_a_success {
         static Func<ITry> _returnFailure;
         static Func<Exception, ITry> _fromErrorToSuccess;

@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 using Machine.Specifications;
 
-namespace NiceTry.Tests.Extensions {
-    [Subject(typeof (Combinators))]
+namespace NiceTry.Tests.Combinators {
+    [Subject(typeof (NiceTry.Combinators))]
     internal class When_I_try_to_divide_a_try_that_contains_two_by_zero {
         static ITry<int> twoSuccess;
         static Func<int, ITry<int>> _tryToDivideByZero;

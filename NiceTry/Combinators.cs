@@ -64,13 +64,15 @@ namespace NiceTry {
         }
 
         public static ITry<TValue> Filter<TValue>(this ITry<TValue> result,
-                                                  Func<TValue, bool> filter) {
+                                                  Func<TValue, bool> predicate) {
             if (result.IsFailure)
                 return result;
 
-            return result.FlatMap(v => filter(v)
-                                           ? result
-                                           : new Failure<TValue>(new InvalidOperationException()));
+            return result.FlatMap(
+                v => predicate(v)
+                         ? result
+                         : new Failure<TValue>(
+                               new InvalidOperationException("The given predicate does not hold for this try.")));
         }
     }
 }

@@ -7,9 +7,8 @@ namespace NiceTry {
                                  Action<Exception> whenFailure) {
             if (result.IsSuccess)
                 whenSuccess();
-            else {
+            else
                 whenFailure(result.Error);
-            }
         }
 
         public static void Match<TValue>(this ITry<TValue> result,
@@ -17,9 +16,8 @@ namespace NiceTry {
                                          Action<Exception> whenFailure) {
             if (result.IsSuccess)
                 whenSuccess(result.Value);
-            else {
+            else
                 whenFailure(result.Error);
-            }
         }
 
         public static void WhenComplete(this ITry result,
@@ -64,7 +62,7 @@ namespace NiceTry {
         }
 
         public static TValue GetOrElse<TValue>(this ITry<TValue> t,
-            TValue elseValue) {
+                                               TValue elseValue) {
             return t.IsFailure
                        ? elseValue
                        : t.Value;

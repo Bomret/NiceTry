@@ -1,5 +1,5 @@
 # NiceTry
-A (yet incomplete) port of the Try type of the Scala programming language (http://www.scala-lang.org/) to the .NET platform, and some additions.
+A port of the Try type of the Scala programming language (http://www.scala-lang.org/) to the .NET platform, and some additions.
 
 Also available on NuGet (http://www.nuget.org/packages/NiceTry/).
 
@@ -23,7 +23,7 @@ Try.To(() => new Uri(Console.ReadLine()))
 ```
 
 ## Retry
-A buffed Try that retries the given work for up to the amount of given retries:
+A buffed Try that retries the given work for up to the amount of given times:
 
 ```csharp
 Retry.To(() => new Uri(Console.ReadLine()), 3)
@@ -38,7 +38,7 @@ Retry.To(() => new Uri(Console.ReadLine()), 3)
         error => Console.WriteLine("Failure: {0}", error.Message));
 ```
 
-The above code sample would try reading a url from the command line up to 4 times (the original try and up to 3 retries). It returns a Success if the user specifies a valid url before all retries are used up. If the user does not specify a valid url the fourth tiem, the Retry fails.
+The above code sample would try reading a url from the command line up to 4 times (the original try and up to 3 retries). It returns a Success if the user specifies a valid url before all retries are used up. If the user does not specify a valid url the fourth time, the Retry will fail.
 
 ------
 
@@ -49,7 +49,7 @@ Try is a wrapper around a simple try/catch statement. It tries to execute the gi
 var result = Try.To(() => 2 + 4);
 ```
 
-The above example would evaluate the anonymous function *() => 2 + 4* and, since no exception will be thrown, return a Success of type int and store it in the variable *result*. The result of the calculation is stored inside the Success and can be accessed using the *Value* property:
+The above example would evaluate the anonymous function *() => 2 + 4* and, since no exception will be thrown, return a Success<int> and store it in the variable *result*. The result of the calculation is stored inside the Success and can be accessed using the *Value* property:
 
 ```csharp
 var six = result.Value;
@@ -71,10 +71,13 @@ var error = result.Error;
 result.WhenFailure(e => _error = e);
 ```
 
-## Extensions
+## Extensions and Combinators
 Since Success and Failure are simple data structures, a couple of extension methods are provided that make working with both types easier.
 
-### WhenComplete
+### Extensions
+An extension is either void or returns something different than a Success or Failure. Extensions can be used to execute actions with side effect.
+
+#### WhenComplete
 ```csharp
 Try.To(() => 2 + 3)
    .WhenComplete(t => _result = t);
@@ -82,7 +85,7 @@ Try.To(() => 2 + 3)
 
 WhenComplete is always executed and delegates the result of the Try to its enclosed callback. In the above example *_result* would be a Success<int> with Value *5*.
 
-### WhenSuccess
+#### WhenSuccess
 ```csharp
 Try.To(() => 2 + 3)
    .WhenSuccess(i => _five = i);
@@ -90,7 +93,7 @@ Try.To(() => 2 + 3)
 
 WhenSuccess is only executed if no exception was thrown and delegates the value of the Success to its enclosed callback. In the above example *_five* would be a int with Value *5*.
 
-### WhenFailure
+#### WhenFailure
 ```csharp
 Try.To(() => 5 / 0)
    .WhenFailure(e => _error = e);
@@ -98,7 +101,7 @@ Try.To(() => 5 / 0)
 
 WhenFailure is only executed if an exception was thrown and delegates the exception to its enclosed callback. In the above example *_error* would be a *DivideByZeroException*.
 
-### Match
+#### Match
 ```csharp
 Try.To(() => 2 + 3)
    .Match(
@@ -108,24 +111,25 @@ Try.To(() => 2 + 3)
 
 Match allows to use a pattern matching like callback registration. The first function parameter is only executed in case of a Success an gets the value to work with. The second function parameter is registered to handle Failure and is only executed if an exception was thrown.
 
-### Get
+#### Get
 ```csharp
 var five = Try.To(() => 2 + 3).Get();
 ```
 
 Get is the most straight forward extension. It returns the value if the result is a Success or rethrows the exception, if one was encountered. In the above example *five* would be *5*.
 
-### GetOrElse
+#### GetOrElse
 ```csharp
 var five = Try.To(() => 2 + 3).GetOrElse(-1);
 ```
 
 GetOrElse either returns the value, if the Try returned a Success, or the else value, if the Try returned a Failure. In the above example *five* would be *5*. It would have been *-1* if *() => 2 + 3* had thrown an exception.
 
-## Combinators
+### Combinators
+A combinator always returns a Success or Failure and thus lets you combine it with other combinators and allows function composition. 
 This library provides a growing number of combinators that empowers you to write concise and bloat-free code for error handling. Some of them, like **Map** and **OrElse** have already been shown in the topmost example.
 
-### OrElse
+#### OrElse
 ```csharp
 var result = Try.To(() => 5 / 0)
 				.OrElse(-1);
@@ -139,7 +143,7 @@ var result = Try.To(() => 5 / 0)
 In the above examples a DivideByZeroException would be thrown and *result* would be a Failure. The 
 **OrElse** combinator makes it possible to return something else in case of a Failure. In both cases above *result* would be a Success<int> with the Value *-1*.
 
-### Map
+#### Map
 ```csharp
 var result = Try.To(() => 2 + 3)
 				.Map(i => i.ToString());
@@ -147,7 +151,7 @@ var result = Try.To(() => 2 + 3)
 
 Map allows to apply a function to the value of a Success. In the above example *result* would be a Success<string> with Value *"5"*.
 
-### Recover
+#### Recover
 ```csharp
 var result = Try.To(() => 5 / 0)
 				.Recover(e => -1);
@@ -155,7 +159,7 @@ var result = Try.To(() => 5 / 0)
 
 This combinator is used to recover from a Failure. In the above example *result* would be a Success<int> with Value *-1*.
 
-### Transform
+#### Transform
 ```csharp
 var result = Try.To(() => 2 + 3))
 				.Transform(
@@ -164,6 +168,3 @@ var result = Try.To(() => 2 + 3))
 ```
 
 Can be used to transform the result of a Try. The first function parameter transforms the resulting value if it is a Success, the second works on the exception if it is a Failure. In the above example *result* would be a Success<string> with Value *"5"*.
-
-## Difference between extensions and combinators
-The difference between an extension and a combinator is that a combinator always returns a Succes or Failure and an extension is either void or returns something different than a Success or Failure.

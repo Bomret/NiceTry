@@ -1,9 +1,9 @@
-﻿using System;
+using System;
 using System.IO;
 using Machine.Specifications;
 
-namespace NiceTry.Tests.Extensions {
-    [Subject(typeof (Combinators))]
+namespace NiceTry.Tests.Combinators {
+    [Subject(typeof (NiceTry.Combinators))]
     internal class When_I_try_to_delete_a_file_and_transform_the_result_to_a_failure {
         static Action _deleteFile;
         static string _testFile;

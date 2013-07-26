@@ -1,9 +1,9 @@
-﻿using System;
+using System;
 using System.Globalization;
 using Machine.Specifications;
 
-namespace NiceTry.Tests.Extensions {
-    [Subject(typeof (Combinators))]
+namespace NiceTry.Tests.Combinators {
+    [Subject(typeof (NiceTry.Combinators))]
     internal class When_I_try_to_add_two_and_three_and_convert_the_result_to_a_string {
         static Func<int> _addTwoAndThree;
         static ITry<string> _result;

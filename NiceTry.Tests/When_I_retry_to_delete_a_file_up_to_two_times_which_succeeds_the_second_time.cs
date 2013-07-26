@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 using System.IO;
 using Machine.Specifications;
 
-namespace NiceTry.Tests.Extensions {
+namespace NiceTry.Tests {
     [Subject(typeof (Retry))]
     internal class When_I_retry_to_delete_a_file_up_to_two_times_which_succeeds_the_second_time {
         static Action _deleteFileButFailTheFirstTime;

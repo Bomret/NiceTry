@@ -1,7 +1,7 @@
-﻿using System;
+using System;
 using Machine.Specifications;
 
-namespace NiceTry.Tests.Extensions {
+namespace NiceTry.Tests {
     [Subject(typeof (Retry))]
     internal class When_I_retry_to_divide_by_zero_up_to_two_times {
         static ITry<int> _result;

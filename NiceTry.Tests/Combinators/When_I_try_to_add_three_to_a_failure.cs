@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 using Machine.Specifications;
 
-namespace NiceTry.Tests.Extensions {
-    [Subject(typeof (Combinators))]
+namespace NiceTry.Tests.Combinators {
+    [Subject(typeof (NiceTry.Combinators))]
     internal class When_I_try_to_add_three_to_a_failure {
         static ITry<int> _failure;
         static Func<int, ITry<int>> _tryToAddThree;
