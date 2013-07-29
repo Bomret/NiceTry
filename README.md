@@ -151,6 +151,22 @@ var result = Try.To(() => 2 + 3)
 
 `Map` allows to apply a function to the value of a `Success`. In the above example `result` would be a `Success<string>` with Value *"5"*.
 
+#### Filter
+```csharp
+var result = Try.To(() => 2 + 3)
+				.Filter(i => i == 5);
+```
+
+`Filter` checks if a given predicate holds true for a `Try`. In the above example `result` would be a `Success<int>` with Value *5*. If the predicate `i => i == 5` would not hold, `result` would have been a `Failure<int>` containing an `ArgumentException`. If `() => 2 + 3` would have thrown an exception `result` would have been the original `Failure<int>`.
+
+#### FlatMap
+```csharp
+var result = Try.To(() => 2 + 3)
+                .FlatMap(i => Try.To(() => i.ToString()));
+```
+
+`FlatMap` allows to apply a function to the value of a `Success` that returns another `Try` and avoid the nesting that would occur otherwise. In the above example `result` would be a `Success<string>` with Value *"5"*. If `Map` would have been used, `result` would have been a `Success<Success<string>>`.
+
 #### Recover
 ```csharp
 var result = Try.To(() => 5 / 0)
