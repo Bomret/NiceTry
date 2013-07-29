@@ -4,13 +4,13 @@ using Machine.Specifications;
 namespace NiceTry.Tests.Extensions {
     [Subject(typeof (NiceTry.Extensions))]
     internal class When_I_try_to_divide_by_zero_and_match_the_result {
-        static Func<int> _divideByZero;
-        static bool _successCallbackExecuted;
-        static Exception _error;
-        static Action<int> _whenSuccess;
-        static Action<Exception> _whenFailure;
+        private static Func<int> _divideByZero;
+        private static bool _successCallbackExecuted;
+        private static Exception _error;
+        private static Action<int> _whenSuccess;
+        private static Action<Exception> _whenFailure;
 
-        Establish context = () => {
+        private Establish context = () => {
             _divideByZero = () => {
                 var zero = 0;
 
@@ -21,11 +21,11 @@ namespace NiceTry.Tests.Extensions {
             _whenFailure = error => _error = error;
         };
 
-        Because of = () => Try.To(_divideByZero)
-                              .Match(_whenSuccess, _whenFailure);
+        private Because of = () => Try.To(_divideByZero)
+                                      .Match(_whenSuccess, _whenFailure);
 
-        It should_execute_the_failure_callback = () => _error.ShouldNotBeNull();
+        private It should_execute_the_failure_callback = () => _error.ShouldNotBeNull();
 
-        It should_not_execute_the_success_callback = () => _successCallbackExecuted.ShouldBeFalse();
+        private It should_not_execute_the_success_callback = () => _successCallbackExecuted.ShouldBeFalse();
     }
 }

@@ -43,15 +43,12 @@
     <Reference Include="Machine.Specifications">
       <HintPath>..\packages\Machine.Specifications.0.5.14\lib\net40\Machine.Specifications.dll</HintPath>
     </Reference>
-    <Reference Include="Machine.Specifications.Clr4">
-      <HintPath>..\packages\Machine.Specifications.0.5.14\lib\net40\Machine.Specifications.Clr4.dll</HintPath>
-    </Reference>
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Combinators\When_I_check_if_a_success_that_contains_two_does_contain_three.cs" />
     <Compile Include="Combinators\When_I_check_if_a_success_that_contains_two_does_contain_two.cs" />
-    <Compile Include="Combinators\When_I_filter_a_failure.cs" />
+    <Compile Include="Combinators\When_I_check_if_a_failure_of_type_int_contains_two.cs" />
     <Compile Include="Combinators\When_I_try_to_add_three_to_a_failure.cs" />
     <Compile Include="Combinators\When_I_try_to_add_three_to_a_success_that_contains_two.cs" />
     <Compile Include="Combinators\When_I_try_to_add_two_and_three_and_convert_the_result_to_a_string.cs" />

@@ -5,12 +5,12 @@ using Machine.Specifications;
 namespace NiceTry.Tests.Combinators {
     [Subject(typeof (NiceTry.Combinators))]
     internal class When_I_try_to_delete_a_file_and_recover_by_creating_the_file_if_any_exception_is_thrown {
-        static ITry _result;
-        static Action _deleteFile;
-        static Action<Exception> _byCreatingFile;
-        static string _testFile;
+        private static ITry _result;
+        private static Action _deleteFile;
+        private static Action<Exception> _byCreatingFile;
+        private static string _testFile;
 
-        Establish context = () => {
+        private Establish context = () => {
             _testFile = Path.GetTempFileName();
 
             _deleteFile = () => File.Delete(_testFile);
@@ -18,13 +18,13 @@ namespace NiceTry.Tests.Combinators {
             _byCreatingFile = error => File.Create(_testFile);
         };
 
-        Because of = () => _result = Try.To(_deleteFile)
-                                        .Recover(_byCreatingFile);
+        private Because of = () => _result = Try.To(_deleteFile)
+                                                .Recover(_byCreatingFile);
 
-        It should_delete_the_file = () => File.Exists(_testFile).ShouldBeFalse();
+        private It should_delete_the_file = () => File.Exists(_testFile).ShouldBeFalse();
 
-        It should_return_a_success = () => _result.IsSuccess.ShouldBeTrue();
+        private It should_return_a_success = () => _result.IsSuccess.ShouldBeTrue();
 
-        Cleanup stuff = () => File.Delete(_testFile);
+        private Cleanup stuff = () => File.Delete(_testFile);
     }
 }

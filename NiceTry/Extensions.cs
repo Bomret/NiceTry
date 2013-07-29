@@ -5,19 +5,21 @@ namespace NiceTry {
         public static void Match(this ITry result,
                                  Action whenSuccess,
                                  Action<Exception> whenFailure) {
-            if (result.IsSuccess)
+            if (result.IsSuccess) {
                 whenSuccess();
-            else
+            } else {
                 whenFailure(result.Error);
+            }
         }
 
         public static void Match<TValue>(this ITry<TValue> result,
                                          Action<TValue> whenSuccess,
                                          Action<Exception> whenFailure) {
-            if (result.IsSuccess)
+            if (result.IsSuccess) {
                 whenSuccess(result.Value);
-            else
+            } else {
                 whenFailure(result.Error);
+            }
         }
 
         public static void WhenComplete(this ITry result,
@@ -32,31 +34,36 @@ namespace NiceTry {
 
         public static void WhenSuccess(this ITry result,
                                        Action runWhenSuccess) {
-            if (result.IsSuccess)
+            if (result.IsSuccess) {
                 runWhenSuccess();
+            }
         }
 
         public static void WhenSuccess<TValue>(this ITry<TValue> result,
                                                Action<TValue> whenSuccess) {
-            if (result.IsSuccess)
+            if (result.IsSuccess) {
                 whenSuccess(result.Value);
+            }
         }
 
         public static void WhenFailure(this ITry result,
                                        Action<Exception> whenFailure) {
-            if (result.IsFailure)
+            if (result.IsFailure) {
                 whenFailure(result.Error);
+            }
         }
 
         public static void WhenFailure<TValue>(this ITry<TValue> result,
                                                Action<Exception> whenFailure) {
-            if (result.IsFailure)
+            if (result.IsFailure) {
                 whenFailure(result.Error);
+            }
         }
 
         public static TValue Get<TValue>(this ITry<TValue> t) {
-            if (t.IsFailure)
+            if (t.IsFailure) {
                 throw t.Error;
+            }
 
             return t.Value;
         }

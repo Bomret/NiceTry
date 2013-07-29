@@ -6,8 +6,7 @@ namespace NiceTry {
             try {
                 work();
                 return new Success();
-            }
-            catch (Exception error) {
+            } catch (Exception error) {
                 return new Failure(error);
             }
         }
@@ -16,8 +15,7 @@ namespace NiceTry {
             try {
                 var result = work();
                 return new Success<TValue>(result);
-            }
-            catch (Exception error) {
+            } catch (Exception error) {
                 return new Failure<TValue>(error);
             }
         }

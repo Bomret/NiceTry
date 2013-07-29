@@ -4,15 +4,15 @@ using Machine.Specifications;
 namespace NiceTry.Tests.Extensions {
     [Subject(typeof (NiceTry.Extensions))]
     internal class When_I_try_to_add_two_and_three_and_match_the_result {
-        static Func<int> _addTwoAndThree;
-        static int _result;
-        static int _five;
+        private static Func<int> _addTwoAndThree;
+        private static int _result;
+        private static int _five;
 
-        static Action<int> _whenSuccess;
-        static Action<Exception> _whenFailure;
-        static Exception _error;
+        private static Action<int> _whenSuccess;
+        private static Action<Exception> _whenFailure;
+        private static Exception _error;
 
-        Establish context = () => {
+        private Establish context = () => {
             _addTwoAndThree = () => 2 + 3;
             _five = _addTwoAndThree();
 
@@ -20,10 +20,10 @@ namespace NiceTry.Tests.Extensions {
             _whenFailure = error => _error = error;
         };
 
-        Because of = () => Try.To(_addTwoAndThree)
-                              .Match(_whenSuccess, _whenFailure);
+        private Because of = () => Try.To(_addTwoAndThree)
+                                      .Match(_whenSuccess, _whenFailure);
 
-        It should_execute_the_success_callback = () => _result.ShouldEqual(_five);
-        It should_not_execute_the_failure_callback = () => _error.ShouldBeNull();
+        private It should_execute_the_success_callback = () => _result.ShouldEqual(_five);
+        private It should_not_execute_the_failure_callback = () => _error.ShouldBeNull();
     }
 }

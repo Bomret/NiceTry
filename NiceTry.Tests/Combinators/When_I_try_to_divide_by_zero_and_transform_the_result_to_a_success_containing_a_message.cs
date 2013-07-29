@@ -5,13 +5,13 @@ using Machine.Specifications;
 namespace NiceTry.Tests.Combinators {
     [Subject(typeof (NiceTry.Combinators))]
     internal class When_I_try_to_divide_by_zero_and_transform_the_result_to_a_success_containing_a_message {
-        static ITry<string> _result;
-        static Func<int, ITry<string>> _toString;
-        static Func<Exception, ITry<string>> _returnExceptionMessage;
-        static Func<int> _divideByZero;
-        static string _expectedMessage;
+        private static ITry<string> _result;
+        private static Func<int, ITry<string>> _toString;
+        private static Func<Exception, ITry<string>> _returnExceptionMessage;
+        private static Func<int> _divideByZero;
+        private static string _expectedMessage;
 
-        Establish context = () => {
+        private Establish context = () => {
             _divideByZero = () => {
                 var zero = 0;
 
@@ -26,13 +26,13 @@ namespace NiceTry.Tests.Combinators {
                                       new Success<string>(_expectedMessage);
         };
 
-        Because of = () => _result = Try.To(_divideByZero)
-                                        .Transform(_toString, _returnExceptionMessage);
+        private Because of = () => _result = Try.To(_divideByZero)
+                                                .Transform(_toString, _returnExceptionMessage);
 
-        It should_contain_the_expected_message_in_the_success =
+        private It should_contain_the_expected_message_in_the_success =
             () => _result.Value.ShouldEqual(_expectedMessage);
 
-        It should_return_a_success =
+        private It should_return_a_success =
             () => _result.IsSuccess.ShouldBeTrue();
     }
 }

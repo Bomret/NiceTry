@@ -4,11 +4,11 @@ using Machine.Specifications;
 namespace NiceTry.Tests.Extensions {
     [Subject(typeof (NiceTry.Extensions))]
     internal class When_I_try_to_divide_by_zero_and_return_zero_instead {
-        static Func<int> _divideByZero;
-        static int _result;
-        static int _zero;
+        private static Func<int> _divideByZero;
+        private static int _result;
+        private static int _zero;
 
-        Establish context = () => {
+        private Establish context = () => {
             _divideByZero = () => {
                 var zero = 0;
 
@@ -18,9 +18,9 @@ namespace NiceTry.Tests.Extensions {
             _zero = 0;
         };
 
-        Because of = () => _result = Try.To(_divideByZero)
-                                        .GetOrElse(_zero);
+        private Because of = () => _result = Try.To(_divideByZero)
+                                                .GetOrElse(_zero);
 
-        It should_return_zero = () => _result.ShouldEqual(_zero);
+        private It should_return_zero = () => _result.ShouldEqual(_zero);
     }
 }
