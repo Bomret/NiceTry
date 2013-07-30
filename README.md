@@ -11,7 +11,7 @@ If an error occurs anywhere during the process, the error message will be printe
 
 ```csharp
 Try.To(() => new Uri(Console.ReadLine()))
-   .OrElse(FallbackUrl)
+   .OrElse(new Success<Uri>(FallbackUrl))
    .Map(url => {
    			using (var webClient = new WebClient()) {
    					return webClient.DownloadString(url);
@@ -27,7 +27,7 @@ A buffed `Try` that retries the given work for up to the amount of given times:
 
 ```csharp
 Retry.To(() => new Uri(Console.ReadLine()), 3)
-   .OrElse(FallbackUrl)
+   .OrElse(new Success<Uri>(FallbackUrl))
    .Map(url => {
    			using (var webClient = new WebClient()) {
    					return webClient.DownloadString(url);
@@ -132,16 +132,16 @@ This library provides a growing number of combinators that empowers you to write
 #### OrElse
 ```csharp
 var result = Try.To(() => 5 / 0)
-				.OrElse(-1);
+				.OrElse(new Success<int>(-1));
 
 // or
 
 var result = Try.To(() => 5 / 0)
-				.OrElse(() => -1);
+				.OrElse(() => new Success<int>(-1));
 ```
 
 In the above examples a `DivideByZeroException` would be thrown and `result` would be a `Failure`. The 
-`OrElse` combinator makes it possible to return something else in case of a `Failure`. In both cases above `result` would be a `Success<int>` with the Value *-1*.
+`OrElse` combinator makes it possible to return a different `Try` in case of a `Failure`. In both cases above `result` would be a `Success<int>` with the Value *-1*.
 
 #### Map
 ```csharp
