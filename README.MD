@@ -1,5 +1,5 @@
 # NiceTry
-A wrapper type for the classic try/catch statement, inspired by its counterpart in the Scala programming language (http://www.scala-lang.org/).
+A functional wrapper type for the classic try/catch statement, inspired by its counterpart in the Scala programming language (http://www.scala-lang.org/).
 
 Also available on NuGet (http://www.nuget.org/packages/NiceTry/).
 
