@@ -7,13 +7,13 @@ namespace NiceTry.Tests.Combinators {
         private static ITry<int> _result;
         private static int _five;
         private static Func<int> _addTwoAndThree;
-        private static int _zero;
+        private static Success<int> _zero;
 
         private Establish context = () => {
             _addTwoAndThree = () => 2 + 3;
             _five = _addTwoAndThree();
 
-            _zero = 0;
+            _zero = new Success<int>(0);
         };
 
         private Because of = () => _result = Try.To(_addTwoAndThree)
