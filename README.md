@@ -71,6 +71,25 @@ var error = result.Error;
 result.WhenFailure(e => _error = e);
 ```
 
+## Recommended usage
+Every method that could throw an exception should return either an `ITry` or an `ITry<T>` instead of `void` or the result directly. That way, eventual exceptions can be handled by applying combinators and extensions to the return value and exception handling can be managed hassle free.
+
+So instead of this:
+
+```csharp
+private void DoSomethingRisky(string a) { //... };
+private int CalculateSomethingRisky(int a, int b) { //... };
+```
+
+write this:
+
+```csharp
+private ITry DoSomethingRisky(string a) { //... };
+private ITry<int> CalculateSomethingRisky(int a, int b) { //... };
+```
+
+Using an `ITry` or an `ITry<T>` as return value states the risky nature of the method much clearer than a XML doc with an `<exception>` element.
+
 ## Extensions and Combinators
 Since `Success` and `Failure` are simple data structures, a couple of extension methods are provided that make working with both types easier.
 
@@ -142,6 +161,20 @@ var result = Try.To(() => 5 / 0)
 
 In the above examples a `DivideByZeroException` would be thrown and `result` would be a `Failure`. The 
 `OrElse` combinator makes it possible to return a different `Try` in case of a `Failure`. In both cases above `result` would be a `Success<int>` with the Value *-1*.
+
+#### AndThen
+```csharp
+var result = Try.To(() => 2 + 3)
+                .AndThen(AddOne)
+                .AndThen(PrintResult);
+```
+
+Allows chaining and conversion of multiple `Try's`. If a try fails, the chain will be interrupted and return immediately with a `Failure`. In the above example `result` would be a `Success`. Here are the signatures of the methods `AddOne` and `PrintResult`:
+
+```csharp
+ITry<int> AddOne(ITry<int> arg)
+ITry PrintResult<T>(ITry<T> value)
+```
 
 #### Map
 ```csharp
