@@ -94,7 +94,7 @@ Using an `ITry` or an `ITry<T>` as return value states the risky nature of the m
 Since `Success` and `Failure` are simple data structures, a couple of extension methods are provided that make working with both types easier.
 
 ### Extensions
-An extension is either void or returns something different than a `Success` or `Failure`. Extensions can be used to execute actions with side effect.
+An extension is either void or returns something different than a `Success` or `Failure`. Extensions can be used to execute actions with side effect. Extensions **do not** catch exceptions. You have to deal with those yourself.
 
 #### WhenComplete
 ```csharp
