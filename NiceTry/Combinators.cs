@@ -2,6 +2,37 @@ using System;
 
 namespace NiceTry {
     public static class Combinators {
+        public static ITry<TNextResult> AndThen<TResult, TNextResult>(this ITry<TResult> result,
+                                                                      Func<ITry<TResult>, ITry<TNextResult>>
+                                                                          continuation) {
+            return result.IsFailure
+                       ? new Failure<TNextResult>(result.Error)
+                       : continuation(result);
+        }
+
+        public static ITry<TNextResult> AndThen<TNextResult>(this ITry result,
+                                                             Func<ITry, ITry<TNextResult>>
+                                                                 continuation) {
+            return result.IsFailure
+                       ? new Failure<TNextResult>(result.Error)
+                       : continuation(result);
+        }
+
+        public static ITry AndThen<TResult>(this ITry<TResult> result,
+                                            Func<ITry<TResult>, ITry>
+                                                continuation) {
+            return result.IsFailure
+                       ? new Failure(result.Error)
+                       : continuation(result);
+        }
+
+        public static ITry AndThen(this ITry result,
+                                   Func<ITry, ITry> continuation) {
+            return result.IsFailure
+                       ? new Failure(result.Error)
+                       : continuation(result);
+        }
+
         public static ITry<TValue> OrElse<TValue>(this ITry<TValue> result,
                                                   Func<ITry<TValue>> orElse) {
             return result.IsFailure
