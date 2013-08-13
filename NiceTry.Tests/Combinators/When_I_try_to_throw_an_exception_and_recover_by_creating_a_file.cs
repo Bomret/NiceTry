@@ -3,7 +3,7 @@ using System.IO;
 using Machine.Specifications;
 
 namespace NiceTry.Tests.Combinators {
-    [Subject(typeof (NiceTry.Combinators))]
+    [Subject(typeof (NiceTry.Combinators), "Recover")]
     internal class When_I_try_to_throw_an_exception_and_recover_by_creating_a_file {
         private static ITry _result;
         private static Action _throwException;

@@ -3,7 +3,7 @@ using System.IO;
 using Machine.Specifications;
 
 namespace NiceTry.Tests.Extensions {
-    [Subject(typeof (NiceTry.Extensions))]
+    [Subject(typeof (NiceTry.Extensions),"Match")]
     internal class When_I_try_to_delete_a_file_and_match_the_result {
         private static Action _deleteFile;
         private static string _testFile;

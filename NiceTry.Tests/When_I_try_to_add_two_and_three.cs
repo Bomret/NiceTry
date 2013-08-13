@@ -2,7 +2,7 @@
 using Machine.Specifications;
 
 namespace NiceTry.Tests {
-    [Subject(typeof (Try))]
+    [Subject(typeof (Try), "To")]
     public class When_I_try_to_add_two_and_three {
         private static Func<int> _addTwoAndThree;
         private static ITry<int> _result;

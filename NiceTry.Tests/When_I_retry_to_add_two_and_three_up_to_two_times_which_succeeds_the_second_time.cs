@@ -2,7 +2,7 @@ using System;
 using Machine.Specifications;
 
 namespace NiceTry.Tests {
-    [Subject(typeof (Retry))]
+    [Subject(typeof (Retry), "To")]
     internal class When_I_retry_to_add_two_and_three_up_to_two_times_which_succeeds_the_second_time {
         private static ITry<int> _result;
         private static int _five;

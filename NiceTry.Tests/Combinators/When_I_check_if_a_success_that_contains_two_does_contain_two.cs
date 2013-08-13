@@ -2,7 +2,7 @@ using System;
 using Machine.Specifications;
 
 namespace NiceTry.Tests.Combinators {
-    [Subject(typeof (NiceTry.Combinators))]
+    [Subject(typeof (NiceTry.Combinators), "Filter")]
     internal class When_I_check_if_a_success_that_contains_two_does_contain_two {
         private static ITry<int> _twoSuccess;
         private static ITry<int> _result;

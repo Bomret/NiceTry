@@ -2,7 +2,7 @@ using System;
 using Machine.Specifications;
 
 namespace NiceTry.Tests.Combinators {
-    [Subject(typeof (NiceTry.Combinators))]
+    [Subject(typeof (NiceTry.Combinators), "OrElse")]
     internal class When_I_try_to_add_two_and_three_and_would_return_a_try_that_contains_zero_if_the_calculation_failed {
         private static ITry<int> _result;
         private static int _five;

@@ -2,7 +2,7 @@ using System;
 using Machine.Specifications;
 
 namespace NiceTry.Tests.Combinators {
-    [Subject(typeof (NiceTry.Combinators))]
+    [Subject(typeof (NiceTry.Combinators), "FlatMap")]
     internal class When_I_try_to_divide_a_try_that_contains_two_by_zero {
         private static ITry<int> twoSuccess;
         private static Func<int, ITry<int>> _tryToDivideByZero;

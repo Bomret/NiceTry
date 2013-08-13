@@ -2,7 +2,7 @@ using System;
 using Machine.Specifications;
 
 namespace NiceTry.Tests {
-    [Subject(typeof (Retry))]
+    [Subject(typeof (Retry), "To")]
     internal class When_I_retry_to_divide_by_zero_up_to_two_times {
         private static ITry<int> _result;
         private static Func<int> _divideByZero;

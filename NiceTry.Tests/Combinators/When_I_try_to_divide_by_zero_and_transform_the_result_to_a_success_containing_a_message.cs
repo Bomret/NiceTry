@@ -3,7 +3,7 @@ using System.Globalization;
 using Machine.Specifications;
 
 namespace NiceTry.Tests.Combinators {
-    [Subject(typeof (NiceTry.Combinators))]
+    [Subject(typeof (NiceTry.Combinators), "Transform")]
     internal class When_I_try_to_divide_by_zero_and_transform_the_result_to_a_success_containing_a_message {
         private static ITry<string> _result;
         private static Func<int, ITry<string>> _toString;

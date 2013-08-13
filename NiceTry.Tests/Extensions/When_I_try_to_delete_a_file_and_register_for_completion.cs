@@ -3,7 +3,7 @@ using System.IO;
 using Machine.Specifications;
 
 namespace NiceTry.Tests.Extensions {
-    [Subject(typeof (NiceTry.Extensions))]
+    [Subject(typeof (NiceTry.Extensions),"WhenComplete")]
     internal class When_I_try_to_delete_a_file_and_register_for_completion {
         private static Action _deleteFile;
         private static ITry _result;

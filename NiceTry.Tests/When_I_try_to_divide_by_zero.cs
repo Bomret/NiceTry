@@ -2,7 +2,7 @@
 using Machine.Specifications;
 
 namespace NiceTry.Tests {
-    [Subject(typeof (Try))]
+    [Subject(typeof (Try), "To")]
     public class When_I_try_to_divide_by_zero {
         private static Func<int> _divideByZero;
         private static bool _failureCallbackExecuted;

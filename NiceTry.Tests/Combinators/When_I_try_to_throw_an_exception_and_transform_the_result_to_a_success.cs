@@ -2,7 +2,7 @@ using System;
 using Machine.Specifications;
 
 namespace NiceTry.Tests.Combinators {
-    [Subject(typeof (NiceTry.Combinators))]
+    [Subject(typeof (NiceTry.Combinators), "Transform")]
     internal class When_I_try_to_throw_an_exception_and_transform_the_result_to_a_success {
         private static Func<ITry> _returnFailure;
         private static Func<Exception, ITry> _fromErrorToSuccess;

@@ -3,7 +3,7 @@ using System.IO;
 using Machine.Specifications;
 
 namespace NiceTry.Tests.Combinators {
-    [Subject(typeof (NiceTry.Combinators))]
+    [Subject(typeof (NiceTry.Combinators), "AndThen")]
     internal class When_I_try_to_delete_a_file_and_then_delete_another_file {
         private static Action _deleteFileOne;
         private static Func<ITry, ITry> _deleteFileTwo;

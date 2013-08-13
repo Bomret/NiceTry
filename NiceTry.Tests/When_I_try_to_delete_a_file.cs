@@ -3,7 +3,7 @@ using System.IO;
 using Machine.Specifications;
 
 namespace NiceTry.Tests {
-    [Subject(typeof (Try))]
+    [Subject(typeof (Try), "To")]
     public class When_I_try_to_delete_a_file {
         private static ITry _result;
         private static string _testFile;

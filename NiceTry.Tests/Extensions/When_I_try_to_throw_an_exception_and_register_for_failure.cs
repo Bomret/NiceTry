@@ -2,7 +2,7 @@
 using Machine.Specifications;
 
 namespace NiceTry.Tests.Extensions {
-    [Subject(typeof (NiceTry.Extensions))]
+    [Subject(typeof (NiceTry.Extensions),"WhenFailure")]
     public class When_I_try_to_throw_an_exception_and_register_for_failure {
         private static Action _throwException;
         private static Exception _expectedException;

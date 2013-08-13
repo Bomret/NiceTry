@@ -3,7 +3,7 @@ using System.Globalization;
 using Machine.Specifications;
 
 namespace NiceTry.Tests.Combinators {
-    [Subject(typeof (NiceTry.Combinators))]
+    [Subject(typeof (NiceTry.Combinators), "Transform")]
     internal class When_I_try_to_add_two_and_three_and_transform_the_result_to_a_try_containing_a_string {
         private static Func<int> _addTwoAndThree;
         private static ITry<string> _result;

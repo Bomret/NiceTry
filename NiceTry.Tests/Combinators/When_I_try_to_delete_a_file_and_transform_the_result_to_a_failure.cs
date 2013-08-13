@@ -3,7 +3,7 @@ using System.IO;
 using Machine.Specifications;
 
 namespace NiceTry.Tests.Combinators {
-    [Subject(typeof (NiceTry.Combinators))]
+    [Subject(typeof (NiceTry.Combinators), "Transform")]
     internal class When_I_try_to_delete_a_file_and_transform_the_result_to_a_failure {
         private static Action _deleteFile;
         private static string _testFile;

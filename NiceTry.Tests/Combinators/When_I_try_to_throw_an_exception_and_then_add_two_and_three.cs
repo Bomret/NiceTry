@@ -2,7 +2,7 @@
 using Machine.Specifications;
 
 namespace NiceTry.Tests.Combinators {
-    [Subject(typeof (NiceTry.Combinators))]
+    [Subject(typeof (NiceTry.Combinators), "AndThen")]
     internal class When_I_try_to_throw_an_exception_and_then_add_two_and_three {
         private static Func<ITry, ITry<int>> _addTwoAndThree;
         private static Func<ITry> _throwException;

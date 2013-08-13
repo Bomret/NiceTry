@@ -2,7 +2,7 @@
 using Machine.Specifications;
 
 namespace NiceTry.Tests.Extensions {
-    [Subject(typeof (NiceTry.Extensions))]
+    [Subject(typeof (NiceTry.Extensions),"GetOrElse")]
     internal class When_I_try_to_divide_by_zero_and_return_zero_instead {
         private static Func<int> _divideByZero;
         private static int _result;
