@@ -217,3 +217,6 @@ var result = Try.To(() => 2 + 3))
 ```
 
 Can be used to transform the result of a `Try`. The first function parameter transforms the resulting value if it is a `Success`, the second works on the exception if it is a `Failure`. In the above example `result` would be a `Success<string>` with Value *"5"*.
+
+## Attributions
+**Icon:** <a href="http://thenounproject.com/noun/approve/#icon-No330" target="_blank">Approve</a>  from The Noun Project
