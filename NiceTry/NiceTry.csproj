@@ -40,9 +40,14 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="System" />
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Async\AsyncTry.cs" />
+    <Compile Include="Async\Combinators.cs" />
+    <Compile Include="Async\Extensions.cs" />
+    <Compile Include="Async\IAsyncTry.cs" />
     <Compile Include="Combinators.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="Failure.cs" />
