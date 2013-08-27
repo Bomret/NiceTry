@@ -1,14 +1,17 @@
 using System;
 using Machine.Specifications;
 
-namespace NiceTry.Tests.Combinators {
+namespace NiceTry.Tests.Combinators
+{
     [Subject(typeof (NiceTry.Combinators), "Filter")]
-    internal class When_I_check_if_a_failure_of_type_int_contains_two {
+    internal class When_I_check_if_a_failure_of_type_int_contains_two
+    {
         private static ITry<int> _failure;
         private static ITry<int> _result;
         private static Func<int, bool> _containsTwo;
 
-        private Establish context = () => {
+        private Establish context = () =>
+        {
             _failure = new Failure<int>(new ArgumentException());
             _containsTwo = i => i == 2;
         };

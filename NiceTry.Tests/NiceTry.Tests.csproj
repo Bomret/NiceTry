@@ -19,7 +19,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\net35\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;NET45</DefineConstants>
     <DefineConstants Condition=" '$(TargetFrameworkVersion)' == 'v3.5' ">NET35</DefineConstants>
     <DefineConstants Condition=" '$(TargetFrameworkVersion)' == 'v4.0' ">NET40</DefineConstants>
     <DefineConstants Condition=" '$(TargetFrameworkVersion)' == 'v4.5' ">NET45</DefineConstants>
@@ -47,7 +47,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Async\Combinators\Class1.cs" />
+    <Compile Include="Async\Combinators\When_I_try_to_add_two_and_three_and_convert_the_result_to_a_string.cs" />
     <Compile Include="Combinators\When_I_check_if_a_success_that_contains_two_does_contain_three.cs" />
     <Compile Include="Combinators\When_I_check_if_a_success_that_contains_two_does_contain_two.cs" />
     <Compile Include="Combinators\When_I_check_if_a_failure_of_type_int_contains_two.cs" />

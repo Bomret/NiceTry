@@ -19,7 +19,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\net45\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>DEBUG;NET45</DefineConstants>
     <DefineConstants Condition=" '$(TargetFrameworkVersion)' == 'v3.5' ">NET35</DefineConstants>
     <DefineConstants Condition=" '$(TargetFrameworkVersion)' == 'v4.0' ">NET40</DefineConstants>
     <DefineConstants Condition=" '$(TargetFrameworkVersion)' == 'v4.5' ">NET45</DefineConstants>
@@ -46,7 +46,6 @@
   <ItemGroup>
     <Compile Include="Async\AsyncTry.cs" />
     <Compile Include="Async\Combinators.cs" />
-    <Compile Include="Async\Extensions.cs" />
     <Compile Include="Async\IAsyncTry.cs" />
     <Compile Include="Combinators.cs" />
     <Compile Include="Extensions.cs" />

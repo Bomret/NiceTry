@@ -1,14 +1,17 @@
 using System;
 using Machine.Specifications;
 
-namespace NiceTry.Tests.Combinators {
+namespace NiceTry.Tests.Combinators
+{
     [Subject(typeof (NiceTry.Combinators), "FlatMap")]
-    internal class When_I_try_to_add_three_to_a_success_that_contains_two {
+    internal class When_I_try_to_add_three_to_a_success_that_contains_two
+    {
         private static ITry<int> _twoSuccess;
         private static Func<int, ITry<int>> _addThree;
         private static ITry<int> _result;
 
-        private Establish context = () => {
+        private Establish context = () =>
+        {
             _twoSuccess = new Success<int>(2);
             _addThree = i => Try.To(() => i + 3);
         };

@@ -1,16 +1,19 @@
 using System;
 using Machine.Specifications;
 
-namespace NiceTry.Tests.Combinators {
+namespace NiceTry.Tests.Combinators
+{
     [Subject(typeof (NiceTry.Combinators), "OrElse")]
     internal class
-        When_I_try_to_add_two_and_three_and_would_try_to_add_one_and_three_if_the_calculation_failed {
+        When_I_try_to_add_two_and_three_and_would_try_to_add_one_and_three_if_the_calculation_failed
+    {
         private static ITry<int> _result;
         private static int _five;
         private static Func<ITry<int>> _addOneAndThree;
         private static Func<int> _addTwoAndThree;
 
-        private Establish context = () => {
+        private Establish context = () =>
+        {
             _addTwoAndThree = () => 2 + 3;
             _five = _addTwoAndThree();
 

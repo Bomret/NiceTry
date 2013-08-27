@@ -2,15 +2,19 @@ using System;
 using System.Globalization;
 using Machine.Specifications;
 
-namespace NiceTry.Tests.Combinators {
+namespace NiceTry.Tests.Combinators
+{
     [Subject(typeof (NiceTry.Combinators), "Map")]
-    internal class When_I_try_to_divide_by_zero_and_would_convert_the_result_to_a_string {
+    internal class When_I_try_to_divide_by_zero_and_would_convert_the_result_to_a_string
+    {
         private static Func<int> _divideByZero;
         private static Func<int, string> _toString;
         private static ITry<string> _result;
 
-        private Establish context = () => {
-            _divideByZero = () => {
+        private Establish context = () =>
+        {
+            _divideByZero = () =>
+            {
                 var zero = 0;
 
                 return 5 / zero;

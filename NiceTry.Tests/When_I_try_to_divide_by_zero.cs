@@ -1,16 +1,20 @@
 ﻿using System;
 using Machine.Specifications;
 
-namespace NiceTry.Tests {
+namespace NiceTry.Tests
+{
     [Subject(typeof (Try), "To")]
-    public class When_I_try_to_divide_by_zero {
+    public class When_I_try_to_divide_by_zero
+    {
         private static Func<int> _divideByZero;
         private static bool _failureCallbackExecuted;
         private static Exception _error;
         private static ITry<int> _result;
 
-        private Establish context = () => {
-            _divideByZero = () => {
+        private Establish context = () =>
+        {
+            _divideByZero = () =>
+            {
                 var zero = 0;
 
                 return 5 / zero;

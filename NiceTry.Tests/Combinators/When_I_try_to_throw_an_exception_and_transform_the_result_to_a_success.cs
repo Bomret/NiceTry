@@ -1,15 +1,18 @@
 using System;
 using Machine.Specifications;
 
-namespace NiceTry.Tests.Combinators {
+namespace NiceTry.Tests.Combinators
+{
     [Subject(typeof (NiceTry.Combinators), "Transform")]
-    internal class When_I_try_to_throw_an_exception_and_transform_the_result_to_a_success {
+    internal class When_I_try_to_throw_an_exception_and_transform_the_result_to_a_success
+    {
         private static Func<ITry> _returnFailure;
         private static Func<Exception, ITry> _fromErrorToSuccess;
         private static ITry _result;
         private static Action _throwException;
 
-        private Establish context = () => {
+        private Establish context = () =>
+        {
             _throwException = () => { throw new ArgumentException("Test exception."); };
 
             _returnFailure = () => new Failure(new ArgumentException("Unexpected test exception."));

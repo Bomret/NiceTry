@@ -2,15 +2,18 @@ using System;
 using System.IO;
 using Machine.Specifications;
 
-namespace NiceTry.Tests.Combinators {
+namespace NiceTry.Tests.Combinators
+{
     [Subject(typeof (NiceTry.Combinators), "Recover")]
-    internal class When_I_try_to_throw_an_exception_and_recover_by_creating_a_file {
+    internal class When_I_try_to_throw_an_exception_and_recover_by_creating_a_file
+    {
         private static ITry _result;
         private static Action _throwException;
         private static Action<Exception> _byCreatingFile;
         private static string _recoverFile;
 
-        private Establish context = () => {
+        private Establish context = () =>
+        {
             _recoverFile = Path.GetTempFileName();
 
             _throwException = () => { throw new ArgumentException("Expected test exception."); };

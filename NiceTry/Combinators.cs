@@ -8,7 +8,9 @@ namespace NiceTry
         public static ITry<TValue> Synchronize<TValue>(this IAsyncTry<TValue> asyncTry)
         {
             if (asyncTry.IsSuccess)
+            {
                 return new Success<TValue>(asyncTry.Value);
+            }
 
             return new Failure<TValue>(asyncTry.Error);
         }
@@ -114,13 +116,15 @@ namespace NiceTry
                                                   Func<TValue, bool> predicate)
         {
             if (result.IsFailure)
+            {
                 return result;
+            }
 
             return result.FlatMap(
-                                  v => predicate(v)
-                                           ? result
-                                           : new Failure<TValue>(
-                                                 new ArgumentException("The given predicate does not hold for this Try.")));
+                v => predicate(v)
+                         ? result
+                         : new Failure<TValue>(
+                               new ArgumentException("The given predicate does not hold for this Try.")));
         }
     }
 }

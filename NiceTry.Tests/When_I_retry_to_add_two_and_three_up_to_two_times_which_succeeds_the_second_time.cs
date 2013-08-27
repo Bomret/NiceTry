@@ -1,21 +1,26 @@
 using System;
 using Machine.Specifications;
 
-namespace NiceTry.Tests {
+namespace NiceTry.Tests
+{
     [Subject(typeof (Retry), "To")]
-    internal class When_I_retry_to_add_two_and_three_up_to_two_times_which_succeeds_the_second_time {
+    internal class When_I_retry_to_add_two_and_three_up_to_two_times_which_succeeds_the_second_time
+    {
         private static ITry<int> _result;
         private static int _five;
         private static Func<int> _addTwoAndThreeButFailTheFirstTime;
         private static int _try;
 
-        private Establish context = () => {
+        private Establish context = () =>
+        {
             _five = 2 + 3;
 
-            _addTwoAndThreeButFailTheFirstTime = () => {
+            _addTwoAndThreeButFailTheFirstTime = () =>
+            {
                 _try += 1;
 
-                if (_try < 2) {
+                if (_try < 2)
+                {
                     throw new ArgumentException("Expected test exception.");
                 }
 

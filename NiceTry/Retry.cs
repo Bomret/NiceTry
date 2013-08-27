@@ -1,11 +1,15 @@
 ﻿using System;
 
-namespace NiceTry {
-    public static class Retry {
-        public static ITry<TValue> To<TValue>(Func<TValue> work, int retries = 1) {
+namespace NiceTry
+{
+    public static class Retry
+    {
+        public static ITry<TValue> To<TValue>(Func<TValue> work, int retries = 1)
+        {
             var r = Try.To(work);
 
-            if (r.IsSuccess || retries < 1) {
+            if (r.IsSuccess || retries < 1)
+            {
                 return r;
             }
 
@@ -13,10 +17,12 @@ namespace NiceTry {
             return To(work, remainingTries);
         }
 
-        public static ITry To(Action work, int retries = 1) {
+        public static ITry To(Action work, int retries = 1)
+        {
             var r = Try.To(work);
 
-            if (r.IsSuccess || retries < 1) {
+            if (r.IsSuccess || retries < 1)
+            {
                 return r;
             }
 

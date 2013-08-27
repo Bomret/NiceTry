@@ -2,16 +2,19 @@ using System;
 using System.IO;
 using Machine.Specifications;
 
-namespace NiceTry.Tests.Combinators {
+namespace NiceTry.Tests.Combinators
+{
     [Subject(typeof (NiceTry.Combinators), "Transform")]
-    internal class When_I_try_to_delete_a_file_and_transform_the_result_to_a_failure {
+    internal class When_I_try_to_delete_a_file_and_transform_the_result_to_a_failure
+    {
         private static Action _deleteFile;
         private static string _testFile;
         private static Func<ITry> _returnFailure;
         private static Func<Exception, ITry> _fromErrorToSuccess;
         private static ITry _result;
 
-        private Establish context = () => {
+        private Establish context = () =>
+        {
             _testFile = Path.GetTempFileName();
             _deleteFile = () => File.Delete(_testFile);
 

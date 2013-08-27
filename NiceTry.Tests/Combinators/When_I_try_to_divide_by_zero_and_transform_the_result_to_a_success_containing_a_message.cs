@@ -2,17 +2,21 @@ using System;
 using System.Globalization;
 using Machine.Specifications;
 
-namespace NiceTry.Tests.Combinators {
+namespace NiceTry.Tests.Combinators
+{
     [Subject(typeof (NiceTry.Combinators), "Transform")]
-    internal class When_I_try_to_divide_by_zero_and_transform_the_result_to_a_success_containing_a_message {
+    internal class When_I_try_to_divide_by_zero_and_transform_the_result_to_a_success_containing_a_message
+    {
         private static ITry<string> _result;
         private static Func<int, ITry<string>> _toString;
         private static Func<Exception, ITry<string>> _returnExceptionMessage;
         private static Func<int> _divideByZero;
         private static string _expectedMessage;
 
-        private Establish context = () => {
-            _divideByZero = () => {
+        private Establish context = () =>
+        {
+            _divideByZero = () =>
+            {
                 var zero = 0;
 
                 return 5 / zero;

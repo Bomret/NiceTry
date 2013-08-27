@@ -1,16 +1,20 @@
 ﻿using System;
 using Machine.Specifications;
 
-namespace NiceTry.Tests.Extensions {
-    [Subject(typeof (NiceTry.Extensions),"WhenComplete")]
-    internal class When_I_try_to_divide_by_zero_and_register_for_completion {
+namespace NiceTry.Tests.Extensions
+{
+    [Subject(typeof (NiceTry.Extensions), "WhenComplete")]
+    internal class When_I_try_to_divide_by_zero_and_register_for_completion
+    {
         private static Func<int> _divideByZero;
         private static bool _failureCallbackExecuted;
         private static Exception _error;
         private static ITry<int> _result;
 
-        private Establish context = () => {
-            _divideByZero = () => {
+        private Establish context = () =>
+        {
+            _divideByZero = () =>
+            {
                 var zero = 0;
 
                 return 5 / zero;

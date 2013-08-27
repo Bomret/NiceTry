@@ -1,9 +1,11 @@
 ﻿using System;
 using Machine.Specifications;
 
-namespace NiceTry.Tests.Extensions {
+namespace NiceTry.Tests.Extensions
+{
     [Subject(typeof (NiceTry.Extensions), "WhenSuccess")]
-    public class When_I_try_to_throw_an_exception_and_register_for_success {
+    public class When_I_try_to_throw_an_exception_and_register_for_success
+    {
         private static Action _throwException;
         private static bool _successCallbackExecuted;
 

@@ -2,9 +2,11 @@
 using System.IO;
 using Machine.Specifications;
 
-namespace NiceTry.Tests.Extensions {
-    [Subject(typeof (NiceTry.Extensions),"Match")]
-    internal class When_I_try_to_delete_a_file_and_match_the_result {
+namespace NiceTry.Tests.Extensions
+{
+    [Subject(typeof (NiceTry.Extensions), "Match")]
+    internal class When_I_try_to_delete_a_file_and_match_the_result
+    {
         private static Action _deleteFile;
         private static string _testFile;
         private static bool _successCallbackExecuted;
@@ -12,7 +14,8 @@ namespace NiceTry.Tests.Extensions {
         private static Action<Exception> _whenFailure;
         private static Exception _error;
 
-        private Establish context = () => {
+        private Establish context = () =>
+        {
             _testFile = Path.GetTempFileName();
             _deleteFile = () => File.Delete(_testFile);
 

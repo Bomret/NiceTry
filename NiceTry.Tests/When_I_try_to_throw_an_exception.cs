@@ -1,14 +1,17 @@
 ﻿using System;
 using Machine.Specifications;
 
-namespace NiceTry.Tests {
+namespace NiceTry.Tests
+{
     [Subject(typeof (Try), "To")]
-    public class When_I_try_to_throw_an_exception {
+    public class When_I_try_to_throw_an_exception
+    {
         private static ITry _result;
         private static Action _throwException;
         private static Exception _expectedException;
 
-        private Establish context = () => {
+        private Establish context = () =>
+        {
             _expectedException = new ArgumentException("Expected test exception");
 
             _throwException = () => { throw _expectedException; };

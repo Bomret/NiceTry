@@ -1,15 +1,19 @@
 using System;
 using Machine.Specifications;
 
-namespace NiceTry.Tests.Combinators {
+namespace NiceTry.Tests.Combinators
+{
     [Subject(typeof (NiceTry.Combinators), "Recover")]
-    internal class When_I_try_to_divide_by_zero_and_recover_with_zero_if_any_exception_is_thrown {
+    internal class When_I_try_to_divide_by_zero_and_recover_with_zero_if_any_exception_is_thrown
+    {
         private static ITry<int> _result;
         private static Func<int> _divideByZero;
         private static Func<Exception, int> _withZero;
 
-        private Establish context = () => {
-            _divideByZero = () => {
+        private Establish context = () =>
+        {
+            _divideByZero = () =>
+            {
                 var zero = 0;
 
                 return 5 / zero;

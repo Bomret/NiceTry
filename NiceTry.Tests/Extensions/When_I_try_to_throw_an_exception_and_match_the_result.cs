@@ -1,9 +1,11 @@
 ﻿using System;
 using Machine.Specifications;
 
-namespace NiceTry.Tests.Extensions {
-    [Subject(typeof (NiceTry.Extensions),"Match")]
-    public class When_I_try_to_throw_an_exception_and_match_the_result {
+namespace NiceTry.Tests.Extensions
+{
+    [Subject(typeof (NiceTry.Extensions), "Match")]
+    public class When_I_try_to_throw_an_exception_and_match_the_result
+    {
         private static Action _throwException;
         private static Exception _expectedException;
         private static Exception _error;
@@ -12,7 +14,8 @@ namespace NiceTry.Tests.Extensions {
         private static Action _whenSuccess;
         private static Action<Exception> _whenFailure;
 
-        private Establish context = () => {
+        private Establish context = () =>
+        {
             _expectedException = new ArgumentException("Expected test exception");
 
             _throwException = () => { throw _expectedException; };

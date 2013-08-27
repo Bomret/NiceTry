@@ -2,16 +2,19 @@
 using System.IO;
 using Machine.Specifications;
 
-namespace NiceTry.Tests.Combinators {
+namespace NiceTry.Tests.Combinators
+{
     [Subject(typeof (NiceTry.Combinators), "AndThen")]
-    internal class When_I_try_to_delete_a_file_and_then_delete_another_file {
+    internal class When_I_try_to_delete_a_file_and_then_delete_another_file
+    {
         private static Action _deleteFileOne;
         private static Func<ITry, ITry> _deleteFileTwo;
         private static ITry _result;
         private static string _testFileOne;
         private static string _testFileTwo;
 
-        private Establish context = () => {
+        private Establish context = () =>
+        {
             _testFileOne = Path.GetTempFileName();
             _testFileTwo = Path.GetTempFileName();
 
@@ -28,7 +31,8 @@ namespace NiceTry.Tests.Combinators {
 
         private It should_return_a_success = () => _result.IsSuccess.ShouldBeTrue();
 
-        private Cleanup stuff = () => {
+        private Cleanup stuff = () =>
+        {
             File.Delete(_testFileOne);
             File.Delete(_testFileTwo);
         };

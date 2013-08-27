@@ -1,17 +1,21 @@
 ﻿using System;
 using Machine.Specifications;
 
-namespace NiceTry.Tests.Extensions {
-    [Subject(typeof (NiceTry.Extensions),"Match")]
-    internal class When_I_try_to_divide_by_zero_and_match_the_result {
+namespace NiceTry.Tests.Extensions
+{
+    [Subject(typeof (NiceTry.Extensions), "Match")]
+    internal class When_I_try_to_divide_by_zero_and_match_the_result
+    {
         private static Func<int> _divideByZero;
         private static bool _successCallbackExecuted;
         private static Exception _error;
         private static Action<int> _whenSuccess;
         private static Action<Exception> _whenFailure;
 
-        private Establish context = () => {
-            _divideByZero = () => {
+        private Establish context = () =>
+        {
+            _divideByZero = () =>
+            {
                 var zero = 0;
 
                 return 5 / zero;
