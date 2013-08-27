@@ -69,6 +69,20 @@ namespace NiceTry
                        : func(t.Value);
         }
 
+        public static ITry<TValue> Flatten<TValue>(this ITry<ITry<TValue>> t)
+        {
+            return t.IsFailure
+                       ? new Failure<TValue>(t.Error)
+                       : t.Value;
+        }
+
+        public static ITry Flatten(this ITry<ITry> t)
+        {
+            return t.IsFailure
+                       ? new Failure(t.Error)
+                       : t.Value;
+        }
+
         public static ITry Recover(this ITry t, Action<Exception> recover)
         {
             return t.IsFailure
@@ -80,6 +94,20 @@ namespace NiceTry
         {
             return t.IsFailure
                        ? Try.To(() => func(t.Error))
+                       : t;
+        }
+
+        public static ITry<TValue> RecoverWith<TValue>(this ITry<TValue> t, Func<Exception, ITry<TValue>> func)
+        {
+            return t.IsFailure
+                       ? func(t.Error)
+                       : t;
+        }
+
+        public static ITry RecoverWith(this ITry t, Func<Exception, ITry> func)
+        {
+            return t.IsFailure
+                       ? func(t.Error)
                        : t;
         }
 
