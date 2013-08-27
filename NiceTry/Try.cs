@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Threading.Tasks;
-using NiceTry.Async;
 
 namespace NiceTry
 {
@@ -30,12 +28,6 @@ namespace NiceTry
             {
                 return new Failure<TValue>(error);
             }
-        }
-
-        public static IAsyncTry<TValue> ToAsync<TValue>(Func<TValue> work)
-        {
-            var task = Task.Factory.StartNew(() => To(work));
-            return new AsyncTry<TValue>(task);
         }
     }
 }

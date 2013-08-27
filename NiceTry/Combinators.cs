@@ -1,20 +1,9 @@
 using System;
-using NiceTry.Async;
 
 namespace NiceTry
 {
     public static class Combinators
     {
-        public static ITry<TValue> Synchronize<TValue>(this IAsyncTry<TValue> asyncTry)
-        {
-            if (asyncTry.IsSuccess)
-            {
-                return new Success<TValue>(asyncTry.Value);
-            }
-
-            return new Failure<TValue>(asyncTry.Error);
-        }
-
         public static ITry<TNextResult> AndThen<TResult, TNextResult>(this ITry<TResult> result,
                                                                       Func<ITry<TResult>, ITry<TNextResult>>
                                                                           continuation)

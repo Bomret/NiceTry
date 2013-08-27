@@ -44,9 +44,6 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Async\AsyncTry.cs" />
-    <Compile Include="Async\Combinators.cs" />
-    <Compile Include="Async\IAsyncTry.cs" />
     <Compile Include="Combinators.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="Failure.cs" />
