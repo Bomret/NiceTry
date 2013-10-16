@@ -4,14 +4,14 @@ using Machine.Specifications;
 namespace NiceTry.Tests.Combinators
 {
     [Subject(typeof (NiceTry.Combinators), "Transform")]
-    internal class When_I_try_to_throw_an_exception_and_transform_the_result_to_a_success
+    class When_I_try_to_throw_an_exception_and_transform_the_result_to_a_success
     {
-        private static Func<ITry> _returnFailure;
-        private static Func<Exception, ITry> _fromErrorToSuccess;
-        private static ITry _result;
-        private static Action _throwException;
+        static Func<ITry> _returnFailure;
+        static Func<Exception, ITry> _fromErrorToSuccess;
+        static ITry _result;
+        static Action _throwException;
 
-        private Establish context = () =>
+        Establish context = () =>
         {
             _throwException = () => { throw new ArgumentException("Test exception."); };
 
@@ -19,9 +19,9 @@ namespace NiceTry.Tests.Combinators
             _fromErrorToSuccess = error => new Success();
         };
 
-        private Because of = () => _result = Try.To(_throwException)
-                                                .Transform(_returnFailure, _fromErrorToSuccess);
+        Because of = () => _result = Try.To(_throwException)
+                                        .Transform(_returnFailure, _fromErrorToSuccess);
 
-        private It should_return_a_success = () => _result.IsSuccess.ShouldBeTrue();
+        It should_return_a_success = () => _result.IsSuccess.ShouldBeTrue();
     }
 }

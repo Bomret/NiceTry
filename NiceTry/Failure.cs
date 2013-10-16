@@ -43,7 +43,7 @@ namespace NiceTry
 
         public TValue Value
         {
-            get { return default(TValue); }
+            get { throw new NotSupportedException("A Failure does not contain a value"); }
         }
     }
 }

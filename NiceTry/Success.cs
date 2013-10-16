@@ -16,7 +16,7 @@ namespace NiceTry
 
         public Exception Error
         {
-            get { return null; }
+            get { throw new NotSupportedException("A Success does not contain an error"); }
         }
     }
 
@@ -39,7 +39,7 @@ namespace NiceTry
 
         public Exception Error
         {
-            get { return null; }
+            get { throw new NotSupportedException("A Success does not contain an error"); }
         }
 
         public TValue Value { get; private set; }

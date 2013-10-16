@@ -14,8 +14,7 @@ namespace NiceTry
         }
 
         public static ITry<TNextResult> AndThen<TNextResult>(this ITry result,
-                                                             Func<ITry, ITry<TNextResult>>
-                                                                 continuation)
+                                                             Func<ITry, ITry<TNextResult>> continuation)
         {
             return result.IsFailure
                        ? new Failure<TNextResult>(result.Error)
@@ -23,8 +22,7 @@ namespace NiceTry
         }
 
         public static ITry AndThen<TResult>(this ITry<TResult> result,
-                                            Func<ITry<TResult>, ITry>
-                                                continuation)
+                                            Func<ITry<TResult>, ITry> continuation)
         {
             return result.IsFailure
                        ? new Failure(result.Error)
@@ -37,6 +35,15 @@ namespace NiceTry
             return result.IsFailure
                        ? new Failure(result.Error)
                        : continuation(result);
+        }
+
+        public static ITry<TResult> LiftMap<TValue, TNextValue, TResult>(this ITry<TValue> ta,
+                                                                         ITry<TNextValue> tb,
+                                                                         Func<TValue, TNextValue, TResult> func)
+        {
+            return ta.IsFailure
+                       ? new Failure<TResult>(ta.Error)
+                       : ta.FlatMap(a => tb.Map(b => func(a, b)));
         }
 
         public static ITry<TValue> OrElse<TValue>(this ITry<TValue> result,
@@ -133,15 +140,13 @@ namespace NiceTry
                                                   Func<TValue, bool> predicate)
         {
             if (result.IsFailure)
-            {
                 return result;
-            }
 
             return result.FlatMap(
-                v => predicate(v)
-                         ? result
-                         : new Failure<TValue>(
-                               new ArgumentException("The given predicate does not hold for this Try.")));
+                                  v => predicate(v)
+                                           ? result
+                                           : new Failure<TValue>(
+                                                 new ArgumentException("The given predicate does not hold for this Try.")));
         }
     }
 }

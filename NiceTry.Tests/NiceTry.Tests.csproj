@@ -13,6 +13,8 @@
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
+    <ProductVersion>12.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -40,11 +42,14 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Machine.Specifications">
-      <HintPath>..\packages\Machine.Specifications.0.5.14\lib\net40\Machine.Specifications.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="Machine.Specifications.Clr4">
+      <HintPath>..\packages\Machine.Specifications.0.5.16\lib\net40\Machine.Specifications.Clr4.dll</HintPath>
+    </Reference>
+    <Reference Include="Machine.Specifications">
+      <HintPath>..\packages\Machine.Specifications.0.5.16\lib\net40\Machine.Specifications.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Combinators\When_I_check_if_a_success_that_contains_two_does_contain_three.cs" />
@@ -54,6 +59,7 @@
     <Compile Include="Combinators\When_I_flatten_a_success_nested_in_a_failure.cs" />
     <Compile Include="Combinators\When_I_flatten_a_success_that_contains_zero_and_is_nested_in_a_success.cs" />
     <Compile Include="Combinators\When_I_flatten_a_success_that_contains_zero_nested_in_a_failure.cs" />
+    <Compile Include="Combinators\When_I_lift_the_addition_and_add_two_and_three.cs" />
     <Compile Include="Combinators\When_I_try_to_add_three_to_a_failure.cs" />
     <Compile Include="Combinators\When_I_try_to_add_three_to_a_success_that_contains_two.cs" />
     <Compile Include="Combinators\When_I_try_to_add_two_and_three_and_convert_the_result_to_a_string.cs" />
@@ -113,9 +119,6 @@
     <Compile Include="When_I_try_to_throw_an_exception.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\NiceTry\NiceTry.csproj">
       <Project>{46F4F616-6391-4514-BF80-4EDD3FD9F7C3}</Project>
       <Name>NiceTry</Name>
@@ -130,4 +133,7 @@
   <Target Name="AfterBuild">  
   </Target>
   -->
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
 </Project>

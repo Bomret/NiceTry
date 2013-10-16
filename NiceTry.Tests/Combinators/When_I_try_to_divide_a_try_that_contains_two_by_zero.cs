@@ -4,13 +4,13 @@ using Machine.Specifications;
 namespace NiceTry.Tests.Combinators
 {
     [Subject(typeof (NiceTry.Combinators), "FlatMap")]
-    internal class When_I_try_to_divide_a_try_that_contains_two_by_zero
+    class When_I_try_to_divide_a_try_that_contains_two_by_zero
     {
-        private static ITry<int> twoSuccess;
-        private static Func<int, ITry<int>> _tryToDivideByZero;
-        private static ITry<int> _result;
+        static ITry<int> twoSuccess;
+        static Func<int, ITry<int>> _tryToDivideByZero;
+        static ITry<int> _result;
 
-        private Establish context = () =>
+        Establish context = () =>
         {
             twoSuccess = new Success<int>(2);
             _tryToDivideByZero = i => Try.To(() =>
@@ -20,8 +20,8 @@ namespace NiceTry.Tests.Combinators
             });
         };
 
-        private Because of = () => _result = twoSuccess.FlatMap(_tryToDivideByZero);
+        Because of = () => _result = twoSuccess.FlatMap(_tryToDivideByZero);
 
-        private It should_return_a_failure = () => _result.IsFailure.ShouldBeTrue();
+        It should_return_a_failure = () => _result.IsFailure.ShouldBeTrue();
     }
 }

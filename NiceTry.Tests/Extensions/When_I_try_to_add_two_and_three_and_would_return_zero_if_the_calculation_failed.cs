@@ -4,14 +4,14 @@ using Machine.Specifications;
 namespace NiceTry.Tests.Extensions
 {
     [Subject(typeof (NiceTry.Extensions), "GetOrElse")]
-    internal class When_I_try_to_add_two_and_three_and_would_return_zero_if_the_calculation_failed
+    class When_I_try_to_add_two_and_three_and_would_return_zero_if_the_calculation_failed
     {
-        private static int _result;
-        private static int _five;
-        private static Func<int> _addTwoAndThree;
-        private static int _zero;
+        static int _result;
+        static int _five;
+        static Func<int> _addTwoAndThree;
+        static int _zero;
 
-        private Establish context = () =>
+        Establish context = () =>
         {
             _addTwoAndThree = () => 2 + 3;
             _five = _addTwoAndThree();
@@ -19,9 +19,9 @@ namespace NiceTry.Tests.Extensions
             _zero = 0;
         };
 
-        private Because of = () => _result = Try.To(_addTwoAndThree)
-                                                .GetOrElse(_zero);
+        Because of = () => _result = Try.To(_addTwoAndThree)
+                                        .GetOrElse(_zero);
 
-        private It should_return_five = () => _result.ShouldEqual(_five);
+        It should_return_five = () => _result.ShouldEqual(_five);
     }
 }

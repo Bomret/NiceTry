@@ -9,13 +9,9 @@ namespace NiceTry
                                  Action<Exception> whenFailure)
         {
             if (result.IsSuccess)
-            {
                 whenSuccess();
-            }
             else
-            {
                 whenFailure(result.Error);
-            }
         }
 
         public static void Match<TValue>(this ITry<TValue> result,
@@ -23,13 +19,9 @@ namespace NiceTry
                                          Action<Exception> whenFailure)
         {
             if (result.IsSuccess)
-            {
                 whenSuccess(result.Value);
-            }
             else
-            {
                 whenFailure(result.Error);
-            }
         }
 
         public static void WhenComplete(this ITry result,
@@ -48,44 +40,34 @@ namespace NiceTry
                                        Action runWhenSuccess)
         {
             if (result.IsSuccess)
-            {
                 runWhenSuccess();
-            }
         }
 
         public static void WhenSuccess<TValue>(this ITry<TValue> result,
                                                Action<TValue> whenSuccess)
         {
             if (result.IsSuccess)
-            {
                 whenSuccess(result.Value);
-            }
         }
 
         public static void WhenFailure(this ITry result,
                                        Action<Exception> whenFailure)
         {
             if (result.IsFailure)
-            {
                 whenFailure(result.Error);
-            }
         }
 
         public static void WhenFailure<TValue>(this ITry<TValue> result,
                                                Action<Exception> whenFailure)
         {
             if (result.IsFailure)
-            {
                 whenFailure(result.Error);
-            }
         }
 
         public static TValue Get<TValue>(this ITry<TValue> t)
         {
             if (t.IsFailure)
-            {
                 throw t.Error;
-            }
 
             return t.Value;
         }

@@ -4,13 +4,13 @@ using Machine.Specifications;
 namespace NiceTry.Tests.Combinators
 {
     [Subject(typeof (NiceTry.Combinators), "Recover")]
-    internal class When_I_try_to_divide_by_zero_and_recover_with_zero
+    class When_I_try_to_divide_by_zero_and_recover_with_zero
     {
-        private static ITry<int> _result;
-        private static Func<int> _divideByZero;
-        private static Func<Exception, int> _withZero;
+        static ITry<int> _result;
+        static Func<int> _divideByZero;
+        static Func<Exception, int> _withZero;
 
-        private Establish context = () =>
+        Establish context = () =>
         {
             _divideByZero = () =>
             {
@@ -22,11 +22,11 @@ namespace NiceTry.Tests.Combinators
             _withZero = error => 0;
         };
 
-        private Because of = () => _result = Try.To(_divideByZero)
-                                                .Recover(_withZero);
+        Because of = () => _result = Try.To(_divideByZero)
+                                        .Recover(_withZero);
 
-        private It should_contain_zero_in_the_success = () => _result.Value.ShouldEqual(0);
+        It should_contain_zero_in_the_success = () => _result.Value.ShouldEqual(0);
 
-        private It should_return_a_success = () => _result.IsSuccess.ShouldBeTrue();
+        It should_return_a_success = () => _result.IsSuccess.ShouldBeTrue();
     }
 }

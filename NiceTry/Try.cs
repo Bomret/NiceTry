@@ -29,5 +29,15 @@ namespace NiceTry
                 return new Failure<TValue>(error);
             }
         }
+
+        public static Func<ITry<TA>, ITry<TB>, ITry<TC>> Lift<TA, TB, TC>(Func<TA, TB, TC> func)
+        {
+            return (ta, tb) => ta.FlatMap(a => tb.Map(b => func(a, b)));
+        }
+
+        public static Func<ITry<TA>, ITry<TB>, ITry> Lift<TA, TB>(Action<TA, TB> func)
+        {
+            return (ta, tb) => To(() => func(ta.Value, tb.Value));
+        }
     }
 }
