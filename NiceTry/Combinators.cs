@@ -37,15 +37,6 @@ namespace NiceTry
                        : continuation(result);
         }
 
-        public static ITry<TResult> LiftMap<TValue, TNextValue, TResult>(this ITry<TValue> ta,
-                                                                         ITry<TNextValue> tb,
-                                                                         Func<TValue, TNextValue, TResult> func)
-        {
-            return ta.IsFailure
-                       ? new Failure<TResult>(ta.Error)
-                       : ta.FlatMap(a => tb.Map(b => func(a, b)));
-        }
-
         public static ITry<TValue> OrElse<TValue>(this ITry<TValue> result,
                                                   Func<ITry<TValue>> orElse)
         {
@@ -62,6 +53,13 @@ namespace NiceTry
                        : result;
         }
 
+        public static ITry Apply<TValue>(this ITry<TValue> t, Action<TValue> action)
+        {
+            return t.IsFailure
+                       ? new Failure(t.Error)
+                       : Try.To(() => action(t.Value));
+        }
+
         public static ITry<TNewValue> Map<TValue, TNewValue>(this ITry<TValue> t, Func<TValue, TNewValue> func)
         {
             return t.IsFailure
@@ -74,6 +72,15 @@ namespace NiceTry
             return t.IsFailure
                        ? new Failure<TNewValue>(t.Error)
                        : func(t.Value);
+        }
+
+        public static ITry<TResult> LiftMap<TValue, TNextValue, TResult>(this ITry<TValue> ta,
+                                                                         ITry<TNextValue> tb,
+                                                                         Func<TValue, TNextValue, TResult> func)
+        {
+            return ta.IsFailure
+                       ? new Failure<TResult>(ta.Error)
+                       : ta.FlatMap(a => tb.Map(b => func(a, b)));
         }
 
         public static ITry<TValue> Flatten<TValue>(this ITry<ITry<TValue>> t)
@@ -140,13 +147,15 @@ namespace NiceTry
                                                   Func<TValue, bool> predicate)
         {
             if (result.IsFailure)
+            {
                 return result;
+            }
 
             return result.FlatMap(
-                                  v => predicate(v)
-                                           ? result
-                                           : new Failure<TValue>(
-                                                 new ArgumentException("The given predicate does not hold for this Try.")));
+                v => predicate(v)
+                         ? result
+                         : new Failure<TValue>(
+                               new ArgumentException("The given predicate does not hold for this Try.")));
         }
     }
 }
