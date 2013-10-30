@@ -4,7 +4,7 @@ using Machine.Specifications;
 
 namespace NiceTry.Tests.Extensions
 {
-    [Subject(typeof (NiceTry.Extensions), "WhenSuccess")]
+    [Subject(typeof (NiceTry.Applicators), "IfSuccess")]
     class When_I_try_to_delete_a_file_and_register_for_success
     {
         static Action _deleteFile;
@@ -18,7 +18,7 @@ namespace NiceTry.Tests.Extensions
         };
 
         Because of = () => Try.To(_deleteFile)
-                              .WhenSuccess(() => _successCallbackExecuted = true);
+                              .IfSuccess(() => _successCallbackExecuted = true);
 
         It should_execute_the_success_callback = () => _successCallbackExecuted.ShouldBeTrue();
 

@@ -3,7 +3,7 @@ using Machine.Specifications;
 
 namespace NiceTry.Tests.Extensions
 {
-    [Subject(typeof (NiceTry.Extensions), "WhenComplete")]
+    [Subject(typeof (NiceTry.Applicators), "WhenComplete")]
     public class When_I_try_to_throw_an_exception_and_register_for_completion
     {
         static ITry _result;

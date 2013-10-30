@@ -4,7 +4,7 @@ using Machine.Specifications;
 
 namespace NiceTry.Tests.Combinators
 {
-    [Subject(typeof (NiceTry.Combinators), "AndThen")]
+    [Subject(typeof (NiceTry.Combinators), "Then")]
     class When_I_try_to_delete_a_file_and_then_delete_another_file
     {
         static Action _deleteFileOne;
@@ -23,7 +23,7 @@ namespace NiceTry.Tests.Combinators
         };
 
         Because of = () => _result = Try.To(_deleteFileOne)
-                                        .AndThen(_deleteFileTwo);
+                                        .Then(_deleteFileTwo);
 
         It should_delete_file_one = () => File.Exists(_testFileOne).ShouldBeFalse();
 

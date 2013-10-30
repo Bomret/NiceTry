@@ -3,7 +3,7 @@ using Machine.Specifications;
 
 namespace NiceTry.Tests.Extensions
 {
-    [Subject(typeof (NiceTry.Extensions), "WhenFailure")]
+    [Subject(typeof (NiceTry.Applicators), "WhenFailure")]
     class When_I_try_to_add_two_and_three_and_register_for_failure
     {
         static Func<int> _addTwoAndThree;
@@ -12,7 +12,7 @@ namespace NiceTry.Tests.Extensions
         Establish context = () => _addTwoAndThree = () => 2 + 3;
 
         Because of = () => Try.To(_addTwoAndThree)
-                              .WhenFailure(error => _failureCallbackExecuted = true);
+                              .IfFailure(error => _failureCallbackExecuted = true);
 
         It should_not_execute_the_failure_callback = () => _failureCallbackExecuted.ShouldBeFalse();
     }

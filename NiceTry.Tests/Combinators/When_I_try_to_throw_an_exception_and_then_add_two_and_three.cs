@@ -17,7 +17,7 @@ namespace NiceTry.Tests.Combinators
         };
 
         Because of = () => _result = Try.To(_throwException)
-                                        .AndThen(t => _addTwoAndThree(t));
+                                        .Then(t => _addTwoAndThree(t));
 
         It should_return_a_failure = () => _result.IsFailure.ShouldBeTrue();
     }

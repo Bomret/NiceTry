@@ -3,7 +3,7 @@ using Machine.Specifications;
 
 namespace NiceTry.Tests.Combinators
 {
-    [Subject(typeof (NiceTry.Combinators), "AndThen")]
+    [Subject(typeof (NiceTry.Combinators), "Then")]
     class When_I_try_to_add_two_and_three_and_then_throw_an_exception
     {
         static Func<int> _addTwoAndThree;
@@ -17,7 +17,7 @@ namespace NiceTry.Tests.Combinators
         };
 
         Because of = () => _result = Try.To(_addTwoAndThree)
-                                        .AndThen(_throwException);
+                                        .Then(_throwException);
 
         It should_return_a_failure = () => _result.IsFailure.ShouldBeTrue();
     }

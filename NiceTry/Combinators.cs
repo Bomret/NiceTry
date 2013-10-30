@@ -4,7 +4,7 @@ namespace NiceTry
 {
     public static class Combinators
     {
-        public static ITry<TNextResult> AndThen<TResult, TNextResult>(this ITry<TResult> result,
+        public static ITry<TNextResult> Then<TResult, TNextResult>(this ITry<TResult> result,
                                                                       Func<ITry<TResult>, ITry<TNextResult>>
                                                                           continuation)
         {
@@ -13,7 +13,7 @@ namespace NiceTry
                        : continuation(result);
         }
 
-        public static ITry<TNextResult> AndThen<TNextResult>(this ITry result,
+        public static ITry<TNextResult> Then<TNextResult>(this ITry result,
                                                              Func<ITry, ITry<TNextResult>> continuation)
         {
             return result.IsFailure
@@ -21,7 +21,7 @@ namespace NiceTry
                        : continuation(result);
         }
 
-        public static ITry AndThen<TResult>(this ITry<TResult> result,
+        public static ITry Then<TResult>(this ITry<TResult> result,
                                             Func<ITry<TResult>, ITry> continuation)
         {
             return result.IsFailure
@@ -29,7 +29,7 @@ namespace NiceTry
                        : continuation(result);
         }
 
-        public static ITry AndThen(this ITry result,
+        public static ITry Then(this ITry result,
                                    Func<ITry, ITry> continuation)
         {
             return result.IsFailure
@@ -81,6 +81,14 @@ namespace NiceTry
             return ta.IsFailure
                        ? new Failure<TResult>(ta.Error)
                        : ta.FlatMap(a => tb.Map(b => func(a, b)));
+        }
+
+        public static ITry<TResult> LiftMap<TA, TB, TC, TResult>(this ITry<TA> ta,
+                                                                         ITry<TB> tb,
+            ITry<TC> tc,
+                                                                         Func<TA, TB, TC, TResult> func)
+        {
+            return ta.FlatMap(a => tb.FlatMap(b => tc.Map(c=> func(a,b,c))));
         }
 
         public static ITry<TValue> Flatten<TValue>(this ITry<ITry<TValue>> t)

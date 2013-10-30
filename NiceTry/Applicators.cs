@@ -2,7 +2,7 @@ using System;
 
 namespace NiceTry
 {
-    public static class Extensions
+    public static class Applicators
     {
         public static void Match(this ITry result,
                                  Action whenSuccess,

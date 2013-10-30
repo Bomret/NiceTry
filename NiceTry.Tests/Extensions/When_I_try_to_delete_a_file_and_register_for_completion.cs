@@ -4,7 +4,7 @@ using Machine.Specifications;
 
 namespace NiceTry.Tests.Extensions
 {
-    [Subject(typeof (NiceTry.Extensions), "WhenComplete")]
+    [Subject(typeof (NiceTry.Applicators), "WhenComplete")]
     class When_I_try_to_delete_a_file_and_register_for_completion
     {
         static Action _deleteFile;

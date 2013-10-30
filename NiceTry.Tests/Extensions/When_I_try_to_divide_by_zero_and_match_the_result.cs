@@ -3,7 +3,7 @@ using Machine.Specifications;
 
 namespace NiceTry.Tests.Extensions
 {
-    [Subject(typeof (NiceTry.Extensions), "Match")]
+    [Subject(typeof (NiceTry.Applicators), "Match")]
     class When_I_try_to_divide_by_zero_and_match_the_result
     {
         static Func<int> _divideByZero;

@@ -3,7 +3,7 @@ using Machine.Specifications;
 
 namespace NiceTry.Tests.Extensions
 {
-    [Subject(typeof (NiceTry.Extensions), "WhenComplete")]
+    [Subject(typeof (NiceTry.Applicators), "WhenComplete")]
     class When_I_try_to_add_two_and_three_and_register_for_completion
     {
         static Func<int> _addTwoAndThree;

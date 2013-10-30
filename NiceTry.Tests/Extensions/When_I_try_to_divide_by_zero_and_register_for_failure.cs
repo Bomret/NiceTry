@@ -3,7 +3,7 @@ using Machine.Specifications;
 
 namespace NiceTry.Tests.Extensions
 {
-    [Subject(typeof (NiceTry.Extensions), "WhenFailure")]
+    [Subject(typeof (NiceTry.Applicators), "WhenFailure")]
     class When_I_try_to_divide_by_zero_and_register_for_failure
     {
         static Func<int> _divideByZero;
@@ -20,7 +20,7 @@ namespace NiceTry.Tests.Extensions
         };
 
         Because of = () => Try.To(_divideByZero)
-                              .WhenFailure(error => _error = error);
+                              .IfFailure(error => _error = error);
 
         It should_return_a_DivideByZeroException = () => _error.ShouldBeOfType<DivideByZeroException>();
     }

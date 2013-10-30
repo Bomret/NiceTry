@@ -3,7 +3,7 @@ using Machine.Specifications;
 
 namespace NiceTry.Tests.Extensions
 {
-    [Subject(typeof (NiceTry.Extensions), "GetOrElse")]
+    [Subject(typeof (NiceTry.Applicators), "GetOrElse")]
     class When_I_try_to_add_two_and_three_and_would_return_zero_if_the_calculation_failed
     {
         static int _result;
