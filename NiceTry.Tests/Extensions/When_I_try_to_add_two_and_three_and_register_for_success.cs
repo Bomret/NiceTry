@@ -3,22 +3,22 @@ using Machine.Specifications;
 
 namespace NiceTry.Tests.Extensions
 {
-    [Subject(typeof (NiceTry.Applicators), "WhenSuccess")]
-    class When_I_try_to_add_two_and_three_and_register_for_success
+    [Subject(typeof (Applicators), "WhenSuccess")]
+    internal class When_I_try_to_add_two_and_three_and_register_for_success
     {
-        static Func<int> _addTwoAndThree;
-        static int _result;
-        static int _five;
+        private static Func<int> _addTwoAndThree;
+        private static int _result;
+        private static int _five;
 
-        Establish context = () =>
+        private Establish context = () =>
         {
             _addTwoAndThree = () => 2 + 3;
             _five = _addTwoAndThree();
         };
 
-        Because of = () => Try.To(_addTwoAndThree)
-                              .IfSuccess(result => _result = result);
+        private Because of = () => Try.To(_addTwoAndThree)
+                                      .WhenSuccess(result => _result = result);
 
-        It should_return_five = () => _result.ShouldEqual(_five);
+        private It should_return_five = () => _result.ShouldEqual(_five);
     }
 }

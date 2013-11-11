@@ -9,8 +9,11 @@ namespace NiceTry
         Exception Error { get; }
     }
 
-    public interface ITry<out TValue> : ITry
+    public interface ITry<out TValue>
     {
         TValue Value { get; }
+        bool IsSuccess { get; }
+        bool IsFailure { get; }
+        Exception Error { get; }
     }
 }
