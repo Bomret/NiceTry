@@ -62,282 +62,58 @@ namespace NiceTry {
             return ta.FlatMap(a => tb.Map(b => func(a, b)));
         }
 
-        public static ITry<TD> LiftMap<TA, TB, TC, TD>(this ITry<TA> ta, ITry<TB> tb, ITry<TC> tc,
-            Func<TA, TB, TC, TD> func) {
+        public static ITry<TD> LiftMap<TA, TB, TC, TD>(this ITry<TA> ta, ITry<TB> tb, ITry<TC> tc, Func<TA, TB, TC, TD> func) {
             return ta.FlatMap(a => tb.FlatMap(b => tc.Map(c => func(a, b, c))));
         }
 
-        public static ITry<TE> LiftMap<TA, TB, TC, TD, TE>(this ITry<TA> ta, ITry<TB> tb, ITry<TC> tc, ITry<TD> td,
-            Func<TA, TB, TC, TD, TE> func) {
+        public static ITry<TE> LiftMap<TA, TB, TC, TD, TE>(this ITry<TA> ta, ITry<TB> tb, ITry<TC> tc, ITry<TD> td, Func<TA, TB, TC, TD, TE> func) {
             return ta.FlatMap(a => tb.FlatMap(b => tc.FlatMap(c => td.Map(d => func(a, b, c, d)))));
         }
 
-#if NET40
-        public static ITry<TResult> LiftMap<TA, TB, TC, TD, TE, TResult>(this ITry<TA> ta,
-                                                                         ITry<TB> tb,
-                                                                         ITry<TC> tc,
-                                                                         ITry<TD> td,
-                                                                         ITry<TE> te,
-                                                                         Func<TA, TB, TC, TD, TE, TResult> func)
+#if NET40 || NET45
+        public static ITry<TF> LiftMap<TA, TB, TC, TD, TE, TF>(this ITry<TA> ta, ITry<TB> tb, ITry<TC> tc, ITry<TD> td, ITry<TE> te, Func<TA, TB, TC, TD, TE, TF> func)
         {
             return ta.FlatMap(a => tb.FlatMap(b => tc.FlatMap(c => td.FlatMap(d => te.Map(e => func(a, b, c, d, e))))));
         }
 
-        public static ITry<TResult> LiftMap<TA, TB, TC, TD, TE, TF, TResult>(this ITry<TA> ta,
-                                                                             ITry<TB> tb,
-                                                                             ITry<TC> tc,
-                                                                             ITry<TD> td,
-                                                                             ITry<TE> te,
-                                                                             ITry<TF> tf,
-                                                                             Func<TA, TB, TC, TD, TE, TF, TResult> func)
+        public static ITry<TG> LiftMap<TA, TB, TC, TD, TE, TF, TG>(this ITry<TA> ta, ITry<TB> tb, ITry<TC> tc, ITry<TD> td, ITry<TE> te, ITry<TF> tf, Func<TA, TB, TC, TD, TE, TF, TG> func)
         {
-            return
-                ta.FlatMap(
-                    a =>
-                    tb.FlatMap(
-                        b => tc.FlatMap(c => td.FlatMap(d => te.FlatMap(e => tf.Map(f => func(a, b, c, d, e, f)))))));
+            return ta.FlatMap(a => tb.FlatMap(b => tc.FlatMap(c => td.FlatMap(d => te.FlatMap(e => tf.Map(f => func(a, b, c, d, e, f)))))));
         }
 
-        public static ITry<TResult> LiftMap<TA, TB, TC, TD, TE, TF, TG, TResult>(this ITry<TA> ta,
-                                                                                 ITry<TB> tb,
-                                                                                 ITry<TC> tc,
-                                                                                 ITry<TD> td,
-                                                                                 ITry<TE> te,
-                                                                                 ITry<TF> tf,
-                                                                                 ITry<TG> tg,
-                                                                                 Func
-                                                                                     <TA, TB, TC, TD, TE, TF, TG,
-                                                                                     TResult> func)
+        public static ITry<TH> LiftMap<TA, TB, TC, TD, TE, TF, TG, TH>(this ITry<TA> ta, ITry<TB> tb, ITry<TC> tc, ITry<TD> td, ITry<TE> te, ITry<TF> tf, ITry<TG> tg, Func<TA, TB, TC, TD, TE, TF, TG, TH> func)
         {
-            return
-                ta.FlatMap(
-                    a =>
-                    tb.FlatMap(
-                        b =>
-                        tc.FlatMap(
-                            c =>
-                            td.FlatMap(d => te.FlatMap(e => tf.FlatMap(f => tg.Map(g => func(a, b, c, d, e, f, g))))))));
+            return ta.FlatMap(a => tb.FlatMap(b => tc.FlatMap(c =>td.FlatMap(d => te.FlatMap(e => tf.FlatMap(f => tg.Map(g => func(a, b, c, d, e, f, g))))))));
         }
 
-        public static ITry<TResult> LiftMap<TA, TB, TC, TD, TE, TF, TG, TH, TResult>(this ITry<TA> ta,
-                                                                                     ITry<TB> tb,
-                                                                                     ITry<TC> tc,
-                                                                                     ITry<TD> td,
-                                                                                     ITry<TE> te,
-                                                                                     ITry<TF> tf,
-                                                                                     ITry<TG> tg,
-                                                                                     ITry<TH> th,
-                                                                                     Func
-                                                                                         <TA, TB, TC, TD, TE, TF, TG, TH
-                                                                                         ,
-                                                                                         TResult> func)
+        public static ITry<TI> LiftMap<TA, TB, TC, TD, TE, TF, TG, TH, TI>(this ITry<TA> ta, ITry<TB> tb, ITry<TC> tc, ITry<TD> td, ITry<TE> te, ITry<TF> tf, ITry<TG> tg, ITry<TH> th, Func<TA, TB, TC, TD, TE, TF, TG, TH, TI> func)
         {
-            return
-                ta.FlatMap(
-                    a =>
-                    tb.FlatMap(
-                        b =>
-                        tc.FlatMap(
-                            c =>
-                            td.FlatMap(
-                                d =>
-                                te.FlatMap(
-                                    e => tf.FlatMap(f => tg.FlatMap(g => th.Map(h => func(a, b, c, d, e, f, g, h)))))))));
+            return ta.FlatMap(a => tb.FlatMap(b => tc.FlatMap(c => td.FlatMap(d => te.FlatMap(e => tf.FlatMap(f => tg.FlatMap(g => th.Map(h => func(a, b, c, d, e, f, g, h)))))))));
         }
 
-        public static ITry<TResult> LiftMap<TA, TB, TC, TD, TE, TF, TG, TH, TI, TResult>(this ITry<TA> ta,
-                                                                                         ITry<TB> tb,
-                                                                                         ITry<TC> tc,
-                                                                                         ITry<TD> td,
-                                                                                         ITry<TE> te,
-                                                                                         ITry<TF> tf,
-                                                                                         ITry<TG> tg,
-                                                                                         ITry<TH> th,
-                                                                                         ITry<TI> ti,
-                                                                                         Func
-                                                                                             <TA, TB, TC, TD, TE, TF, TG
-                                                                                             , TH, TI,
-                                                                                             TResult> func)
+        public static ITry<TJ> LiftMap<TA, TB, TC, TD, TE, TF, TG, TH, TI, TJ>(this ITry<TA> ta, ITry<TB> tb, ITry<TC> tc, ITry<TD> td, ITry<TE> te, ITry<TF> tf, ITry<TG> tg, ITry<TH> th, ITry<TI> ti, Func<TA, TB, TC, TD, TE, TF, TG, TH, TI,TJ> func)
         {
-            return
-                ta.FlatMap(
-                    a =>
-                    tb.FlatMap(
-                        b =>
-                        tc.FlatMap(
-                            c =>
-                            td.FlatMap(
-                                d =>
-                                te.FlatMap(
-                                    e =>
-                                    tf.FlatMap(
-                                        f =>
-                                        tg.FlatMap(g => th.FlatMap(h => ti.Map(i => func(a, b, c, d, e, f, g, h, i))))))))));
+            return ta.FlatMap(a => tb.FlatMap(b => tc.FlatMap(c => td.FlatMap(d => te.FlatMap(e => tf.FlatMap(f => tg.FlatMap(g => th.FlatMap(h => ti.Map(i => func(a, b, c, d, e, f, g, h, i))))))))));
         }
 
-        public static ITry<TResult> LiftMap<TA, TB, TC, TD, TE, TF, TG, TH, TI, TJ, TResult>(this ITry<TA> ta,
-                                                                                             ITry<TB> tb,
-                                                                                             ITry<TC> tc,
-                                                                                             ITry<TD> td,
-                                                                                             ITry<TE> te,
-                                                                                             ITry<TF> tf,
-                                                                                             ITry<TG> tg,
-                                                                                             ITry<TH> th,
-                                                                                             ITry<TI> ti,
-                                                                                             ITry<TJ> tj,
-                                                                                             Func
-                                                                                                 <TA, TB, TC, TD, TE, TF
-                                                                                                 , TG
-                                                                                                 , TH, TI, TJ,
-                                                                                                 TResult> func)
+        public static ITry<TK> LiftMap<TA, TB, TC, TD, TE, TF, TG, TH, TI, TJ, TK>(this ITry<TA> ta, ITry<TB> tb, ITry<TC> tc, ITry<TD> td, ITry<TE> te, ITry<TF> tf, ITry<TG> tg, ITry<TH> th, ITry<TI> ti, ITry<TJ> tj, Func<TA, TB, TC, TD, TE, TF, TG, TH, TI, TJ, TK> func)
         {
-            return
-                ta.FlatMap(
-                    a =>
-                    tb.FlatMap(
-                        b =>
-                        tc.FlatMap(
-                            c =>
-                            td.FlatMap(
-                                d =>
-                                te.FlatMap(
-                                    e =>
-                                    tf.FlatMap(
-                                        f =>
-                                        tg.FlatMap(
-                                            g =>
-                                            th.FlatMap(
-                                                h => ti.FlatMap(i => tj.Map(j => func(a, b, c, d, e, f, g, h, i, j)))))))))));
+            return ta.FlatMap(a => tb.FlatMap(b => tc.FlatMap(c => td.FlatMap(d => te.FlatMap(e => tf.FlatMap(f => tg.FlatMap(g => th.FlatMap(h => ti.FlatMap(i => tj.Map(j => func(a, b, c, d, e, f, g, h, i, j)))))))))));
         }
 
-        public static ITry<TResult> LiftMap<TA, TB, TC, TD, TE, TF, TG, TH, TI, TJ, TK, TResult>(this ITry<TA> ta,
-                                                                                                 ITry<TB> tb,
-                                                                                                 ITry<TC> tc,
-                                                                                                 ITry<TD> td,
-                                                                                                 ITry<TE> te,
-                                                                                                 ITry<TF> tf,
-                                                                                                 ITry<TG> tg,
-                                                                                                 ITry<TH> th,
-                                                                                                 ITry<TI> ti,
-                                                                                                 ITry<TJ> tj,
-                                                                                                 ITry<TK> tk,
-                                                                                                 Func
-                                                                                                     <TA, TB, TC, TD, TE
-                                                                                                     , TF, TG
-                                                                                                     , TH, TI, TJ, TK,
-                                                                                                     TResult> func)
+        public static ITry<TL> LiftMap<TA, TB, TC, TD, TE, TF, TG, TH, TI, TJ,TK, TL>(this ITry<TA> ta, ITry<TB> tb, ITry<TC> tc, ITry<TD> td, ITry<TE> te, ITry<TF> tf, ITry<TG> tg, ITry<TH> th, ITry<TI> ti, ITry<TJ> tj, ITry<TK> tk, Func<TA, TB, TC, TD, TE, TF, TG, TH, TI, TJ, TK, TL> func)
         {
-            return
-                ta.FlatMap(
-                    a =>
-                    tb.FlatMap(
-                        b =>
-                        tc.FlatMap(
-                            c =>
-                            td.FlatMap(
-                                d =>
-                                te.FlatMap(
-                                    e =>
-                                    tf.FlatMap(
-                                        f =>
-                                        tg.FlatMap(
-                                            g =>
-                                            th.FlatMap(
-                                                h =>
-                                                ti.FlatMap(
-                                                    i =>
-                                                    tj.FlatMap(j => tk.Map(k => func(a, b, c, d, e, f, g, h, i, j, k))))))))))));
+            return ta.FlatMap(a => tb.FlatMap(b => tc.FlatMap(c => td.FlatMap(d => te.FlatMap(e => tf.FlatMap(f => tg.FlatMap(g => th.FlatMap(h => ti.FlatMap(i => tj.FlatMap(j => tk.Map(k => func(a, b, c, d, e, f, g, h, i, j, k))))))))))));
         }
 
-        public static ITry<TResult> LiftMap<TA, TB, TC, TD, TE, TF, TG, TH, TI, TJ, TK, TL, TResult>(this ITry<TA> ta,
-                                                                                                     ITry<TB> tb,
-                                                                                                     ITry<TC> tc,
-                                                                                                     ITry<TD> td,
-                                                                                                     ITry<TE> te,
-                                                                                                     ITry<TF> tf,
-                                                                                                     ITry<TG> tg,
-                                                                                                     ITry<TH> th,
-                                                                                                     ITry<TI> ti,
-                                                                                                     ITry<TJ> tj,
-                                                                                                     ITry<TK> tk,
-                                                                                                     ITry<TL> tl,
-                                                                                                     Func
-                                                                                                         <TA, TB, TC, TD
-                                                                                                         , TE, TF, TG
-                                                                                                         , TH, TI, TJ,
-                                                                                                         TK, TL,
-                                                                                                         TResult> func)
+        public static ITry<TM> LiftMap<TA, TB, TC, TD, TE, TF, TG, TH, TI, TJ, TK, TL, TM>(this ITry<TA> ta, ITry<TB> tb, ITry<TC> tc, ITry<TD> td, ITry<TE> te, ITry<TF> tf, ITry<TG> tg, ITry<TH> th, ITry<TI> ti, ITry<TJ> tj, ITry<TK> tk, ITry<TL> tl, Func<TA, TB, TC, TD, TE, TF, TG, TH, TI, TJ, TK, TL, TM> func)
         {
-            return
-                ta.FlatMap(
-                    a =>
-                    tb.FlatMap(
-                        b =>
-                        tc.FlatMap(
-                            c =>
-                            td.FlatMap(
-                                d =>
-                                te.FlatMap(
-                                    e =>
-                                    tf.FlatMap(
-                                        f =>
-                                        tg.FlatMap(
-                                            g =>
-                                            th.FlatMap(
-                                                h =>
-                                                ti.FlatMap(
-                                                    i =>
-                                                    tj.FlatMap(
-                                                        j =>
-                                                        tk.FlatMap(
-                                                            k => tl.Map(l => func(a, b, c, d, e, f, g, h, i, j, k, l)))))))))))));
+            return ta.FlatMap(a => tb.FlatMap(b => tc.FlatMap(c => td.FlatMap( d => te.FlatMap(e => tf.FlatMap(f => tg.FlatMap(g => th.FlatMap(h => ti.FlatMap(i => tj.FlatMap(j => tk.FlatMap(k => tl.Map(l => func(a, b, c, d, e, f, g, h, i, j, k, l)))))))))))));
         }
 
-        public static ITry<TResult> LiftMap<TA, TB, TC, TD, TE, TF, TG, TH, TI, TJ, TK, TL, TM, TResult>(
-            this ITry<TA> ta,
-            ITry<TB> tb,
-            ITry<TC> tc,
-            ITry<TD> td,
-            ITry<TE> te,
-            ITry<TF> tf,
-            ITry<TG> tg,
-            ITry<TH> th,
-            ITry<TI> ti,
-            ITry<TJ> tj,
-            ITry<TK> tk,
-            ITry<TL> tl,
-            ITry<TM> tm,
-            Func
-                <TA, TB, TC, TD, TE, TF, TG
-                , TH, TI, TJ, TK, TL, TM,
-                TResult> func)
+        public static ITry<TN> LiftMap<TA, TB, TC, TD, TE, TF, TG, TH, TI, TJ, TK, TL, TM, TN>(this ITry<TA> ta, ITry<TB> tb, ITry<TC> tc, ITry<TD> td, ITry<TE> te, ITry<TF> tf, ITry<TG> tg, ITry<TH> th, ITry<TI> ti, ITry<TJ> tj, ITry<TK> tk, ITry<TL> tl, ITry<TM> tm, Func<TA, TB, TC, TD, TE, TF, TG, TH, TI, TJ, TK, TL, TM, TN> func)
         {
-            return
-                ta.FlatMap(
-                    a =>
-                    tb.FlatMap(
-                        b =>
-                        tc.FlatMap(
-                            c =>
-                            td.FlatMap(
-                                d =>
-                                te.FlatMap(
-                                    e =>
-                                    tf.FlatMap(
-                                        f =>
-                                        tg.FlatMap(
-                                            g =>
-                                            th.FlatMap(
-                                                h =>
-                                                ti.FlatMap(
-                                                    i =>
-                                                    tj.FlatMap(
-                                                        j =>
-                                                        tk.FlatMap(
-                                                            k =>
-                                                            tl.FlatMap(
-                                                                l =>
-                                                                tm.Map(m => func(a, b, c, d, e, f, g, h, i, j, k, l, m))))))))))))));
+            return ta.FlatMap(a => tb.FlatMap(b => tc.FlatMap(c => td.FlatMap(d => te.FlatMap(e => tf.FlatMap(f => tg.FlatMap(g => th.FlatMap(h => ti.FlatMap(i => tj.FlatMap(j => tk.FlatMap(k => tl.FlatMap(l => tm.Map(m => func(a, b, c, d, e, f, g, h, i, j, k, l, m))))))))))))));
         }
 
         public static ITry<TResult> LiftMap<TA, TB, TC, TD, TE, TF, TG, TH, TI, TJ, TK, TL, TM, TN, TResult>(
