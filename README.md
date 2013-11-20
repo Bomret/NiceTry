@@ -55,13 +55,13 @@ The above example would evaluate the anonymous function `() => 2 + 4` and, since
 var six = result.Value;
 ```
 
-To find out if `result` represents a `Success` or `Failure` it provides two boolean properties: `IsSuccess` and `IsFailure`. To be safe, you can either check those properties first or use the corresponding extension:
+To find out if `result` represents a `Success` or `Failure` it provides two boolean properties: `IsSuccess` and `IsFailure`. To be safe, you can either check those properties first or use the corresponding applicator:
 
 ```csharp
 result.WhenSuccess(i => _six = i);
 ```
 
-If the above example would have thrown an exception, it could be accessed by the `Error` property or the `WhenFailure` extension:
+If the above example would have thrown an exception, this could be accessed by the `Error` property or the `WhenFailure` extension:
 
 ```csharp
 var error = result.Error;
@@ -72,7 +72,7 @@ result.WhenFailure(e => _error = e);
 ```
 
 ## Recommended usage
-Every method that could throw an exception should return either an `ITry` or an `ITry<T>` instead of `void` or the result directly. That way, eventual exceptions can be handled by applying combinators and extensions to the return value and exception handling can be managed hassle free.
+Every method that could throw an exception should return either an `ITry` or an `ITry<T>` instead of `void` or the result directly. That way, eventual exceptions can be handled by applying combinators and applicators to the return value and exception handling can be managed hassle free.
 
 So instead of this:
 
@@ -90,11 +90,11 @@ private ITry<int> CalculateSomethingRisky(int a, int b) { //... };
 
 Using an `ITry` or an `ITry<T>` as return value states the risky nature of the method much clearer than a XML doc with an `<exception>` element.
 
-## Extensions and Combinators
+## Applicators and Combinators
 Since `Success` and `Failure` are simple data structures, a couple of extension methods are provided that make working with both types easier.
 
-### Extensions
-An extension is either void or returns something different than a `Success` or `Failure`. Extensions can be used to execute actions with side effect. Extensions **do not** catch exceptions. You have to deal with those yourself.
+### Applicators
+An applicator is either void or returns something different than a `Success` or `Failure`. Applicators can be used to execute actions with side effect. Applicators **do not** catch exceptions. You have to deal with those yourself.
 
 #### WhenComplete
 ```csharp
@@ -102,7 +102,7 @@ Try.To(() => 2 + 3)
    .WhenComplete(t => _result = t);
 ```
 
-`WhenComplete` is always executed and delegates the result of the `Try` to its enclosed callback. In the above example `_result` would be a `Success<int>` with Value *5*.
+`WhenComplete` is always executed and delegates the result of the `Try` to its enclosed callback. In the above example `_result` would be a `Success<int>` with Value `5`.
 
 #### WhenSuccess
 ```csharp
@@ -110,7 +110,7 @@ Try.To(() => 2 + 3)
    .WhenSuccess(i => _five = i);
 ```
 
-`WhenSuccess` is only executed if no exception was thrown and delegates the value of the `Success` to its enclosed callback. In the above example `_five` would be a int with Value *5*.
+`WhenSuccess` is only executed if no exception was thrown and delegates the value of the `Success` to its enclosed callback. In the above example `_five` would be a int with Value `5`.
 
 #### WhenFailure
 ```csharp
@@ -135,14 +135,14 @@ Try.To(() => 2 + 3)
 var five = Try.To(() => 2 + 3).Get();
 ```
 
-`Get` is the most straight forward extension. It returns the value if the result is a `Success` or rethrows the exception, if one was encountered. In the above example `five` would be *5*.
+`Get` is the most straight forward applicator. It returns the value if the result is a `Success` or rethrows the exception, if one was encountered. In the above example `five` would be `5`.
 
 #### GetOrElse
 ```csharp
 var five = Try.To(() => 2 + 3).GetOrElse(-1);
 ```
 
-`GetOrElse` either returns the value, if the `Try` returned a `Success` or the else value, if the `Try` returned a `Failure`. In the above example `five` would be *5*. It would have been *-1* if `() => 2 + 3` had thrown an exception.
+`GetOrElse` either returns the value, if the `Try` returned a `Success` or the else value, if the `Try` returned a `Failure`. In the above example `five` would be `5`. It would have been `-1` if `() => 2 + 3` had thrown an exception.
 
 ### Combinators
 A combinator always returns a `Success` or `Failure` and thus lets you combine it with other combinators and allows function composition. 
@@ -162,11 +162,11 @@ var result = Try.To(() => 5 / 0)
 In the above examples a `DivideByZeroException` would be thrown and `result` would be a `Failure`. The 
 `OrElse` combinator makes it possible to return a different `Try` in case of a `Failure`. In both cases above `result` would be a `Success<int>` with the Value *-1*.
 
-#### AndThen
+#### Then
 ```csharp
 var result = Try.To(() => 2 + 3)
-                .AndThen(AddOne)
-                .AndThen(PrintResult);
+                .Then(AddOne)
+                .Then(PrintResult);
 ```
 
 Allows chaining and conversion of multiple `Try's`. If a try fails, the chain will be interrupted and return immediately with a `Failure`. In the above example `result` would be a `Success`. Here are the signatures of the methods `AddOne` and `PrintResult`:
@@ -176,13 +176,21 @@ ITry<int> AddOne(ITry<int> arg)
 ITry PrintResult<T>(ITry<T> value)
 ```
 
+#### Apply
+```csharp
+var result = Try.To(() => 2 + 3)
+				.Apply(i => Console.WriteLine(i));
+```
+
+Applies an `Action<T>` to the value contained in a `Success<T>`. And returns the successful or failed result of this `Action`. In the above example `result` would be a `Success` if `Console.WriteLine` would not throw an exception, otherwise a `Failure`.
+
 #### Map
 ```csharp
 var result = Try.To(() => 2 + 3)
 				.Map(i => i.ToString());
 ```
 
-`Map` allows to apply a function to the value of a `Success`. In the above example `result` would be a `Success<string>` with Value *"5"*.
+`Map` allows to apply a function to the value of a `Success`. In the above example `result` would be a `Success<string>` with Value `"5"`.
 
 #### Filter
 ```csharp
@@ -190,7 +198,7 @@ var result = Try.To(() => 2 + 3)
 				.Filter(i => i == 5);
 ```
 
-`Filter` checks if a given predicate holds true for a `Try`. In the above example `result` would be a `Success<int>` with Value *5*. If the predicate `i => i == 5` would not hold, `result` would have been a `Failure<int>` containing an `ArgumentException`. If `() => 2 + 3` would have thrown an exception `result` would have been the original `Failure<int>`.
+`Filter` checks if a given predicate holds true for a `Try`. In the above example `result` would be a `Success<int>` with Value `5`. If the predicate `i => i == 5` would not hold, `result` would have been a `Failure<int>` containing an `ArgumentException`. If `() => 2 + 3` would have thrown an exception `result` would have been a `Failure<int>` containing the thrown exception.
 
 #### FlatMap
 ```csharp
@@ -198,7 +206,19 @@ var result = Try.To(() => 2 + 3)
                 .FlatMap(i => Try.To(() => i.ToString()));
 ```
 
-`FlatMap` allows to apply a function to the value of a `Success` that returns another `Try` and avoid the nesting that would occur otherwise. In the above example `result` would be a `Success<string>` with Value *"5"*. If `Map` would have been used, `result` would have been a `Success<Success<string>>`.
+`FlatMap` allows to apply a function to the value of a `Success` that returns another `Try` and avoid the nesting that would occur otherwise. In the above example `result` would be a `Success<string>` with Value `"5"`. If `Map` would have been used, `result` would have been a `Success<Success<string>>`.
+
+#### LiftMap
+```csharp
+var five = Try.To(() => 2 + 3);
+var four = Try.To(() => 6 - 2);
+var one = Try.To(() => 1);
+
+var ten = five.LiftMap(four, one, (a, b, c) => a + b + c);
+```
+
+Takes one or more other `Try's` and allows to apply a `Func` to all values of all `Try's`. If one `Try` would be a `Failure` the function would not be applied.
+In the above example `ten` would be a `Success<int>` containing `10`.
 
 #### Recover
 ```csharp
@@ -206,7 +226,15 @@ var result = Try.To(() => 5 / 0)
 				.Recover(e => -1);
 ```
 
-This combinator is used to recover from a `Failure`. In the above example `result` would be a `Success<int>` with Value *-1*.
+This combinator is used to recover from a `Failure`. Gets the thrown exception to work with. In the above example `result` would be a `Success<int>` with Value `-1` and `e` would be a `DivideByZeroException`.
+
+#### RecoverWith
+```csharp
+var result = Try.To(() => 5 / 0)
+				.RecoverWith(e => new Success<int>(-1));
+```
+
+This combinator is used to recover from a `Failure` with a new `Try`. Gets the thrown exception to work with. In the above example `result` would be a `Success<int>` with Value `-1` and `e` would be a `DivideByZeroException`.
 
 #### Transform
 ```csharp
