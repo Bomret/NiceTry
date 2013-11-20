@@ -1,21 +1,17 @@
 ﻿using System;
 using Machine.Specifications;
 
-namespace NiceTry.Tests.Extensions
-{
-    [Subject(typeof (NiceTry.Applicators), "Match")]
-    class When_I_try_to_divide_by_zero_and_match_the_result
-    {
+namespace NiceTry.Tests.Extensions {
+    [Subject(typeof (Applicators), "Match")]
+    internal class When_I_try_to_divide_by_zero_and_match_the_result {
         static Func<int> _divideByZero;
         static bool _successCallbackExecuted;
         static Exception _error;
         static Action<int> _whenSuccess;
         static Action<Exception> _whenFailure;
 
-        Establish context = () =>
-        {
-            _divideByZero = () =>
-            {
+        Establish context = () => {
+            _divideByZero = () => {
                 var zero = 0;
 
                 return 5 / zero;
@@ -26,7 +22,7 @@ namespace NiceTry.Tests.Extensions
         };
 
         Because of = () => Try.To(_divideByZero)
-                              .Match(_whenSuccess, _whenFailure);
+            .Match(_whenSuccess, _whenFailure);
 
         It should_execute_the_failure_callback = () => _error.ShouldNotBeNull();
 

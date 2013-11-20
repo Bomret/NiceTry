@@ -2,27 +2,26 @@ using System;
 using System.IO;
 using Machine.Specifications;
 
-namespace NiceTry.Tests.Combinators
-{
+namespace NiceTry.Tests.Combinators {
     [Subject(typeof (NiceTry.Combinators), "Recover")]
-    class When_I_try_to_throw_an_exception_and_recover_by_creating_a_file
-    {
+    internal class When_I_try_to_throw_an_exception_and_recover_by_creating_a_file {
         static ITry _result;
         static Action _throwException;
         static Action<Exception> _byCreatingFile;
         static string _recoverFile;
 
-        Establish context = () =>
-        {
+        Establish context = () => {
             _recoverFile = Path.GetTempFileName();
 
-            _throwException = () => { throw new ArgumentException("Expected test exception."); };
+            _throwException = () => {
+                throw new ArgumentException("Expected test exception.");
+            };
 
             _byCreatingFile = error => File.Create(_recoverFile);
         };
 
         Because of = () => _result = Try.To(_throwException)
-                                        .Recover(_byCreatingFile);
+            .Recover(_byCreatingFile);
 
         It should_create_the_file = () => File.Exists(_recoverFile).ShouldBeTrue();
 

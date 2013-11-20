@@ -1,19 +1,15 @@
 using System;
 using Machine.Specifications;
 
-namespace NiceTry.Tests.Combinators
-{
+namespace NiceTry.Tests.Combinators {
     [Subject(typeof (NiceTry.Combinators), "RecoverWith")]
-    class When_I_try_to_divide_by_zero_and_recover_with_a_success_that_contains_zero
-    {
+    internal class When_I_try_to_divide_by_zero_and_recover_with_a_success_that_contains_zero {
         static ITry<int> _result;
         static Func<int> _divideByZero;
         static Func<Exception, ITry<int>> _aSuccessThatContainsZero;
 
-        Establish context = () =>
-        {
-            _divideByZero = () =>
-            {
+        Establish context = () => {
+            _divideByZero = () => {
                 var zero = 0;
 
                 return 5 / zero;
@@ -23,7 +19,7 @@ namespace NiceTry.Tests.Combinators
         };
 
         Because of = () => _result = Try.To(_divideByZero)
-                                        .RecoverWith(_aSuccessThatContainsZero);
+            .RecoverWith(_aSuccessThatContainsZero);
 
         It should_contain_zero_in_the_success = () => _result.Value.ShouldEqual(0);
 

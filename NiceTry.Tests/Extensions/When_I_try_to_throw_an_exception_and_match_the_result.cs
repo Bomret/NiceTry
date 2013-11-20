@@ -1,11 +1,9 @@
 ﻿using System;
 using Machine.Specifications;
 
-namespace NiceTry.Tests.Extensions
-{
-    [Subject(typeof (NiceTry.Applicators), "Match")]
-    public class When_I_try_to_throw_an_exception_and_match_the_result
-    {
+namespace NiceTry.Tests.Extensions {
+    [Subject(typeof (Applicators), "Match")]
+    public class When_I_try_to_throw_an_exception_and_match_the_result {
         static Action _throwException;
         static Exception _expectedException;
         static Exception _error;
@@ -14,18 +12,19 @@ namespace NiceTry.Tests.Extensions
         static Action _whenSuccess;
         static Action<Exception> _whenFailure;
 
-        Establish context = () =>
-        {
+        Establish context = () => {
             _expectedException = new ArgumentException("Expected test exception");
 
-            _throwException = () => { throw _expectedException; };
+            _throwException = () => {
+                throw _expectedException;
+            };
 
             _whenSuccess = () => _successCallbackExecuted = true;
             _whenFailure = error => _error = error;
         };
 
         Because of = () => Try.To(_throwException)
-                              .Match(_whenSuccess, _whenFailure);
+            .Match(_whenSuccess, _whenFailure);
 
         It should_execute_the_failure_callback = () => _error.ShouldEqual(_expectedException);
 

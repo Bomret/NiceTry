@@ -1,102 +1,74 @@
 using System;
 
-namespace NiceTry
-{
-    public static class Combinators
-    {
-        public static ITry<TNextResult> Then<TResult, TNextResult>(this ITry<TResult> result,
-                                                                   Func<ITry<TResult>, ITry<TNextResult>>
-                                                                       continuation)
-        {
-            return result.IsFailure
-                       ? new Failure<TNextResult>(result.Error)
-                       : continuation(result);
-        }
-
-        public static ITry<TNextResult> Then<TNextResult>(this ITry result,
-                                                          Func<ITry, ITry<TNextResult>> continuation)
-        {
-            return result.IsFailure
-                       ? new Failure<TNextResult>(result.Error)
-                       : continuation(result);
-        }
-
-        public static ITry Then<TResult>(this ITry<TResult> result,
-                                         Func<ITry<TResult>, ITry> continuation)
-        {
-            return result.IsFailure
-                       ? new Failure(result.Error)
-                       : continuation(result);
-        }
-
-        public static ITry Then(this ITry result,
-                                Func<ITry, ITry> continuation)
-        {
-            return result.IsFailure
-                       ? new Failure(result.Error)
-                       : continuation(result);
-        }
-
-        public static ITry<TValue> OrElse<TValue>(this ITry<TValue> result,
-                                                  Func<ITry<TValue>> orElse)
-        {
-            return result.IsFailure
-                       ? orElse()
-                       : result;
-        }
-
-        public static ITry<TValue> OrElse<TValue>(this ITry<TValue> result,
-                                                  ITry<TValue> orElse)
-        {
-            return result.IsFailure
-                       ? orElse
-                       : result;
-        }
-
-        public static ITry Apply<TValue>(this ITry<TValue> t, Action<TValue> action)
-        {
-            return t.IsFailure
-                       ? new Failure(t.Error)
-                       : Try.To(() => action(t.Value));
-        }
-
-        public static ITry<TNewValue> Map<TValue, TNewValue>(this ITry<TValue> t, Func<TValue, TNewValue> func)
-        {
-            return t.IsFailure
-                       ? new Failure<TNewValue>(t.Error)
-                       : Try.To(() => func(t.Value));
-        }
-
-        public static ITry<TNewValue> FlatMap<TValue, TNewValue>(this ITry<TValue> t, Func<TValue, ITry<TNewValue>> func)
-        {
-            return t.IsFailure
-                       ? new Failure<TNewValue>(t.Error)
-                       : func(t.Value);
-        }
-
-        public static ITry<TResult> LiftMap<TValue, TNextValue, TResult>(this ITry<TValue> ta,
-                                                                         ITry<TNextValue> tb,
-                                                                         Func<TValue, TNextValue, TResult> func)
-        {
+namespace NiceTry {
+    public static class Combinators {
+        public static ITry<TB> Then<TA, TB>(this ITry<TA> ta, Func<ITry<TA>, ITry<TB>> func) {
             return ta.IsFailure
-                       ? new Failure<TResult>(ta.Error)
-                       : ta.FlatMap(a => tb.Map(b => func(a, b)));
+                ? new Failure<TB>(ta.Error)
+                : func(ta);
         }
 
-        public static ITry<TResult> LiftMap<TA, TB, TC, TResult>(this ITry<TA> ta,
-                                                                 ITry<TB> tb,
-                                                                 ITry<TC> tc,
-                                                                 Func<TA, TB, TC, TResult> func)
-        {
+        public static ITry<T> Then<T>(this ITry t, Func<ITry, ITry<T>> func) {
+            return t.IsFailure
+                ? new Failure<T>(t.Error)
+                : func(t);
+        }
+
+        public static ITry Then<T>(this ITry<T> t, Func<ITry<T>, ITry> func) {
+            return t.IsFailure
+                ? new Failure(t.Error)
+                : func(t);
+        }
+
+        public static ITry Then(this ITry t, Func<ITry, ITry> func) {
+            return t.IsFailure
+                ? new Failure(t.Error)
+                : func(t);
+        }
+
+        public static ITry<T> OrElse<T>(this ITry<T> t, Func<ITry<T>> func) {
+            return t.IsFailure
+                ? func()
+                : t;
+        }
+
+        public static ITry<T> OrElse<T>(this ITry<T> t, ITry<T> et) {
+            return t.IsFailure
+                ? et
+                : t;
+        }
+
+        public static ITry Apply<T>(this ITry<T> t, Action<T> action) {
+            return t.FlatMap(x => Try.To(() => action(x)));
+        }
+
+        public static ITry<TB> Map<TA, TB>(this ITry<TA> ta, Func<TA, TB> func) {
+            return ta.FlatMap(a => Try.To(() => func(a)));
+        }
+
+        public static ITry<TB> FlatMap<TA, TB>(this ITry<TA> ta, Func<TA, ITry<TB>> func) {
+            return ta.IsFailure
+                ? new Failure<TB>(ta.Error)
+                : func(ta.Value);
+        }
+
+        public static ITry FlatMap<T>(this ITry<T> t, Func<T, ITry> func) {
+            return t.IsFailure
+                ? new Failure(t.Error)
+                : func(t.Value);
+        }
+
+        public static ITry<TC> LiftMap<TA, TB, TC>(this ITry<TA> ta, ITry<TB> tb, Func<TA, TB, TC> func) {
+            return ta.FlatMap(a => tb.Map(b => func(a, b)));
+        }
+
+        public static ITry<TD> LiftMap<TA, TB, TC, TD>(this ITry<TA> ta, ITry<TB> tb, ITry<TC> tc,
+            Func<TA, TB, TC, TD> func) {
             return ta.FlatMap(a => tb.FlatMap(b => tc.Map(c => func(a, b, c))));
         }
 
-        public static ITry<TResult> LiftMap<TA, TB, TC, TD, TResult>(this ITry<TA> ta,
-                                                                     ITry<TB> tb,
-                                                                     ITry<TC> tc,
-                                                                     ITry<TD> td,
-                                                                     Func<TA, TB, TC, TD, TResult> func)
-        {
+        public static ITry<TE> LiftMap<TA, TB, TC, TD, TE>(this ITry<TA> ta, ITry<TB> tb, ITry<TC> tc, ITry<TD> td,
+            Func<TA, TB, TC, TD, TE> func) {
             return ta.FlatMap(a => tb.FlatMap(b => tc.FlatMap(c => td.Map(d => func(a, b, c, d)))));
         }
 
@@ -536,74 +508,57 @@ namespace NiceTry
         }
 #endif
 
-        public static ITry<TValue> Flatten<TValue>(this ITry<ITry<TValue>> t)
-        {
+        public static ITry<T> Flatten<T>(this ITry<ITry<T>> tt) {
+            return tt.FlatMap(x => x);
+        }
+
+        public static ITry Flatten(this ITry<ITry> tt) {
+            return tt.FlatMap(x => x);
+        }
+
+        public static ITry Recover(this ITry t, Action<Exception> recover) {
             return t.IsFailure
-                       ? new Failure<TValue>(t.Error)
-                       : t.Value;
+                ? Try.To(() => recover(t.Error))
+                : t;
         }
 
-        public static ITry Flatten(this ITry<ITry> t)
-        {
+        public static ITry<T> Recover<T>(this ITry<T> t, Func<Exception, T> func) {
             return t.IsFailure
-                       ? new Failure(t.Error)
-                       : t.Value;
+                ? Try.To(() => func(t.Error))
+                : t;
         }
 
-        public static ITry Recover(this ITry t, Action<Exception> recover)
-        {
+        public static ITry<T> RecoverWith<T>(this ITry<T> t, Func<Exception, ITry<T>> func) {
             return t.IsFailure
-                       ? Try.To(() => recover(t.Error))
-                       : t;
+                ? func(t.Error)
+                : t;
         }
 
-        public static ITry<TValue> Recover<TValue>(this ITry<TValue> t, Func<Exception, TValue> func)
-        {
+        public static ITry RecoverWith(this ITry t, Func<Exception, ITry> func) {
             return t.IsFailure
-                       ? Try.To(() => func(t.Error))
-                       : t;
+                ? func(t.Error)
+                : t;
         }
 
-        public static ITry<TValue> RecoverWith<TValue>(this ITry<TValue> t, Func<Exception, ITry<TValue>> func)
-        {
-            return t.IsFailure
-                       ? func(t.Error)
-                       : t;
+        public static ITry Transform(this ITry t, Func<ITry> whenSuccess, Func<Exception, ITry> whenFailure) {
+            return t.IsSuccess
+                ? whenSuccess()
+                : whenFailure(t.Error);
         }
 
-        public static ITry RecoverWith(this ITry t, Func<Exception, ITry> func)
-        {
-            return t.IsFailure
-                       ? func(t.Error)
-                       : t;
+        public static ITry<TB> Transform<TA, TB>(this ITry<TA> ta, Func<TA, ITry<TB>> whenSuccess,
+            Func<Exception, ITry<TB>> whenFailure) {
+            return ta.IsSuccess
+                ? whenSuccess(ta.Value)
+                : whenFailure(ta.Error);
         }
 
-        public static ITry Transform(this ITry result,
-                                     Func<ITry> whenSuccess,
-                                     Func<Exception, ITry> whenFailure)
-        {
-            return result.IsSuccess
-                       ? whenSuccess()
-                       : whenFailure(result.Error);
-        }
-
-        public static ITry<TNewValue> Transform<TValue, TNewValue>(this ITry<TValue> result,
-                                                                   Func<TValue, ITry<TNewValue>> whenSuccess,
-                                                                   Func<Exception, ITry<TNewValue>> whenFailure)
-        {
-            return result.IsSuccess
-                       ? whenSuccess(result.Value)
-                       : whenFailure(result.Error);
-        }
-
-        public static ITry<TValue> Filter<TValue>(this ITry<TValue> result,
-                                                  Func<TValue, bool> predicate)
-        {
-            return result.FlatMap(
-                v => predicate(v)
-                         ? result
-                         : new Failure<TValue>(
-                               new ArgumentException("The given predicate does not hold for this Try.")));
+        public static ITry<T> Filter<T>(this ITry<T> t, Func<T, bool> predicate) {
+            return t.FlatMap(
+                x => predicate(x)
+                    ? t
+                    : new Failure<T>(
+                        new ArgumentException("The given predicate does not hold for this Try.")));
         }
     }
 }

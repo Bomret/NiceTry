@@ -2,11 +2,9 @@
 using System.IO;
 using Machine.Specifications;
 
-namespace NiceTry.Tests.Extensions
-{
-    [Subject(typeof (NiceTry.Applicators), "Match")]
-    class When_I_try_to_delete_a_file_and_match_the_result
-    {
+namespace NiceTry.Tests.Extensions {
+    [Subject(typeof (Applicators), "Match")]
+    internal class When_I_try_to_delete_a_file_and_match_the_result {
         static Action _deleteFile;
         static string _testFile;
         static bool _successCallbackExecuted;
@@ -14,8 +12,7 @@ namespace NiceTry.Tests.Extensions
         static Action<Exception> _whenFailure;
         static Exception _error;
 
-        Establish context = () =>
-        {
+        Establish context = () => {
             _testFile = Path.GetTempFileName();
             _deleteFile = () => File.Delete(_testFile);
 
@@ -24,7 +21,7 @@ namespace NiceTry.Tests.Extensions
         };
 
         Because of = () => Try.To(_deleteFile)
-                              .Match(_whenSuccess, _whenFailure);
+            .Match(_whenSuccess, _whenFailure);
 
         It should_execute_the_success_callback = () => _successCallbackExecuted.ShouldBeTrue();
 

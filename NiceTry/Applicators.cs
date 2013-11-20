@@ -1,83 +1,60 @@
 using System;
 
-namespace NiceTry
-{
-    public static class Applicators
-    {
-        public static void Match(this ITry result,
-                                 Action whenSuccess,
-                                 Action<Exception> whenFailure)
-        {
-            if (result.IsSuccess)
+namespace NiceTry {
+    public static class Applicators {
+        public static void Match(this ITry t, Action whenSuccess, Action<Exception> whenFailure) {
+            if (t.IsSuccess)
                 whenSuccess();
             else
-                whenFailure(result.Error);
+                whenFailure(t.Error);
         }
 
-        public static void Match<TValue>(this ITry<TValue> result,
-                                         Action<TValue> whenSuccess,
-                                         Action<Exception> whenFailure)
-        {
-            if (result.IsSuccess)
-                whenSuccess(result.Value);
+        public static void Match<T>(this ITry<T> t, Action<T> whenSuccess, Action<Exception> whenFailure) {
+            if (t.IsSuccess)
+                whenSuccess(t.Value);
             else
-                whenFailure(result.Error);
+                whenFailure(t.Error);
         }
 
-        public static void WhenComplete(this ITry result,
-                                        Action<ITry> whenComplete)
-        {
-            whenComplete(result);
+        public static void WhenComplete(this ITry t, Action<ITry> whenComplete) {
+            whenComplete(t);
         }
 
-        public static void WhenComplete<TValue>(this ITry<TValue> result,
-                                                Action<ITry<TValue>> whenComplete)
-        {
-            whenComplete(result);
+        public static void WhenComplete<T>(this ITry<T> t, Action<ITry<T>> whenComplete) {
+            whenComplete(t);
         }
 
-        public static void WhenSuccess(this ITry result,
-                                       Action runWhenSuccess)
-        {
-            if (result.IsSuccess)
+        public static void WhenSuccess(this ITry t, Action runWhenSuccess) {
+            if (t.IsSuccess)
                 runWhenSuccess();
         }
 
-        public static void WhenSuccess<TValue>(this ITry<TValue> result,
-                                               Action<TValue> whenSuccess)
-        {
-            if (result.IsSuccess)
-                whenSuccess(result.Value);
+        public static void WhenSuccess<T>(this ITry<T> t, Action<T> whenSuccess) {
+            if (t.IsSuccess)
+                whenSuccess(t.Value);
         }
 
-        public static void WhenFailure(this ITry result,
-                                       Action<Exception> whenFailure)
-        {
-            if (result.IsFailure)
-                whenFailure(result.Error);
+        public static void WhenFailure(this ITry t, Action<Exception> whenFailure) {
+            if (t.IsFailure)
+                whenFailure(t.Error);
         }
 
-        public static void WhenFailure<TValue>(this ITry<TValue> result,
-                                               Action<Exception> whenFailure)
-        {
-            if (result.IsFailure)
-                whenFailure(result.Error);
+        public static void WhenFailure<T>(this ITry<T> t, Action<Exception> whenFailure) {
+            if (t.IsFailure)
+                whenFailure(t.Error);
         }
 
-        public static TValue Get<TValue>(this ITry<TValue> t)
-        {
+        public static T Get<T>(this ITry<T> t) {
             if (t.IsFailure)
                 throw t.Error;
 
             return t.Value;
         }
 
-        public static TValue GetOrElse<TValue>(this ITry<TValue> t,
-                                               TValue elseValue)
-        {
+        public static T GetOrElse<T>(this ITry<T> t, T elseValue) {
             return t.IsFailure
-                       ? elseValue
-                       : t.Value;
+                ? elseValue
+                : t.Value;
         }
     }
 }

@@ -2,19 +2,16 @@
 using System.IO;
 using Machine.Specifications;
 
-namespace NiceTry.Tests.Combinators
-{
+namespace NiceTry.Tests.Combinators {
     [Subject(typeof (NiceTry.Combinators), "Then")]
-    class When_I_try_to_delete_a_file_and_then_delete_another_file
-    {
+    internal class When_I_try_to_delete_a_file_and_then_delete_another_file {
         static Action _deleteFileOne;
         static Func<ITry, ITry> _deleteFileTwo;
         static ITry _result;
         static string _testFileOne;
         static string _testFileTwo;
 
-        Establish context = () =>
-        {
+        Establish context = () => {
             _testFileOne = Path.GetTempFileName();
             _testFileTwo = Path.GetTempFileName();
 
@@ -23,7 +20,7 @@ namespace NiceTry.Tests.Combinators
         };
 
         Because of = () => _result = Try.To(_deleteFileOne)
-                                        .Then(_deleteFileTwo);
+            .Then(_deleteFileTwo);
 
         It should_delete_file_one = () => File.Exists(_testFileOne).ShouldBeFalse();
 
@@ -31,8 +28,7 @@ namespace NiceTry.Tests.Combinators
 
         It should_return_a_success = () => _result.IsSuccess.ShouldBeTrue();
 
-        Cleanup stuff = () =>
-        {
+        Cleanup stuff = () => {
             File.Delete(_testFileOne);
             File.Delete(_testFileTwo);
         };

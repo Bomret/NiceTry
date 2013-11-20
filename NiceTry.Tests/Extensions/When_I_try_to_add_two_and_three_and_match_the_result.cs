@@ -1,11 +1,9 @@
 ﻿using System;
 using Machine.Specifications;
 
-namespace NiceTry.Tests.Extensions
-{
-    [Subject(typeof (NiceTry.Applicators), "Match")]
-    class When_I_try_to_add_two_and_three_and_match_the_result
-    {
+namespace NiceTry.Tests.Extensions {
+    [Subject(typeof (Applicators), "Match")]
+    internal class When_I_try_to_add_two_and_three_and_match_the_result {
         static Func<int> _addTwoAndThree;
         static int _result;
         static int _five;
@@ -14,8 +12,7 @@ namespace NiceTry.Tests.Extensions
         static Action<Exception> _whenFailure;
         static Exception _error;
 
-        Establish context = () =>
-        {
+        Establish context = () => {
             _addTwoAndThree = () => 2 + 3;
             _five = _addTwoAndThree();
 
@@ -24,7 +21,7 @@ namespace NiceTry.Tests.Extensions
         };
 
         Because of = () => Try.To(_addTwoAndThree)
-                              .Match(_whenSuccess, _whenFailure);
+            .Match(_whenSuccess, _whenFailure);
 
         It should_execute_the_success_callback = () => _result.ShouldEqual(_five);
 

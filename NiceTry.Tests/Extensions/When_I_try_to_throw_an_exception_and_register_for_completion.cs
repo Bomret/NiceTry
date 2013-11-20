@@ -1,24 +1,23 @@
 ﻿using System;
 using Machine.Specifications;
 
-namespace NiceTry.Tests.Extensions
-{
-    [Subject(typeof (NiceTry.Applicators), "WhenComplete")]
-    public class When_I_try_to_throw_an_exception_and_register_for_completion
-    {
+namespace NiceTry.Tests.Extensions {
+    [Subject(typeof (Applicators), "WhenComplete")]
+    public class When_I_try_to_throw_an_exception_and_register_for_completion {
         static ITry _result;
         static Action _throwException;
         static Exception _expectedException;
 
-        Establish context = () =>
-        {
+        Establish context = () => {
             _expectedException = new ArgumentException("Expected test exception");
 
-            _throwException = () => { throw _expectedException; };
+            _throwException = () => {
+                throw _expectedException;
+            };
         };
 
         Because of = () => Try.To(_throwException)
-                              .WhenComplete(result => _result = result);
+            .WhenComplete(result => _result = result);
 
         It should_contain_the_expected_exception_in_the_success =
             () => _result.Error.ShouldEqual(_expectedException);

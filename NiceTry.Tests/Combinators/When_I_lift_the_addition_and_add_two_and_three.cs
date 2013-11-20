@@ -1,18 +1,15 @@
 ﻿using System;
 using Machine.Specifications;
 
-namespace NiceTry.Tests.Combinators
-{
+namespace NiceTry.Tests.Combinators {
     [Subject(typeof (NiceTry.Combinators), "LiftMap")]
-    class When_I_lift_the_addition_and_add_two_and_three
-    {
+    internal class When_I_lift_the_addition_and_add_two_and_three {
         static Success<int> _two;
         static Success<int> _three;
         static Func<int, int, int> _add;
         static ITry<int> _five;
 
-        Establish context = () =>
-        {
+        Establish context = () => {
             _two = new Success<int>(2);
             _three = new Success<int>(3);
             _add = (a, b) => a + b;

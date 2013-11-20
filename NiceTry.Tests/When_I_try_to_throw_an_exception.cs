@@ -1,20 +1,19 @@
 ﻿using System;
 using Machine.Specifications;
 
-namespace NiceTry.Tests
-{
+namespace NiceTry.Tests {
     [Subject(typeof (Try), "To")]
-    public class When_I_try_to_throw_an_exception
-    {
+    public class When_I_try_to_throw_an_exception {
         static ITry _result;
         static Action _throwException;
         static Exception _expectedException;
 
-        Establish context = () =>
-        {
+        Establish context = () => {
             _expectedException = new ArgumentException("Expected test exception");
 
-            _throwException = () => { throw _expectedException; };
+            _throwException = () => {
+                throw _expectedException;
+            };
         };
 
         Because of = () => _result = Try.To(_throwException);

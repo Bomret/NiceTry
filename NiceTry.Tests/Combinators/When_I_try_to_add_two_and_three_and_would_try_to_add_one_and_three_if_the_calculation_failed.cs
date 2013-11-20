@@ -1,19 +1,16 @@
 using System;
 using Machine.Specifications;
 
-namespace NiceTry.Tests.Combinators
-{
+namespace NiceTry.Tests.Combinators {
     [Subject(typeof (NiceTry.Combinators), "OrElse")]
-    class
-        When_I_try_to_add_two_and_three_and_would_try_to_add_one_and_three_if_the_calculation_failed
-    {
+    internal class
+        When_I_try_to_add_two_and_three_and_would_try_to_add_one_and_three_if_the_calculation_failed {
         static ITry<int> _result;
         static int _five;
         static Func<ITry<int>> _addOneAndThree;
         static Func<int> _addTwoAndThree;
 
-        Establish context = () =>
-        {
+        Establish context = () => {
             _addTwoAndThree = () => 2 + 3;
             _five = _addTwoAndThree();
 
@@ -21,7 +18,7 @@ namespace NiceTry.Tests.Combinators
         };
 
         Because of = () => _result = Try.To(_addTwoAndThree)
-                                        .OrElse(_addOneAndThree);
+            .OrElse(_addOneAndThree);
 
         It should_contain_five_in_the_success = () => _result.Value.ShouldEqual(_five);
 

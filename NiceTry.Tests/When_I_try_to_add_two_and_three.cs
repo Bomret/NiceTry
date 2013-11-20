@@ -1,18 +1,15 @@
 ﻿using System;
 using Machine.Specifications;
 
-namespace NiceTry.Tests
-{
+namespace NiceTry.Tests {
     [Subject(typeof (Try), "To")]
-    public class When_I_try_to_add_two_and_three
-    {
+    public class When_I_try_to_add_two_and_three {
         static Func<int> _addTwoAndThree;
         static ITry<int> _result;
         static int _five;
         static Exception _error;
 
-        Establish context = () =>
-        {
+        Establish context = () => {
             _addTwoAndThree = () => 2 + 3;
             _five = _addTwoAndThree();
         };

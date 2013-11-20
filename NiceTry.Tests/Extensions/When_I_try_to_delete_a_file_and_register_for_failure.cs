@@ -2,26 +2,23 @@
 using System.IO;
 using Machine.Specifications;
 
-namespace NiceTry.Tests.Extensions
-{
+namespace NiceTry.Tests.Extensions {
     [Subject(typeof (Applicators), "WhenFailure")]
-    internal class When_I_try_to_delete_a_file_and_register_for_failure
-    {
-        private static Action _deleteFile;
-        private static string _testFile;
-        private static bool _failureCallbackExecuted;
+    internal class When_I_try_to_delete_a_file_and_register_for_failure {
+        static Action _deleteFile;
+        static string _testFile;
+        static bool _failureCallbackExecuted;
 
-        private Establish context = () =>
-        {
+        Establish context = () => {
             _testFile = Path.GetTempFileName();
             _deleteFile = () => File.Delete(_testFile);
         };
 
-        private Because of = () => Try.To(_deleteFile)
-                                      .WhenFailure(error => _failureCallbackExecuted = true);
+        Because of = () => Try.To(_deleteFile)
+            .WhenFailure(error => _failureCallbackExecuted = true);
 
-        private It should_not_execute_the_failure_callback = () => _failureCallbackExecuted.ShouldBeFalse();
+        It should_not_execute_the_failure_callback = () => _failureCallbackExecuted.ShouldBeFalse();
 
-        private Cleanup stuff = () => File.Delete(_testFile);
+        Cleanup stuff = () => File.Delete(_testFile);
     }
 }

@@ -1,48 +1,38 @@
 ﻿using System;
 
-namespace NiceTry
-{
-    public sealed class Failure : ITry
-    {
-        public Failure(Exception error)
-        {
+namespace NiceTry {
+    public sealed class Failure : ITry {
+        public Failure(Exception error) {
             Error = error;
         }
 
-        public bool IsSuccess
-        {
+        public bool IsSuccess {
             get { return false; }
         }
 
-        public bool IsFailure
-        {
+        public bool IsFailure {
             get { return true; }
         }
 
         public Exception Error { get; private set; }
     }
 
-    public sealed class Failure<TValue> : ITry<TValue>
-    {
-        public Failure(Exception error)
-        {
+    public sealed class Failure<TValue> : ITry<TValue> {
+        public Failure(Exception error) {
             Error = error;
         }
 
-        public bool IsSuccess
-        {
+        public bool IsSuccess {
             get { return false; }
         }
 
-        public bool IsFailure
-        {
+        public bool IsFailure {
             get { return true; }
         }
 
         public Exception Error { get; private set; }
 
-        public TValue Value
-        {
+        public TValue Value {
             get { throw new NotSupportedException("A Failure does not contain a value"); }
         }
     }

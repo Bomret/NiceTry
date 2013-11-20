@@ -2,18 +2,15 @@ using System;
 using System.IO;
 using Machine.Specifications;
 
-namespace NiceTry.Tests.Combinators
-{
+namespace NiceTry.Tests.Combinators {
     [Subject(typeof (NiceTry.Combinators), "Recover")]
-    class When_I_try_to_delete_a_file_and_recover_by_creating_the_file_if_any_exception_is_thrown
-    {
+    internal class When_I_try_to_delete_a_file_and_recover_by_creating_the_file_if_any_exception_is_thrown {
         static ITry _result;
         static Action _deleteFile;
         static Action<Exception> _byCreatingFile;
         static string _testFile;
 
-        Establish context = () =>
-        {
+        Establish context = () => {
             _testFile = Path.GetTempFileName();
 
             _deleteFile = () => File.Delete(_testFile);
@@ -22,7 +19,7 @@ namespace NiceTry.Tests.Combinators
         };
 
         Because of = () => _result = Try.To(_deleteFile)
-                                        .Recover(_byCreatingFile);
+            .Recover(_byCreatingFile);
 
         It should_delete_the_file = () => File.Exists(_testFile).ShouldBeFalse();
 

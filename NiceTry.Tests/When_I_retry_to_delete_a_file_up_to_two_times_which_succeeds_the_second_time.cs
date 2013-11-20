@@ -2,22 +2,18 @@ using System;
 using System.IO;
 using Machine.Specifications;
 
-namespace NiceTry.Tests
-{
+namespace NiceTry.Tests {
     [Subject(typeof (Retry), "To")]
-    class When_I_retry_to_delete_a_file_up_to_two_times_which_succeeds_the_second_time
-    {
+    internal class When_I_retry_to_delete_a_file_up_to_two_times_which_succeeds_the_second_time {
         static Action _deleteFileButFailTheFirstTime;
         static int _try;
         static string _testFile;
         static ITry _result;
 
-        Establish context = () =>
-        {
+        Establish context = () => {
             _testFile = Path.GetTempFileName();
 
-            _deleteFileButFailTheFirstTime = () =>
-            {
+            _deleteFileButFailTheFirstTime = () => {
                 _try += 1;
 
                 if (_try < 2)

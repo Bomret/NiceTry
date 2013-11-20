@@ -2,18 +2,15 @@
 using System.IO;
 using Machine.Specifications;
 
-namespace NiceTry.Tests
-{
+namespace NiceTry.Tests {
     [Subject(typeof (Try), "To")]
-    public class When_I_try_to_delete_a_file
-    {
+    public class When_I_try_to_delete_a_file {
         static ITry _result;
         static string _testFile;
         static Action _deleteFile;
         static Exception _error;
 
-        Establish context = () =>
-        {
+        Establish context = () => {
             _testFile = Path.GetTempFileName();
             _deleteFile = () => File.Delete(_testFile);
         };
