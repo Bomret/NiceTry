@@ -19,7 +19,7 @@ namespace NiceTry.Tests.Combinators {
         };
 
         Because of = () => _result = Try.To(_deleteFile)
-            .RecoverWith(_success);
+                                        .RecoverWith(_success);
 
         It should_delete_the_file = () => File.Exists(_testFile).ShouldBeFalse();
 

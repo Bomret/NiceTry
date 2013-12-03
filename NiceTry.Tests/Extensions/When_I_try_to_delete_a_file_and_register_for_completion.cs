@@ -16,7 +16,7 @@ namespace NiceTry.Tests.Extensions {
         };
 
         Because of = () => Try.To(_deleteFile)
-            .WhenComplete(result => _result = result);
+                              .WhenComplete(result => _result = result);
 
         It should_return_a_success = () => _result.IsSuccess.ShouldBeTrue();
 

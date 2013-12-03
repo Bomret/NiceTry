@@ -22,7 +22,7 @@ namespace NiceTry.Tests.Extensions {
         };
 
         Because of = () => Try.To(_divideByZero)
-            .Match(_whenSuccess, _whenFailure);
+                              .Match(_whenSuccess, _whenFailure);
 
         It should_execute_the_failure_callback = () => _error.ShouldNotBeNull();
 

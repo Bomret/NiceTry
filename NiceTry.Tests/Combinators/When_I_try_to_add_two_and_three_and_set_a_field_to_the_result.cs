@@ -16,7 +16,7 @@ namespace NiceTry.Tests.Combinators {
         };
 
         Because of = () => _result = Try.To(_addTwoAndThree)
-            .Apply(_setField);
+                                        .Apply(_setField);
 
         It should_return_a_success = () => _result.IsSuccess.ShouldBeTrue();
         It should_set_the_field_to_five = () => _five.ShouldEqual(5);

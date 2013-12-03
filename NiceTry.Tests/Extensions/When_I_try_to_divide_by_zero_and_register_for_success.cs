@@ -16,7 +16,7 @@ namespace NiceTry.Tests.Extensions {
         };
 
         Because of = () => Try.To(_divideByZero)
-            .WhenSuccess(result => _successCallbackExecuted = true);
+                              .WhenSuccess(result => _successCallbackExecuted = true);
 
         It should_not_execute_the_success_callback = () => _successCallbackExecuted.ShouldBeFalse();
     }

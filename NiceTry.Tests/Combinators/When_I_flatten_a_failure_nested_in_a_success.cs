@@ -13,9 +13,7 @@ namespace NiceTry.Tests.Combinators {
             _nestedFailure = new Success<Failure<int>>(_expectedResult);
         };
 
-        Because of = () => {
-            _result = _nestedFailure.Flatten();
-        };
+        Because of = () => { _result = _nestedFailure.Flatten(); };
 
         It should_return_the_inner_failure = () => _result.ShouldEqual(_expectedResult);
     }

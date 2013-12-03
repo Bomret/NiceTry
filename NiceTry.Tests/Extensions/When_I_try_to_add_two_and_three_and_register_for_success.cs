@@ -14,7 +14,7 @@ namespace NiceTry.Tests.Extensions {
         };
 
         Because of = () => Try.To(_addTwoAndThree)
-            .WhenSuccess(result => _result = result);
+                              .WhenSuccess(result => _result = result);
 
         It should_return_five = () => _result.ShouldEqual(_five);
     }

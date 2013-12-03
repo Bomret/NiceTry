@@ -20,7 +20,7 @@ namespace NiceTry.Tests.Combinators {
         };
 
         Because of = () => _result = Try.To(_divideByZero)
-            .Map(_toString);
+                                        .Map(_toString);
 
         It should_contain_a_DivideByZeroException_in_the_failure =
             () => _result.Error.ShouldBeOfType<DivideByZeroException>();

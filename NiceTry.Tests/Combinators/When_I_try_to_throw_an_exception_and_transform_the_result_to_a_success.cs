@@ -10,16 +10,14 @@ namespace NiceTry.Tests.Combinators {
         static Action _throwException;
 
         Establish context = () => {
-            _throwException = () => {
-                throw new ArgumentException("Test exception.");
-            };
+            _throwException = () => { throw new ArgumentException("Test exception."); };
 
             _returnFailure = () => new Failure(new ArgumentException("Unexpected test exception."));
             _fromErrorToSuccess = error => new Success();
         };
 
         Because of = () => _result = Try.To(_throwException)
-            .Transform(_returnFailure, _fromErrorToSuccess);
+                                        .Transform(_returnFailure, _fromErrorToSuccess);
 
         It should_return_a_success = () => _result.IsSuccess.ShouldBeTrue();
     }

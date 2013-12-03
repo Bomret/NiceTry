@@ -22,7 +22,7 @@ namespace NiceTry.Tests.Combinators {
         };
 
         Because of = () => _result = Try.To(_divideByZero)
-            .OrElse(_addOneAndThree);
+                                        .OrElse(_addOneAndThree);
 
         It should_contain_four_in_the_success = () => _result.Value.ShouldEqual(_four.Value);
 

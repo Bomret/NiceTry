@@ -21,13 +21,13 @@ namespace NiceTry.Tests.Combinators {
             _expectedMessage = "Expected test message.";
 
             _toString = i =>
-                Try.To(() => i.ToString(CultureInfo.InvariantCulture));
+                        Try.To(() => i.ToString(CultureInfo.InvariantCulture));
             _returnExceptionMessage = error =>
-                new Success<string>(_expectedMessage);
+                                      new Success<string>(_expectedMessage);
         };
 
         Because of = () => _result = Try.To(_divideByZero)
-            .Transform(_toString, _returnExceptionMessage);
+                                        .Transform(_toString, _returnExceptionMessage);
 
         It should_contain_the_expected_message_in_the_success =
             () => _result.Value.ShouldEqual(_expectedMessage);

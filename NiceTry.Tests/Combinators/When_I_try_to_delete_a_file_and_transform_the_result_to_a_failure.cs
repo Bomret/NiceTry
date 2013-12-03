@@ -20,7 +20,7 @@ namespace NiceTry.Tests.Combinators {
         };
 
         Because of = () => _result = Try.To(_deleteFile)
-            .Transform(_returnFailure, _fromErrorToSuccess);
+                                        .Transform(_returnFailure, _fromErrorToSuccess);
 
         It should_return_a_failure = () => _result.IsFailure.ShouldBeTrue();
 

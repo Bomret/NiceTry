@@ -8,13 +8,9 @@ namespace NiceTry.Tests.Combinators {
         static ITry _result;
 
         Establish context =
-            () => {
-                _nestedSuccess = new Failure<Success>(new Exception("Expected test exception"));
-            };
+            () => { _nestedSuccess = new Failure<Success>(new Exception("Expected test exception")); };
 
-        Because of = () => {
-            _result = _nestedSuccess.Flatten();
-        };
+        Because of = () => { _result = _nestedSuccess.Flatten(); };
 
         It should_return_a_failure = () => _result.IsFailure.ShouldBeTrue();
     }

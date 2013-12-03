@@ -19,7 +19,7 @@ namespace NiceTry.Tests.Combinators {
         };
 
         Because of = () => _result = Try.To(_divideByZero)
-            .OrElse(_zero);
+                                        .OrElse(_zero);
 
         It should_contaion_zero_in_the_success = () => _result.Value.ShouldEqual(_zero.Value);
 

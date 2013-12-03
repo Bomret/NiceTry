@@ -16,7 +16,7 @@ namespace NiceTry.Tests.Extensions {
         };
 
         Because of = () => Try.To(_divideByZero)
-            .WhenFailure(error => _error = error);
+                              .WhenFailure(error => _error = error);
 
         It should_return_a_DivideByZeroException = () => _error.ShouldBeOfType<DivideByZeroException>();
     }

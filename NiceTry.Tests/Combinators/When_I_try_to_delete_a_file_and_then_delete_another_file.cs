@@ -20,7 +20,7 @@ namespace NiceTry.Tests.Combinators {
         };
 
         Because of = () => _result = Try.To(_deleteFileOne)
-            .Then(_deleteFileTwo);
+                                        .Then(_deleteFileTwo);
 
         It should_delete_file_one = () => File.Exists(_testFileOne).ShouldBeFalse();
 

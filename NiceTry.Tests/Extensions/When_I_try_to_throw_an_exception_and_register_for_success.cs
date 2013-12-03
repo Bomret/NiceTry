@@ -8,14 +8,10 @@ namespace NiceTry.Tests.Extensions {
         static bool _successCallbackExecuted;
 
         Establish context =
-            () => {
-                _throwException = () => {
-                    throw new ArgumentException("Expected test exception");
-                };
-            };
+            () => { _throwException = () => { throw new ArgumentException("Expected test exception"); }; };
 
         Because of = () => Try.To(_throwException)
-            .WhenSuccess(() => _successCallbackExecuted = true);
+                              .WhenSuccess(() => _successCallbackExecuted = true);
 
         It should_not_execute_the_success_callback = () => _successCallbackExecuted.ShouldBeFalse();
     }

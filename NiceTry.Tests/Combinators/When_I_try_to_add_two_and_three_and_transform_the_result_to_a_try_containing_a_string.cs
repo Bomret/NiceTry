@@ -20,7 +20,7 @@ namespace NiceTry.Tests.Combinators {
         };
 
         Because of = () => _result = Try.To(_addTwoAndThree)
-            .Transform(_toString, _returnExceptionMessage);
+                                        .Transform(_toString, _returnExceptionMessage);
 
         It should_contain_five_as_a_string_in_the_success =
             () => _result.Value.ShouldEqual(_fiveAsString);

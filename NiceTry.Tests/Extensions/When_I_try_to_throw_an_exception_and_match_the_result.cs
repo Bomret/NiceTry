@@ -15,16 +15,14 @@ namespace NiceTry.Tests.Extensions {
         Establish context = () => {
             _expectedException = new ArgumentException("Expected test exception");
 
-            _throwException = () => {
-                throw _expectedException;
-            };
+            _throwException = () => { throw _expectedException; };
 
             _whenSuccess = () => _successCallbackExecuted = true;
             _whenFailure = error => _error = error;
         };
 
         Because of = () => Try.To(_throwException)
-            .Match(_whenSuccess, _whenFailure);
+                              .Match(_whenSuccess, _whenFailure);
 
         It should_execute_the_failure_callback = () => _error.ShouldEqual(_expectedException);
 

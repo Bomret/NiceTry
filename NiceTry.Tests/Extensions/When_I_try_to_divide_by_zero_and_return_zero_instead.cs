@@ -19,7 +19,7 @@ namespace NiceTry.Tests.Extensions {
         };
 
         Because of = () => _result = Try.To(_divideByZero)
-            .GetOrElse(_zero);
+                                        .GetOrElse(_zero);
 
         It should_return_zero = () => _result.ShouldEqual(_zero);
     }

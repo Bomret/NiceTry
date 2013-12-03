@@ -18,7 +18,7 @@ namespace NiceTry.Tests.Combinators {
         };
 
         Because of = () => _result = Try.To(_addTwoAndThree)
-            .RecoverWith(_withZeroIfException);
+                                        .RecoverWith(_withZeroIfException);
 
         It should_contain_five_in_the_success = () => _result.Value.ShouldEqual(_five);
 

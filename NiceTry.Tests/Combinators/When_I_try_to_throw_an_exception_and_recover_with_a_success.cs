@@ -9,15 +9,13 @@ namespace NiceTry.Tests.Combinators {
         static Func<Exception, ITry> _aSuccess;
 
         Establish context = () => {
-            _throwException = () => {
-                throw new ArgumentException("Expected test exception.");
-            };
+            _throwException = () => { throw new ArgumentException("Expected test exception."); };
 
             _aSuccess = error => new Success();
         };
 
         Because of = () => _result = Try.To(_throwException)
-            .RecoverWith(_aSuccess);
+                                        .RecoverWith(_aSuccess);
 
         It should_return_a_success = () => _result.IsSuccess.ShouldBeTrue();
     }

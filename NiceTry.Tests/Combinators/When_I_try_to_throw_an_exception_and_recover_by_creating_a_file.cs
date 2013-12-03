@@ -13,15 +13,13 @@ namespace NiceTry.Tests.Combinators {
         Establish context = () => {
             _recoverFile = Path.GetTempFileName();
 
-            _throwException = () => {
-                throw new ArgumentException("Expected test exception.");
-            };
+            _throwException = () => { throw new ArgumentException("Expected test exception."); };
 
             _byCreatingFile = error => File.Create(_recoverFile);
         };
 
         Because of = () => _result = Try.To(_throwException)
-            .Recover(_byCreatingFile);
+                                        .Recover(_byCreatingFile);
 
         It should_create_the_file = () => File.Exists(_recoverFile).ShouldBeTrue();
 

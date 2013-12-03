@@ -11,13 +11,11 @@ namespace NiceTry.Tests.Extensions {
         Establish context = () => {
             _expectedException = new ArgumentException("Expected test exception");
 
-            _throwException = () => {
-                throw _expectedException;
-            };
+            _throwException = () => { throw _expectedException; };
         };
 
         Because of = () => Try.To(_throwException)
-            .WhenFailure(error => _error = error);
+                              .WhenFailure(error => _error = error);
 
         It should_return_the_expected_exception = () => _error.ShouldEqual(_expectedException);
     }

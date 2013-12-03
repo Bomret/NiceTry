@@ -15,7 +15,7 @@ namespace NiceTry.Tests.Extensions {
         };
 
         Because of = () => Try.To(_deleteFile)
-            .WhenSuccess(() => _successCallbackExecuted = true);
+                              .WhenSuccess(() => _successCallbackExecuted = true);
 
         It should_execute_the_success_callback = () => _successCallbackExecuted.ShouldBeTrue();
 

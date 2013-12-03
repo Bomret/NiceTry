@@ -11,9 +11,7 @@ namespace NiceTry.Tests {
         Establish context = () => {
             _expectedException = new ArgumentException("Expected test exception");
 
-            _throwException = () => {
-                throw _expectedException;
-            };
+            _throwException = () => { throw _expectedException; };
         };
 
         Because of = () => _result = Try.To(_throwException);

@@ -16,7 +16,7 @@ namespace NiceTry.Tests.Combinators {
         };
 
         Because of = () => _result = Try.To(_addTwoAndThree)
-            .Map(_toString);
+                                        .Map(_toString);
 
         It should_return_five_as_a_string = () => _result.Value.ShouldEqual("5");
     }

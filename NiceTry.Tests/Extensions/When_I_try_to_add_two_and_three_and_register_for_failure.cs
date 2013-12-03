@@ -10,7 +10,7 @@ namespace NiceTry.Tests.Extensions {
         Establish context = () => _addTwoAndThree = () => 2 + 3;
 
         Because of = () => Try.To(_addTwoAndThree)
-            .WhenFailure(error => _failureCallbackExecuted = true);
+                              .WhenFailure(error => _failureCallbackExecuted = true);
 
         It should_not_execute_the_failure_callback = () => _failureCallbackExecuted.ShouldBeFalse();
     }

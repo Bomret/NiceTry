@@ -10,13 +10,11 @@ namespace NiceTry.Tests.Combinators {
 
         Establish context = () => {
             _addTwoAndThree = () => 2 + 3;
-            _throwException = t => Try.To(() => {
-                throw new Exception("Expected test exception");
-            });
+            _throwException = t => Try.To(() => { throw new Exception("Expected test exception"); });
         };
 
         Because of = () => _result = Try.To(_addTwoAndThree)
-            .Then(_throwException);
+                                        .Then(_throwException);
 
         It should_return_a_failure = () => _result.IsFailure.ShouldBeTrue();
     }
