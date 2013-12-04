@@ -83,11 +83,15 @@
     <Compile Include="Combinators\When_I_try_to_divide_by_zero_and_transform_the_result_to_a_success_containing_a_message.cs" />
     <Compile Include="Combinators\When_I_try_to_divide_by_zero_and_would_convert_the_result_to_a_string.cs" />
     <Compile Include="Combinators\When_I_try_to_sleep_the_thread_and_inspect_the_result.cs" />
+    <Compile Include="Combinators\When_I_try_to_throw_an_argument_exception_catch_it_and_return_a_success_containing_zero_instead.cs" />
+    <Compile Include="Combinators\When_I_try_to_throw_an_argument_exception_catch_it_and_return_zero_instead.cs" />
     <Compile Include="Combinators\When_I_try_to_throw_an_exception_and_inspect_the_result.cs" />
     <Compile Include="Combinators\When_I_try_to_throw_an_exception_and_recover_by_creating_a_file.cs" />
     <Compile Include="Combinators\When_I_try_to_throw_an_exception_and_recover_with_a_success.cs" />
     <Compile Include="Combinators\When_I_try_to_throw_an_exception_and_then_add_two_and_three.cs" />
     <Compile Include="Combinators\When_I_try_to_throw_an_exception_and_transform_the_result_to_a_success.cs" />
+    <Compile Include="Combinators\When_I_try_to_throw_a_generic_exception_and_would_catch_it_and_return_a_success_containing_zero_if_it_was_an_argument_exception.cs" />
+    <Compile Include="Combinators\When_I_try_to_throw_a_generic_exception_and_would_catch_it_and_return_zero_if_it_was_an_argument_exception.cs" />
     <Compile Include="Extensions\When_I_try_to_add_two_and_three_and_get_the_result.cs" />
     <Compile Include="Extensions\When_I_try_to_add_two_and_three_and_match_the_result.cs" />
     <Compile Include="Extensions\When_I_try_to_add_two_and_three_and_register_for_completion.cs" />
