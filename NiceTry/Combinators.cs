@@ -82,22 +82,32 @@ namespace NiceTry {
             return t.IsFailure ? f(t.Error) : t;
         }
 
-        public static ITry<B> Catch<A, B, E>(this ITry<A> t, Func<E, B> f)
-            where E : Exception
-            where A : B {
+        public static ITry<B> Catch<A, B, E>(this ITry<A> t, Func<E, B> f) where E : Exception where A : B {
             if (t.IsSuccess) return (ITry<B>) t;
 
             var ex = t.Error as E;
             return ex == null ? (ITry<B>) t : Try.To(() => f(ex));
         }
 
-        public static ITry<B> CatchWith<A, B, E>(this ITry<A> t, Func<E, ITry<B>> f)
-            where E : Exception
-            where A : B {
+        public static ITry Catch<E>(this ITry t, Action<E> a) where E : Exception {
+            if (t.IsSuccess) return t;
+
+            var ex = t.Error as E;
+            return ex == null ? t : Try.To(() => a(ex));
+        }
+
+        public static ITry<B> CatchWith<A, B, E>(this ITry<A> t, Func<E, ITry<B>> f) where E : Exception where A : B {
             if (t.IsSuccess) return (ITry<B>) t;
 
             var ex = t.Error as E;
             return ex == null ? (ITry<B>) t : f(ex);
+        }
+
+        public static ITry CatchWith<E>(this ITry t, Func<E, ITry> f) where E : Exception {
+            if (t.IsSuccess) return t;
+
+            var ex = t.Error as E;
+            return ex == null ? t : f(ex);
         }
 
         public static ITry Transform(this ITry t, Func<ITry> whenSuccess, Func<Exception, ITry> whenFailure) {
