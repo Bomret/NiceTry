@@ -30,6 +30,18 @@ namespace NiceTry {
             return t.FlatMap(x => Try.To(() => a(x)));
         }
 
+        public static ITry Inspect(this ITry t, Action<ITry> a) {
+            var inspection = Try.To(() => a(t));
+
+            return inspection.IsFailure ? inspection : t;
+        }
+
+        public static ITry<A> Inspect<A>(this ITry<A> t, Action<ITry<A>> a) {
+            var inspection = Try.To(() => a(t));
+
+            return inspection.IsFailure ? new Failure<A>(inspection.Error) : t;
+        }
+
         public static ITry<B> Map<A, B>(this ITry<A> ta, Func<A, B> f) {
             return ta.FlatMap(a => Try.To(() => f(a)));
         }
