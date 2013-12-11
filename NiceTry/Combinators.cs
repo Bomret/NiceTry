@@ -11,6 +11,14 @@ namespace NiceTry {
             return new Failure<A>(error);
         }
 
+        public static ITry<B> Retry<A, B>(this ITry<A> t, Func<A, B> f, int retryCount = 1) {
+            return t.FlatMap(a => NiceTry.Retry.To(() => f(a), retryCount));
+        }
+
+        public static ITry<B> RetryWith<A, B>(this ITry<A> t, Func<A, ITry<B>> f, int retryCount = 1) {
+            return t.FlatMap(a => NiceTry.Retry.To(() => f(a), retryCount).Flatten());
+        }
+
         public static ITry<B> Then<A, B>(this ITry<A> ta, Func<ITry<A>, ITry<B>> f) {
             return ta.FlatMap(_ => f(ta));
         }
