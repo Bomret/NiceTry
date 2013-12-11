@@ -21,10 +21,10 @@ namespace NiceTry.Tests.Combinators {
                                         .Inspect(_throw)
                                         .Map(_toString);
 
-        It should_contain_the_exception_that_occured_during_the_inspection_in_the_failure =
-            () => _result.Error.Message.ShouldEqual("Expected test exception");
+        It should_contain_five_as_string_in_the_success =
+            () => _result.Value.ShouldEqual("5");
 
-        It should_return_a_failure =
-            () => _result.IsFailure.ShouldBeTrue();
+        It should_return_a_success =
+            () => _result.IsSuccess.ShouldBeTrue();
     }
 }

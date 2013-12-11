@@ -52,6 +52,7 @@
     <Compile Include="Retry.cs" />
     <Compile Include="Success.cs" />
     <Compile Include="Try.cs" />
+    <Compile Include="Unit.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

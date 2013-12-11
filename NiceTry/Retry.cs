@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reactive;
 
 namespace NiceTry {
     public static class Retry {
@@ -13,7 +14,7 @@ namespace NiceTry {
             }
         }
 
-        public static ITry To(Action work, int retries = 1) {
+        public static ITry<Unit> To(Action work, int retries = 1) {
             while (true) {
                 var r = Try.To(work);
 
