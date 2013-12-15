@@ -13,13 +13,13 @@ namespace NiceTry {
             }
         }
 
-        public static ITry<TValue> To<TValue>(Func<TValue> work) {
+        public static ITry<T> To<T>(Func<T> work) {
             try {
                 var result = work();
-                return new Success<TValue>(result);
+                return new Success<T>(result);
             }
             catch (Exception error) {
-                return new Failure<TValue>(error);
+                return new Failure<T>(error);
             }
         }
     }

@@ -3,12 +3,12 @@ using System.Reactive;
 
 namespace NiceTry {
     public static class Retry {
-        public static ITry<TValue> To<TValue>(Func<TValue> work, int retries = 1) {
+        public static ITry<T> To<T>(Func<T> work, int retries = 1) {
             while (true) {
-                var r = Try.To(work);
+                var result = Try.To(work);
 
-                if (r.IsSuccess || retries < 1)
-                    return r;
+                if (result.IsSuccess || retries < 1)
+                    return result;
 
                 retries -= 1;
             }
@@ -16,10 +16,10 @@ namespace NiceTry {
 
         public static ITry<Unit> To(Action work, int retries = 1) {
             while (true) {
-                var r = Try.To(work);
+                var result = Try.To(work);
 
-                if (r.IsSuccess || retries < 1)
-                    return r;
+                if (result.IsSuccess || retries < 1)
+                    return result;
 
                 retries -= 1;
             }

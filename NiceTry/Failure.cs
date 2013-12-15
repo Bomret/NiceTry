@@ -1,7 +1,7 @@
 ﻿using System;
 
 namespace NiceTry {
-    public sealed class Failure<TValue> : ITry<TValue> {
+    public sealed class Failure<T> : ITry<T> {
         public Failure(Exception error) {
             Error = error;
         }
@@ -16,7 +16,7 @@ namespace NiceTry {
 
         public Exception Error { get; private set; }
 
-        public TValue Value {
+        public T Value {
             get { throw new NotSupportedException("A Failure does not contain a value"); }
         }
     }

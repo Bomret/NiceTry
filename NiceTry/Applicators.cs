@@ -2,30 +2,30 @@ using System;
 
 namespace NiceTry {
     public static class Applicators {
-        public static void Match<A>(this ITry<A> t, Action<A> whenSuccess, Action<Exception> whenFailure) {
-            if (t.IsSuccess) whenSuccess(t.Value);
-            else whenFailure(t.Error);
+        public static void Match<T>(this ITry<T> @try, Action<T> whenSuccess, Action<Exception> whenFailure) {
+            if (@try.IsSuccess) whenSuccess(@try.Value);
+            else whenFailure(@try.Error);
         }
 
-        public static void WhenComplete<A>(this ITry<A> t, Action<ITry<A>> whenComplete) {
-            whenComplete(t);
+        public static void WhenComplete<T>(this ITry<T> @try, Action<ITry<T>> whenComplete) {
+            whenComplete(@try);
         }
 
-        public static void WhenSuccess<A>(this ITry<A> t, Action<A> whenSuccess) {
-            if (t.IsSuccess) whenSuccess(t.Value);
+        public static void WhenSuccess<T>(this ITry<T> @try, Action<T> whenSuccess) {
+            if (@try.IsSuccess) whenSuccess(@try.Value);
         }
 
-        public static void WhenFailure<A>(this ITry<A> t, Action<Exception> whenFailure) {
-            if (t.IsFailure) whenFailure(t.Error);
+        public static void WhenFailure<T>(this ITry<T> @try, Action<Exception> whenFailure) {
+            if (@try.IsFailure) whenFailure(@try.Error);
         }
 
-        public static A Get<A>(this ITry<A> t) {
-            if (t.IsFailure) throw t.Error;
-            return t.Value;
+        public static T Get<T>(this ITry<T> @try) {
+            if (@try.IsFailure) throw @try.Error;
+            return @try.Value;
         }
 
-        public static B GetOrElse<A, B>(this ITry<A> t, B b) where A : B {
-            return t.IsFailure ? b : t.Value;
+        public static B GetOrElse<A, B>(this ITry<A> @try, B elseValue) where A : B {
+            return @try.IsFailure ? elseValue : @try.Value;
         }
     }
 }

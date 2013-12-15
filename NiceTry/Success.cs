@@ -1,8 +1,8 @@
 ﻿using System;
 
 namespace NiceTry {
-    public sealed class Success<TValue> : ITry<TValue> {
-        public Success(TValue value) {
+    public sealed class Success<T> : ITry<T> {
+        public Success(T value) {
             Value = value;
         }
 
@@ -18,6 +18,6 @@ namespace NiceTry {
             get { throw new NotSupportedException("A Success does not contain an error"); }
         }
 
-        public TValue Value { get; private set; }
+        public T Value { get; private set; }
     }
 }
