@@ -8,7 +8,7 @@ test/
 packages/
 
 # Fake
-tools/FAKE/
+FAKE/
 
 # mstest test results
 TestResults

@@ -4,6 +4,7 @@ A functional wrapper type for the classic try/catch statement, inspired by its c
 Also available on NuGet (http://www.nuget.org/packages/NiceTry/).
 
 Licensed under the Apache License 2.0 (http://www.apache.org/licenses/LICENSE-2.0.html).
+Uses the System.Reactive.Unit type made available by the guys working on the awesome Reactive Extensions (https://github.com/Reactive-Extensions) to represent void. 
 
 ## Example
 Reading the content specified by a url as string and printing it to the console. If the user specifies an invalid url, a fallback url will be used.
@@ -17,6 +18,7 @@ Try.To(() => new Uri(Console.ReadLine()))
    					return webClient.DownloadString(url);
             }
     })
+    .Filter(content => string.IsNullOrWhiteSpace(content) == false)
     .Match(
     	content => Console.WriteLine("Success: {0}", content),
         error => Console.WriteLine("Failure: {0}", error.Message));
@@ -61,7 +63,7 @@ To find out if `result` represents a `Success` or `Failure` it provides two bool
 result.WhenSuccess(i => _six = i);
 ```
 
-If the above example would have thrown an exception, this could be accessed by the `Error` property or the `WhenFailure` extension:
+If the above example would have thrown an exception, this could be accessed by the `Error` property or the `WhenFailure` applicator:
 
 ```csharp
 var error = result.Error;
@@ -71,8 +73,10 @@ var error = result.Error;
 result.WhenFailure(e => _error = e);
 ```
 
+When you use `Try` or `Retry` to do an `Action` (which returns nothing) you'll get an `ITry<Unit>` as result. The Unit type represents void (read more: http://en.wikipedia.org/wiki/Unit_type) and has been implemented to avoid the unnecessary duplication of combinator and applicator functions.
+
 ## Recommended usage
-Every method that could throw an exception should return either an `ITry` or an `ITry<T>` instead of `void` or the result directly. That way, eventual exceptions can be handled by applying combinators and applicators to the return value and exception handling can be managed hassle free.
+Every method that could throw an exception should return an `ITry<T>` instead of `void` or the result directly. That way, eventual exceptions can be handled by applying combinators and applicators to the return value and exception handling can be managed hassle free.
 
 So instead of this:
 
@@ -84,11 +88,11 @@ private int CalculateSomethingRisky(int a, int b) { //... };
 write this:
 
 ```csharp
-private ITry DoSomethingRisky(string a) { //... };
+private ITry<Unit> DoSomethingRisky(string a) { //... };
 private ITry<int> CalculateSomethingRisky(int a, int b) { //... };
 ```
 
-Using an `ITry` or an `ITry<T>` as return value states the risky nature of the method much clearer than a XML doc with an `<exception>` element.
+Using an `ITry<T>` as return value states the risky nature of the method much clearer than a XML doc with an `<exception>` element.
 
 ## Applicators and Combinators
 Since `Success` and `Failure` are simple data structures, a couple of extension methods are provided that make working with both types easier.
@@ -173,7 +177,7 @@ Allows chaining and conversion of multiple `Try's`. If a try fails, the chain wi
 
 ```csharp
 ITry<int> AddOne(ITry<int> arg)
-ITry PrintResult<T>(ITry<T> value)
+ITry<Unit> PrintResult<T>(ITry<T> value)
 ```
 
 #### Apply
@@ -182,7 +186,7 @@ var result = Try.To(() => 2 + 3)
 				.Apply(i => Console.WriteLine(i));
 ```
 
-Applies an `Action<T>` to the value contained in a `Success<T>`. And returns the successful or failed result of this `Action`. In the above example `result` would be a `Success` if `Console.WriteLine` would not throw an exception, otherwise a `Failure`.
+Applies an `Action<T>` to the value contained in a `Success<T>`. And returns the successful or failed result of this `Action`. In the above example `result` would be a `Success<Unit>` if `Console.WriteLine` would not throw an exception, otherwise a `Failure<Unit>`.
 
 #### Map
 ```csharp
@@ -200,6 +204,14 @@ var result = Try.To(() => 2 + 3)
 
 `Filter` checks if a given predicate holds true for a `Try`. In the above example `result` would be a `Success<int>` with Value `5`. If the predicate `i => i == 5` would not hold, `result` would have been a `Failure<int>` containing an `ArgumentException`. If `() => 2 + 3` would have thrown an exception `result` would have been a `Failure<int>` containing the thrown exception.
 
+#### Reject
+```csharp
+var result = Try.To(() => 2 + 3)
+				.Reject(i => i == 5);
+```
+
+Is the exact opposite of `Filter`. It checks if a given predicate does _not_ hold true for a `Try`. In the above example `result` would be a `Failure<int>` containing an ArgumentException.
+
 #### FlatMap
 ```csharp
 var result = Try.To(() => 2 + 3)
@@ -212,13 +224,12 @@ var result = Try.To(() => 2 + 3)
 ```csharp
 var five = Try.To(() => 2 + 3);
 var four = Try.To(() => 6 - 2);
-var one = Try.To(() => 1);
 
-var ten = five.LiftMap(four, one, (a, b, c) => a + b + c);
+var nine = five.LiftMap(four, (a, b) => a + b);
 ```
 
-Takes one or more other `Try's` and allows to apply a `Func` to all values of all `Try's`. If one `Try` would be a `Failure` the function would not be applied.
-In the above example `ten` would be a `Success<int>` containing `10`.
+Takes one other `Try` and allows to apply a `Func` to the values of both `Try`. If one `Try` would be a `Failure` the function would not be applied.
+In the above example `nine` would be a `Success<int>` containing `9`.
 
 #### Recover
 ```csharp
@@ -238,7 +249,7 @@ This combinator is used to recover from a `Failure` with a new `Try`. Gets the t
 
 #### Transform
 ```csharp
-var result = Try.To(() => 2 + 3))
+var result = Try.To(() => 2 + 3)
 				.Transform(
 					i => i.ToString(),
 					e => e.Message);
@@ -246,5 +257,35 @@ var result = Try.To(() => 2 + 3))
 
 Can be used to transform the result of a `Try`. The first function parameter transforms the resulting value if it is a `Success`, the second works on the exception if it is a `Failure`. In the above example `result` would be a `Success<string>` with Value *"5"*.
 
-## Attributions
-**Icon:** <a href="http://thenounproject.com/noun/approve/#icon-No330" target="_blank">Approve</a>  from The Noun Project
+#### Succeed
+```csharp
+var result = Try.To(() => 2 + 3)
+				.Succeed(6);
+```
+
+Ignores the `Try` it is called from completely and returns a new `Success<T>` with a given value. In the above example `result` would be a `Success<int>` with value *6*.
+
+#### Fail
+```csharp
+var result = Try.To(() => 2 + 3)
+				.Fail(new ArgumentException("I can't do this, Dave."));
+```
+
+Ignores the `Try` it is called from completely and returns a new `Failure<T>` with a given Exception. In the above example `result` would be a `Failure<int>` containing an Exception.
+
+#### Retry
+```csharp
+var result = Try.To(() => 2 + 3)
+				.Retry(i => i.ToString(), 2);
+```
+
+Allows to retry a certain step a given number of times (at least once, if no retry count is given). Works the same as `Retry.To` as documented above.
+
+#### Inspect
+```csharp
+var result = Try.To(() => 2 + 3)
+				.Inspect(i => Console.WriteLine(i))
+				.Map(i => i + 1);
+```
+
+Can be used to execute side effecting behavior on the value of a `Try` without modifying it. In the above example `result` would be a `Success<int>` containing the value *6*. Inspect would have printed *5* to the console.
