@@ -1,4 +1,3 @@
-// include Fake lib
 #r @"tools\FAKE\tools\FakeLib.dll"
 open Fake 
 
@@ -18,16 +17,13 @@ Target "BuildLib" (fun _ ->
 
 Target "BuildTests" (fun _ -> 
     !! "NiceTry.Tests/**/*.csproj"
-    |> MSBuildRelease testDir "Build"
-    |> Log "Build output: "
+    |> MSBuildDebug testDir "Build"
+    |> Log "Test build output: "
 )
 
 Target "Test" (fun _ ->
     testAssemblies
-        |> MSpec (fun p -> 
-            {p with 
-                ExcludeTags = ["LongRunning"]
-                HtmlOutputDir = testDir})
+        |> MSpec (fun p -> {p with HtmlOutputDir = testDir})
 )
 
 "Clean"
@@ -35,5 +31,4 @@ Target "Test" (fun _ ->
     ==> "BuildTests"
     ==> "Test"
 
-// start build
 RunTargetOrDefault "Test"
