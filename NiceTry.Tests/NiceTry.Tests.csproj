@@ -48,9 +48,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Machine.Specifications.0.6.1\lib\net45\Machine.Specifications.dll</HintPath>
     </Reference>
-    <Reference Include="Machine.Specifications.Clr4">
-      <HintPath>..\packages\Machine.Specifications.0.6.1\lib\net45\Machine.Specifications.Clr4.dll</HintPath>
-    </Reference>
     <Reference Include="Machine.Specifications.Should">
       <HintPath>..\packages\Machine.Specifications.0.6.1\lib\net45\Machine.Specifications.Should.dll</HintPath>
     </Reference>
@@ -98,6 +95,11 @@
     <Compile Include="Applicators\When_I_try_to_divide_by_zero_and_register_for_success.cs" />
     <Compile Include="Applicators\When_I_try_to_divide_by_zero_and_register_for_failure.cs" />
     <Compile Include="Applicators\When_I_try_to_throw_an_exception_and_register_for_failure.cs" />
+    <Compile Include="When_I_compare_a_failure_with_a_failure_that_contain_different_errors.cs" />
+    <Compile Include="When_I_compare_a_failure_with_a_failure_that_contain_the_same_errors.cs" />
+    <Compile Include="When_I_compare_a_success_with_a_failure.cs" />
+    <Compile Include="When_I_compare_a_success_with_a_success_that_contain_different_values.cs" />
+    <Compile Include="When_I_compare_a_success_with_a_success_that_contain_the_same_value.cs" />
     <Compile Include="When_I_retry_to_add_two_and_three_up_to_two_times_which_succeeds_the_first_time.cs" />
     <Compile Include="When_I_retry_to_add_two_and_three_up_to_two_times_which_succeeds_the_second_time.cs" />
     <Compile Include="When_I_retry_to_divide_by_zero_up_to_two_times.cs" />

@@ -1,8 +1,8 @@
 ﻿using System;
 using Machine.Specifications;
 
-namespace NiceTry.Tests.Extensions {
-    [Subject(typeof (Applicators), "WhenSuccess")]
+namespace NiceTry.Tests.Applicators {
+    [Subject(typeof (NiceTry.Applicators), "WhenSuccess")]
     internal class When_I_try_to_divide_by_zero_and_register_for_success {
         static Func<int> _divideByZero;
         static bool _successCallbackExecuted;

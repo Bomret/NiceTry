@@ -2,8 +2,8 @@
 using System.IO;
 using Machine.Specifications;
 
-namespace NiceTry.Tests.Extensions {
-    [Subject(typeof (Applicators), "WhenFailure")]
+namespace NiceTry.Tests.Applicators {
+    [Subject(typeof (NiceTry.Applicators), "WhenFailure")]
     internal class When_I_try_to_delete_a_file_and_register_for_failure {
         static Action _deleteFile;
         static string _testFile;

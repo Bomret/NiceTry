@@ -1,8 +1,8 @@
 ﻿using System;
 using Machine.Specifications;
 
-namespace NiceTry.Tests.Extensions {
-    [Subject(typeof (Applicators), "Get")]
+namespace NiceTry.Tests.Applicators {
+    [Subject(typeof (NiceTry.Applicators), "Get")]
     internal class When_I_try_to_add_two_and_three_and_get_the_result {
         static Func<int> _addTwoAndThree;
         static int _result;

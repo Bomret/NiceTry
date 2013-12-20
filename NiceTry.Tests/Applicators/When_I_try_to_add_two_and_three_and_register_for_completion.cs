@@ -1,8 +1,8 @@
 ﻿using System;
 using Machine.Specifications;
 
-namespace NiceTry.Tests.Extensions {
-    [Subject(typeof (Applicators), "WhenComplete")]
+namespace NiceTry.Tests.Applicators {
+    [Subject(typeof (NiceTry.Applicators), "WhenComplete")]
     internal class When_I_try_to_add_two_and_three_and_register_for_completion {
         static Func<int> _addTwoAndThree;
         static ITry<int> _result;

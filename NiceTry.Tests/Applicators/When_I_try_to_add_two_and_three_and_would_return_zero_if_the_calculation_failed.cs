@@ -1,8 +1,8 @@
 ﻿using System;
 using Machine.Specifications;
 
-namespace NiceTry.Tests.Extensions {
-    [Subject(typeof (Applicators), "GetOrElse")]
+namespace NiceTry.Tests.Applicators {
+    [Subject(typeof (NiceTry.Applicators), "GetOrElse")]
     internal class When_I_try_to_add_two_and_three_and_would_return_zero_if_the_calculation_failed {
         static int _result;
         static int _five;
