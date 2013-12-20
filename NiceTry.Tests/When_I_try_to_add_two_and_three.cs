@@ -24,4 +24,88 @@ namespace NiceTry.Tests {
 
         It should_return_a_success = () => _result.IsSuccess.ShouldBeTrue();
     }
+
+    [Subject(typeof (Try), "Equals")]
+    public class When_I_compare_a_success_with_a_failure {
+        static Success<int> _success;
+        static Failure<int> _failure;
+        static bool _result;
+
+        Establish context = () => {
+            _success = new Success<int>(5);
+            _failure = new Failure<int>(new Exception());
+        };
+
+        Because of = () => _result = _success.Equals(_failure);
+
+        It should_return_false = () => _result.ShouldBeFalse();
+    }
+
+    [Subject(typeof (Try), "Equals")]
+    public class When_I_compare_a_success_with_a_success_that_contain_the_same_value {
+        static Success<int> _success;
+
+        static bool _result;
+        static Success<int> _otherSuccess;
+
+        Establish context = () => {
+            _success = new Success<int>(5);
+            _otherSuccess = new Success<int>(5);
+        };
+
+        Because of = () => _result = _success.Equals(_otherSuccess);
+
+        It should_return_true = () => _result.ShouldBeTrue();
+    }
+
+    [Subject(typeof (Try), "Equals")]
+    public class When_I_compare_a_success_with_a_success_that_contain_different_values {
+        static Success<int> _success;
+
+        static bool _result;
+        static Success<int> _otherSuccess;
+
+        Establish context = () => {
+            _success = new Success<int>(5);
+            _otherSuccess = new Success<int>(0);
+        };
+
+        Because of = () => _result = _success.Equals(_otherSuccess);
+
+        It should_return_false = () => _result.ShouldBeFalse();
+    }
+
+    [Subject(typeof (Try), "Equals")]
+    public class When_I_compare_a_failure_with_a_failure_that_contain_different_errors {
+        static Failure<int> _failure;
+
+        static bool _result;
+        static Failure<int> _otherFailure;
+
+        Establish context = () => {
+            _failure = new Failure<int>(new ArgumentException());
+            _otherFailure = new Failure<int>(new IndexOutOfRangeException());
+        };
+
+        Because of = () => _result = _failure.Equals(_otherFailure);
+
+        It should_return_false = () => _result.ShouldBeFalse();
+    }
+
+    [Subject(typeof (Try), "Equals")]
+    public class When_I_compare_a_failure_with_a_failure_that_contain_the_same_errors {
+        static Failure<int> _failure;
+
+        static bool _result;
+        static Failure<int> _otherFailure;
+
+        Establish context = () => {
+            _failure = new Failure<int>(new ArgumentException());
+            _otherFailure = new Failure<int>(new ArgumentException());
+        };
+
+        Because of = () => _result = _failure.Equals(_otherFailure);
+
+        It should_return_false = () => _result.ShouldBeFalse();
+    }
 }

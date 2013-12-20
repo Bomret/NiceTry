@@ -1,9 +1,14 @@
 ﻿using System;
 
 namespace NiceTry {
-    public sealed class Failure<T> : ITry<T> {
+    public sealed class Failure<T> : ITry<T>,
+                                     IEquatable<ITry<T>> {
         public Failure(Exception error) {
             Error = error;
+        }
+
+        public bool Equals(ITry<T> other) {
+            return false;
         }
 
         public bool IsSuccess {

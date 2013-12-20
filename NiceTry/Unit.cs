@@ -1,6 +1,9 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 
+// ReSharper disable CheckNamespace
+
 namespace System.Reactive {
+// ReSharper restore CheckNamespace
     /// <summary>
     ///     Represents a type with a single value. This type is often used to denote the successful completion of a
     ///     void-returning method (C#) or a Sub procedure (Visual Basic).

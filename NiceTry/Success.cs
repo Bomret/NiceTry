@@ -1,9 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace NiceTry {
-    public sealed class Success<T> : ITry<T> {
+    public sealed class Success<T> : ITry<T>,
+                                     IEquatable<ITry<T>> {
         public Success(T value) {
             Value = value;
+        }
+
+        public bool Equals(ITry<T> other) {
+            return other.IsSuccess && EqualityComparer<T>.Default.Equals(Value, other.Value);
         }
 
         public bool IsSuccess {
