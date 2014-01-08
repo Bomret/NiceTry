@@ -80,6 +80,7 @@
     <Compile Include="Combinators\When_I_try_to_divide_by_zero_and_recover_with_zero.cs" />
     <Compile Include="Combinators\When_I_try_to_divide_by_zero_and_return_a_try_that_contains_zero_instead.cs" />
     <Compile Include="Combinators\When_I_try_to_divide_by_zero_and_transform_the_result_to_a_success_containing_a_message.cs" />
+    <Compile Include="Combinators\When_I_try_to_divide_by_zero_and_try_to_add_one_and_three_instead.cs" />
     <Compile Include="Combinators\When_I_try_to_divide_by_zero_and_would_convert_the_result_to_a_string.cs" />
     <Compile Include="Applicators\When_I_try_to_add_two_and_three_and_get_the_result.cs" />
     <Compile Include="Applicators\When_I_try_to_add_two_and_three_and_match_the_result.cs" />

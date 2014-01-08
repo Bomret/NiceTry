@@ -19,11 +19,19 @@ namespace NiceTry {
             return @try.FlatMap(_ => f(@try));
         }
 
-        public static ITry<B> OrElse<A, B>(this ITry<A> @try, Func<ITry<B>> f) where A : B {
-            return @try.RecoverWith(_ => f());
+        public static ITry<T> OrElse<T>(this ITry<T> @try, Func<T> createElseValue) {
+            return @try.Recover(_ => createElseValue());
         }
 
-        public static ITry<B> OrElse<A, B>(this ITry<A> @try, ITry<B> elseTry) where A : B {
+        public static ITry<T> OrElse<T>(this ITry<T> @try, T elseValue) {
+            return @try.Recover(_ => elseValue);
+        }
+
+        public static ITry<T> OrElseWith<T>(this ITry<T> @try, Func<ITry<T>> createElseTry) {
+            return @try.RecoverWith(_ => createElseTry());
+        }
+
+        public static ITry<T> OrElseWith<T>(this ITry<T> @try, ITry<T> elseTry) {
             return @try.RecoverWith(_ => elseTry);
         }
 
@@ -31,8 +39,8 @@ namespace NiceTry {
             return @try.FlatMap(a => Try.To(() => action(a)));
         }
 
-        public static ITry<T> Inspect<T>(this ITry<T> @try, Action<ITry<T>> inspect) {
-            Try.To(() => inspect(@try));
+        public static ITry<T> Inspect<T>(this ITry<T> @try, Action<T> inspect) {
+            @try.Apply(inspect);
 
             return @try;
         }
@@ -101,8 +109,8 @@ namespace NiceTry {
             return @try.Map(a => { using (var disposable = createDisposable(a)) return useDisposable(disposable); });
         }
 
-        public static ITry<B> Using<A, B, TDisposable>(this ITry<A> @try, Func<A, TDisposable> createDisposable,
-                                                       Func<TDisposable, ITry<B>> useDisposable)
+        public static ITry<B> UsingWith<A, B, TDisposable>(this ITry<A> @try, Func<A, TDisposable> createDisposable,
+                                                           Func<TDisposable, ITry<B>> useDisposable)
             where TDisposable : IDisposable {
             return @try.FlatMap(a => { using (var disposable = createDisposable(a)) return useDisposable(disposable); });
         }

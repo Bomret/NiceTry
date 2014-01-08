@@ -4,22 +4,12 @@ using Machine.Specifications;
 
 namespace NiceTry.Tests.Combinators {
     [Subject(typeof (NiceTry.Combinators), "Inspect")]
-    class
-        When_I_try_to_add_two_and_three_and_throw_and_exception_when_inspecting_the_result_and_convert_it_to_a_string {
-        static Func<int> _addTwoAndThree;
+    class When_I_try_to_add_two_and_three_and_throw_and_exception_when_inspecting_the_result_and_convert_it_to_a_string {
         static ITry<string> _result;
-        static Func<int, string> _toString;
-        static Action<ITry<int>> _throw;
 
-        Establish context = () => {
-            _addTwoAndThree = () => 2 + 3;
-            _throw = t => { throw new Exception("Expected test exception"); };
-            _toString = i => i.ToString(CultureInfo.InvariantCulture);
-        };
-
-        Because of = () => _result = Try.To(_addTwoAndThree)
-                                        .Inspect(_throw)
-                                        .Map(_toString);
+        Because of = () => _result = Try.To(() => 2 + 3)
+                                        .Inspect(_ => { throw new Exception("Expected test exception"); })
+                                        .Map(i => i.ToString(CultureInfo.InvariantCulture));
 
         It should_contain_five_as_string_in_the_success =
             () => _result.Value.ShouldEqual("5");
