@@ -3,7 +3,7 @@ using Machine.Specifications;
 
 namespace NiceTry.Tests.Combinators {
     [Subject(typeof (NiceTry.Combinators), "LiftMap")]
-    internal class When_I_lift_the_addition_and_add_two_and_three {
+    class When_I_lift_the_addition_and_add_two_and_three {
         static Success<int> _two;
         static Success<int> _three;
         static Func<int, int, int> _add;

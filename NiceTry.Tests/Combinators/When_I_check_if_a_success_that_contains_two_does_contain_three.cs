@@ -3,7 +3,7 @@ using Machine.Specifications;
 
 namespace NiceTry.Tests.Combinators {
     [Subject(typeof (NiceTry.Combinators), "Filter")]
-    internal class When_I_check_if_a_success_that_contains_two_does_contain_three {
+    class When_I_check_if_a_success_that_contains_two_does_contain_three {
         static ITry<int> _twoSuccess;
         static ITry<int> _result;
         static Func<int, bool> _containsThree;

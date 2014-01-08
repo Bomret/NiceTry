@@ -4,7 +4,7 @@ using Machine.Specifications;
 
 namespace NiceTry.Tests.Combinators {
     [Subject(typeof (NiceTry.Combinators), "Transform")]
-    internal class When_I_try_to_divide_by_zero_and_transform_the_result_to_a_success_containing_a_message {
+    class When_I_try_to_divide_by_zero_and_transform_the_result_to_a_success_containing_a_message {
         static ITry<string> _result;
         static Func<int, ITry<string>> _toString;
         static Func<Exception, ITry<string>> _returnExceptionMessage;
@@ -21,9 +21,9 @@ namespace NiceTry.Tests.Combinators {
             _expectedMessage = "Expected test message.";
 
             _toString = i =>
-                        Try.To(() => i.ToString(CultureInfo.InvariantCulture));
+                Try.To(() => i.ToString(CultureInfo.InvariantCulture));
             _returnExceptionMessage = error =>
-                                      new Success<string>(_expectedMessage);
+                new Success<string>(_expectedMessage);
         };
 
         Because of = () => _result = Try.To(_divideByZero)

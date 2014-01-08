@@ -37,6 +37,12 @@ namespace NiceTry {
             return @try;
         }
 
+        public static ITry<T> Do<T>(this ITry<T> @try, Action action) {
+            Try.To(action);
+
+            return @try;
+        }
+
         public static ITry<B> Map<A, B>(this ITry<A> @try, Func<A, B> f) {
             return @try.FlatMap(v => Try.To(() => f(v)));
         }
@@ -67,14 +73,38 @@ namespace NiceTry {
         }
 
         public static ITry<T> Filter<T>(this ITry<T> @try, Func<T, bool> predicate) {
-            return @try.FlatMap(
-                v => predicate(v)
-                         ? @try
-                         : new Failure<T>(new ArgumentException("The given predicate does not hold for this Try.")));
+            return @try.FlatMap(v => predicate(v)
+                ? @try
+                : new Failure<T>(new ArgumentException("The given predicate does not hold for this Try.")));
         }
 
         public static ITry<T> Reject<T>(this ITry<T> @try, Func<T, bool> predicate) {
             return @try.Filter(v => !predicate(v));
+        }
+
+        public static ITry<B> Using<A, B, TDisposable>(this ITry<A> @try, Func<TDisposable> createDisposable,
+                                                       Func<TDisposable, A, B> useDisposable)
+            where TDisposable : IDisposable {
+            return @try.Map(a => { using (var disposable = createDisposable()) return useDisposable(disposable, a); });
+        }
+
+        public static ITry<B> UsingWith<A, B, TDisposable>(this ITry<A> @try, Func<TDisposable> createDisposable,
+                                                           Func<TDisposable, A, ITry<B>> useDisposable)
+            where TDisposable : IDisposable {
+            return
+                @try.FlatMap(a => { using (var disposable = createDisposable()) return useDisposable(disposable, a); });
+        }
+
+        public static ITry<B> Using<A, B, TDisposable>(this ITry<A> @try, Func<A, TDisposable> createDisposable,
+                                                       Func<TDisposable, B> useDisposable)
+            where TDisposable : IDisposable {
+            return @try.Map(a => { using (var disposable = createDisposable(a)) return useDisposable(disposable); });
+        }
+
+        public static ITry<B> Using<A, B, TDisposable>(this ITry<A> @try, Func<A, TDisposable> createDisposable,
+                                                       Func<TDisposable, ITry<B>> useDisposable)
+            where TDisposable : IDisposable {
+            return @try.FlatMap(a => { using (var disposable = createDisposable(a)) return useDisposable(disposable); });
         }
     }
 }

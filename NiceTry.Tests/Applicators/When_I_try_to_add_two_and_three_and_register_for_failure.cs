@@ -3,7 +3,7 @@ using Machine.Specifications;
 
 namespace NiceTry.Tests.Applicators {
     [Subject(typeof (NiceTry.Applicators), "WhenFailure")]
-    internal class When_I_try_to_add_two_and_three_and_register_for_failure {
+    class When_I_try_to_add_two_and_three_and_register_for_failure {
         static Func<int> _addTwoAndThree;
         static bool _failureCallbackExecuted;
 

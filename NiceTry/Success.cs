@@ -25,5 +25,9 @@ namespace NiceTry {
         }
 
         public T Value { get; private set; }
+
+        public override string ToString() {
+            return string.Format("Value: {0}", Value);
+        }
     }
 }

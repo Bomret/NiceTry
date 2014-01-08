@@ -4,7 +4,7 @@ using Machine.Specifications;
 
 namespace NiceTry.Tests.Combinators {
     [Subject(typeof (NiceTry.Combinators), "Inspect")]
-    internal class When_I_try_to_add_two_and_three_inspect_the_result_and_convert_it_to_a_string {
+    class When_I_try_to_add_two_and_three_inspect_the_result_and_convert_it_to_a_string {
         static Func<int> _addTwoAndThree;
         static ITry<string> _result;
         static Func<int, string> _toString;

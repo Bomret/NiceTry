@@ -3,7 +3,7 @@ using Machine.Specifications;
 
 namespace NiceTry.Tests.Applicators {
     [Subject(typeof (NiceTry.Applicators), "WhenFailure")]
-    internal class When_I_try_to_divide_by_zero_and_register_for_failure {
+    class When_I_try_to_divide_by_zero_and_register_for_failure {
         static Func<int> _divideByZero;
         static Exception _error;
 

@@ -23,11 +23,11 @@ namespace NiceTry.Tests {
         It should_contain_a_DivideByZeroException_in_the_failure =
             () => _result.Error.ShouldBeOfType<DivideByZeroException>();
 
-        It should_contain_a_value_that_matches_the_value_types_default =
-            () => Catch.Exception(() => _value = _result.Value).ShouldBeOfType<NotSupportedException>();
-
         It should_not_return_a_success = () => _result.IsSuccess.ShouldBeFalse();
 
         It should_return_a_failure = () => _result.IsFailure.ShouldBeTrue();
+
+        It should_throw_an_NotSupportedException_when_accessing_the_value_property =
+            () => Catch.Exception(() => _value = _result.Value).ShouldBeOfType<NotSupportedException>();
     }
 }

@@ -95,6 +95,7 @@
     <Compile Include="Applicators\When_I_try_to_divide_by_zero_and_register_for_success.cs" />
     <Compile Include="Applicators\When_I_try_to_divide_by_zero_and_register_for_failure.cs" />
     <Compile Include="Applicators\When_I_try_to_throw_an_exception_and_register_for_failure.cs" />
+    <Compile Include="Combinators\When_I_try_to_read_a_file_using_a_StreamReader.cs" />
     <Compile Include="When_I_compare_a_failure_with_a_failure_that_contain_different_errors.cs" />
     <Compile Include="When_I_compare_a_failure_with_a_failure_that_contain_the_same_errors.cs" />
     <Compile Include="When_I_compare_a_success_with_a_failure.cs" />
@@ -106,6 +107,7 @@
     <Compile Include="When_I_try_to_add_two_and_three.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="When_I_try_to_divide_by_zero.cs" />
+    <Compile Include="When_I_try_to_read_a_file_using_a_StreamReader.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NiceTry\NiceTry.csproj">

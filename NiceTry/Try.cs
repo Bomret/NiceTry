@@ -22,5 +22,10 @@ namespace NiceTry {
                 return new Failure<T>(error);
             }
         }
+
+        public static ITry<T> Using<T, TDisposable>(Func<TDisposable> createDisposable,
+                                                    Func<TDisposable, T> useDisposable) where TDisposable : IDisposable {
+            return To(() => { using (var disposable = createDisposable()) return useDisposable(disposable); });
+        }
     }
 }

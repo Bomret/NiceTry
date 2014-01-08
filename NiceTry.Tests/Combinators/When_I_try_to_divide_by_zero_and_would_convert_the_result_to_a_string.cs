@@ -4,7 +4,7 @@ using Machine.Specifications;
 
 namespace NiceTry.Tests.Combinators {
     [Subject(typeof (NiceTry.Combinators), "Map")]
-    internal class When_I_try_to_divide_by_zero_and_would_convert_the_result_to_a_string {
+    class When_I_try_to_divide_by_zero_and_would_convert_the_result_to_a_string {
         static Func<int> _divideByZero;
         static Func<int, string> _toString;
         static ITry<string> _result;

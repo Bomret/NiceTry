@@ -3,7 +3,7 @@ using Machine.Specifications;
 
 namespace NiceTry.Tests.Combinators {
     [Subject(typeof (NiceTry.Combinators), "RecoverWith")]
-    internal class
+    class
         When_I_try_to_add_two_and_three_and_recover_with_a_success_that_contains_zero_if_any_exception_is_thrown {
         static ITry<int> _result;
         static Func<int> _addTwoAndThree;

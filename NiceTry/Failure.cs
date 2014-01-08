@@ -24,5 +24,9 @@ namespace NiceTry {
         public T Value {
             get { throw new NotSupportedException("A Failure does not contain a value"); }
         }
+
+        public override string ToString() {
+            return string.Format("Error: {0}", Error);
+        }
     }
 }

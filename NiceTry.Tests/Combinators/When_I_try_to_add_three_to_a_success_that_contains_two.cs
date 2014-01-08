@@ -3,7 +3,7 @@ using Machine.Specifications;
 
 namespace NiceTry.Tests.Combinators {
     [Subject(typeof (NiceTry.Combinators), "FlatMap")]
-    internal class When_I_try_to_add_three_to_a_success_that_contains_two {
+    class When_I_try_to_add_three_to_a_success_that_contains_two {
         static ITry<int> _twoSuccess;
         static Func<int, ITry<int>> _addThree;
         static ITry<int> _result;
