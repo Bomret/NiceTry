@@ -11,17 +11,14 @@ Reading the content specified by a url as string and printing it to the console.
 If an error occurs anywhere during the process, the error message will be printed to the console.
 
 ```csharp
-Try.To(() => new Uri(Console.ReadLine()))
-   .OrElse(new Success<Uri>(FallbackUrl))
-   .Map(url => {
-   			using (var webClient = new WebClient()) {
-   					return webClient.DownloadString(url);
-            }
-    })
+Try.To(() => Console.ReadLine())
+    .Map(input => new Uri(input))
+    .OrElse(new Uri("http://google.com"))
+    .Using(() => new WebClient(),
+           (wc, url) => wc.DownloadString(url))
     .Filter(content => string.IsNullOrWhiteSpace(content) == false)
-    .Match(
-    	content => Console.WriteLine("Success: {0}", content),
-        error => Console.WriteLine("Failure: {0}", error.Message));
+    .Match(content => Console.WriteLine("Success: {0}", content),
+           error => Console.WriteLine("Failure: {0}", error.Message));
 ```
 
 ## Retry
@@ -155,16 +152,28 @@ This library provides a growing number of combinators that empowers you to write
 #### OrElse
 ```csharp
 var result = Try.To(() => 5 / 0)
-				.OrElse(new Success<int>(-1));
+				.OrElse(-1);
 
 // or
 
 var result = Try.To(() => 5 / 0)
-				.OrElse(() => new Success<int>(-1));
+				.OrElse(() => -1);
 ```
 
-In the above examples a `DivideByZeroException` would be thrown and `result` would be a `Failure`. The 
-`OrElse` combinator makes it possible to return a different `Try` in case of a `Failure`. In both cases above `result` would be a `Success<int>` with the Value *-1*.
+In the above examples a `DivideByZeroException` would be thrown and `result` would be a `Failure`. The `OrElse` combinator makes it possible to return a different value in case of a `Failure`. In both cases above `result` would be a `Success<int>` with the Value *-1*.
+
+#### OrElseWith
+```csharp
+var result = Try.To(() => 5 / 0)
+				.OrElseWith(Try.To(() => 1 - 2));
+
+// or
+
+var result = Try.To(() => 5 / 0)
+				.OrElseWith(() => Try.To(() => 1 - 2));
+```
+
+In the above examples a `DivideByZeroException` would be thrown and `result` would be a `Failure`. The `OrElseWith` combinator makes it possible to return a different `Try` in case of a `Failure`. In both cases above `result` would be a `Success<int>` with the Value *-1*.
 
 #### Then
 ```csharp
@@ -288,4 +297,47 @@ var result = Try.To(() => 2 + 3)
 				.Map(i => i + 1);
 ```
 
-Can be used to execute side effecting behavior on the value of a `Try` without modifying it. In the above example `result` would be a `Success<int>` containing the value *6*. Inspect would have printed *5* to the console.
+Can be used to take a look at the value of a `Try` without modifying it. In the above example `result` would be a `Success<int>` containing the value *6*. `Inspect` would have printed *5* to the console.
+
+__Note:__ If the action in `Inspect` throws, the exception is swallowed.
+
+#### Do
+```csharp
+var result = Try.To(() => File.ReadAllText("some.file"))
+				.Do(() => File.Delete("some.file"))
+				.Map(content => content.Replace("meh", "awesome"));
+```
+
+Can be used to execute side effecting behavior without modifying a `Try`. In the above example `result` would be a `Success<string>` containing the read text. The file "some.file" would have been deleted by `Do`.
+
+__Note:__ If the action in `Do` throws, the exception is swallowed.
+
+#### Using
+```csharp
+var result = Try.Using(() => new StreamReader(File.OpenRead("some.file")),
+                       reader => reader.ReadToEnd());
+                      
+// or
+
+var result = Try.To(() => File.OpenRead(file))
+                .Using(stream => new StreamReader(stream),
+                       reader => reader.ReadToEnd())
+```
+
+Simplifies working with disposables. The first function creates a disposable, the second one allows to use it.
+In both examples above, `result` would be a `Success<string>` containing the file content as text or a `Failure<string>` if an error would have occurred.
+
+#### UsingWith
+```csharp
+var result = Try.Using(() => new StreamReader(File.OpenRead("some.file")),
+                       reader => Try.To(() => reader.ReadToEnd()));
+                      
+// or
+
+var result = Try.To(() => File.OpenRead(file))
+                .Using(stream => new StreamReader(stream),
+                       reader => Try.To(() => reader.ReadToEnd()))
+```
+
+Simplifies working with disposables. The first function creates a disposable, the second one allows to use it.
+In both examples above, `result` would be a `Success<string>` containing the file content as text or a `Failure<string>` if an error would have occurred.
