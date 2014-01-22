@@ -7,8 +7,6 @@ namespace NiceTry.Tests.Applicators {
         static Func<int> _divideByZero;
         static bool _successCallbackExecuted;
         static Exception _error;
-        static Action<int> _whenSuccess;
-        static Action<Exception> _whenFailure;
 
         Establish context = () => {
             _divideByZero = () => {
@@ -16,13 +14,11 @@ namespace NiceTry.Tests.Applicators {
 
                 return 5 / zero;
             };
-
-            _whenSuccess = i => _successCallbackExecuted = true;
-            _whenFailure = error => _error = error;
         };
 
         Because of = () => Try.To(_divideByZero)
-                              .Match(_whenSuccess, _whenFailure);
+                              .Match(i => _successCallbackExecuted = true,
+                                     error => _error = error);
 
         It should_execute_the_failure_callback = () => _error.ShouldNotBeNull();
 

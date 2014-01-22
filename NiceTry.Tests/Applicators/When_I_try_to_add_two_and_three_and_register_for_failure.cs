@@ -1,15 +1,11 @@
-﻿using System;
-using Machine.Specifications;
+﻿using Machine.Specifications;
 
 namespace NiceTry.Tests.Applicators {
     [Subject(typeof (NiceTry.Applicators), "WhenFailure")]
     class When_I_try_to_add_two_and_three_and_register_for_failure {
-        static Func<int> _addTwoAndThree;
         static bool _failureCallbackExecuted;
 
-        Establish context = () => _addTwoAndThree = () => 2 + 3;
-
-        Because of = () => Try.To(_addTwoAndThree)
+        Because of = () => Try.To(() => 2 + 3)
                               .WhenFailure(error => _failureCallbackExecuted = true);
 
         It should_not_execute_the_failure_callback = () => _failureCallbackExecuted.ShouldBeFalse();

@@ -37,7 +37,7 @@ namespace NiceTry.Examples {
                       reader => reader.ReadToEnd())
                .Using(() => new WebClient(),
                       (wc, text) => wc.UploadString(url, text))
-               .Do(() => File.Delete(file))
+               .Finally(() => File.Delete(file))
                .Match(text => Console.WriteLine("Uploaded {0} to {1}", text, url),
                       error => Console.WriteLine("Encountered exception: {0}", error.Message));
         }

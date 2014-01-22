@@ -28,6 +28,6 @@ namespace NiceTry.Tests {
         It should_return_a_failure = () => _result.IsFailure.ShouldBeTrue();
 
         It should_throw_an_NotSupportedException_when_accessing_the_value_property =
-            () => Catch.Exception(() => _value = _result.Value).ShouldBeOfType<NotSupportedException>();
+            () => Catch.Exception(() => _value = _result.Value).ShouldBeOfType<InvalidOperationException>();
     }
 }

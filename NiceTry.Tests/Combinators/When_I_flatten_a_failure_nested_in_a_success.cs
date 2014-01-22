@@ -9,12 +9,12 @@ namespace NiceTry.Tests.Combinators {
         static Failure<int> _failure;
 
         Establish context = () => {
-            _failure = new Failure<int>(new Exception("Expected test exception"));
+            _failure = new Failure<int>(new Exception());
             _nestedFailure = new Success<Failure<int>>(_failure);
         };
 
-        Because of = () => { _result = _nestedFailure.Flatten(); };
+        Because of = () => _result = _nestedFailure.Flatten();
 
-        It should_return_the_inner_failure = () => _result.IsFailure.ShouldBeTrue();
+        It should_return_the_inner_failure = () => _result.ShouldEqual(_failure);
     }
 }

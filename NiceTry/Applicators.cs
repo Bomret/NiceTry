@@ -7,6 +7,10 @@ namespace NiceTry {
             else whenFailure(@try.Error);
         }
 
+        public static B Match<A, B>(this ITry<A> @try, Func<A, B> onSuccess, Func<Exception, B> onFailure) {
+            return @try.IsSuccess ? onSuccess(@try.Value) : onFailure(@try.Error);
+        }
+
         public static void WhenComplete<T>(this ITry<T> @try, Action<ITry<T>> whenComplete) {
             whenComplete(@try);
         }
@@ -21,11 +25,16 @@ namespace NiceTry {
 
         public static T Get<T>(this ITry<T> @try) {
             if (@try.IsFailure) throw @try.Error;
+
             return @try.Value;
         }
 
         public static B GetOrElse<A, B>(this ITry<A> @try, B elseValue) where A : B {
             return @try.IsFailure ? elseValue : @try.Value;
+        }
+
+        public static T GetOrDefault<T>(this ITry<T> @try) {
+            return @try.IsSuccess ? @try.Value : default (T);
         }
     }
 }

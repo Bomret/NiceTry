@@ -3,11 +3,11 @@ using System.Reactive;
 
 namespace NiceTry {
     public static class Combinators {
-        public static ITry<T> Succeed<T>(this ITry<T> @try, T value) {
-            return new Success<T>(value);
+        public static Success<T> Succeed<T>(this ITry<T> @try, T value) {
+            return value;
         }
 
-        public static ITry<T> Fail<T>(this ITry<T> @try, Exception error) {
+        public static Failure<T> Fail<T>(this ITry<T> @try, Exception error) {
             return new Failure<T>(error);
         }
 
@@ -39,13 +39,13 @@ namespace NiceTry {
             return @try.FlatMap(a => Try.To(() => action(a)));
         }
 
-        public static ITry<T> Inspect<T>(this ITry<T> @try, Action<T> inspect) {
-            @try.Apply(inspect);
+        public static ITry<T> Tap<T>(this ITry<T> @try, Action<T> action) {
+            @try.Apply(action);
 
             return @try;
         }
 
-        public static ITry<T> Do<T>(this ITry<T> @try, Action action) {
+        public static ITry<T> Finally<T>(this ITry<T> @try, Action action) {
             Try.To(action);
 
             return @try;
@@ -59,7 +59,7 @@ namespace NiceTry {
             return @try.IsFailure ? new Failure<B>(@try.Error) : f(@try.Value);
         }
 
-        public static ITry<C> LiftMap<A, B, C>(this ITry<A> tryA, ITry<B> tryB, Func<A, B, C> f) {
+        public static ITry<C> Zip<A, B, C>(this ITry<A> tryA, ITry<B> tryB, Func<A, B, C> f) {
             return tryA.FlatMap(a => tryB.Map(b => f(a, b)));
         }
 

@@ -5,8 +5,6 @@ namespace NiceTry.Tests.Applicators {
     [Subject(typeof (NiceTry.Applicators), "WhenComplete")]
     class When_I_try_to_divide_by_zero_and_register_for_completion {
         static Func<int> _divideByZero;
-        static bool _failureCallbackExecuted;
-        static Exception _error;
         static ITry<int> _result;
 
         Establish context = () => {
@@ -18,7 +16,7 @@ namespace NiceTry.Tests.Applicators {
         };
 
         Because of = () => Try.To(_divideByZero)
-                              .WhenComplete(result => { _result = result; });
+                              .WhenComplete(result => _result = result);
 
         It should_contain_a_DivideByZeroException_in_the_failure =
             () => _result.Error.ShouldBeOfType<DivideByZeroException>();

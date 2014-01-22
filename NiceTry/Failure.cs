@@ -8,7 +8,7 @@ namespace NiceTry {
         }
 
         public bool Equals(ITry<T> other) {
-            return false;
+            return ReferenceEquals(other, this);
         }
 
         public bool IsSuccess {
@@ -22,11 +22,15 @@ namespace NiceTry {
         public Exception Error { get; private set; }
 
         public T Value {
-            get { throw new NotSupportedException("A Failure does not contain a value"); }
+            get { throw new InvalidOperationException("A Failure does not contain a value"); }
         }
 
         public override string ToString() {
             return string.Format("Error: {0}", Error);
+        }
+
+        public static implicit operator Exception(Failure<T> m) {
+            return m.Error;
         }
     }
 }

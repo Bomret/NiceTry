@@ -6,7 +6,6 @@ namespace NiceTry.Tests.Combinators {
     class When_I_try_to_divide_by_zero_and_recover_with_zero {
         static ITry<int> _result;
         static Func<int> _divideByZero;
-        static Func<Exception, int> _withZero;
 
         Establish context = () => {
             _divideByZero = () => {
@@ -14,12 +13,10 @@ namespace NiceTry.Tests.Combinators {
 
                 return 5 / zero;
             };
-
-            _withZero = error => 0;
         };
 
         Because of = () => _result = Try.To(_divideByZero)
-                                        .Recover(_withZero);
+                                        .Recover(e => 0);
 
         It should_contain_zero_in_the_success = () => _result.Value.ShouldEqual(0);
 

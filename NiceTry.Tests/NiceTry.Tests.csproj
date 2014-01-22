@@ -44,17 +44,25 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Machine.Specifications, Version=0.6.1.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Machine.Specifications, Version=0.6.2.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Machine.Specifications.0.6.1\lib\net45\Machine.Specifications.dll</HintPath>
+      <HintPath>..\packages\Machine.Specifications.0.6.2\lib\net45\Machine.Specifications.dll</HintPath>
     </Reference>
-    <Reference Include="Machine.Specifications.Should">
-      <HintPath>..\packages\Machine.Specifications.0.6.1\lib\net45\Machine.Specifications.Should.dll</HintPath>
+    <Reference Include="Machine.Specifications.Clr4">
+      <HintPath>..\packages\Machine.Specifications.0.6.2\lib\net45\Machine.Specifications.Clr4.dll</HintPath>
+    </Reference>
+    <Reference Include="Machine.Specifications.Should, Version=0.6.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Machine.Specifications.0.6.2\lib\net45\Machine.Specifications.Should.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Applicators\When_I_try_to_add_two_and_three_and_match_the_result_by_creating_a_string.cs" />
+    <Compile Include="Applicators\When_I_try_to_add_two_and_three_and_would_return_the_default_of_int_if_the_calculation_failed.cs" />
+    <Compile Include="Applicators\When_I_try_to_divide_by_zero_and_match_the_result_by_creating_a_string.cs" />
+    <Compile Include="Applicators\When_I_try_to_divide_by_zero_and_return_the_default_of_int_instead.cs" />
     <Compile Include="Combinators\When_I_check_if_a_success_that_contains_two_does_contain_three.cs" />
     <Compile Include="Combinators\When_I_check_if_a_success_that_contains_two_does_contain_two.cs" />
     <Compile Include="Combinators\When_I_check_if_a_failure_of_type_int_contains_two.cs" />
@@ -68,7 +76,6 @@
     <Compile Include="Combinators\When_I_try_to_add_two_and_three_and_recover_with_a_success_that_contains_zero_if_any_exception_is_thrown.cs" />
     <Compile Include="Combinators\When_I_try_to_add_two_and_three_and_recover_with_zero_if_any_exception_is_thrown.cs" />
     <Compile Include="Combinators\When_I_try_to_add_two_and_three_and_then_add_one.cs" />
-    <Compile Include="Combinators\When_I_try_to_add_two_and_three_and_then_convert_the_result_to_a_string.cs" />
     <Compile Include="Combinators\When_I_try_to_add_two_and_three_and_throw_and_exception_when_inspecting_the_result_and_convert_it_to_a_string.cs" />
     <Compile Include="Combinators\When_I_try_to_add_two_and_three_and_transform_the_result_to_a_try_containing_a_string.cs" />
     <Compile Include="Combinators\When_I_try_to_add_two_and_three_and_would_return_a_try_that_contains_zero_if_the_calculation_failed.cs" />
@@ -91,7 +98,6 @@
     <Compile Include="Applicators\When_I_try_to_divide_by_zero_and_get_the_result.cs" />
     <Compile Include="Applicators\When_I_try_to_divide_by_zero_and_match_the_result.cs" />
     <Compile Include="Applicators\When_I_try_to_divide_by_zero_and_return_zero_instead.cs" />
-    <Compile Include="Applicators\When_I_try_to_delete_a_file_and_register_for_failure.cs" />
     <Compile Include="Applicators\When_I_try_to_divide_by_zero_and_register_for_completion.cs" />
     <Compile Include="Applicators\When_I_try_to_divide_by_zero_and_register_for_success.cs" />
     <Compile Include="Applicators\When_I_try_to_divide_by_zero_and_register_for_failure.cs" />
