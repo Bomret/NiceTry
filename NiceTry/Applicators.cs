@@ -11,15 +11,11 @@ namespace NiceTry {
             return @try.IsSuccess ? onSuccess(@try.Value) : onFailure(@try.Error);
         }
 
-        public static void WhenComplete<T>(this ITry<T> @try, Action<ITry<T>> whenComplete) {
-            whenComplete(@try);
-        }
-
-        public static void WhenSuccess<T>(this ITry<T> @try, Action<T> whenSuccess) {
+        public static void OnSuccess<T>(this ITry<T> @try, Action<T> whenSuccess) {
             if (@try.IsSuccess) whenSuccess(@try.Value);
         }
 
-        public static void WhenFailure<T>(this ITry<T> @try, Action<Exception> whenFailure) {
+        public static void OnFailure<T>(this ITry<T> @try, Action<Exception> whenFailure) {
             if (@try.IsFailure) whenFailure(@try.Error);
         }
 

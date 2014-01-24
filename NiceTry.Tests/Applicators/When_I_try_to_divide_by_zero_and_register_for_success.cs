@@ -2,7 +2,7 @@
 using Machine.Specifications;
 
 namespace NiceTry.Tests.Applicators {
-    [Subject(typeof (NiceTry.Applicators), "WhenSuccess")]
+    [Subject(typeof (NiceTry.Applicators), "OnSuccess")]
     class When_I_try_to_divide_by_zero_and_register_for_success {
         static Func<int> _divideByZero;
         static bool _successCallbackExecuted;
@@ -16,7 +16,7 @@ namespace NiceTry.Tests.Applicators {
         };
 
         Because of = () => Try.To(_divideByZero)
-                              .WhenSuccess(result => _successCallbackExecuted = true);
+                              .OnSuccess(result => _successCallbackExecuted = true);
 
         It should_not_execute_the_success_callback = () => _successCallbackExecuted.ShouldBeFalse();
     }

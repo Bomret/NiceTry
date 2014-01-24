@@ -68,9 +68,16 @@
     <Compile Include="Combinators\When_I_check_if_a_failure_of_type_int_contains_two.cs" />
     <Compile Include="Combinators\When_I_flatten_a_failure_nested_in_a_success.cs" />
     <Compile Include="Combinators\When_I_flatten_a_success_that_contains_zero_and_is_nested_in_a_success.cs" />
-    <Compile Include="Combinators\When_I_flatten_a_success_that_contains_zero_nested_in_a_failure.cs" />
-    <Compile Include="Combinators\When_I_lift_the_addition_and_add_two_and_three.cs" />
-    <Compile Include="Combinators\When_I_try_to_add_three_to_a_failure.cs" />
+    <Compile Include="Combinators\When_I_flatten_a_success_nested_in_a_failure.cs" />
+    <Compile Include="Combinators\When_I_try_to_add_two_and_three_and_add_one_up_to_two_times_which_succeeds_the_first_time.cs" />
+    <Compile Include="Combinators\When_I_try_to_add_two_and_three_and_add_one_up_to_two_times_which_succeeds_the_second_time.cs" />
+    <Compile Include="Combinators\When_I_try_to_add_two_and_three_and_add_one_up_to_two_times_which_would_succeed_the_fourth_time.cs" />
+    <Compile Include="Combinators\When_I_try_to_divide_by_zero_finish_with_minus_one_instead.cs" />
+    <Compile Include="Combinators\When_I_try_to_execute_a_finally_action_on_a_failure.cs" />
+    <Compile Include="Combinators\When_I_try_to_execute_a_finally_action_on_a_success.cs" />
+    <Compile Include="Combinators\When_I_try_to_fail_a_success_with_an_exception.cs" />
+    <Compile Include="Combinators\When_I_zip_two_successes_by_addition.cs" />
+    <Compile Include="Combinators\When_I_try_to_succeed_a_failure_with_zero.cs" />
     <Compile Include="Combinators\When_I_try_to_add_three_to_a_success_that_contains_two.cs" />
     <Compile Include="Combinators\When_I_try_to_add_two_and_three_and_convert_the_result_to_a_string.cs" />
     <Compile Include="Combinators\When_I_try_to_add_two_and_three_and_recover_with_a_success_that_contains_zero_if_any_exception_is_thrown.cs" />
@@ -80,7 +87,7 @@
     <Compile Include="Combinators\When_I_try_to_add_two_and_three_and_transform_the_result_to_a_try_containing_a_string.cs" />
     <Compile Include="Combinators\When_I_try_to_add_two_and_three_and_would_return_a_try_that_contains_zero_if_the_calculation_failed.cs" />
     <Compile Include="Combinators\When_I_try_to_add_two_and_three_and_would_try_to_add_one_and_three_if_the_calculation_failed.cs" />
-    <Compile Include="Combinators\When_I_try_to_add_two_and_three_inspect_the_result_and_convert_it_to_a_string.cs" />
+    <Compile Include="Combinators\When_I_try_to_add_two_and_three_tap_the_result_and_convert_it_to_a_string.cs" />
     <Compile Include="Combinators\When_I_try_to_divide_a_try_that_contains_two_by_zero.cs" />
     <Compile Include="Combinators\When_I_try_to_divide_by_zero_and_add_one_and_three_instead.cs" />
     <Compile Include="Combinators\When_I_try_to_divide_by_zero_and_recover_with_a_success_that_contains_zero.cs" />
@@ -91,14 +98,12 @@
     <Compile Include="Combinators\When_I_try_to_divide_by_zero_and_would_convert_the_result_to_a_string.cs" />
     <Compile Include="Applicators\When_I_try_to_add_two_and_three_and_get_the_result.cs" />
     <Compile Include="Applicators\When_I_try_to_add_two_and_three_and_match_the_result.cs" />
-    <Compile Include="Applicators\When_I_try_to_add_two_and_three_and_register_for_completion.cs" />
     <Compile Include="Applicators\When_I_try_to_add_two_and_three_and_register_for_failure.cs" />
     <Compile Include="Applicators\When_I_try_to_add_two_and_three_and_register_for_success.cs" />
     <Compile Include="Applicators\When_I_try_to_add_two_and_three_and_would_return_zero_if_the_calculation_failed.cs" />
     <Compile Include="Applicators\When_I_try_to_divide_by_zero_and_get_the_result.cs" />
     <Compile Include="Applicators\When_I_try_to_divide_by_zero_and_match_the_result.cs" />
     <Compile Include="Applicators\When_I_try_to_divide_by_zero_and_return_zero_instead.cs" />
-    <Compile Include="Applicators\When_I_try_to_divide_by_zero_and_register_for_completion.cs" />
     <Compile Include="Applicators\When_I_try_to_divide_by_zero_and_register_for_success.cs" />
     <Compile Include="Applicators\When_I_try_to_divide_by_zero_and_register_for_failure.cs" />
     <Compile Include="Applicators\When_I_try_to_throw_an_exception_and_register_for_failure.cs" />
@@ -113,6 +118,7 @@
     <Compile Include="When_I_retry_to_divide_by_zero_up_to_two_times.cs" />
     <Compile Include="When_I_try_to_add_two_and_three.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="When_I_try_to_create_a_success_from_five.cs" />
     <Compile Include="When_I_try_to_divide_by_zero.cs" />
     <Compile Include="When_I_try_to_read_a_file_using_a_StreamReader.cs" />
   </ItemGroup>

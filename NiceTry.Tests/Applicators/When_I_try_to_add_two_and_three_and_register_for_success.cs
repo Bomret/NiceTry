@@ -7,7 +7,7 @@ namespace NiceTry.Tests.Applicators {
         static int _five;
         
         Because of = () => Try.To(() => 2 + 3)
-                              .WhenSuccess(five => _five= five);
+                              .OnSuccess(five => _five= five);
 
         It should_return_five = () => _five.ShouldEqual(5);
     }
