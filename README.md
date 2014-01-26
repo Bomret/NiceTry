@@ -146,7 +146,7 @@ Simplifies working with disposables. The first function creates a disposable, th
 In the example above, `result` would be a `Success<string>` containing the file content as text or a `Failure<string>` if an error would have occurred.
 
 ## Applicators and Combinators
-Since `Success` and `Failure` are simple data structures, a couple of extension methods are provided that make working with both types easier.
+As `Success` and `Failure` are simple data structures, a couple of extension methods are provided that make working with both types easier.
 
 ### Applicators
 An applicator is either void or returns something different than a `Success` or `Failure`. Applicators can be used to execute actions with side effect. Applicators **do not** catch exceptions. You have to deal with those yourself.
