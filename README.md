@@ -129,7 +129,7 @@ var five = Try.FromValue(5);
 ```
 Creates a `Success` that contains the given value.
 
-#### Using
+### Using
 ```csharp
 var result = Try.Using(() => new StreamReader(File.OpenRead("some.file")),
                        reader => reader.ReadToEnd());
@@ -137,7 +137,7 @@ var result = Try.Using(() => new StreamReader(File.OpenRead("some.file")),
 Simplifies working with disposables. The first function creates a disposable, the second one allows to use it.
 In the example above, `result` would be a `Success<string>` containing the file content as text or a `Failure<string>` if an error would have occurred.
 
-#### UsingWith
+### UsingWith
 ```csharp
 var result = Try.Using(() => new StreamReader(File.OpenRead("some.file")),
                        reader => Try.To(() => reader.ReadToEnd()));
