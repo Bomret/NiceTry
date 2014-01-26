@@ -1,4 +1,3 @@
-using System;
 using Machine.Specifications;
 
 namespace NiceTry.Tests.Combinators {
@@ -7,8 +6,8 @@ namespace NiceTry.Tests.Combinators {
         When_I_try_to_add_two_and_three_and_recover_with_a_success_that_contains_zero_if_any_exception_is_thrown {
         static ITry<int> _five;
 
-        Because of = () => _five= Try.To(() => 2+3)
-                                        .RecoverWith(e => new Success<int>(0));
+        Because of = () => _five = Try.To(() => 2 + 3)
+                                      .RecoverWith(e => new Success<int>(0));
 
         It should_contain_five_in_the_success = () => _five.Value.ShouldEqual(5);
 

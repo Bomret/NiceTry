@@ -29,5 +29,12 @@ namespace NiceTry {
                                                     Func<TDisposable, T> useDisposable) where TDisposable : IDisposable {
             return To(() => { using (var disposable = createDisposable()) return useDisposable(disposable); });
         }
+
+        public static ITry<T> UsingWith<T, TDisposable>(Func<TDisposable> createDisposable,
+                                                        Func<TDisposable, ITry<T>> useDisposable)
+            where TDisposable : IDisposable {
+            return To(() => { using (var disposable = createDisposable()) return useDisposable(disposable); })
+                .Flatten();
+        }
     }
 }

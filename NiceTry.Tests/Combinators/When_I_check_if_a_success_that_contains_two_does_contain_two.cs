@@ -1,4 +1,3 @@
-using System;
 using Machine.Specifications;
 
 namespace NiceTry.Tests.Combinators {
@@ -7,9 +6,7 @@ namespace NiceTry.Tests.Combinators {
         static ITry<int> _twoSuccess;
         static ITry<int> _result;
 
-        Establish context = () => {
-            _twoSuccess = new Success<int>(2);
-        };
+        Establish context = () => { _twoSuccess = new Success<int>(2); };
 
         Because of = () => _result = _twoSuccess.Filter(i => i == 2);
 

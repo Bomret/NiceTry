@@ -29,6 +29,20 @@ namespace NiceTry {
             return string.Format("Error: {0}", Error);
         }
 
+        bool Equals(Failure<T> other) {
+            return Equals(Error, other.Error);
+        }
+
+        public override bool Equals(object obj) {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            return obj is Failure<T> && Equals((Failure<T>) obj);
+        }
+
+        public override int GetHashCode() {
+            return (Error != null ? Error.GetHashCode() : 0);
+        }
+
         public static implicit operator Exception(Failure<T> m) {
             return m.Error;
         }

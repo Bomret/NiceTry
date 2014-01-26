@@ -1,7 +1,7 @@
 ﻿using System;
 using Machine.Specifications;
 
-namespace NiceTry.Async.Tests {
+namespace NiceTry.Async.Task.Tests {
     [Subject(typeof (TryAsync), "To")]
     public class When_I_try_to_add_two_and_three {
         static ITry<int> _result;

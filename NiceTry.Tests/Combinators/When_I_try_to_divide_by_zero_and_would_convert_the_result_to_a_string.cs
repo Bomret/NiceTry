@@ -1,5 +1,4 @@
 using System;
-using System.Globalization;
 using Machine.Specifications;
 
 namespace NiceTry.Tests.Combinators {

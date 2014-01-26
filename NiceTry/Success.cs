@@ -30,6 +30,20 @@ namespace NiceTry {
             return string.Format("Value: {0}", Value);
         }
 
+        bool Equals(Success<T> other) {
+            return EqualityComparer<T>.Default.Equals(Value, other.Value);
+        }
+
+        public override bool Equals(object obj) {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            return obj is Success<T> && Equals((Success<T>) obj);
+        }
+
+        public override int GetHashCode() {
+            return EqualityComparer<T>.Default.GetHashCode(Value);
+        }
+
         public static implicit operator T(Success<T> success) {
             return success.Value;
         }

@@ -1,6 +1,6 @@
 using Machine.Specifications;
 
-namespace NiceTry.Async.Tests {
+namespace NiceTry.Async.Task.Tests {
     [Subject(typeof (TryAsync), "To")]
     public class When_I_try_to_divide_by_zero {
         static ITry<int> _result;

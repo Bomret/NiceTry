@@ -9,7 +9,7 @@ namespace NiceTry.Examples {
 
             Try.Using(() => new StreamReader(File.OpenRead(file)),
                       reader => reader.ReadToEnd())
-               .OnSuccess(fileContent => Console.WriteLine(fileContent));
+               .OnSuccess(Console.WriteLine);
         }
 
         public void ReadFileWithUsingAsInBetweenStatement() {
@@ -18,14 +18,14 @@ namespace NiceTry.Examples {
             Try.To(() => File.OpenRead(file))
                .Using(stream => new StreamReader(stream),
                       reader => reader.ReadToEnd())
-               .OnSuccess(fileContent => Console.WriteLine(fileContent));
+               .OnSuccess(Console.WriteLine);
         }
 
         public void DownloadFromUrlWithUsingAsInBetweenStatement() {
             Try.To(() => new Uri("http://google.com"))
                .Using(() => new WebClient(),
                       (wc, url) => wc.DownloadString(url))
-               .OnSuccess(content => Console.WriteLine(content));
+               .OnSuccess(Console.WriteLine);
         }
 
         public void ReadFileUploadContentToUrlFinallyDeleteFile() {

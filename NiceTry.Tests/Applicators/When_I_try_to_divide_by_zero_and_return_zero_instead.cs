@@ -16,7 +16,7 @@ namespace NiceTry.Tests.Applicators {
         };
 
         Because of = () => _zero = Try.To(_divideByZero)
-                                        .GetOrElse(0);
+                                      .GetOrElse(0);
 
         It should_return_zero = () => _zero.ShouldEqual(0);
     }

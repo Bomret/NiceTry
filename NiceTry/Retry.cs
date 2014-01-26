@@ -15,14 +15,11 @@ namespace NiceTry {
         }
 
         public static ITry<Unit> To(Action work, int retries = 1) {
-            while (true) {
-                var result = Try.To(work);
+            return To(() => {
+                work();
 
-                if (result.IsSuccess || retries < 1)
-                    return result;
-
-                retries -= 1;
-            }
+                return Unit.Default;
+            });
         }
     }
 }
