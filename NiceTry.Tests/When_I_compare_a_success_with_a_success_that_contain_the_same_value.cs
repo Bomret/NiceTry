@@ -3,14 +3,14 @@
 namespace NiceTry.Tests {
     [Subject(typeof (Try), "Equals")]
     public class When_I_compare_a_success_with_a_success_that_contain_the_same_value {
-        static Success<int> _success;
+        static Try<int> _success;
 
         static bool _result;
-        static Success<int> _otherSuccess;
+        static Try<int> _otherSuccess;
 
         Establish context = () => {
-            _success = new Success<int>(5);
-            _otherSuccess = new Success<int>(5);
+            _success = Try.Success(5);
+            _otherSuccess = Try.Success(5);
         };
 
         Because of = () => _result = _success.Equals(_otherSuccess);

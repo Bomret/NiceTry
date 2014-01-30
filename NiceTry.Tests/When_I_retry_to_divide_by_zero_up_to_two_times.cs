@@ -4,7 +4,7 @@ using Machine.Specifications;
 namespace NiceTry.Tests {
     [Subject(typeof (Retry), "To")]
     class When_I_retry_to_divide_by_zero_up_to_two_times {
-        static ITry<int> _result;
+        static Try<int> _result;
         static Func<int> _divideByZero;
 
         Establish context = () => {

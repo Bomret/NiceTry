@@ -1,50 +1,54 @@
 ﻿using System;
+using System.Diagnostics;
 
 namespace NiceTry {
-    public sealed class Failure<T> : ITry<T>,
-                                     IEquatable<ITry<T>> {
+    [DebuggerDisplay("Failure(Error)")]
+    public sealed class Failure {
         public Failure(Exception error) {
             Error = error;
         }
 
-        public bool Equals(ITry<T> other) {
-            return ReferenceEquals(other, this);
+        public Exception Error { get; private set; }
+
+        public override string ToString() {
+            return string.Format("Failure({0})", Error);
         }
 
-        public bool IsSuccess {
+        public override int GetHashCode() {
+            return Error.GetHashCode();
+        }
+    }
+
+    [DebuggerDisplay("Failure(Error)")]
+    sealed class Failure<T> : Try<T> {
+        readonly Exception _error;
+
+        public Failure(Exception error) {
+            _error = error;
+        }
+
+        public override bool IsSuccess {
             get { return false; }
         }
 
-        public bool IsFailure {
+        public override bool IsFailure {
             get { return true; }
         }
 
-        public Exception Error { get; private set; }
+        public override Exception Error {
+            get { return _error; }
+        }
 
-        public T Value {
+        public override T Value {
             get { throw new InvalidOperationException("A Failure does not contain a value"); }
         }
 
         public override string ToString() {
-            return string.Format("Error: {0}", Error);
-        }
-
-        bool Equals(Failure<T> other) {
-            return Equals(Error, other.Error);
-        }
-
-        public override bool Equals(object obj) {
-            if (ReferenceEquals(null, obj)) return false;
-            if (ReferenceEquals(this, obj)) return true;
-            return obj is Failure<T> && Equals((Failure<T>) obj);
+            return string.Format("Failure({0})", Error);
         }
 
         public override int GetHashCode() {
-            return (Error != null ? Error.GetHashCode() : 0);
-        }
-
-        public static implicit operator Exception(Failure<T> m) {
-            return m.Error;
+            return Error.GetHashCode();
         }
     }
 }

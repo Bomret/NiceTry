@@ -4,7 +4,7 @@ using Machine.Specifications;
 namespace NiceTry.Tests {
     [Subject(typeof (Try), "To")]
     public class When_I_try_to_add_two_and_three {
-        static ITry<int> _result;
+        static Try<int> _result;
         static Exception _error;
 
         Because of = () => _result = Try.To(() => 2 + 3);

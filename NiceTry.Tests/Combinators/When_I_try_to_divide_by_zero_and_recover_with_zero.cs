@@ -4,7 +4,7 @@ using Machine.Specifications;
 namespace NiceTry.Tests.Combinators {
     [Subject(typeof (NiceTry.Combinators), "Recover")]
     class When_I_try_to_divide_by_zero_and_recover_with_zero {
-        static ITry<int> _result;
+        static Try<int> _result;
         static Func<int> _divideByZero;
 
         Establish context = () => {

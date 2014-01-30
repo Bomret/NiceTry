@@ -3,13 +3,13 @@
 namespace NiceTry.Tests.Combinators {
     [Subject(typeof (NiceTry.Combinators), "Flatten")]
     public class When_I_flatten_a_success_that_contains_zero_and_is_nested_in_a_success {
-        static Success<Success<int>> _nestedSuccess;
-        static ITry<int> _result;
-        static Success<int> _expectedResult;
+        static Try<Try<int>> _nestedSuccess;
+        static Try<int> _result;
+        static Try<int> _expectedResult;
 
         Establish context = () => {
-            _expectedResult = new Success<int>(0);
-            _nestedSuccess = new Success<Success<int>>(_expectedResult);
+            _expectedResult = Try.Success(0);
+            _nestedSuccess = Try.Success(_expectedResult);
         };
 
         Because of = () => { _result = _nestedSuccess.Flatten(); };

@@ -4,7 +4,7 @@ using Machine.Specifications;
 namespace NiceTry.Tests.Combinators {
     [Subject(typeof (NiceTry.Combinators), "RecoverWith")]
     class When_I_try_to_divide_by_zero_and_recover_with_a_success_that_contains_zero {
-        static ITry<int> _result;
+        static Try<int> _result;
         static Func<int> _divideByZero;
 
         Establish context = () => {
@@ -16,7 +16,7 @@ namespace NiceTry.Tests.Combinators {
         };
 
         Because of = () => _result = Try.To(_divideByZero)
-                                        .RecoverWith(e => new Success<int>(0));
+                                        .RecoverWith(e => Try.Success(0));
 
         It should_contain_zero_in_the_success = () => _result.Value.ShouldEqual(0);
 

@@ -4,10 +4,10 @@ using Machine.Specifications;
 namespace NiceTry.Tests.Combinators {
     [Subject(typeof (NiceTry.Combinators), "Reject")]
     class When_I_reject_a_failure_if_it_contains_two {
-        static ITry<int> _failure;
-        static ITry<int> _result;
+        static Try<int> _failure;
+        static Try<int> _result;
 
-        Establish context = () => { _failure = new Failure<int>(new Exception()); };
+        Establish context = () => { _failure = Try.Failure(new Exception()); };
 
         Because of = () => _result = _failure.Reject(i => i == 2);
 

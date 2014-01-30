@@ -3,7 +3,7 @@ using Machine.Specifications;
 namespace NiceTry.Tests.Combinators {
     [Subject(typeof (NiceTry.Combinators), "OrElse")]
     class When_I_try_to_add_two_and_three_and_would_return_a_try_that_contains_zero_if_the_calculation_failed {
-        static ITry<int> _result;
+        static Try<int> _result;
 
         Because of = () => _result = Try.To(() => 2 + 3)
                                         .OrElse(0);

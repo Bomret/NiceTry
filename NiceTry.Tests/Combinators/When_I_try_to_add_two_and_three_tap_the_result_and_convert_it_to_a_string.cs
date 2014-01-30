@@ -3,7 +3,7 @@ using Machine.Specifications;
 namespace NiceTry.Tests.Combinators {
     [Subject(typeof (NiceTry.Combinators), "Tap")]
     class When_I_try_to_add_two_and_three_tap_the_result_and_convert_it_to_a_string {
-        static ITry<string> _result;
+        static Try<string> _result;
         static int _five;
 
         Because of = () => _result = Try.To(() => 2 + 3)
