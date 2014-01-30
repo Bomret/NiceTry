@@ -6,7 +6,7 @@ namespace NiceTry.Tests.Combinators {
     public class When_I_try_to_read_a_file_using_a_StreamReader {
         static string _file;
         static string _content;
-        static ITry<string> _result;
+        static Try<string> _result;
 
         Establish context = () => {
             _file = Path.GetTempFileName();

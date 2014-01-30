@@ -4,7 +4,7 @@ using Machine.Specifications;
 namespace NiceTry.Tests {
     [Subject(typeof (Try), "Using")]
     class When_I_use_a_disposable_container_to_store_two {
-        static ITry<string> _result;
+        static Try<string> _result;
         static Container<int> _container;
 
         Because of = () => _result = Try.Using(() => new Container<int>(2),
@@ -44,7 +44,7 @@ namespace NiceTry.Tests {
 
     [Subject(typeof (Try), "UsingWith")]
     class When_I_use_a_disposable_container_to_store_two_an_try_to_stringify_the_value {
-        static ITry<string> _result;
+        static Try<string> _result;
         static Container<int> _container;
 
         Because of = () => _result = Try.UsingWith(() => new Container<int>(2),
@@ -76,7 +76,7 @@ namespace NiceTry.Tests {
                 IsDisposed = true;
             }
 
-            public ITry<string> TryStringifyValue() {
+            public Try<string> TryStringifyValue() {
                 return Try.To(() => Value.ToString());
             }
         }

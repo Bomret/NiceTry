@@ -4,9 +4,9 @@ using Machine.Specifications;
 namespace NiceTry.Tests.Combinators {
     [Subject(typeof (NiceTry.Combinators), "Using")]
     class When_I_use_a_disposable_container_to_store_two {
-        static ITry<Container<int>> _result;
+        static Try<Container<int>> _result;
 
-        Because of = () => _result = Try.FromValue(2)
+        Because of = () => _result = Try.Success(2)
                                         .Using(() => new Container<int>(),
                                                (container, i) => container.StoreValue(i));
 
@@ -36,9 +36,9 @@ namespace NiceTry.Tests.Combinators {
 
     [Subject(typeof (NiceTry.Combinators), "UsingWith")]
     class When_I_use_a_disposable_container_to_store_two_and_return_a_try_containing_it {
-        static ITry<Container<int>> _result;
+        static Try<Container<int>> _result;
 
-        Because of = () => _result = Try.FromValue(2)
+        Because of = () => _result = Try.Success(2)
                                         .UsingWith(() => new Container<int>(),
                                                    (container, i) => container.TryStoreValue(i));
 
@@ -58,10 +58,10 @@ namespace NiceTry.Tests.Combinators {
                 IsDisposed = true;
             }
 
-            public ITry<Container<T>> TryStoreValue(T i) {
+            public Try<Container<T>> TryStoreValue(T i) {
                 Value = i;
 
-                return Try.FromValue(this);
+                return Try.Success(this);
             }
         }
     }

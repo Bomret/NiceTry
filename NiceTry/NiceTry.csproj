@@ -47,7 +47,6 @@
     <Compile Include="Combinators.cs" />
     <Compile Include="Applicators.cs" />
     <Compile Include="Failure.cs" />
-    <Compile Include="ITry.cs" />
     <Compile Include="Properties\AssemblyVersionInformation.cs" />
     <Compile Include="Retry.cs" />
     <Compile Include="Success.cs" />

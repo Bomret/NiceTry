@@ -4,10 +4,10 @@ using Machine.Specifications;
 namespace NiceTry.Tests {
     [Subject(typeof (Try), "FromValue")]
     public class When_I_try_to_create_a_success_from_five {
-        static ITry<int> _result;
+        static Try<int> _result;
         static Exception _error;
 
-        Because of = () => _result = Try.FromValue(5);
+        Because of = () => _result = Try.Success(5);
 
         It should_contain_five_in_the_success = () => _result.Value.ShouldEqual(5);
 

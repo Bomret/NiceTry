@@ -7,7 +7,7 @@ namespace NiceTry.Tests {
         static Func<int> _divideByZero;
         static bool _failureCallbackExecuted;
         static Exception _error;
-        static ITry<int> _result;
+        static Try<int> _result;
         static int _value;
 
         Establish context = () => {

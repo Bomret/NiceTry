@@ -3,13 +3,13 @@
 namespace NiceTry.Tests.Combinators {
     [Subject(typeof (NiceTry.Combinators), "Zip")]
     class When_I_zip_two_successes_by_addition {
-        static Success<int> _two;
-        static Success<int> _three;
-        static ITry<int> _five;
+        static Try<int> _two;
+        static Try<int> _three;
+        static Try<int> _five;
 
         Establish context = () => {
-            _two = new Success<int>(2);
-            _three = new Success<int>(3);
+            _two = Try.Success(2);
+            _three = Try.Success(3);
         };
 
         Because of = () => _five = _two.Zip(_three, (a, b) => a + b);

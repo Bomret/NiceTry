@@ -4,7 +4,7 @@ using Machine.Specifications;
 namespace NiceTry.Tests {
     [Subject(typeof (Retry), "To")]
     class When_I_retry_to_add_two_and_three_up_to_two_times_which_succeeds_the_second_time {
-        static ITry<int> _result;
+        static Try<int> _result;
         static int _five;
         static Func<int> _addTwoAndThreeButFailTheFirstTime;
         static int _try;

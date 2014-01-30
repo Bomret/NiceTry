@@ -78,11 +78,9 @@
     <Compile Include="Combinators\When_I_try_to_divide_by_zero_finish_with_minus_one_instead.cs" />
     <Compile Include="Combinators\When_I_try_to_execute_a_finally_action_on_a_failure.cs" />
     <Compile Include="Combinators\When_I_try_to_execute_a_finally_action_on_a_success.cs" />
-    <Compile Include="Combinators\When_I_try_to_fail_a_success_with_an_exception.cs" />
     <Compile Include="Combinators\When_I_use_a_disposable_container_to_store_two.cs" />
     <Compile Include="Combinators\When_I_use_a_disposable_container_to_store_two_imediately.cs" />
     <Compile Include="Combinators\When_I_zip_two_successes_by_addition.cs" />
-    <Compile Include="Combinators\When_I_try_to_succeed_a_failure_with_zero.cs" />
     <Compile Include="Combinators\When_I_try_to_add_three_to_a_success_that_contains_two.cs" />
     <Compile Include="Combinators\When_I_try_to_add_two_and_three_and_convert_the_result_to_a_string.cs" />
     <Compile Include="Combinators\When_I_try_to_add_two_and_three_and_recover_with_a_success_that_contains_zero_if_any_exception_is_thrown.cs" />

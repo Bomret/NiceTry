@@ -1,55 +1,38 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace NiceTry {
-    public sealed class Success<T> : ITry<T>,
-                                     IEquatable<ITry<T>> {
+    [DebuggerDisplay("Success(Value)")]
+    sealed class Success<T> : Try<T> {
+        readonly T _value;
+
         public Success(T value) {
-            Value = value;
+            _value = value;
         }
 
-        public bool Equals(ITry<T> other) {
-            return other.IsSuccess && EqualityComparer<T>.Default.Equals(Value, other.Value);
-        }
-
-        public bool IsSuccess {
+        public override bool IsSuccess {
             get { return true; }
         }
 
-        public bool IsFailure {
+        public override bool IsFailure {
             get { return false; }
         }
 
-        public Exception Error {
+        public override Exception Error {
             get { throw new InvalidOperationException("A Success does not contain an error"); }
         }
 
-        public T Value { get; private set; }
+        public override T Value {
+            get { return _value; }
+        }
 
         public override string ToString() {
-            return string.Format("Value: {0}", Value);
-        }
-
-        bool Equals(Success<T> other) {
-            return EqualityComparer<T>.Default.Equals(Value, other.Value);
-        }
-
-        public override bool Equals(object obj) {
-            if (ReferenceEquals(null, obj)) return false;
-            if (ReferenceEquals(this, obj)) return true;
-            return obj is Success<T> && Equals((Success<T>) obj);
+            return string.Format("Success({0})", Value);
         }
 
         public override int GetHashCode() {
             return EqualityComparer<T>.Default.GetHashCode(Value);
-        }
-
-        public static implicit operator T(Success<T> success) {
-            return success.Value;
-        }
-
-        public static implicit operator Success<T>(T value) {
-            return new Success<T>(value);
         }
     }
 }
