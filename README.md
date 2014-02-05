@@ -43,12 +43,12 @@ The above code sample would try reading a url from the command line up to 4 time
 `Try` is a wrapper around a simple try/catch statement. It tries to execute the given `Action` or `Func` and returns a `Success` if no exception was thrown and a `Failure` containing the encountered exception otherwise.
 
 ```csharp
-var result = Try.To(() => 2 + 4);
+Try<int> result = Try.To(() => 2 + 4);
 ```
 The above example would evaluate the anonymous function `() => 2 + 4` and, since no exception will be thrown, return a `Success<int>` and store it in the variable `result`. The result of the calculation is stored inside the `Success` and can be accessed using the `Value` property:
 
 ```csharp
-var six = result.Value;
+int six = result.Value;
 
 // or
 
@@ -59,17 +59,17 @@ To find out if `result` represents a `Success` or `Failure` it provides two bool
 If the above example would have thrown an exception, this could be accessed by the `Error` property or the `OnFailure` applicator:
 
 ```csharp
-var error = result.Error;
+Exception error = result.Error;
 
 // or
 
 result.OnFailure(e => _error = e);
 ```
 
-When you use `Try` or `Retry` to do an `Action` (which returns nothing) you'll get an `ITry<Unit>` as result. The Unit type represents void (read more: http://en.wikipedia.org/wiki/Unit_type) and has been implemented to avoid the unnecessary duplication of combinator and applicator functions.
+When you use `Try` or `Retry` to do an `Action` (which returns nothing) you'll get a `Try<Unit>` as result. The Unit type represents void (read more: http://en.wikipedia.org/wiki/Unit_type) and has been implemented to avoid the unnecessary duplication of combinator and applicator functions.
 
 ## Recommended usage
-Every method that could throw an exception should return a `ITry<T>` instead of `void` or the result directly. That way, eventual exceptions can be handled by applying combinators and applicators to the return value and exception handling can be managed hassle free.
+Every method that could throw an exception should return a `Try<T>` instead of `void` or the result directly. That way, eventual exceptions can be handled by applying combinators and applicators to the return value and exception handling can be managed hassle free.
 
 So instead of this:
 ```csharp
@@ -79,63 +79,43 @@ private int CalculateSomethingRisky(int a, int b) { //... };
 
 write this:
 ```csharp
-private ITry<Unit> DoSomethingRisky(string a) { //... };
-private ITry<int> CalculateSomethingRisky(int a, int b) { //... };
+private Try<Unit> DoSomethingRisky(string a) { //... };
+private Try<int> CalculateSomethingRisky(int a, int b) { //... };
 ```
 
-Using a `ITry<T>` as return value states the risky nature of the method much clearer than a XML doc with an `<exception>` element.
-
-## Implicit conversions
-Two implicit conversions are provided for the `Success` type: You can return a `Success<T>` where a `T` would be required and return a `T` where a `Success<T>` would be required:
-```csharp
-Success<int> SafeAdd(int a, int b) {
-    return a + b;
-}
-
-// and
-
-int SafeAdd(int a, int b) {
-    var result = a + b;
-    
-    return new Success<int>(result);
-}
-```
-
-Currently, only one implicit conversion is implemented for `Failure`:
-```csharp
-Exception GetError() {
-    return new Failure<int>(new Exception());
-}
-
-// can also be written as
-
-Exception GetError() {
-    return new Success<Exception>(new Exception());
-}
-```
+Using a `Try<T>` as return value states the risky nature of the method much clearer than a XML doc with an `<exception>` element.
 
 ## Creating a Try
 There are several ways to create a `Try`.
 
 ### To
 ```csharp
-var @try = Try.To(() => 2 + 3);
+Try<int> @try = Try.To(() => 2 + 3);
 ```
 Executes an `Action` or a `Func<T>` synchronously and returns a `Success` if no exception was thrown or a `Failure` otherwise.
 
-### FromValue
+### Of / Success
 ```csharp
-var five = Try.FromValue(5);
+Try<int> five = Try.Of(5);
+
+// same as
+
+Try<int> five = Try.Success(5);
 ```
-Creates a `Success` that contains the given value.
+Create a `Success` that contains the given value.
+
+### Failure
+```csharp
+Try<int> five = Try.Failure(new Exception());
+```
+Creates a `Failure` that contains the given Error.
 
 ### Using
 ```csharp
-var result = Try.Using(() => new StreamReader(File.OpenRead("some.file")),
-                       reader => reader.ReadToEnd());
+Try<string> result = Try.Using(() => new StreamReader(File.OpenRead("some.file")), reader => reader.ReadToEnd());
 ```
 Simplifies working with disposables. The first function creates a disposable, the second one allows to use it.
-In the example above, `result` would be a `Success<string>` containing the file content as text or a `Failure<string>` if an error would have occurred.
+In the example above, `result` would be a `Success<string>` containing the file content as text or a `Failure` if an error would have occurred.
 
 ### UsingWith
 ```csharp
@@ -175,7 +155,7 @@ Try.To(() => 2 + 3)
 `Match` allows to use a pattern matching like callback registration. The first function parameter is only executed in case of a `Success` and gets the value to work with. The second function parameter is registered to handle `Failure` and is only executed if an exception was thrown.
 
 ```csharp
-var result = Try.To(() => 2 + 3)
+string result = Try.To(() => 2 + 3)
                 .Match(
    		             i => i.ToString(),
    		             e => "");
@@ -185,157 +165,158 @@ This overload for `Match` produces a value. In the above example `result` would 
 
 #### Get
 ```csharp
-var five = Try.To(() => 2 + 3).Get();
+int five = Try.To(() => 2 + 3).Get();
 ```
 `Get` is the most straight forward applicator. It returns the value if the result is a `Success` or rethrows the exception, if one was encountered. In the above example `five` would be `5`.
 
 #### GetOrElse
 ```csharp
-var five = Try.To(() => 2 + 3).GetOrElse(-1);
+int five = Try.To(() => 2 + 3).GetOrElse(-1);
 ```
 `GetOrElse` either returns the value, if the `Try` returned a `Success` or the else value, if the `Try` returned a `Failure`. In the above example `five` would be `5`. It would have been `-1` if `() => 2 + 3` had thrown an exception.
 
 #### GetOrDefault
 ```csharp
-var five = Try.To(() => 2 + 3).GetOrDefault();
+int five = Try.To(() => 2 + 3).GetOrDefault();
 ```
 `GetOrDefault` either returns the value, if the `Try` returned a `Success` or the value of `default(T)`, if the `Try` returned a `Failure`. In the above example `five` would be `5`. It would have been `0` which is `default(int)` if `() => 2 + 3` had thrown an exception.
 
 ### Combinators
-A combinator always returns a `Success` or `Failure` and thus lets you combine it with other combinators and allows function composition. 
+A combinator always returns a `Try` and thus lets you combine it with other combinators and allow function composition. 
 This library provides a growing number of combinators that empowers you to write concise and bloat-free code for error handling. Some of them, like `Map` and `OrElse` have already been shown in the topmost example.
 
 #### OrElse
 ```csharp
-var result = Try.To(() => 5 / 0)
-				.OrElse(-1);
-
-// or
-
-var result = Try.To(() => 5 / 0)
-				.OrElse(() => -1);
+Try<int> result = Try.To(() => 5 / 0).OrElse(-1);
 ```
 In the above examples a `DivideByZeroException` would be thrown and `result` would be a `Failure`. The `OrElse` combinator makes it possible to return a different value in case of a `Failure`. In both cases above `result` would be a `Success<int>` with the Value *-1*.
 
 #### OrElseWith
 ```csharp
-var result = Try.To(() => 5 / 0)
-				.OrElseWith(Try.To(() => 1 - 2));
-
-// or
-
-var result = Try.To(() => 5 / 0)
-				.OrElseWith(() => Try.To(() => 1 - 2));
+Try<int> result = Try.To(() => 5 / 0).OrElseWith(Try.Of(-1));
 ```
-In the above examples a `DivideByZeroException` would be thrown and `result` would be a `Failure`. The `OrElseWith` combinator makes it possible to return a different `Try` in case of a `Failure`. In both cases above `result` would be a `Success<int>` with the Value *-1*.
+In the above example a `DivideByZeroException` would be thrown and `result` would be a `Failure`. The `OrElseWith` combinator makes it possible to return a different `Try` in case of a `Failure`. In both cases above `result` would be a `Success<int>` with the Value *-1*.
 
 #### Then
 ```csharp
-var result = Try.To(() => 2 + 3)
-                .Then(AddOne)
-                .Then(PrintResult);
+Try<Unit> result = Try.To(() => 2 + 3)
+                      .Then(t => t.Get() + 1)
+                      .Then(t => Print(t.Get()));
 ```
-Allows chaining and conversion of multiple `Try's`. If a try fails, the chain will be interrupted and return immediately with a `Failure`. In the above example `result` would be a `Success`. Here are the signatures of the methods `AddOne` and `PrintResult`:
+Allows chaining and conversion of multiple `Try's`. If a try fails, the chain will be interrupted and return immediately with a `Failure`.
 
+#### ThenWith
 ```csharp
-ITry<int> AddOne(ITry<int> arg)
-ITry<Unit> PrintResult<T>(ITry<T> value)
+Try<Unit> result = Try.To(() => 2 + 3)
+                      .ThenWith(t => t.Map(i => i + 1))
+                      .ThenWith(t => t.Map(i => Print(i)));
 ```
+Allows chaining and conversion of multiple `Try's`. If a try fails, the chain will be interrupted and return immediately with a `Failure`.
 
 #### Apply
 ```csharp
-var result = Try.To(() => 2 + 3)
-				.Apply(i => Console.WriteLine(i));
+Try<Unit> result = Try.To(() => 2 + 3)
+				      .Apply(i => Print(i));
 ```
-Applies an `Action<T>` to the value contained in a `Success<T>`. And returns the successful or failed result of this `Action`. In the above example `result` would be a `Success<Unit>` if `Console.WriteLine` would not throw an exception, otherwise a `Failure<Unit>`.
+Applies an `Action<T>` to the value contained in a `Success<T>`. And returns the successful or failed result of this `Action`. In the above example `result` would be a `Success<Unit>` if `Print` would not throw an exception, otherwise a `Failure`.
 
 #### Map
 ```csharp
-var result = Try.To(() => 2 + 3)
+string result = Try.To(() => 2 + 3)
 				.Map(i => i.ToString());
 ```
 `Map` allows to apply a function to the value of a `Success`. In the above example `result` would be a `Success<string>` with Value `"5"`.
 
-#### Filter
-```csharp
-var result = Try.To(() => 2 + 3)
-				.Filter(i => i == 5);
-```
-`Filter` checks if a given predicate holds true for a `Try`. In the above example `result` would be a `Success<int>` with Value `5`. If the predicate `i => i == 5` would not hold, `result` would have been a `Failure<int>` containing an `ArgumentException`. If `() => 2 + 3` would have thrown an exception `result` would have been a `Failure<int>` containing the thrown exception.
-
-#### Reject
-```csharp
-var result = Try.To(() => 2 + 3)
-				.Reject(i => i == 5);
-```
-Is the exact opposite of `Filter`. It checks if a given predicate does _not_ hold true for a `Try`. In the above example `result` would be a `Failure<int>` containing an `ArgumentException`.
-
 #### FlatMap
 ```csharp
-var result = Try.To(() => 2 + 3)
-                .FlatMap(i => Try.To(() => i.ToString()));
+Try<string> result = Try.To(() => 2 + 3)
+                        .FlatMap(i => Try.To(() => i.ToString()));
 ```
 `FlatMap` allows to apply a function to the value of a `Success` that returns another `Try` and avoid the nesting that would occur otherwise. In the above example `result` would be a `Success<string>` with Value `"5"`. If `Map` would have been used, `result` would have been a `Success<Success<string>>`.
 
+#### Filter
+```csharp
+Try<int> result = Try.To(() => 2 + 3)
+				.Filter(i => i == 5);
+```
+`Filter` checks if a given predicate holds true for a `Try`. In the above example `result` would be a `Success<int>` with Value `5`. If the predicate `i => i == 5` would not hold, `result` would have been a `Failure` containing an `ArgumentException`. If `() => 2 + 3` would have thrown an exception `result` would have been a `Failure` containing the thrown exception.
+
+#### Reject
+```csharp
+Try<int> result = Try.To(() => 2 + 3)
+				     .Reject(i => i == 5);
+```
+Is the exact opposite of `Filter`. It checks if a given predicate does _not_ hold true for a `Try`. In the above example `result` would be a `Failure` containing an `ArgumentException`.
+
 #### Zip
 ```csharp
-var five = Try.To(() => 2 + 3);
-var four = Try.To(() => 6 - 2);
+Try<int> five = Try.To(() => 2 + 3);
+Try<int> four = Try.To(() => 6 - 2);
 
-var nine = five.Zip(four, (a, b) => a + b);
+Try<int> nine = five.Zip(four, (a, b) => a + b);
 ```
-Takes one other `Try` and allows to apply a `Func` to the values of both `Try`. If one `Try` would be a `Failure` the function would not be applied.
+Takes one other `Try` and allows to apply a `Func` to the values of both `Try`'s. If one `Try` would be a `Failure` the function would not be applied.
+In the above example `nine` would be a `Success<int>` containing `9`.
+
+#### ZipWith
+```csharp
+Try<int> five = Try.To(() => 2 + 3);
+Try<int> four = Try.To(() => 6 - 2);
+
+Try<int> nine = five.ZipWith(four, (a, b) => Try.To(() => a + b));
+```
+Takes one other `Try` and allows to apply a `Func` to the values of both `Try`'s. If one `Try` would be a `Failure` the function would not be applied.
 In the above example `nine` would be a `Success<int>` containing `9`.
 
 #### Recover
 ```csharp
-var result = Try.To(() => 5 / 0)
-				.Recover(e => -1);
+Try<int> result = Try.To(() => 5 / 0)
+				     .Recover(e => -1);
 ```
 This combinator is used to recover from a `Failure`. Gets the thrown exception to work with. In the above example `result` would be a `Success<int>` with Value `-1` and `e` would be a `DivideByZeroException`.
 
 #### RecoverWith
 ```csharp
-var result = Try.To(() => 5 / 0)
-				.RecoverWith(e => new Success<int>(-1));
+Try<int> result = Try.To(() => 5 / 0)
+				     .RecoverWith(e => Try.Of(-1));
 ```
 This combinator is used to recover from a `Failure` with a new `Try`. Gets the thrown exception to work with. In the above example `result` would be a `Success<int>` with Value `-1` and `e` would be a `DivideByZeroException`.
 
 #### Transform
 ```csharp
-var result = Try.To(() => 2 + 3)
-				.Transform(
-					i => i.ToString(),
-					e => e.Message);
+Try<string> result = Try.To(() => 2 + 3)
+        				.Transform(
+        					i => i.ToString(),
+        					e => e.Message);
 ```
 Can be used to transform the result of a `Try`. The first function parameter transforms the resulting value if it is a `Success`, the second works on the exception if it is a `Failure`. In the above example `result` would be a `Success<string>` with Value *"5"*.
 
 #### Succeed
 ```csharp
-var result = Try.To(() => 2 + 3)
-				.Succeed(6);
+Try<int> result = Try.To(() => 2 + 3)
+				     .Succeed(6);
 ```
 Ignores the `Try` it is called from completely and returns a new `Success<T>` with a given value. In the above example `result` would be a `Success<int>` with value *6*.
 
 #### Fail
 ```csharp
-var result = Try.To(() => 2 + 3)
-				.Fail(new ArgumentException("I can't do this, Dave."));
+Try<int> result = Try.To(() => 2 + 3)
+				     .Fail(new ArgumentException("I can't do this, Dave."));
 ```
-Ignores the `Try` it is called from completely and returns a new `Failure<T>` with a given Exception. In the above example `result` would be a `Failure<int>` containing an Exception.
+Ignores the `Try` it is called from completely and returns a new `Failure` with a given Exception. In the above example `result` would be a `Failure` containing an Exception.
 
 #### Retry
 ```csharp
-var result = Try.To(() => 2 + 3)
-				.Retry(i => i.ToString(), 2);
+Try<string> result = Try.To(() => 2 + 3)
+				        .Retry(i => i.ToString(), 2);
 ```
 Allows to retry a certain step a given number of times (at least once, if no retry count is given). Works the same as `Retry.To` as documented above.
 
 #### Tap
 ```csharp
-var result = Try.To(() => 2 + 3)
-				.Tap(i => Console.WriteLine(i))
-				.Map(i => i + 1);
+Try<int> result = Try.To(() => 2 + 3)
+        			 .Tap(i => Console.WriteLine(i))
+        			 .Map(i => i + 1);
 ```
 Can be used to take a look at the value of a `Try` without modifying it. In the above example `result` would be a `Success<int>` containing the value *6*. `Tap` would have printed *5* to the console.
 
@@ -343,9 +324,9 @@ __Note:__ If the action in `Tap` throws, the exception is swallowed.
 
 #### Finally
 ```csharp
-var result = Try.To(() => File.ReadAllText("some.file"))
-				.Finally(() => File.Delete("some.file"))
-				.Map(content => content.Replace("meh", "awesome"));
+Try<string> result = Try.To(() => File.ReadAllText("some.file"))
+				        .Finally(() => File.Delete("some.file"))
+				        .Map(content => content.Replace("meh", "awesome"));
 ```
 Can be used to execute side effecting behavior without modifying a `Try`. In the above example `result` would be a `Success<string>` containing the read text. The given `Action` will be executed in _either case_, regardless if the incoming `Try` is a `Success` or a `Failure`.
 
@@ -353,28 +334,26 @@ __Note:__ If the action in `Finally` throws, the exception is swallowed.
 
 #### Using
 ```csharp
-var result = Try.Using(() => new StreamReader(File.OpenRead("some.file")),
-                       reader => reader.ReadToEnd());
+Try<string> result = Try.Using(() => new StreamReader(File.OpenRead("some.file")), reader => reader.ReadToEnd());
                       
 // or
 
-var result = Try.To(() => File.OpenRead(file))
-                .Using(stream => new StreamReader(stream),
-                       reader => reader.ReadToEnd())
+Try<string> result = Try.To(() => File.OpenRead(file))
+                        .Using(stream => new StreamReader(stream),
+                               reader => reader.ReadToEnd())
 ```
 Simplifies working with disposables. The first function creates a disposable, the second one allows to use it.
-In both examples above, `result` would be a `Success<string>` containing the file content as text or a `Failure<string>` if an error would have occurred.
+In both examples above, `result` would be a `Success<string>` containing the file content as text or a `Failure` if an error would have occurred.
 
 #### UsingWith
 ```csharp
-var result = Try.Using(() => new StreamReader(File.OpenRead("some.file")),
-                       reader => Try.To(() => reader.ReadToEnd()));
+Try<string> result = Try.Using(() => new StreamReader(File.OpenRead("some.file")), reader => Try.To(() => reader.ReadToEnd()));
                       
 // or
 
-var result = Try.To(() => File.OpenRead(file))
-                .Using(stream => new StreamReader(stream),
-                       reader => Try.To(() => reader.ReadToEnd()))
+Try<string> result = Try.To(() => File.OpenRead(file))
+                        .Using(stream => new StreamReader(stream),
+                               reader => Try.To(() => reader.ReadToEnd()))
 ```
 Simplifies working with disposables. The first function creates a disposable, the second one allows to use it.
-In both examples above, `result` would be a `Success<string>` containing the file content as text or a `Failure<string>` if an error would have occurred.
+In both examples above, `result` would be a `Success<string>` containing the file content as text or a `Failure` if an error would have occurred.
