@@ -44,7 +44,7 @@ namespace NiceTry {
         }
 
         public static Try<B> FlatMap<A, B>(this Try<A> @try, Func<A, Try<B>> f) {
-            return @try.IsFailure ? Try.Failure(@try.Error) : f(@try.Value);
+            return @try.Match(f, e => Try.Failure(e));
         }
 
         public static Try<C> Zip<A, B, C>(this Try<A> tryA, Try<B> tryB, Func<A, B, C> f) {
@@ -60,27 +60,28 @@ namespace NiceTry {
         }
 
         public static Try<T> Recover<T>(this Try<T> @try, Func<Exception, T> f) {
-            return @try.IsFailure ? Try.To(() => f(@try.Error)) : @try;
+            return @try.Match(Try.Of, e => Try.To(() => f(e)));
         }
 
         public static Try<T> RecoverWith<T>(this Try<T> @try, Func<Exception, Try<T>> f) {
-            return @try.IsFailure ? f(@try.Error) : @try;
+            return @try.Match(Try.Of, f);
         }
 
-        public static Try<B> Transform<A, B>(this Try<A> @try, Func<A, B> whenSuccess,
-                                             Func<Exception, B> whenFailure) {
-            return Try.To(() => @try.IsSuccess ? whenSuccess(@try.Value) : whenFailure(@try.Error));
+        public static Try<B> Transform<A, B>(this Try<A> @try, Func<A, B> onSuccess,
+                                             Func<Exception, B> onFailure) {
+            return @try.Match(v => Try.To(() => onSuccess(v)),
+                              e => Try.To(() => onFailure(e)));
         }
 
-        public static Try<B> TransformWith<A, B>(this Try<A> @try, Func<A, Try<B>> whenSuccess,
-                                                 Func<Exception, Try<B>> whenFailure) {
-            return @try.IsSuccess ? whenSuccess(@try.Value) : whenFailure(@try.Error);
+        public static Try<B> TransformWith<A, B>(this Try<A> @try, Func<A, Try<B>> onSuccess,
+                                                 Func<Exception, Try<B>> onFailure) {
+            return @try.Match(onSuccess, onFailure);
         }
 
         public static Try<T> Filter<T>(this Try<T> @try, Func<T, bool> predicate) {
             return @try.FlatMap(v => predicate(v)
-                ? @try
-                : new Failure<T>(new ArgumentException("The given predicate does not hold for this Try.")));
+                ? Try.Of(v)
+                : Try.Failure(new ArgumentException("The given predicate does not hold for this Try.")));
         }
 
         public static Try<T> Reject<T>(this Try<T> @try, Func<T, bool> predicate) {

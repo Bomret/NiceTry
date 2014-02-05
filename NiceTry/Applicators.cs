@@ -26,11 +26,11 @@ namespace NiceTry {
         }
 
         public static T GetOrElse<T>(this Try<T> @try, T elseValue) {
-            return @try.IsFailure ? elseValue : @try.Value;
+            return @try.Match(value => value, error => elseValue);
         }
 
         public static T GetOrDefault<T>(this Try<T> @try) {
-            return @try.IsSuccess ? @try.Value : default (T);
+            return @try.Match(value => value, error => default(T));
         }
     }
 }
