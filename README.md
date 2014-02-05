@@ -119,8 +119,7 @@ In the example above, `result` would be a `Success<string>` containing the file 
 
 ### UsingWith
 ```csharp
-var result = Try.Using(() => new StreamReader(File.OpenRead("some.file")),
-                       reader => Try.To(() => reader.ReadToEnd()));
+Try<string> result = Try.Using(() => new StreamReader(File.OpenRead("some.file")), reader => Try.To(() => reader.ReadToEnd()));
 ```
 Simplifies working with disposables. The first function creates a disposable, the second one allows to use it.
 In the example above, `result` would be a `Success<string>` containing the file content as text or a `Failure<string>` if an error would have occurred.
