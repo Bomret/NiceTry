@@ -2,13 +2,13 @@ using System;
 using Machine.Specifications;
 
 namespace NiceTry.Tests.Combinators {
-    [Subject(typeof (NiceTry.Combinators), "Using")]
-    class When_I_use_a_disposable_container_to_store_two {
+    [Subject(typeof (NiceTry.Combinators), "UsingWith")]
+    class When_I_use_a_disposable_container_to_store_two_and_return_a_try_containing_it {
         static Try<Container<int>> _result;
 
         Because of = () => _result = Try.Success(2)
-                                        .Using(() => new Container<int>(),
-                                               (container, i) => container.StoreValue(i));
+                                        .UsingWith(() => new Container<int>(),
+                                                   (container, i) => container.TryStoreValue(i));
 
         It should_contain_a_disposed_container_in_the_result =
             () => _result.Value.IsDisposed.ShouldBeTrue();
@@ -26,10 +26,10 @@ namespace NiceTry.Tests.Combinators {
                 IsDisposed = true;
             }
 
-            public Container<T> StoreValue(T i) {
+            public Try<Container<T>> TryStoreValue(T i) {
                 Value = i;
 
-                return this;
+                return Try.Success(this);
             }
         }
     }

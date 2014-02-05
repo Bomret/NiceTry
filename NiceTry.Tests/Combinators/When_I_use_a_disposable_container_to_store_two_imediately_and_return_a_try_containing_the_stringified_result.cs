@@ -2,17 +2,17 @@ using System;
 using Machine.Specifications;
 
 namespace NiceTry.Tests.Combinators {
-    [Subject(typeof (NiceTry.Combinators), "Using")]
-    class When_I_use_a_disposable_container_to_store_two_imediately {
+    [Subject(typeof (NiceTry.Combinators), "UsingWith")]
+    class When_I_use_a_disposable_container_to_store_two_imediately_and_return_a_try_containing_the_stringified_result {
         static Try<string> _result;
         static Container<int> _container;
 
         Because of = () => _result = Try.Success(2)
-                                        .Using(i => new Container<int>(i),
-                                               container => {
-                                                   _container = container;
-                                                   return container.StringifyValue();
-                                               });
+                                        .UsingWith(i => new Container<int>(i),
+                                                   container => {
+                                                       _container = container;
+                                                       return container.TryStringifyValue();
+                                                   });
 
         It should_contain_two_as_string_in_the_result =
             () => _result.Value.ShouldEqual("2");
@@ -37,8 +37,8 @@ namespace NiceTry.Tests.Combinators {
                 IsDisposed = true;
             }
 
-            public string StringifyValue() {
-                return Value.ToString();
+            public Try<string> TryStringifyValue() {
+                return Try.To(() => Value.ToString());
             }
         }
     }
