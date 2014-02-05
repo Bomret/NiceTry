@@ -75,11 +75,14 @@
     <Compile Include="Combinators\When_I_try_to_add_two_and_three_and_add_one_up_to_two_times_which_succeeds_the_first_time.cs" />
     <Compile Include="Combinators\When_I_try_to_add_two_and_three_and_add_one_up_to_two_times_which_succeeds_the_second_time.cs" />
     <Compile Include="Combinators\When_I_try_to_add_two_and_three_and_add_one_up_to_two_times_which_would_succeed_the_fourth_time.cs" />
+    <Compile Include="Combinators\When_I_try_to_add_two_and_three_and_then_add_one_with_map.cs" />
     <Compile Include="Combinators\When_I_try_to_divide_by_zero_finish_with_minus_one_instead.cs" />
     <Compile Include="Combinators\When_I_try_to_execute_a_finally_action_on_a_failure.cs" />
     <Compile Include="Combinators\When_I_try_to_execute_a_finally_action_on_a_success.cs" />
     <Compile Include="Combinators\When_I_use_a_disposable_container_to_store_two.cs" />
+    <Compile Include="Combinators\When_I_use_a_disposable_container_to_store_two_and_return_a_try_containing_it.cs" />
     <Compile Include="Combinators\When_I_use_a_disposable_container_to_store_two_imediately.cs" />
+    <Compile Include="Combinators\When_I_use_a_disposable_container_to_store_two_imediately_and_return_a_try_containing_the_stringified_result.cs" />
     <Compile Include="Combinators\When_I_zip_two_successes_by_addition.cs" />
     <Compile Include="Combinators\When_I_try_to_add_three_to_a_success_that_contains_two.cs" />
     <Compile Include="Combinators\When_I_try_to_add_two_and_three_and_convert_the_result_to_a_string.cs" />
@@ -116,6 +119,9 @@
     <Compile Include="When_I_compare_a_success_with_a_failure.cs" />
     <Compile Include="When_I_compare_a_success_with_a_success_that_contain_different_values.cs" />
     <Compile Include="When_I_compare_a_success_with_a_success_that_contain_the_same_value.cs" />
+    <Compile Include="When_I_create_a_failure_containing_an_exception.cs" />
+    <Compile Include="When_I_create_a_success_containing_three.cs" />
+    <Compile Include="When_I_create_a_try_of_three.cs" />
     <Compile Include="When_I_retry_to_add_two_and_three_up_to_two_times_which_succeeds_the_first_time.cs" />
     <Compile Include="When_I_retry_to_add_two_and_three_up_to_two_times_which_succeeds_the_second_time.cs" />
     <Compile Include="When_I_retry_to_divide_by_zero_up_to_two_times.cs" />
@@ -125,6 +131,7 @@
     <Compile Include="When_I_try_to_divide_by_zero.cs" />
     <Compile Include="When_I_try_to_read_a_file_using_a_StreamReader.cs" />
     <Compile Include="When_I_use_a_disposable_container_to_store_two.cs" />
+    <Compile Include="When_I_use_a_disposable_container_to_store_two_an_try_to_stringify_the_value.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NiceTry\NiceTry.csproj">

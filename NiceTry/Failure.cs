@@ -11,7 +11,7 @@ namespace NiceTry {
         public Exception Error { get; private set; }
 
         public override string ToString() {
-            return string.Format("Failure({0})", Error);
+            return string.Format("Failure({0})", Error.Message);
         }
 
         public override int GetHashCode() {
@@ -44,7 +44,7 @@ namespace NiceTry {
         }
 
         public override string ToString() {
-            return string.Format("Failure({0})", Error);
+            return string.Format("Failure({0})", Error.Message);
         }
 
         public override int GetHashCode() {

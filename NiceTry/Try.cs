@@ -15,8 +15,8 @@ namespace NiceTry {
             if (other.IsSuccess && IsSuccess)
                 return EqualityComparer<T>.Default.Equals(Value, other.Value);
 
-            if(other.IsFailure && IsFailure)
-                return EqualityComparer<Exception>.Default.Equals(Error,other.Error);
+            if (other.IsFailure && IsFailure)
+                return EqualityComparer<Exception>.Default.Equals(Error, other.Error);
 
             return false;
         }
@@ -51,6 +51,10 @@ namespace NiceTry {
 
         public static Try<T> Success<T>(T value) {
             return new Success<T>(value);
+        }
+
+        public static Try<T> Of<T>(T value) {
+            return Success(value);
         }
 
         public static Try<T> Using<T, TDisposable>(Func<TDisposable> createDisposable,
