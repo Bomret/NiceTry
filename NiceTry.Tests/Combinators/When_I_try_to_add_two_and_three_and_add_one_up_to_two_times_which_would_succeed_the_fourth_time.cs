@@ -10,7 +10,6 @@ namespace NiceTry.Tests.Combinators {
 
         Establish ctx = () => _addOne = i => {
             _count += 1;
-
             if (_count < 4) throw new Exception("Expected test exception");
 
             return i + 1;
