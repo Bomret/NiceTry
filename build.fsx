@@ -5,14 +5,20 @@ open Fake.AssemblyInfoFile
 RestorePackages()
 
 let buildDir = "./build"
+let net45Dir = buildDir + "/net45"
+let net40Dir = buildDir + "/net40"
+let net35Dir = buildDir + "/net35"
+
 let testDir = "./test"
+let packagingDir = "./package"
+let publishDir = "./publish"
 let testAssemblies = !! (testDir + "/*.Tests.dll")
 let version = 
     match buildServer with
         | TeamCity -> buildVersion
         | _ -> "2.1.0"
 
-Target "Clean" (fun _ -> CleanDirs [buildDir; testDir])
+Target "Clean" (fun _ -> CleanDirs [buildDir; testDir; packagingDir])
 
 Target "BuildLib" (fun _ -> 
     CreateCSharpAssemblyInfo "./NiceTry/Properties/AssemblyInfo.cs"
@@ -24,7 +30,15 @@ Target "BuildLib" (fun _ ->
          Attribute.FileVersion version]
 
     !! "NiceTry/**/*.csproj"
-    |> MSBuildRelease buildDir "Build"
+    |> MSBuild net45Dir "Build" ["Configuration","Net45"]
+    |> Log "Build output: "
+
+    !! "NiceTry/**/*.csproj"
+    |> MSBuild net40Dir "Build" ["Configuration","Net40"]
+    |> Log "Build output: "
+
+    !! "NiceTry/**/*.csproj"
+    |> MSBuild net35Dir "Build" ["Configuration","Net35"]
     |> Log "Build output: "
 )
 
@@ -39,9 +53,29 @@ Target "Test" (fun _ ->
         |> MSpec (fun p -> {p with HtmlOutputDir = testDir})
 )
 
+Target "CreatePackage" (fun _ ->
+  CreateDir "package/lib/net45"
+  CreateDir "package/lib/net40"
+  CreateDir "package/lib/net35"
+
+  CopyFile "package/lib/net45/NiceTry.dll" "build/net45/NiceTry.dll"
+  CopyFile "package/lib/net40/NiceTry.dll" "build/net40/NiceTry.dll"
+  CopyFile "package/lib/net35/NiceTry.dll" "build/net35/NiceTry.dll"
+
+  NuGet (fun p ->
+    {p with
+        WorkingDir = packagingDir
+        OutputPath = publishDir
+        Version = version
+        Publish = false
+            })
+            "NiceTry.nuspec"
+)
+
 "Clean"
     ==> "BuildLib"
     ==> "BuildTests"
     ==> "Test"
+    ==> "CreatePackage"
 
-RunTargetOrDefault "Test"
+RunTargetOrDefault "CreatePackage"
