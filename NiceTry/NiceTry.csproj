@@ -47,13 +47,14 @@
     <Compile Include="Combinators.cs" />
     <Compile Include="Applicators.cs" />
     <Compile Include="Failure.cs" />
-    <Compile Include="Properties\AssemblyVersionInformation.cs" />
     <Compile Include="Retry.cs" />
     <Compile Include="Success.cs" />
     <Compile Include="ThirdParty\Unit.cs" />
     <Compile Include="Try.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
