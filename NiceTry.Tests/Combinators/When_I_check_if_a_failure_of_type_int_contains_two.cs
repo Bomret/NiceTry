@@ -11,6 +11,7 @@ namespace NiceTry.Tests.Combinators {
 
         Because of = () => _result = _failure.Filter(i => i == 2);
 
-        It should_return_a_failure = () => _result.IsFailure.ShouldBeTrue();
+        It should_return_a_failure = () => 
+            _result.IsFailure.ShouldBeTrue();
     }
 }
