@@ -190,3 +190,4 @@ App_Data/*.ldf
 
 # Microsoft Fakes
 FakesAssemblies/
+/package

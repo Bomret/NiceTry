@@ -11,7 +11,6 @@ let net35Dir = buildDir + "/net35"
 
 let testDir = "./test"
 let packagingDir = "./package"
-let publishDir = "./publish"
 let testAssemblies = !! (testDir + "/*.Tests.dll")
 let version = 
     match buildServer with
@@ -65,7 +64,7 @@ Target "CreatePackage" (fun _ ->
   NuGet (fun p ->
     {p with
         WorkingDir = packagingDir
-        OutputPath = publishDir
+        OutputPath = packagingDir
         Version = version
         Publish = false
             })
