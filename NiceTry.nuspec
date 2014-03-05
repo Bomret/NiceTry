@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
         <id>NiceTry</id>
-        <version>1.1.0</version>
+        <version>@build.number@</version>
         <title>NiceTry</title>
         <authors>Stefan Reichel</authors>
         <licenseUrl>http://www.apache.org/licenses/LICENSE-2.0.html</licenseUrl>
@@ -10,5 +10,6 @@
         <requireLicenseAcceptance>true</requireLicenseAcceptance>
         <description>A functional wrapper type around try/catch that allows readable and bloat free error handling. Provides a growing number of combinators for functional composition.</description>
         <tags>try, catch, functional, error handling, exception</tags>
+        @references@
     </metadata>    
 </package>
