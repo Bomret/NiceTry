@@ -10,7 +10,7 @@ let testAssemblies = !! (testDir + "/*.Tests.dll")
 let version = 
     match buildServer with
         | TeamCity -> buildVersion
-        | _ -> "2.0.0"
+        | _ -> "2.1.0"
 
 Target "Clean" (fun _ -> CleanDirs [buildDir; testDir])
 
