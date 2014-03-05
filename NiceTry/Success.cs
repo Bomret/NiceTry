@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace NiceTry {
-    [DebuggerDisplay("Success(Value)")]
+    [DebuggerDisplay("Success({Value})")]
     sealed class Success<T> : Try<T> {
         readonly T _value;
 

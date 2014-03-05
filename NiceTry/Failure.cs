@@ -2,7 +2,7 @@
 using System.Diagnostics;
 
 namespace NiceTry {
-    [DebuggerDisplay("Failure(Error)")]
+    [DebuggerDisplay("Failure({Error.Message})")]
     public sealed class Failure {
         public Failure(Exception error) {
             Error = error;
@@ -19,7 +19,7 @@ namespace NiceTry {
         }
     }
 
-    [DebuggerDisplay("Failure(Error)")]
+    [DebuggerDisplay("Failure({Error.Message})")]
     sealed class Failure<T> : Try<T> {
         readonly Exception _error;
 
