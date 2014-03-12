@@ -84,4 +84,4 @@ Target "CreatePackage" (fun _ ->
     ==> "Test"
     ==> "CreatePackage"
 
-RunTargetOrDefault "CreatePackage"
+RunTargetOrDefault "Test"
