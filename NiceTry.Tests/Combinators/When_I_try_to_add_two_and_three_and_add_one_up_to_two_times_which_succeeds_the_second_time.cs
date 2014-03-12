@@ -1,4 +1,5 @@
 using System;
+using FluentAssertions;
 using Machine.Specifications;
 
 namespace NiceTry.Tests.Combinators {
@@ -20,9 +21,9 @@ namespace NiceTry.Tests.Combinators {
                                         .Retry(_addOne, 2);
 
         It should_contain_six_in_the_success =
-            () => _result.Value.ShouldEqual(6);
+            () => _result.Value.Should().Be(6);
 
         It should_return_a_success =
-            () => _result.IsSuccess.ShouldBeTrue();
+            () => _result.IsSuccess.Should().BeTrue();
     }
 }

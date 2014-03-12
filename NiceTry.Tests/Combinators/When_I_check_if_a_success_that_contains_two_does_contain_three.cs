@@ -1,4 +1,5 @@
 using System;
+using FluentAssertions;
 using Machine.Specifications;
 
 namespace NiceTry.Tests.Combinators {
@@ -12,8 +13,8 @@ namespace NiceTry.Tests.Combinators {
         Because of = () => _result = _twoSuccess.Filter(i => i == 3);
 
         It should_contain_an_ArgumentException_in_the_failure =
-            () => _result.Error.ShouldBeOfType<ArgumentException>();
+            () => _result.Error.Should().BeOfType<ArgumentException>();
 
-        It should_return_a_failure_success = () => _result.IsFailure.ShouldBeTrue();
+        It should_return_a_failure_success = () => _result.IsFailure.Should().BeTrue();
     }
 }

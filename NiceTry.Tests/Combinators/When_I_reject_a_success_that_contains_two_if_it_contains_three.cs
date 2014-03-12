@@ -1,3 +1,4 @@
+using FluentAssertions;
 using Machine.Specifications;
 
 namespace NiceTry.Tests.Combinators {
@@ -10,8 +11,7 @@ namespace NiceTry.Tests.Combinators {
 
         Because of = () => _result = _success.Reject(i => i == 2);
 
-        It should_return_a_success = () => _result.IsSuccess.ShouldBeTrue();
-
-        It should_contain_three_in_the_success = () => _result.Value.ShouldEqual(3);
+        It should_contain_three_in_the_success = () => _result.Value.Should().Be(3);
+        It should_return_a_success = () => _result.IsSuccess.Should().BeTrue();
     }
 }

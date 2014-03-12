@@ -6,10 +6,10 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDescriptionAttribute("A functional wrapper type for the classic try/catch statement")]
 [assembly: GuidAttribute("d9712c70-9a11-43b9-b9b4-10b4036ea8f2")]
 [assembly: AssemblyProductAttribute("NiceTry")]
-[assembly: AssemblyVersionAttribute("2.1.0")]
-[assembly: AssemblyFileVersionAttribute("2.1.0")]
+[assembly: AssemblyVersionAttribute("2.1.1")]
+[assembly: AssemblyFileVersionAttribute("2.1.1")]
 namespace System {
     internal static class AssemblyVersionInformation {
-        internal const string Version = "2.1.0";
+        internal const string Version = "2.1.1";
     }
 }

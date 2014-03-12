@@ -1,3 +1,4 @@
+using FluentAssertions;
 using Machine.Specifications;
 
 namespace NiceTry.Tests.Combinators {
@@ -9,8 +10,8 @@ namespace NiceTry.Tests.Combinators {
                                         .Map(zero => 5 / zero)
                                         .OrElseWith(Try.Success(1 + 3));
 
-        It should_contain_four_in_the_success = () => _result.Value.ShouldEqual(4);
+        It should_contain_four_in_the_success = () => _result.Value.Should().Be(4);
 
-        It should_return_a_success = () => _result.IsSuccess.ShouldBeTrue();
+        It should_return_a_success = () => _result.IsSuccess.Should().BeTrue();
     }
 }

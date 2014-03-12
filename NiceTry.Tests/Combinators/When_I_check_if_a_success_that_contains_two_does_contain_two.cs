@@ -1,3 +1,4 @@
+using FluentAssertions;
 using Machine.Specifications;
 
 namespace NiceTry.Tests.Combinators {
@@ -10,6 +11,7 @@ namespace NiceTry.Tests.Combinators {
 
         Because of = () => _result = _twoSuccess.Filter(i => i == 2);
 
-        It should_return_the_original_success = () => _result.ShouldEqual(_twoSuccess);
+        It should_contain_two_in_the_success = () => _result.Value.Should().Be(2);
+        It should_return_a_success = () => _result.IsSuccess.Should().BeTrue();
     }
 }

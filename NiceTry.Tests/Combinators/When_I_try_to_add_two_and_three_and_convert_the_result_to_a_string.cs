@@ -1,3 +1,4 @@
+using FluentAssertions;
 using Machine.Specifications;
 
 namespace NiceTry.Tests.Combinators {
@@ -8,6 +9,6 @@ namespace NiceTry.Tests.Combinators {
         Because of = () => _result = Try.To(() => 2 + 3)
                                         .Map(i => i.ToString());
 
-        It should_return_five_as_a_string = () => _result.Value.ShouldEqual("5");
+        It should_return_five_as_a_string = () => _result.Value.Should().Be("5");
     }
 }

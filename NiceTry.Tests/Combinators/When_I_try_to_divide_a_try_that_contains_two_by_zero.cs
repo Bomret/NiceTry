@@ -1,4 +1,5 @@
 using System;
+using FluentAssertions;
 using Machine.Specifications;
 
 namespace NiceTry.Tests.Combinators {
@@ -18,6 +19,6 @@ namespace NiceTry.Tests.Combinators {
 
         Because of = () => _result = twoSuccess.FlatMap(_tryToDivideByZero);
 
-        It should_return_a_failure = () => _result.IsFailure.ShouldBeTrue();
+        It should_return_a_failure = () => _result.IsFailure.Should().BeTrue();
     }
 }

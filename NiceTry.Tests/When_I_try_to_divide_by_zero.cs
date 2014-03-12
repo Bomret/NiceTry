@@ -1,4 +1,5 @@
 ﻿using System;
+using FluentAssertions;
 using Machine.Specifications;
 
 namespace NiceTry.Tests {
@@ -21,13 +22,13 @@ namespace NiceTry.Tests {
         Because of = () => _result = Try.To(_divideByZero);
 
         It should_contain_a_DivideByZeroException_in_the_failure =
-            () => _result.Error.ShouldBeOfType<DivideByZeroException>();
+            () => _result.Error.Should().BeOfType<DivideByZeroException>();
 
-        It should_not_return_a_success = () => _result.IsSuccess.ShouldBeFalse();
+        It should_not_return_a_success = () => _result.IsSuccess.Should().BeFalse();
 
-        It should_return_a_failure = () => _result.IsFailure.ShouldBeTrue();
+        It should_return_a_failure = () => _result.IsFailure.Should().BeTrue();
 
         It should_throw_an_NotSupportedException_when_accessing_the_value_property =
-            () => Catch.Exception(() => _value = _result.Value).ShouldBeOfType<InvalidOperationException>();
+            () => Catch.Exception(() => _value = _result.Value).Should().BeOfType<InvalidOperationException>();
     }
 }

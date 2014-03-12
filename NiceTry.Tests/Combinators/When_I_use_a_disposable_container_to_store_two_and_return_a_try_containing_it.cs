@@ -1,4 +1,5 @@
 using System;
+using FluentAssertions;
 using Machine.Specifications;
 
 namespace NiceTry.Tests.Combinators {
@@ -11,12 +12,12 @@ namespace NiceTry.Tests.Combinators {
                                                    (container, i) => container.TryStoreValue(i));
 
         It should_contain_a_disposed_container_in_the_result =
-            () => _result.Value.IsDisposed.ShouldBeTrue();
+            () => _result.Value.IsDisposed.Should().BeTrue();
 
         It should_contan_two_in_the_resulting_container =
-            () => _result.Value.Value.ShouldEqual(2);
+            () => _result.Value.Value.Should().Be(2);
 
-        It should_return_a_success = () => _result.IsSuccess.ShouldBeTrue();
+        It should_return_a_success = () => _result.IsSuccess.Should().BeTrue();
 
         class Container<T> : IDisposable {
             public bool IsDisposed { get; private set; }

@@ -1,4 +1,5 @@
 using System;
+using FluentAssertions;
 using Machine.Specifications;
 
 namespace NiceTry.Tests.Combinators {
@@ -18,8 +19,8 @@ namespace NiceTry.Tests.Combinators {
         Because of = () => _result = Try.To(_divideByZero)
                                         .RecoverWith(e => Try.Success(0));
 
-        It should_contain_zero_in_the_success = () => _result.Value.ShouldEqual(0);
+        It should_contain_zero_in_the_success = () => _result.Value.Should().Be(0);
 
-        It should_return_a_success = () => _result.IsSuccess.ShouldBeTrue();
+        It should_return_a_success = () => _result.IsSuccess.Should().BeTrue();
     }
 }

@@ -1,4 +1,5 @@
 using System.IO;
+using FluentAssertions;
 using Machine.Specifications;
 
 namespace NiceTry.Tests.Combinators {
@@ -20,9 +21,9 @@ namespace NiceTry.Tests.Combinators {
                                                reader => reader.ReadToEnd());
 
         It should_contain_the_content_of_the_file_in_the_success =
-            () => _result.Value.ShouldEqual(_content);
+            () => _result.Value.Should().Be(_content);
 
-        It should_return_a_success = () => _result.IsSuccess.ShouldBeTrue();
+        It should_return_a_success = () => _result.IsSuccess.Should().BeTrue();
 
         Cleanup stuff = () => File.Delete(_file);
     }
