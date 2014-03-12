@@ -1,4 +1,5 @@
-﻿using Machine.Specifications;
+﻿using FluentAssertions;
+using Machine.Specifications;
 
 namespace NiceTry.Tests.Applicators {
     [Subject(typeof (NiceTry.Applicators), "OnFailure")]
@@ -8,6 +9,6 @@ namespace NiceTry.Tests.Applicators {
         Because of = () => Try.To(() => 2 + 3)
                               .OnFailure(error => _failureCallbackExecuted = true);
 
-        It should_not_execute_the_failure_callback = () => _failureCallbackExecuted.ShouldBeFalse();
+        It should_not_execute_the_failure_callback = () => _failureCallbackExecuted.Should().BeFalse();
     }
 }

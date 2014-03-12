@@ -1,4 +1,5 @@
-﻿using Machine.Specifications;
+﻿using FluentAssertions;
+using Machine.Specifications;
 
 namespace NiceTry.Tests {
     [Subject(typeof (Try), "Equals")]
@@ -15,6 +16,6 @@ namespace NiceTry.Tests {
 
         Because of = () => _result = _success.Equals(_otherSuccess);
 
-        It should_return_true = () => _result.ShouldBeTrue();
+        It should_return_true = () => _result.Should().BeTrue();
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using FluentAssertions;
 using Machine.Specifications;
 
 namespace NiceTry.Tests.Applicators {
@@ -20,8 +21,8 @@ namespace NiceTry.Tests.Applicators {
                               .Match(i => _successCallbackExecuted = true,
                                      error => _error = error);
 
-        It should_execute_the_failure_callback = () => _error.ShouldNotBeNull();
+        It should_execute_the_failure_callback = () => _error.Should().NotBeNull();
 
-        It should_not_execute_the_success_callback = () => _successCallbackExecuted.ShouldBeFalse();
+        It should_not_execute_the_success_callback = () => _successCallbackExecuted.Should().BeFalse();
     }
 }

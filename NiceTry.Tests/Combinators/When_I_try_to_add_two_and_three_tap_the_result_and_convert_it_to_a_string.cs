@@ -1,3 +1,4 @@
+using FluentAssertions;
 using Machine.Specifications;
 
 namespace NiceTry.Tests.Combinators {
@@ -11,9 +12,9 @@ namespace NiceTry.Tests.Combinators {
                                         .Map(i => i.ToString());
 
         It should_return_five_as_a_string =
-            () => _result.Value.ShouldEqual("5");
+            () => _result.Value.Should().Be("5");
 
         It should_set_the_result_of_the_inspection_to_five_as_int =
-            () => _five.ShouldEqual(5);
+            () => _five.Should().Be(5);
     }
 }

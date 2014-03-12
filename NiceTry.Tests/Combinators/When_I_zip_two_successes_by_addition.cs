@@ -1,4 +1,5 @@
-﻿using Machine.Specifications;
+﻿using FluentAssertions;
+using Machine.Specifications;
 
 namespace NiceTry.Tests.Combinators {
     [Subject(typeof (NiceTry.Combinators), "Zip")]
@@ -14,8 +15,8 @@ namespace NiceTry.Tests.Combinators {
 
         Because of = () => _five = _two.Zip(_three, (a, b) => a + b);
 
-        It should_contain_five_in_the_success = () => _five.Value.ShouldEqual(5);
+        It should_contain_five_in_the_success = () => _five.Value.Should().Be(5);
 
-        It should_return_a_success = () => _five.IsSuccess.ShouldBeTrue();
+        It should_return_a_success = () => _five.IsSuccess.Should().BeTrue();
     }
 }

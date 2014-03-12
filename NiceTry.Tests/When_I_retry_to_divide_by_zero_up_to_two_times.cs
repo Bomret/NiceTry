@@ -1,4 +1,5 @@
 using System;
+using FluentAssertions;
 using Machine.Specifications;
 
 namespace NiceTry.Tests {
@@ -17,6 +18,6 @@ namespace NiceTry.Tests {
 
         Because of = () => _result = Retry.To(_divideByZero);
 
-        It should_return_a_failure = () => _result.IsFailure.ShouldBeTrue();
+        It should_return_a_failure = () => _result.IsFailure.Should().BeTrue();
     }
 }

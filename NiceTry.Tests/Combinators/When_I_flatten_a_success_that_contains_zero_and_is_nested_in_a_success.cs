@@ -1,4 +1,5 @@
-﻿using Machine.Specifications;
+﻿using FluentAssertions;
+using Machine.Specifications;
 
 namespace NiceTry.Tests.Combinators {
     [Subject(typeof (NiceTry.Combinators), "Flatten")]
@@ -14,6 +15,6 @@ namespace NiceTry.Tests.Combinators {
 
         Because of = () => { _result = _nestedSuccess.Flatten(); };
 
-        It should_return_the_inner_success = () => _result.ShouldEqual(_expectedResult);
+        It should_return_the_inner_success = () => _result.Should().Be(_expectedResult);
     }
 }

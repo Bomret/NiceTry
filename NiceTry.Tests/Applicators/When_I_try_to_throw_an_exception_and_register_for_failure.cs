@@ -1,4 +1,5 @@
 ﻿using System;
+using FluentAssertions;
 using Machine.Specifications;
 
 namespace NiceTry.Tests.Applicators {
@@ -9,6 +10,6 @@ namespace NiceTry.Tests.Applicators {
         Because of = () => Try.To(() => { throw new Exception("Test exception"); })
                               .OnFailure(error => _error = error);
 
-        It should_return_the_expected_exception = () => _error.Message.ShouldEqual("Test exception");
+        It should_return_the_expected_exception = () => _error.Message.Should().Be("Test exception");
     }
 }

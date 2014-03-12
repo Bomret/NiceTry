@@ -1,3 +1,4 @@
+using FluentAssertions;
 using Machine.Specifications;
 
 namespace NiceTry.Tests.Combinators {
@@ -8,8 +9,8 @@ namespace NiceTry.Tests.Combinators {
         Because of = () => _result = Try.To(() => 2 + 3)
                                         .ThenWith(t => t.Map(i => i + 1));
 
-        It should_contain_six_in_the_success = () => _result.Value.ShouldEqual(6);
+        It should_contain_six_in_the_success = () => _result.Value.Should().Be(6);
 
-        It should_return_a_success = () => _result.IsSuccess.ShouldBeTrue();
+        It should_return_a_success = () => _result.IsSuccess.Should().BeTrue();
     }
 }

@@ -1,4 +1,5 @@
 using System;
+using FluentAssertions;
 using Machine.Specifications;
 
 namespace NiceTry.Tests.Applicators {
@@ -16,6 +17,6 @@ namespace NiceTry.Tests.Applicators {
         Because of = () => _zero = Try.To(_divideByZero)
                                       .GetOrDefault();
 
-        It should_return_five = () => _zero.ShouldEqual(default(int));
+        It should_return_five = () => _zero.Should().Be(default(int));
     }
 }

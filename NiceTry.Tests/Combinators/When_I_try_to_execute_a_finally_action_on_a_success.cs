@@ -1,3 +1,4 @@
+using FluentAssertions;
 using Machine.Specifications;
 
 namespace NiceTry.Tests.Combinators {
@@ -11,8 +12,8 @@ namespace NiceTry.Tests.Combinators {
 
         Because of = () => _result = _success.Finally(() => _finallyExecuted = true);
 
-        It should_have_executed_the_finally_action = () => _finallyExecuted.ShouldBeTrue();
+        It should_have_executed_the_finally_action = () => _finallyExecuted.Should().BeTrue();
 
-        It should_return_the_original_success = () => _result.ShouldEqual(_success);
+        It should_return_the_original_success = () => _result.Should().Be(_success);
     }
 }

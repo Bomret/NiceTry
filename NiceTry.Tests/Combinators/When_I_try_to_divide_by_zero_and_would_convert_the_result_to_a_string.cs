@@ -1,4 +1,5 @@
 using System;
+using FluentAssertions;
 using Machine.Specifications;
 
 namespace NiceTry.Tests.Combinators {
@@ -19,8 +20,8 @@ namespace NiceTry.Tests.Combinators {
                                         .Map(i => i.ToString());
 
         It should_contain_a_DivideByZeroException_in_the_failure =
-            () => _result.Error.ShouldBeOfType<DivideByZeroException>();
+            () => _result.Error.Should().BeOfType<DivideByZeroException>();
 
-        It should_return_a_failure = () => _result.IsFailure.ShouldBeTrue();
+        It should_return_a_failure = () => _result.IsFailure.Should().BeTrue();
     }
 }

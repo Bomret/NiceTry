@@ -1,3 +1,4 @@
+using FluentAssertions;
 using Machine.Specifications;
 
 namespace NiceTry.Tests.Applicators {
@@ -8,6 +9,6 @@ namespace NiceTry.Tests.Applicators {
         Because of = () => _five = Try.To(() => 2 + 3)
                                       .GetOrDefault();
 
-        It should_return_five = () => _five.ShouldEqual(5);
+        It should_return_five = () => _five.Should().Be(5);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using FluentAssertions;
 using Machine.Specifications;
 
 namespace NiceTry.Tests {
@@ -15,6 +16,6 @@ namespace NiceTry.Tests {
 
         Because of = () => _result = _success.Equals(_failure);
 
-        It should_return_false = () => _result.ShouldBeFalse();
+        It should_return_false = () => _result.Should().BeFalse();
     }
 }

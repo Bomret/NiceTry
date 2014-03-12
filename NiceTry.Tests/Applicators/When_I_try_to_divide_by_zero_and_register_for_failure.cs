@@ -1,4 +1,5 @@
 ﻿using System;
+using FluentAssertions;
 using Machine.Specifications;
 
 namespace NiceTry.Tests.Applicators {
@@ -18,6 +19,6 @@ namespace NiceTry.Tests.Applicators {
         Because of = () => Try.To(_divideByZero)
                               .OnFailure(error => _error = error);
 
-        It should_return_a_DivideByZeroException = () => _error.ShouldBeOfType<DivideByZeroException>();
+        It should_return_a_DivideByZeroException = () => _error.Should().BeOfType<DivideByZeroException>();
     }
 }

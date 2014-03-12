@@ -1,4 +1,5 @@
 ﻿using System;
+using FluentAssertions;
 using Machine.Specifications;
 
 namespace NiceTry.Tests.Applicators {
@@ -18,6 +19,6 @@ namespace NiceTry.Tests.Applicators {
         Because of = () => Try.To(_divideByZero)
                               .OnSuccess(result => _successCallbackExecuted = true);
 
-        It should_not_execute_the_success_callback = () => _successCallbackExecuted.ShouldBeFalse();
+        It should_not_execute_the_success_callback = () => _successCallbackExecuted.Should().BeFalse();
     }
 }

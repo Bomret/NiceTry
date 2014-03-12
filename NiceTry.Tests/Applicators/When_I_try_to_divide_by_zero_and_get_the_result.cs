@@ -1,4 +1,5 @@
 ﻿using System;
+using FluentAssertions;
 using Machine.Specifications;
 
 namespace NiceTry.Tests.Applicators {
@@ -20,6 +21,6 @@ namespace NiceTry.Tests.Applicators {
                                                              .Get());
 
         It should_throw_the_DivideByZeroException_contained_in_the_try =
-            () => _error.ShouldBeOfType<DivideByZeroException>();
+            () => _error.Should().BeOfType<DivideByZeroException>();
     }
 }

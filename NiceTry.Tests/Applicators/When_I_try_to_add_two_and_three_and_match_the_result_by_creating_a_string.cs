@@ -1,3 +1,4 @@
+using FluentAssertions;
 using Machine.Specifications;
 
 namespace NiceTry.Tests.Applicators {
@@ -9,6 +10,6 @@ namespace NiceTry.Tests.Applicators {
                                         .Match(i => i.ToString(),
                                                e => "0");
 
-        It should_return_five_as_string = () => _result.ShouldEqual("5");
+        It should_return_five_as_string = () => _result.Should().Be("5");
     }
 }

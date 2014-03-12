@@ -1,4 +1,5 @@
 using System;
+using FluentAssertions;
 using Machine.Specifications;
 
 namespace NiceTry.Tests {
@@ -9,12 +10,12 @@ namespace NiceTry.Tests {
 
         Because of = () => _result = Try.Success(5);
 
-        It should_contain_five_in_the_success = () => _result.Value.ShouldEqual(5);
+        It should_contain_five_in_the_success = () => _result.Value.Should().Be(5);
 
-        It should_not_contain_an_exception = () => Catch.Exception(() => _error = _result.Error).ShouldNotBeNull();
+        It should_not_contain_an_exception = () => Catch.Exception(() => _error = _result.Error).Should().NotBeNull();
 
-        It should_not_return_a_failure = () => _result.IsFailure.ShouldBeFalse();
+        It should_not_return_a_failure = () => _result.IsFailure.Should().BeFalse();
 
-        It should_return_a_success = () => _result.IsSuccess.ShouldBeTrue();
+        It should_return_a_success = () => _result.IsSuccess.Should().BeTrue();
     }
 }

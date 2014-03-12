@@ -5,6 +5,7 @@ open Fake.AssemblyInfoFile
 RestorePackages()
 
 let buildDir = "./build"
+let net451Dir = buildDir + "/net451"
 let net45Dir = buildDir + "/net45"
 let net40Dir = buildDir + "/net40"
 let net35Dir = buildDir + "/net35"
@@ -15,7 +16,7 @@ let testAssemblies = !! (testDir + "/*.Tests.dll")
 let version = 
     match buildServer with
         | TeamCity -> buildVersion
-        | _ -> "2.1.0"
+        | _ -> "2.1.1"
 
 Target "Clean" (fun _ -> CleanDirs [buildDir; testDir; packagingDir])
 
@@ -27,6 +28,10 @@ Target "BuildLib" (fun _ ->
          Attribute.Product "NiceTry"
          Attribute.Version version
          Attribute.FileVersion version]
+
+    !! "NiceTry/**/*.csproj"
+    |> MSBuild net451Dir "Build" ["Configuration","Net451"]
+    |> Log "Build output: "
 
     !! "NiceTry/**/*.csproj"
     |> MSBuild net45Dir "Build" ["Configuration","Net45"]
@@ -53,10 +58,12 @@ Target "Test" (fun _ ->
 )
 
 Target "CreatePackage" (fun _ ->
+  CreateDir "package/lib/net451"
   CreateDir "package/lib/net45"
   CreateDir "package/lib/net40"
   CreateDir "package/lib/net35"
 
+  CopyFile "package/lib/net451/NiceTry.dll" "build/net451/NiceTry.dll"
   CopyFile "package/lib/net45/NiceTry.dll" "build/net45/NiceTry.dll"
   CopyFile "package/lib/net40/NiceTry.dll" "build/net40/NiceTry.dll"
   CopyFile "package/lib/net35/NiceTry.dll" "build/net35/NiceTry.dll"

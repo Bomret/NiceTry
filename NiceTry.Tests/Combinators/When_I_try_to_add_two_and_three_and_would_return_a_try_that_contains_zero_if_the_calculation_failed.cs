@@ -1,3 +1,4 @@
+using FluentAssertions;
 using Machine.Specifications;
 
 namespace NiceTry.Tests.Combinators {
@@ -8,8 +9,8 @@ namespace NiceTry.Tests.Combinators {
         Because of = () => _result = Try.To(() => 2 + 3)
                                         .OrElse(0);
 
-        It should_contain_five_in_the_success = () => _result.Value.ShouldEqual(5);
+        It should_contain_five_in_the_success = () => _result.Value.Should().Be(5);
 
-        It should_return_a_success = () => _result.IsSuccess.ShouldBeTrue();
+        It should_return_a_success = () => _result.IsSuccess.Should().BeTrue();
     }
 }

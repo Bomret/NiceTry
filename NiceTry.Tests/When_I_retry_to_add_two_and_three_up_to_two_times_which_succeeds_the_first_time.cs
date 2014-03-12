@@ -1,3 +1,4 @@
+using FluentAssertions;
 using Machine.Specifications;
 
 namespace NiceTry.Tests {
@@ -8,9 +9,9 @@ namespace NiceTry.Tests {
         Because of = () => _result = Retry.To(() => 2 + 3);
 
         It should_contain_five_in_the_success =
-            () => _result.Value.ShouldEqual(5);
+            () => _result.Value.Should().Be(5);
 
         It should_return_a_success =
-            () => _result.IsSuccess.ShouldBeTrue();
+            () => _result.IsSuccess.Should().BeTrue();
     }
 }

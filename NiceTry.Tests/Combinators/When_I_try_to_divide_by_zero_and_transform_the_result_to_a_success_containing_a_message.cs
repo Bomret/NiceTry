@@ -1,4 +1,5 @@
 using System;
+using FluentAssertions;
 using Machine.Specifications;
 
 namespace NiceTry.Tests.Combinators {
@@ -20,9 +21,9 @@ namespace NiceTry.Tests.Combinators {
                                                    e => "Test exception");
 
         It should_contain_the_expected_message_in_the_success =
-            () => _result.Value.ShouldEqual("Test exception");
+            () => _result.Value.Should().Be("Test exception");
 
         It should_return_a_success =
-            () => _result.IsSuccess.ShouldBeTrue();
+            () => _result.IsSuccess.Should().BeTrue();
     }
 }
