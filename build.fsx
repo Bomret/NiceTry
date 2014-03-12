@@ -16,7 +16,7 @@ let testAssemblies = !! (testDir + "/*.Tests.dll")
 let version = 
     match buildServer with
         | TeamCity -> buildVersion
-        | _ -> "2.1.1"
+        | _ -> "2.2.0"
 
 Target "Clean" (fun _ -> CleanDirs [buildDir; testDir; packagingDir])
 
@@ -84,4 +84,4 @@ Target "CreatePackage" (fun _ ->
     ==> "Test"
     ==> "CreatePackage"
 
-RunTargetOrDefault "CreatePackage"
+RunTargetOrDefault "Test"
