@@ -1,87 +1,72 @@
-#r @"FAKE\tools\FakeLib.dll"
+﻿#r @"FAKE\tools\FakeLib.dll"
 open Fake
 open Fake.AssemblyInfoFile
 
 RestorePackages()
 
-let buildDir = "./build"
-let net451Dir = buildDir + "/net451"
-let net45Dir = buildDir + "/net45"
-let net40Dir = buildDir + "/net40"
-let net35Dir = buildDir + "/net35"
+let name ="NiceTry"
+let description = "A monoid for the classical try/catch statement that allows functional and bloat free error handling."
+let id = "d9712c70-9a11-43b9-b9b4-10b4036ea8f2"
+let authors = ["Stefan Reichel"]
+let tags = "try, catch, functional, error, exception"
 
+let solution = name + ".sln"
+let builtAssembly = name + ".dll"
+let publishDir = "./publish"
+let buildDir = "./build"
 let testDir = "./test"
-let packagingDir = "./package"
-let testAssemblies = !! (testDir + "/*.Tests.dll")
-let version = 
+
+let version =
     match buildServer with
         | TeamCity -> buildVersion
-        | _ -> "2.2.0"
+        | _ -> "0.5.0"
 
-Target "Clean" (fun _ -> CleanDirs [buildDir; testDir; packagingDir])
+Target "Clean" (fun _ -> CleanDirs [buildDir; testDir; publishDir])
 
-Target "BuildLib" (fun _ -> 
-    CreateCSharpAssemblyInfo "./NiceTry/Properties/AssemblyInfo.cs"
-        [Attribute.Title "NiceTry"
-         Attribute.Description "A functional wrapper type for the classic try/catch statement"
-         Attribute.Guid "d9712c70-9a11-43b9-b9b4-10b4036ea8f2"
-         Attribute.Product "NiceTry"
+Target "BuildLibrary" (fun _ ->
+    CreateCSharpAssemblyInfo "./" + name + "/Properties/AssemblyInfo.cs"
+        [Attribute.Title name
+         Attribute.Description description
+         Attribute.Guid id
+         Attribute.Product name
          Attribute.Version version
          Attribute.FileVersion version]
 
-    !! "NiceTry/**/*.csproj"
-    |> MSBuild net451Dir "Build" ["Configuration","Net451"]
-    |> Log "Build output: "
-
-    !! "NiceTry/**/*.csproj"
-    |> MSBuild net45Dir "Build" ["Configuration","Net45"]
-    |> Log "Build output: "
-
-    !! "NiceTry/**/*.csproj"
-    |> MSBuild net40Dir "Build" ["Configuration","Net40"]
-    |> Log "Build output: "
-
-    !! "NiceTry/**/*.csproj"
-    |> MSBuild net35Dir "Build" ["Configuration","Net35"]
-    |> Log "Build output: "
+    MSBuildRelease buildDir "Build" [solution]
+    |> Log "Building lib: "
 )
 
-Target "BuildTests" (fun _ -> 
-    !! "NiceTry.Tests/**/*.csproj"
+Target "BuildTests" (fun _ ->
+    !! "*.Tests/**/*.csproj"
     |> MSBuildDebug testDir "Build"
-    |> Log "Test build output: "
+    |> Log "Building tests: "
 )
 
 Target "Test" (fun _ ->
-    testAssemblies
-        |> MSpec (fun p -> {p with HtmlOutputDir = testDir})
+    !! (testDir @@ "*.Tests.dll")
+    |> MSpec (fun p -> {p with HtmlOutputDir = testDir})
 )
 
-Target "CreatePackage" (fun _ ->
-  CreateDir "package/lib/net451"
-  CreateDir "package/lib/net45"
-  CreateDir "package/lib/net40"
-  CreateDir "package/lib/net35"
+Target "Package" (fun _ ->
+    CopyFiles publishDir !! (buildDir @@ builtAssembly)
 
-  CopyFile "package/lib/net451/NiceTry.dll" "build/net451/NiceTry.dll"
-  CopyFile "package/lib/net45/NiceTry.dll" "build/net45/NiceTry.dll"
-  CopyFile "package/lib/net40/NiceTry.dll" "build/net40/NiceTry.dll"
-  CopyFile "package/lib/net35/NiceTry.dll" "build/net35/NiceTry.dll"
-
-  NuGet (fun p ->
-    {p with
-        WorkingDir = packagingDir
-        OutputPath = packagingDir
-        Version = version
-        Publish = false
-            })
-            "NiceTry.nuspec"
+    NuGet (fun p ->
+        {p with
+            Project = name
+            Authors = authors
+            Description = description
+            Tags = tags
+            Version = version
+            OutputPath = publishDir
+            WorkingDir = publishDir
+            Files = [builtAssembly, Some "lib/portable-net40+sl50+win+wpa81+wp80", None] })
+            "package.nuspec"
 )
 
 "Clean"
-    ==> "BuildLib"
+    ==> "BuildLibrary"
     ==> "BuildTests"
     ==> "Test"
-    ==> "CreatePackage"
+    ==> "Package"
 
 RunTargetOrDefault "Test"
