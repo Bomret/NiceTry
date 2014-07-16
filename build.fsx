@@ -24,7 +24,7 @@ let version =
 Target "Clean" (fun _ -> CleanDirs [buildDir; testDir; publishDir])
 
 Target "BuildLibrary" (fun _ ->
-    CreateCSharpAssemblyInfo "./" + name + "/Properties/AssemblyInfo.cs"
+    CreateCSharpAssemblyInfo ("./" + name + "/Properties/AssemblyInfo.cs")
         [Attribute.Title name
          Attribute.Description description
          Attribute.Guid id

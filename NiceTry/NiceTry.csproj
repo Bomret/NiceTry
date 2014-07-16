@@ -40,7 +40,6 @@
     <Compile Include="Applicators.cs" />
     <Compile Include="Combinators.cs" />
     <Compile Include="Failure.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Retry.cs" />
     <Compile Include="Success.cs" />
     <Compile Include="ThirdParty\Unit.cs" />
