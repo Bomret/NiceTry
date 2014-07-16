@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+    <metadata>
+        <id>@project@</id>
+        <version>@build.number@</version>
+        <title>@project@</title>
+        <authors>@authors@</authors>
+        <licenseUrl>http://www.apache.org/licenses/LICENSE-2.0.html</licenseUrl>
+        <projectUrl>https://github.com/bomret/nicetry</projectUrl>
+        <requireLicenseAcceptance>true</requireLicenseAcceptance>
+        <description>@description@</description>
+        <tags>@tags@</tags>
+        @dependencies@
+        @references@
+    </metadata>
+    @files@
+</package>

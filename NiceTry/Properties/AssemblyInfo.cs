@@ -3,13 +3,13 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitleAttribute("NiceTry")]
-[assembly: AssemblyDescriptionAttribute("A functional wrapper type for the classic try/catch statement")]
+[assembly: AssemblyDescriptionAttribute("A monoid for the classical try/catch statement that allows functional and bloat free error handling.")]
 [assembly: GuidAttribute("d9712c70-9a11-43b9-b9b4-10b4036ea8f2")]
 [assembly: AssemblyProductAttribute("NiceTry")]
-[assembly: AssemblyVersionAttribute("2.1.1")]
-[assembly: AssemblyFileVersionAttribute("2.1.1")]
+[assembly: AssemblyVersionAttribute("0.5.0")]
+[assembly: AssemblyFileVersionAttribute("0.5.0")]
 namespace System {
     internal static class AssemblyVersionInformation {
-        internal const string Version = "2.1.1";
+        internal const string Version = "0.5.0";
     }
 }

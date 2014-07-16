@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>NiceTry.Tests</RootNamespace>
     <AssemblyName>NiceTry.Tests</AssemblyName>
-    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
@@ -161,16 +161,16 @@
     <Compile Include="When_I_use_a_disposable_container_to_store_two_an_try_to_stringify_the_value.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\NiceTry\NiceTry.csproj">
-      <Project>{46F4F616-6391-4514-BF80-4EDD3FD9F7C3}</Project>
-      <Name>NiceTry</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NiceTry\NiceTry.csproj">
+      <Project>{220f1de6-1bb7-425c-a991-276fd7ae9b9a}</Project>
+      <Name>NiceTry</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

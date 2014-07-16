@@ -8,9 +8,6 @@ namespace System.Reactive {
     ///     Represents a type with a single value. This type is often used to denote the successful completion of a
     ///     void-returning method (C#) or a Sub procedure (Visual Basic).
     /// </summary>
-#if !NO_SERIALIZABLE
-    [Serializable]
-#endif
     public struct Unit : IEquatable<Unit> {
         /// <summary>
         ///     Determines whether the specified Unit values is equal to the current Unit. Because Unit has a single value, this
