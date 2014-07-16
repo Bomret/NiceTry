@@ -6,6 +6,8 @@ Also available on NuGet (http://www.nuget.org/packages/NiceTry/).
 Licensed under the Apache License 2.0 (http://www.apache.org/licenses/LICENSE-2.0.html).
 Uses the System.Reactive.Unit type made available by the guys working on the awesome Reactive Extensions (https://github.com/Reactive-Extensions) to represent the absence of a return value. 
 
+Build Status: ![Not available](http://ci.devcrowd.de/app/rest/builds/buildType:OpenSource_NiceTry_Integration/statusIcon)
+
 ## Example
 Reading the content specified by a url as string and printing it to the console. If the user specifies an invalid url, a fallback url will be used.
 If an error occurs anywhere during the process, the error message will be printed to the console.
@@ -36,8 +38,6 @@ Retry.To(() => Console.ReadLine(), 3)
 ```
 
 The above code sample would try reading a url from the command line up to 4 times (the original try and up to 3 retries). It returns a `Success` if the user specifies a valid url before all retries are used up. If the user does not specify a valid url the fourth time, the `Retry` will fail.
-
-------
 
 ## Basics
 `Try` is a wrapper around a simple try/catch statement. It tries to execute the given `Action` or `Func` and returns a `Success` if no exception was thrown and a `Failure` containing the encountered exception otherwise.
