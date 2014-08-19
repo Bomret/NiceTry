@@ -1,6 +1,8 @@
 ﻿using System;
 using System.IO;
 using System.Net;
+using NiceTry.Applicators;
+using NiceTry.Combinators;
 
 namespace NiceTry.Examples {
     public class UsingDisposables {
@@ -37,7 +39,7 @@ namespace NiceTry.Examples {
                       reader => reader.ReadToEnd())
                .Using(() => new WebClient(),
                       (wc, text) => wc.UploadString(url, text))
-               .Finally(() => File.Delete(file))
+               .Tap(_ => File.Delete(file))
                .Match(text => Console.WriteLine("Uploaded {0} to {1}", text, url),
                       error => Console.WriteLine("Encountered exception: {0}", error.Message));
         }

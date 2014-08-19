@@ -97,7 +97,7 @@
     <Compile Include="Combinators\When_I_flatten_a_success_that_contains_zero_and_is_nested_in_a_success.cs" />
     <Compile Include="Combinators\When_I_flatten_a_success_nested_in_a_failure.cs" />
     <Compile Include="Combinators\When_I_reject_a_failure_if_it_contains_two.cs" />
-    <Compile Include="Combinators\When_I_reject_a_success_that_contains_two_if_it_contains_three.cs" />
+    <Compile Include="Combinators\When_I_reject_a_success_that_contains_three_if_it_would_contain_two.cs" />
     <Compile Include="Combinators\When_I_reject_a_success_that_contains_two_if_it_contains_two.cs" />
     <Compile Include="Combinators\When_I_try_to_add_two_and_three_and_add_one_up_to_two_times_which_succeeds_the_first_time.cs" />
     <Compile Include="Combinators\When_I_try_to_add_two_and_three_and_add_one_up_to_two_times_which_succeeds_the_second_time.cs" />

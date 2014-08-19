@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Reactive;
+using NiceTry.Combinators;
 
 namespace NiceTry {
     public abstract class Try<T> : IEquatable<Try<T>> {
