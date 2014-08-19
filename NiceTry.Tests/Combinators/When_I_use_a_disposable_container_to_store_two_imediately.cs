@@ -1,9 +1,10 @@
 using System;
 using FluentAssertions;
 using Machine.Specifications;
+using NiceTry.Combinators;
 
 namespace NiceTry.Tests.Combinators {
-    [Subject(typeof (NiceTry.Combinators), "Using")]
+    [Subject(typeof (UsingExt), "Using")]
     class When_I_use_a_disposable_container_to_store_two_imediately {
         static Try<string> _result;
         static Container<int> _container;

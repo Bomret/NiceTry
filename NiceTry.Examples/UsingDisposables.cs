@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Net;
-using NiceTry.Applicators;
 using NiceTry.Combinators;
 
 namespace NiceTry.Examples {

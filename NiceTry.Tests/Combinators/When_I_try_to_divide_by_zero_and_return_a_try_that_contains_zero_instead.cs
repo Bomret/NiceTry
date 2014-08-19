@@ -1,8 +1,9 @@
 using FluentAssertions;
 using Machine.Specifications;
+using NiceTry.Combinators;
 
 namespace NiceTry.Tests.Combinators {
-    [Subject(typeof (NiceTry.Combinators), "OrElse")]
+    [Subject(typeof (OrElseExt), "OrElse")]
     class When_I_try_to_divide_by_zero_and_return_a_try_that_contains_zero_instead {
         static Try<int> _result;
 

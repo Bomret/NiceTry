@@ -1,9 +1,10 @@
 ﻿using System;
 using FluentAssertions;
 using Machine.Specifications;
+using NiceTry.Combinators;
 
-namespace NiceTry.Tests.Applicators {
-    [Subject(typeof (NiceTry.Applicators), "OnFailure")]
+namespace NiceTry.Tests.Combinators {
+    [Subject(typeof (OnFailureExt), "OnFailure")]
     public class When_I_try_to_throw_an_exception_and_register_for_failure {
         static Exception _error;
 

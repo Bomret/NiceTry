@@ -1,8 +1,9 @@
 using FluentAssertions;
 using Machine.Specifications;
+using NiceTry.Combinators;
 
 namespace NiceTry.Tests.Combinators {
-    [Subject(typeof (NiceTry.Combinators), "Recover")]
+    [Subject(typeof (RecoverExt), "Recover")]
     class When_I_try_to_add_two_and_three_and_recover_with_zero_if_any_exception_is_thrown {
         static Try<int> _five;
 

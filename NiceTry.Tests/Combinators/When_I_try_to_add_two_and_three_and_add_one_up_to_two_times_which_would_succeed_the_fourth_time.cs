@@ -1,9 +1,10 @@
 using System;
 using FluentAssertions;
 using Machine.Specifications;
+using NiceTry.Combinators;
 
 namespace NiceTry.Tests.Combinators {
-    [Subject(typeof (NiceTry.Combinators), "Retry")]
+    [Subject(typeof (RetryExt), "Retry")]
     class When_I_try_to_add_two_and_three_and_add_one_up_to_two_times_which_would_succeed_the_fourth_time {
         static Try<int> _result;
         static Func<int, int> _addOne;

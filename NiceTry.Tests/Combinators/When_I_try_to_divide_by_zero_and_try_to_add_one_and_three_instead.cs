@@ -1,8 +1,9 @@
 using FluentAssertions;
 using Machine.Specifications;
+using NiceTry.Combinators;
 
 namespace NiceTry.Tests.Combinators {
-    [Subject(typeof (NiceTry.Combinators), "OrElseWith")]
+    [Subject(typeof (OrElseWithExt), "OrElseWith")]
     class When_I_try_to_divide_by_zero_and_try_to_add_one_and_three_instead {
         static Try<int> _result;
 

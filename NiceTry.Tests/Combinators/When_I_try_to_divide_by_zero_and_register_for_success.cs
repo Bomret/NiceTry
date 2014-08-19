@@ -1,9 +1,10 @@
 ﻿using System;
 using FluentAssertions;
 using Machine.Specifications;
+using NiceTry.Combinators;
 
-namespace NiceTry.Tests.Applicators {
-    [Subject(typeof (NiceTry.Applicators), "OnSuccess")]
+namespace NiceTry.Tests.Combinators {
+    [Subject(typeof (OnSuccessExt), "OnSuccess")]
     class When_I_try_to_divide_by_zero_and_register_for_success {
         static Func<int> _divideByZero;
         static bool _successCallbackExecuted;

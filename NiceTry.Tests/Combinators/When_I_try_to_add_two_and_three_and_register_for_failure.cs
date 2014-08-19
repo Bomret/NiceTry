@@ -1,8 +1,9 @@
 ﻿using FluentAssertions;
 using Machine.Specifications;
+using NiceTry.Combinators;
 
-namespace NiceTry.Tests.Applicators {
-    [Subject(typeof (NiceTry.Applicators), "OnFailure")]
+namespace NiceTry.Tests.Combinators {
+    [Subject(typeof (OnFailureExt), "OnFailure")]
     class When_I_try_to_add_two_and_three_and_register_for_failure {
         static bool _failureCallbackExecuted;
 

@@ -1,8 +1,9 @@
 ﻿using FluentAssertions;
 using Machine.Specifications;
+using NiceTry.Combinators;
 
-namespace NiceTry.Tests.Applicators {
-    [Subject(typeof (NiceTry.Applicators), "GetOrElse")]
+namespace NiceTry.Tests.Combinators {
+    [Subject(typeof (GetExt), "GetOrElse")]
     class When_I_try_to_add_two_and_three_and_would_return_zero_if_the_calculation_failed {
         static int _five;
 

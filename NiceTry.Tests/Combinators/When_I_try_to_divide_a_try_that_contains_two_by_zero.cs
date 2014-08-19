@@ -1,9 +1,10 @@
 using System;
 using FluentAssertions;
 using Machine.Specifications;
+using NiceTry.Combinators;
 
 namespace NiceTry.Tests.Combinators {
-    [Subject(typeof (NiceTry.Combinators), "FlatMap")]
+    [Subject(typeof (FlatMapExt), "FlatMap")]
     class When_I_try_to_divide_a_try_that_contains_two_by_zero {
         static Try<int> twoSuccess;
         static Func<int, Try<int>> _tryToDivideByZero;

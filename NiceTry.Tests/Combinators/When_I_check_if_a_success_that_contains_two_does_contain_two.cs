@@ -1,8 +1,9 @@
 using FluentAssertions;
 using Machine.Specifications;
+using NiceTry.Combinators;
 
 namespace NiceTry.Tests.Combinators {
-    [Subject(typeof (NiceTry.Combinators), "Filter")]
+    [Subject(typeof (FilterExt), "Filter")]
     class When_I_check_if_a_success_that_contains_two_does_contain_two {
         static Try<int> _twoSuccess;
         static Try<int> _result;

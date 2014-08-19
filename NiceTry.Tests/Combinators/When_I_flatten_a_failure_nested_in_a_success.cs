@@ -1,9 +1,10 @@
 ﻿using System;
 using FluentAssertions;
 using Machine.Specifications;
+using NiceTry.Combinators;
 
 namespace NiceTry.Tests.Combinators {
-    [Subject(typeof (NiceTry.Combinators), "Flatten")]
+    [Subject(typeof (FlattenExt), "Flatten")]
     public class When_I_flatten_a_failure_nested_in_a_success {
         static Try<Try<int>> _nestedFailure;
         static Try<int> _result;

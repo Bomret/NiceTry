@@ -1,8 +1,9 @@
 ﻿using FluentAssertions;
 using Machine.Specifications;
+using NiceTry.Combinators;
 
 namespace NiceTry.Tests.Combinators {
-    [Subject(typeof (NiceTry.Combinators), "Zip")]
+    [Subject(typeof (ZipExt), "Zip")]
     class When_I_zip_two_successes_by_addition {
         static Try<int> _two;
         static Try<int> _three;

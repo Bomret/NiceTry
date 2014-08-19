@@ -1,8 +1,9 @@
 using FluentAssertions;
 using Machine.Specifications;
+using NiceTry.Combinators;
 
 namespace NiceTry.Tests.Combinators {
-    [Subject(typeof (NiceTry.Combinators), "Tap")]
+    [Subject(typeof (TapExt), "Tap")]
     class When_I_try_to_add_two_and_three_tap_the_result_and_convert_it_to_a_string {
         static Try<string> _result;
         static int _five;

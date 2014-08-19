@@ -1,9 +1,10 @@
 using System;
 using FluentAssertions;
 using Machine.Specifications;
+using NiceTry.Combinators;
 
 namespace NiceTry.Tests.Combinators {
-    [Subject(typeof (NiceTry.Combinators), "Recover")]
+    [Subject(typeof (RecoverExt), "Recover")]
     class When_I_try_to_divide_by_zero_and_recover_with_zero {
         static Try<int> _result;
         static Func<int> _divideByZero;

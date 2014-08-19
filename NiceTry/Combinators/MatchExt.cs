@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NiceTry.Applicators
+namespace NiceTry.Combinators
 {
     public static class MatchExt
     {

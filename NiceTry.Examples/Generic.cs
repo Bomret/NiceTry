@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net;
+using NiceTry.Combinators;
 
 namespace NiceTry.Examples {
     class Generic {

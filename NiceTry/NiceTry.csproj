@@ -37,14 +37,17 @@
     <!-- A reference to the entire .NET Framework is automatically included -->
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Applicators\GetExt.cs" />
-    <Compile Include="Applicators\MatchExt.cs" />
-    <Compile Include="Applicators\OnExt.cs" />
     <Compile Include="Combinators\ApplyExt.cs" />
     <Compile Include="Combinators\FilterExt.cs" />
     <Compile Include="Combinators\FlatMapExt.cs" />
     <Compile Include="Combinators\FlattenExt.cs" />
+    <Compile Include="Combinators\GetExt.cs" />
+    <Compile Include="Combinators\GetOrDefaultExt.cs" />
+    <Compile Include="Combinators\GetOrElseExt.cs" />
     <Compile Include="Combinators\MapExt.cs" />
+    <Compile Include="Combinators\MatchExt.cs" />
+    <Compile Include="Combinators\OnSuccessExt.cs" />
+    <Compile Include="Combinators\OnFailureExt.cs" />
     <Compile Include="Combinators\OrElseExt.cs" />
     <Compile Include="Combinators\OrElseWithExt.cs" />
     <Compile Include="Combinators\RecoverExt.cs" />

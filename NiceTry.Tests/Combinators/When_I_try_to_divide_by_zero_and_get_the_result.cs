@@ -1,9 +1,9 @@
 ﻿using System;
 using FluentAssertions;
 using Machine.Specifications;
-using NiceTry.Applicators;
+using NiceTry.Combinators;
 
-namespace NiceTry.Tests.Applicators
+namespace NiceTry.Tests.Combinators
 {
     [Subject(typeof (GetExt), "Get")]
     internal class When_I_try_to_divide_by_zero_and_get_the_result

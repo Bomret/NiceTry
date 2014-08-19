@@ -1,9 +1,10 @@
 using System;
 using FluentAssertions;
 using Machine.Specifications;
+using NiceTry.Combinators;
 
 namespace NiceTry.Tests.Combinators {
-    [Subject(typeof (NiceTry.Combinators), "Filter")]
+    [Subject(typeof (FilterExt), "Filter")]
     class When_I_check_if_a_failure_of_type_int_contains_two {
         static Try<int> _failure;
         static Try<int> _result;

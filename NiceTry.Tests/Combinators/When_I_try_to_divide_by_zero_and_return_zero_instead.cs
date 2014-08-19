@@ -1,9 +1,10 @@
 ﻿using System;
 using FluentAssertions;
 using Machine.Specifications;
+using NiceTry.Combinators;
 
-namespace NiceTry.Tests.Applicators {
-    [Subject(typeof (NiceTry.Applicators), "GetOrElse")]
+namespace NiceTry.Tests.Combinators {
+    [Subject(typeof (GetExt), "GetOrElse")]
     class When_I_try_to_divide_by_zero_and_return_zero_instead {
         static Func<int> _divideByZero;
         static int _zero;

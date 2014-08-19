@@ -1,9 +1,10 @@
 using System.IO;
 using FluentAssertions;
 using Machine.Specifications;
+using NiceTry.Combinators;
 
 namespace NiceTry.Tests.Combinators {
-    [Subject(typeof (NiceTry.Combinators), "Using")]
+    [Subject(typeof (UsingExt), "Using")]
     public class When_I_try_to_read_a_file_using_a_StreamReader {
         static string _file;
         static string _content;

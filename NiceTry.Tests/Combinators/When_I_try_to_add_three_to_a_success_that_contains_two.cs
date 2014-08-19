@@ -1,8 +1,9 @@
 using FluentAssertions;
 using Machine.Specifications;
+using NiceTry.Combinators;
 
 namespace NiceTry.Tests.Combinators {
-    [Subject(typeof (NiceTry.Combinators), "FlatMap")]
+    [Subject(typeof (FlatMapExt), "FlatMap")]
     class When_I_try_to_add_three_to_a_success_that_contains_two {
         static Try<int> _twoSuccess;
         static Try<int> _result;

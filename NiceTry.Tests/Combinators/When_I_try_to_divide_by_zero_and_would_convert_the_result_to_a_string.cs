@@ -1,9 +1,10 @@
 using System;
 using FluentAssertions;
 using Machine.Specifications;
+using NiceTry.Combinators;
 
 namespace NiceTry.Tests.Combinators {
-    [Subject(typeof (NiceTry.Combinators), "Map")]
+    [Subject(typeof (MapExt), "Map")]
     class When_I_try_to_divide_by_zero_and_would_convert_the_result_to_a_string {
         static Func<int> _divideByZero;
         static Try<string> _result;

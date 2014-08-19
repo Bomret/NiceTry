@@ -1,8 +1,9 @@
 ﻿using FluentAssertions;
 using Machine.Specifications;
+using NiceTry.Combinators;
 
-namespace NiceTry.Tests.Applicators {
-    [Subject(typeof (NiceTry.Applicators), "WhenSuccess")]
+namespace NiceTry.Tests.Combinators {
+    [Subject(typeof (OnSuccessExt), "OnSuccess")]
     class When_I_try_to_add_two_and_three_and_register_for_success {
         static int _five;
 
