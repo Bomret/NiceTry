@@ -2,15 +2,17 @@ using FluentAssertions;
 using Machine.Specifications;
 using NiceTry.Combinators;
 
-namespace NiceTry.Tests.Combinators {
+namespace NiceTry.Tests.Combinators
+{
     [Subject(typeof (MatchExt), "Match")]
-    class When_I_try_to_add_two_and_three_and_match_the_result_by_creating_a_string {
-        static string _result;
+    internal class When_I_try_to_add_two_and_three_and_match_the_result_by_creating_a_string
+    {
+        private static string _result;
 
-        Because of = () => _result = Try.To(() => 2 + 3)
-                                        .Match(i => i.ToString(),
-                                               e => "0");
+        private Because of = () => _result = Try.To(() => 2 + 3)
+            .Match(i => i.ToString(),
+                e => "0");
 
-        It should_return_five_as_string = () => _result.Should().Be("5");
+        private It should_return_five_as_string = () => _result.Should().Be("5");
     }
 }

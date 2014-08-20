@@ -2,22 +2,25 @@
 using Machine.Specifications;
 using NiceTry.Combinators;
 
-namespace NiceTry.Tests.Combinators {
+namespace NiceTry.Tests.Combinators
+{
     [Subject(typeof (ZipExt), "Zip")]
-    class When_I_zip_two_successes_by_addition {
-        static Try<int> _two;
-        static Try<int> _three;
-        static Try<int> _five;
+    internal class When_I_zip_two_successes_by_addition
+    {
+        private static Try<int> _two;
+        private static Try<int> _three;
+        private static Try<int> _five;
 
-        Establish context = () => {
+        private Establish context = () =>
+        {
             _two = Try.Success(2);
             _three = Try.Success(3);
         };
 
-        Because of = () => _five = _two.Zip(_three, (a, b) => a + b);
+        private Because of = () => _five = _two.Zip(_three, (a, b) => a + b);
 
-        It should_contain_five_in_the_success = () => _five.Value.Should().Be(5);
+        private It should_contain_five_in_the_success = () => _five.Value.Should().Be(5);
 
-        It should_return_a_success = () => _five.IsSuccess.Should().BeTrue();
+        private It should_return_a_success = () => _five.IsSuccess.Should().BeTrue();
     }
 }

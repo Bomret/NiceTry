@@ -10,11 +10,9 @@ namespace NiceTry.Combinators
 
             try
             {
-                var isRejected = predicate(@try.Value);
-                if (isRejected)
-                    return new Failure<T>(new ArgumentException("The given Try was rejected"));
-
-                return new Success<T>(@try.Value);
+                return predicate(@try.Value)
+                    ? new Failure<T>(new ArgumentException("The given Try was rejected"))
+                    : @try;
             }
             catch (Exception err)
             {

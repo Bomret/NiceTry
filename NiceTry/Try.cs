@@ -1,15 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using NiceTry.Combinators;
 
-namespace NiceTry {
-    public abstract class Try<T> : IEquatable<Try<T>> {
+namespace NiceTry
+{
+    public abstract class Try<T> : IEquatable<Try<T>>
+    {
         public abstract T Value { get; }
         public abstract bool IsSuccess { get; }
         public abstract bool IsFailure { get; }
         public abstract Exception Error { get; }
 
-        public bool Equals(Try<T> other) {
+        public bool Equals(Try<T> other)
+        {
             if (other == null) return false;
 
             if (other.IsSuccess && IsSuccess)
@@ -21,52 +23,67 @@ namespace NiceTry {
             return false;
         }
 
-        public static implicit operator Try<T>(Failure failure) {
+        public static implicit operator Try<T>(Failure failure)
+        {
             return new Failure<T>(failure.Error);
         }
     }
 
-    public static class Try {
-        public static Try<T> To<T>(Func<T> work) {
-            try {
+    public static class Try
+    {
+        public static Try<T> To<T>(Func<T> work)
+        {
+            try
+            {
                 var result = work();
-                return Success(result);
+                return new Success<T>(result);
             }
-            catch (Exception error) {
-                return Failure(error);
+            catch (Exception error)
+            {
+                return new Failure<T>(error);
             }
         }
 
-        public static Try<Unit> To(Action work) {
-            return To(() => {
+        public static Try<Unit> To(Action work)
+        {
+            return To(() =>
+            {
                 work();
 
-                return Unit.Default;
+                return Unit.Type;
             });
         }
 
-        public static Failure Failure(Exception error) {
+        public static Failure Failure(Exception error)
+        {
             return new Failure(error);
         }
 
-        public static Try<T> Success<T>(T value) {
+        public static Try<T> Success<T>(T value)
+        {
             return new Success<T>(value);
         }
 
-        public static Try<T> Of<T>(T value) {
+        public static Try<T> Of<T>(T value)
+        {
             return Success(value);
         }
 
         public static Try<T> Using<T, TDisposable>(Func<TDisposable> createDisposable,
-                                                   Func<TDisposable, T> useDisposable) where TDisposable : IDisposable {
+            Func<TDisposable, T> useDisposable) where TDisposable : IDisposable
+        {
             return To(() => { using (var disposable = createDisposable()) return useDisposable(disposable); });
         }
 
         public static Try<T> UsingWith<T, TDisposable>(Func<TDisposable> createDisposable,
-                                                       Func<TDisposable, Try<T>> useDisposable)
-            where TDisposable : IDisposable {
-            return To(() => { using (var disposable = createDisposable()) return useDisposable(disposable); })
-                .Flatten();
+            Func<TDisposable, Try<T>> useDisposable)
+            where TDisposable : IDisposable
+        {
+            var result = To(() => { using (var disposable = createDisposable()) return useDisposable(disposable); });
+
+            return result.IsFailure
+                ? new Failure<T>(result.Error)
+                : result.Value;
         }
     }
 }

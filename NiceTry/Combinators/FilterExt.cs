@@ -10,11 +10,9 @@ namespace NiceTry.Combinators
 
             try
             {
-                var isValid = predicate(@try.Value);
-                if (isValid)
-                    return new Success<T>(@try.Value);
-
-                return new Failure<T>(new ArgumentException("The given predicate does not hold for this Try."));
+                return predicate(@try.Value)
+                    ? @try
+                    : new Failure<T>(new ArgumentException("The given predicate does not hold for this Try."));
             }
             catch (Exception err)
             {

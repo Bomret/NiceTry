@@ -12,8 +12,7 @@ namespace NiceTry.Combinators
 
             try
             {
-                var result = f(tryA.Value, tryB.Value);
-                return result;
+                return f(tryA.Value, tryB.Value);
             }
             catch (Exception err)
             {

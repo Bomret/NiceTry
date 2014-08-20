@@ -6,7 +6,7 @@ namespace NiceTry.Combinators
     {
         public static Try<T> Recover<T>(this Try<T> @try, Func<Exception, T> f)
         {
-            return @try.IsSuccess ? new Success<T>(@try.Value) : Try.To(() => f(@try.Error));
+            return @try.IsSuccess ? @try : Try.To(() => f(@try.Error));
         }
     }
 }

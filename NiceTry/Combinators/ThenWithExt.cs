@@ -10,9 +10,7 @@ namespace NiceTry.Combinators
 
             try
             {
-                var result = f(@try);
-
-                return result;
+                return f(@try);
             }
             catch (Exception err)
             {

@@ -6,13 +6,13 @@ namespace NiceTry.Combinators
     {
         public static Try<T> Tap<T>(this Try<T> @try, Action<T> action)
         {
-            if (@try.IsFailure) return new Failure<T>(@try.Error);
+            if (@try.IsFailure) return @try;
 
             try
             {
                 action(@try.Value);
 
-                return new Success<T>(@try.Value);
+                return @try;
             }
             catch (Exception err)
             {

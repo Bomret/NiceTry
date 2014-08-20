@@ -10,7 +10,7 @@ namespace NiceTry
     {
         private static readonly Unit Instance = new Unit();
 
-        public static Unit Default
+        public static Unit Type
         {
             get { return Instance; }
         }

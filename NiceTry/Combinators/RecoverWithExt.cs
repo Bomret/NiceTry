@@ -6,12 +6,11 @@ namespace NiceTry.Combinators
     {
         public static Try<T> RecoverWith<T>(this Try<T> @try, Func<Exception, Try<T>> f)
         {
-            if (@try.IsSuccess) return new Success<T>(@try.Value);
+            if (@try.IsSuccess) return @try;
 
             try
             {
-                var result = f(@try.Error);
-                return result;
+                return f(@try.Error);
             }
             catch (Exception err)
             {
