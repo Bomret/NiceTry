@@ -1,4 +1,4 @@
-#r @"FAKE\tools\FakeLib.dll"
+﻿#r @"FAKE\tools\FakeLib.dll"
 open Fake
 open Fake.AssemblyInfoFile
 
@@ -55,6 +55,7 @@ Target "Package" (fun _ ->
             Project = name
             Authors = authors
             Description = description
+            Summary = description
             Tags = tags
             Version = version
             OutputPath = publishDir

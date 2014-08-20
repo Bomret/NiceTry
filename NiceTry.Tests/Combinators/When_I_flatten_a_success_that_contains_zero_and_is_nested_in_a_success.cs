@@ -1,20 +1,24 @@
 ﻿using FluentAssertions;
 using Machine.Specifications;
+using NiceTry.Combinators;
 
-namespace NiceTry.Tests.Combinators {
-    [Subject(typeof (NiceTry.Combinators), "Flatten")]
-    public class When_I_flatten_a_success_that_contains_zero_and_is_nested_in_a_success {
-        static Try<Try<int>> _nestedSuccess;
-        static Try<int> _result;
-        static Try<int> _expectedResult;
+namespace NiceTry.Tests.Combinators
+{
+    [Subject(typeof (FlattenExt), "Flatten")]
+    public class When_I_flatten_a_success_that_contains_zero_and_is_nested_in_a_success
+    {
+        private static Try<Try<int>> _nestedSuccess;
+        private static Try<int> _result;
+        private static Try<int> _expectedResult;
 
-        Establish context = () => {
+        private Establish context = () =>
+        {
             _expectedResult = Try.Success(0);
             _nestedSuccess = Try.Success(_expectedResult);
         };
 
-        Because of = () => { _result = _nestedSuccess.Flatten(); };
+        private Because of = () => { _result = _nestedSuccess.Flatten(); };
 
-        It should_return_the_inner_success = () => _result.Should().Be(_expectedResult);
+        private It should_return_the_inner_success = () => _result.Should().Be(_expectedResult);
     }
 }
