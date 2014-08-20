@@ -284,20 +284,6 @@ Try<string> result = Try.To(() => 2 + 3)
 ```
 Can be used to transform the result of a `Try`. The first function parameter transforms the resulting value if it is a `Success`, the second works on the exception if it is a `Failure`. In the above example `result` would be a `Success<string>` with Value *"5"*.
 
-### Succeed
-```csharp
-Try<int> result = Try.To(() => 2 + 3)
-				     .Succeed(6);
-```
-Ignores the `Try` it is called from completely and returns a new `Success<T>` with a given value. In the above example `result` would be a `Success<int>` with value *6*.
-
-### Fail
-```csharp
-Try<int> result = Try.To(() => 2 + 3)
-				     .Fail(new ArgumentException("I can't do this, Dave."));
-```
-Ignores the `Try` it is called from completely and returns a new `Failure` with a given Exception. In the above example `result` would be a `Failure` containing an Exception.
-
 ### Retry
 ```csharp
 Try<string> result = Try.To(() => 2 + 3)
@@ -313,7 +299,7 @@ Try<int> result = Try.To(() => 2 + 3)
 ```
 Can be used to take a look at the value of a `Try` without modifying it. In the above example `result` would be a `Success<int>` containing the value *6*. `Tap` would have printed *5* to the console.
 
-__Note:__ If the action in `Tap` throws, the exception is swallowed.
+__Note:__ If the action in `Tap` throws, `result` would be a `Failure` containing the thrown exception.
 
 ### Finally
 ```csharp
@@ -323,7 +309,7 @@ Try<string> result = Try.To(() => File.ReadAllText("some.file"))
 ```
 Can be used to execute side effecting behavior without modifying a `Try`. In the above example `result` would be a `Success<string>` containing the read text. The given `Action` will be executed in _either case_, regardless if the incoming `Try` is a `Success` or a `Failure`.
 
-__Note:__ If the action in `Finally` throws, the exception is swallowed.
+__Note:__ If the action in `Finally` throws, `result` would be a `Failure` containing the thrown exception.
 
 ### Using
 ```csharp

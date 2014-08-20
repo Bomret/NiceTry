@@ -39,6 +39,7 @@
   <ItemGroup>
     <Compile Include="Combinators\ApplyExt.cs" />
     <Compile Include="Combinators\FilterExt.cs" />
+    <Compile Include="Combinators\FinallyExt.cs" />
     <Compile Include="Combinators\FlatMapExt.cs" />
     <Compile Include="Combinators\FlattenExt.cs" />
     <Compile Include="Combinators\GetExt.cs" />
