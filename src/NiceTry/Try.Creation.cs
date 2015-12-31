@@ -97,6 +97,22 @@ namespace NiceTry {
             }
         }
 
+        [NotNull]
+        public static ITry To([NotNull] Func<ITry> work) {
+            work.ThrowIfNull(nameof(work));
+
+            try {
+                var result = work();
+                if (result.IsNull())
+                    throw new ArgumentException("The given work returned null which is not allowed.", nameof(work));
+
+                return result;
+            }
+            catch (Exception ex) {
+                return Failure(ex);
+            }
+        }
+
         /// <summary>
         ///     Tries to execute the given <paramref name="work" /> synchronously and return its result.
         ///     If an exception is thrown or <paramref name="work" /> returns <see langword="null" />, a

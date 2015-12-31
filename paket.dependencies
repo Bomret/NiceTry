@@ -6,6 +6,7 @@ nuget NUnit.Runners ~> 2
 nuget FAKE
 nuget SourceLink.Fake
 nuget FsCheck
+nuget FsCheck.NUnit
 
 nuget JetBrains.Annotations
 
