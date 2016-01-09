@@ -16,13 +16,13 @@ namespace NiceTry.Combinators {
         /// </exception>
         [NotNull]
         public static ITry Recover(this ITry @try, Action<Exception> handleError) {
-            @try.ThrowIfNull(nameof(@try));
+            @try.ThrowIfNullOrInvalid(nameof(@try));
             handleError.ThrowIfNull(nameof(handleError));
 
             // ReSharper disable once AssignNullToNotNullAttribute
             return @try.Match(
-                Failure: err => Try.To(() => handleError(err)),
-                Success: Try.Success);
+                failure: err => Try.To(() => handleError(err)),
+                success: Try.Success);
         }
 
         /// <summary>
@@ -39,13 +39,13 @@ namespace NiceTry.Combinators {
         /// </exception>
         [NotNull]
         public static ITry<T> Recover<T>(this ITry<T> @try, Func<Exception, T> handleError) {
-            @try.ThrowIfNull(nameof(@try));
+            @try.ThrowIfNullOrInvalid(nameof(@try));
             handleError.ThrowIfNull(nameof(handleError));
 
             // ReSharper disable once AssignNullToNotNullAttribute
             return @try.Match(
-                Failure: err => Try.To(() => handleError(err)),
-                Success: Try.Success);
+                failure: err => Try.To(() => handleError(err)),
+                success: Try.Success);
         }
 
         /// <summary>
@@ -61,13 +61,13 @@ namespace NiceTry.Combinators {
         /// </exception>
         [NotNull]
         public static ITry RecoverWith(this ITry @try, Func<Exception, ITry> handleError) {
-            @try.ThrowIfNull(nameof(@try));
+            @try.ThrowIfNullOrInvalid(nameof(@try));
             handleError.ThrowIfNull(nameof(handleError));
 
             // ReSharper disable once AssignNullToNotNullAttribute
             return @try.Match(
-                Failure: err => Try.To(() => handleError(err)),
-                Success: Try.Success);
+                failure: err => Try.To(() => handleError(err)),
+                success: Try.Success);
         }
 
         /// <summary>
@@ -84,13 +84,13 @@ namespace NiceTry.Combinators {
         /// </exception>
         [NotNull]
         public static ITry<T> RecoverWith<T>(this ITry<T> @try, Func<Exception, ITry<T>> handleError) {
-            @try.ThrowIfNull(nameof(@try));
+            @try.ThrowIfNullOrInvalid(nameof(@try));
             handleError.ThrowIfNull(nameof(handleError));
 
             // ReSharper disable once AssignNullToNotNullAttribute
             return @try.Match(
-                Failure: err => Try.To(() => handleError(err)),
-                Success: Try.Success);
+                failure: err => Try.To(() => handleError(err)),
+                success: Try.Success);
         }
     }
 }

@@ -18,15 +18,15 @@ namespace NiceTry.Combinators {
         /// </exception>
         [CanBeNull]
         public static T Get<T>([NotNull] this ITry<T> @try) {
-            @try.ThrowIfNull(nameof(@try));
+            @try.ThrowIfNullOrInvalid(nameof(@try));
 
             return @try.Match(
-                Failure: err => {
+                failure: err => {
                     throw new InvalidOperationException(
                         "A failure does not contain a value. Use the InnerException property to see the exception that caused the failure.",
                         err);
                 },
-                Success: x => x);
+                success: x => x);
         }
 
         /// <summary>
@@ -42,11 +42,11 @@ namespace NiceTry.Combinators {
         /// </exception>
         [CanBeNull]
         public static T GetOrElse<T>([NotNull] this ITry<T> @try, [CanBeNull] T fallback) {
-            @try.ThrowIfNull(nameof(@try));
+            @try.ThrowIfNullOrInvalid(nameof(@try));
 
             return @try.Match(
-                Failure: _ => fallback,
-                Success: x => x);
+                failure: _ => fallback,
+                success: x => x);
         }
 
         /// <summary>
@@ -62,11 +62,12 @@ namespace NiceTry.Combinators {
         /// </exception>
         [CanBeNull]
         public static T GetOrElse<T>([NotNull] this ITry<T> @try, [NotNull] Func<T> fallback) {
-            @try.ThrowIfNull(nameof(@try));
+            @try.ThrowIfNullOrInvalid(nameof(@try));
+            fallback.ThrowIfNull(nameof(fallback));
 
             return @try.Match(
-                Failure: _ => fallback(),
-                Success: x => x);
+                failure: _ => fallback(),
+                success: x => x);
         }
 
         /// <summary>
@@ -82,11 +83,11 @@ namespace NiceTry.Combinators {
         /// </exception>
         [CanBeNull]
         public static T GetOrDefault<T>([NotNull] this ITry<T> @try) {
-            @try.ThrowIfNull(nameof(@try));
+            @try.ThrowIfNullOrInvalid(nameof(@try));
 
             return @try.Match(
-                Failure: _ => default(T),
-                Success: x => x);
+                failure: _ => default(T),
+                success: x => x);
         }
     }
 }

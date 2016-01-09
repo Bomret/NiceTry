@@ -21,11 +21,11 @@ namespace NiceTry {
         public bool IsFailure => false;
         public bool IsSuccess => true;
 
-        public void Match(Action Success, Action<Exception> Failure) =>
-            Success();
+        public void Match(Action success, Action<Exception> failure) =>
+            success();
 
-        public T Match<T>(Func<T> Success, Func<Exception, T> Failure) =>
-            Success();
+        public T Match<T>(Func<T> success, Func<Exception, T> failure) =>
+            success();
 
         public void IfSuccess(Action sideEffect) {
             sideEffect.ThrowIfNull(nameof(sideEffect));
@@ -52,8 +52,8 @@ namespace NiceTry {
                 throw new ArgumentException("Provided object not of type Try", nameof(other));
 
             return asTry.Match(
-                Failure: _ => 1,
-                Success: () => 0);
+                failure: _ => 1,
+                success: () => 0);
         }
 
         int IComparable<ITry>.CompareTo(ITry other) =>
@@ -94,8 +94,8 @@ namespace NiceTry {
             _value = value;
         }
 
-        public void Match(Action<T> Success, Action<Exception> Failure) => Success(_value);
-        public B Match<B>(Func<T, B> Success, Func<Exception, B> Failure) => Success(_value);
+        public void Match(Action<T> success, Action<Exception> failure) => success(_value);
+        public B Match<B>(Func<T, B> success, Func<Exception, B> failure) => success(_value);
 
         public void IfSuccess(Action<T> sideEffect) {
             sideEffect.ThrowIfNull(nameof(sideEffect));
@@ -145,8 +145,8 @@ namespace NiceTry {
                 throw new ArgumentException("Provided object not of type ITry<T>", nameof(other));
 
             return @try.Match(
-                Failure: _ => 1,
-                Success: x => comparer.Compare(x, _value));
+                failure: _ => 1,
+                success: x => comparer.Compare(x, _value));
         }
 
         int IComparable<ITry<T>>.CompareTo(ITry<T> other) =>

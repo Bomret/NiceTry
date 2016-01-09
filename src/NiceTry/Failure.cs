@@ -21,11 +21,11 @@ namespace NiceTry {
         public bool IsFailure => true;
         public bool IsSuccess => false;
 
-        public void Match(Action Success, Action<Exception> Failure) =>
-            Failure(_error);
+        public void Match(Action success, Action<Exception> failure) =>
+            failure(_error);
 
-        public T Match<T>(Func<T> Success, Func<Exception, T> Failure) =>
-            Failure(_error);
+        public T Match<T>(Func<T> success, Func<Exception, T> failure) =>
+            failure(_error);
 
         public void IfSuccess(Action sideEffect) =>
             sideEffect.ThrowIfNull(nameof(sideEffect));
@@ -84,8 +84,8 @@ namespace NiceTry {
                 throw new ArgumentException("Provided object not of type Try", nameof(other));
 
             return @try.Match(
-                Failure: err => comparer.Compare(err, _error),
-                Success: () => -1);
+                failure: err => comparer.Compare(err, _error),
+                success: () => -1);
         }
 
         #endregion
@@ -98,11 +98,11 @@ namespace NiceTry {
     public sealed class Failure<T> : Failure, ITry<T> {
         public Failure([NotNull] Exception error) : base(error) {}
 
-        public void Match(Action<T> Success, Action<Exception> Failure) =>
-            Failure(_error);
+        public void Match(Action<T> success, Action<Exception> failure) =>
+            failure(_error);
 
-        public B Match<B>(Func<T, B> Success, Func<Exception, B> Failure) =>
-            Failure(_error);
+        public B Match<B>(Func<T, B> success, Func<Exception, B> failure) =>
+            failure(_error);
 
         public void IfSuccess(Action<T> sideEffect) =>
             sideEffect.ThrowIfNull(nameof(sideEffect));
@@ -147,8 +147,8 @@ namespace NiceTry {
                 throw new ArgumentException("Provided object not of type ITry<T>", nameof(other));
 
             return @try.Match(
-                Failure: err => comparer.Compare(err, _error),
-                Success: () => -1);
+                failure: err => comparer.Compare(err, _error),
+                success: () => -1);
         }
 
         #endregion

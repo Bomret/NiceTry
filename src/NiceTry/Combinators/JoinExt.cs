@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using JetBrains.Annotations;
-using NiceTry.Exceptions;
 
 // ReSharper disable CatchAllClause
 
@@ -55,18 +54,18 @@ namespace NiceTry.Combinators {
         [NotNull]
         public static ITry<C> Join<A, B, K, C>(ITry<A> tryA, ITry<B> tryB, Func<A, K> aKeySelect,
             Func<B, K> bKeySelect, Func<A, B, C> resultSelect, IEqualityComparer<K> keyCompare) {
-            tryA.ThrowIfNull(nameof(tryA));
-            tryB.ThrowIfNull(nameof(tryB));
+            tryA.ThrowIfNullOrInvalid(nameof(tryA));
+            tryB.ThrowIfNullOrInvalid(nameof(tryB));
             aKeySelect.ThrowIfNull(nameof(aKeySelect));
             bKeySelect.ThrowIfNull(nameof(bKeySelect));
             resultSelect.ThrowIfNull(nameof(resultSelect));
-
+            
             // ReSharper disable once AssignNullToNotNullAttribute
             return tryA.Match(
-                Failure: Try.Failure<C>,
-                Success: a => tryB.Match(
-                    Failure: Try.Failure<C>,
-                    Success: b => Try.To(() => {
+                failure: Try.Failure<C>,
+                success: a => tryB.Match(
+                    failure: Try.Failure<C>,
+                    success: b => Try.To(() => {
                         var aKey = aKeySelect(a);
                         var bKey = bKeySelect(b);
                         var compare = keyCompare ?? EqualityComparer<K>.Default;
@@ -75,9 +74,7 @@ namespace NiceTry.Combinators {
                             var result = resultSelect(a, b);
                             return Try.Success(result);
                         }
-                        return Try.Failure<C>(
-                                new JoinFailedException(
-                                    $"{tryA} and {tryB} could not be joined because their keys are not equal"));
+                        return Try.Failure<C>(new Exception($"{tryA} and {tryB} could not be joined because their keys are not equal"));
                     })));
         }
     }

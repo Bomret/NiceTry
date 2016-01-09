@@ -42,6 +42,7 @@
     <Compile Include="Combinators\ApplyExt.cs" />
     <Compile Include="Combinators\CatchExt.cs" />
     <Compile Include="Combinators\DoExt.cs" />
+    <Compile Include="Combinators\FinallyExt.cs" />
     <Compile Include="Combinators\FlattenExt.cs" />
     <Compile Include="Combinators\GetExt.cs" />
     <Compile Include="Combinators\JoinExt.cs" />
@@ -50,13 +51,15 @@
     <Compile Include="Combinators\RejectExt.cs" />
     <Compile Include="Combinators\SelectExt.cs" />
     <Compile Include="Combinators\SelectManyExt.cs" />
+    <Compile Include="Combinators\AllOrFailureExt.cs" />
+    <Compile Include="Combinators\SwitchExt.cs" />
+    <Compile Include="Combinators\TransformExt.cs" />
     <Compile Include="Combinators\UsingExt.cs" />
     <Compile Include="Combinators\WhereExt.cs" />
     <Compile Include="Combinators\ZipExt.cs" />
-    <Compile Include="Exceptions\JoinFailedException.cs" />
-    <Compile Include="Exceptions\PredicateFailedException.cs" />
     <Compile Include="Failure.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ITry.cs" />
+    <Compile Include="Properties\AssemblyVersionInformation.cs" />
     <Compile Include="Success.cs" />
     <Compile Include="Try.Creation.cs" />
     <Compile Include="Try.cs" />

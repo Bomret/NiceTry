@@ -1,13 +1,11 @@
 using System;
 using JetBrains.Annotations;
-using NiceTry.Exceptions;
 
 namespace NiceTry.Combinators {
     public static class WhereExt {
         /// <summary>
         /// Filters the specified <paramref name="try" /> based on the specified <paramref name="predicate" />.
-        ///     Returns a <see cref="Failure{T}" /> containing a <see cref="PredicateFailedException" /> if the predicate does not
-        ///     hold.
+        ///     Returns a <see cref="Failure{T}" /> if the predicate does not hold.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="try"></param>
@@ -18,15 +16,15 @@ namespace NiceTry.Combinators {
         /// </exception>
         [NotNull]
         public static ITry<T> Where<T>(this ITry<T> @try, Func<T, bool> predicate) {
-            @try.ThrowIfNull(nameof(@try));
+            @try.ThrowIfNullOrInvalid(nameof(@try));
             predicate.ThrowIfNull(nameof(predicate));
 
             // ReSharper disable once AssignNullToNotNullAttribute
             return @try.Match(
-                Failure: Try.Failure<T>,
-                Success: x => predicate(x)
+                failure: Try.Failure<T>,
+                success: x => predicate(x)
                         ? @try 
-                        : Try.Failure<T>(new PredicateFailedException($"The specified predicate did not hold for the specified {@try}.")));
+                        : Try.Failure<T>(new Exception($"The specified predicate did not hold for the specified {@try}.")));
         }
     }
 }

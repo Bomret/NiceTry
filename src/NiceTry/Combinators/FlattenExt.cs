@@ -14,12 +14,12 @@ namespace NiceTry.Combinators {
         /// </exception>
         [NotNull]
         public static ITry<T> Flatten<T>([NotNull] this ITry<ITry<T>> nestedTry) {
-            nestedTry.ThrowIfNull(nameof(nestedTry));
+            nestedTry.ThrowIfNullOrInvalid(nameof(nestedTry));
 
             // ReSharper disable once AssignNullToNotNullAttribute
             return nestedTry.Match(
-                Failure: Try.Failure<T>,
-                Success: t => t);
+                failure: Try.Failure<T>,
+                success: t => t);
         }
     }
 }

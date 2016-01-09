@@ -22,16 +22,16 @@ namespace NiceTry.Combinators {
         /// </exception>
         [NotNull]
         public static ITry<C> Zip<A, B, C>(this ITry<A> tryA, ITry<B> tryB, Func<A, B, C> zip) {
-            tryA.ThrowIfNull(nameof(tryA));
-            tryB.ThrowIfNull(nameof(tryB));
+            tryA.ThrowIfNullOrInvalid(nameof(tryA));
+            tryB.ThrowIfNullOrInvalid(nameof(tryB));
             zip.ThrowIfNull(nameof(zip));
 
             // ReSharper disable once AssignNullToNotNullAttribute
             return tryA.Match(
-                Failure: Try.Failure<C>,
-                Success: a => tryB.Match(
-                    Failure: Try.Failure<C>,
-                    Success: b => Try.To(() => zip(a, b))));
+                failure: Try.Failure<C>,
+                success: a => tryB.Match(
+                    failure: Try.Failure<C>,
+                    success: b => Try.To(() => zip(a, b))));
         }
 
         /// <summary>
@@ -52,16 +52,16 @@ namespace NiceTry.Combinators {
         /// </exception>
         [NotNull]
         public static ITry<C> ZipWith<A, B, C>(this ITry<A> tryA, ITry<B> tryB, Func<A, B, ITry<C>> zip) {
-            tryA.ThrowIfNull(nameof(tryA));
-            tryB.ThrowIfNull(nameof(tryB));
+            tryA.ThrowIfNullOrInvalid(nameof(tryA));
+            tryB.ThrowIfNullOrInvalid(nameof(tryB));
             zip.ThrowIfNull(nameof(zip));
 
             // ReSharper disable once AssignNullToNotNullAttribute
             return tryA.Match(
-                Failure: Try.Failure<C>,
-                Success: a => tryB.Match(
-                    Failure: Try.Failure<C>,
-                    Success: b => Try.To(() => zip(a, b))));
+                failure: Try.Failure<C>,
+                success: a => tryB.Match(
+                    failure: Try.Failure<C>,
+                    success: b => Try.To(() => zip(a, b))));
         }
     }
 }

@@ -103,8 +103,10 @@ namespace NiceTry {
 
             try {
                 var result = work();
-                if (result.IsNull())
-                    throw new ArgumentException("The given work returned null which is not allowed.", nameof(work));
+                if (result.IsNull()) {
+                    throw new ArgumentException("The specified expression returned null which is not allowed.",
+                        nameof(work));
+                }
 
                 return result;
             }
@@ -114,7 +116,7 @@ namespace NiceTry {
         }
 
         /// <summary>
-        ///     Tries to execute the given <paramref name="work" /> synchronously and return its result.
+        ///     Tries to execute the specified <paramref name="work" /> synchronously and return its result.
         ///     If an exception is thrown or <paramref name="work" /> returns <see langword="null" />, a
         ///     <see cref="NiceTry.Failure{T}" /> is returned otherwise a <see cref="NiceTry.Success" />.
         /// </summary>
@@ -130,14 +132,51 @@ namespace NiceTry {
 
             try {
                 var result = work();
-                if (result.IsNull())
-                    throw new ArgumentException("The given work returned null which is not allowed.", nameof(work));
+                if (result.IsNull()) {
+                    throw new ArgumentException("The specified expression returned null which is not allowed.",
+                        nameof(work));
+                }
 
                 return result;
             }
             catch (Exception ex) {
                 return Failure<T>(ex);
             }
+        }
+
+        /// <summary>
+        ///     Transforms the specified <paramref name="func" /> into a form which can be applied to an instance of
+        ///     <see cref="ITry{T}" /> instead of <typeparamref name="A" />.
+        /// </summary>
+        /// <typeparam name="A"></typeparam>
+        /// <typeparam name="B"></typeparam>
+        /// <param name="func"></param>
+        /// <returns></returns>
+        [NotNull]
+        public static Func<ITry<A>, ITry<B>> Lift<A, B>([NotNull] Func<A, B> func) {
+            func.ThrowIfNull(nameof(func));
+            return ta => ta.Match(
+                failure: Failure<B>,
+                success: a => To(() => func(a)));
+        }
+
+        /// <summary>
+        ///     Transforms the specified <paramref name="func" /> into a form which can be applied to two instance of
+        ///     <see cref="ITry{T}" /> instead of <typeparamref name="A" /> and <typeparamref name="B" />.
+        /// </summary>
+        /// <typeparam name="A"></typeparam>
+        /// <typeparam name="B"></typeparam>
+        /// <typeparam name="C"></typeparam>
+        /// <param name="func"></param>
+        /// <returns></returns>
+        [NotNull]
+        public static Func<ITry<A>, ITry<B>, ITry<C>> Lift2<A, B, C>([NotNull] Func<A, B, C> func) {
+            func.ThrowIfNull(nameof(func));
+            return (ta, tb) => ta.Match(
+                failure: Failure<C>,
+                success: a => tb.Match(
+                    failure: Failure<C>,
+                    success: b => To(() => func(a, b))));
         }
     }
 }

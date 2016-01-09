@@ -21,14 +21,14 @@ namespace NiceTry.Combinators {
         [NotNull]
         public static ITry Using<Disposable>([NotNull] this ITry @try, Func<Disposable> createDisposable,
             [NotNull] Action<Disposable> useDisposable) where Disposable : IDisposable {
-            @try.ThrowIfNull(nameof(@try));
+            @try.ThrowIfNullOrInvalid(nameof(@try));
             createDisposable.ThrowIfNull(nameof(createDisposable));
             useDisposable.ThrowIfNull(nameof(useDisposable));
 
             // ReSharper disable once AssignNullToNotNullAttribute
             return @try.Match(
-                Failure: Try.Failure,
-                Success: () => Try.Using(createDisposable, useDisposable));
+                failure: Try.Failure,
+                success: () => Try.Using(createDisposable, useDisposable));
         }
 
         /// <summary>
@@ -50,14 +50,14 @@ namespace NiceTry.Combinators {
         [NotNull]
         public static ITry Using<Disposable, T>([NotNull] this ITry<T> @try, [NotNull] Func<Disposable> createDisposable,
             [NotNull] Action<Disposable, T> useDisposable) where Disposable : IDisposable {
-            @try.ThrowIfNull(nameof(@try));
+            @try.ThrowIfNullOrInvalid(nameof(@try));
             createDisposable.ThrowIfNull(nameof(createDisposable));
             useDisposable.ThrowIfNull(nameof(useDisposable));
 
             // ReSharper disable once AssignNullToNotNullAttribute
             return @try.Match(
-                Failure: Try.Failure,
-                Success: x => Try.Using(createDisposable, d => useDisposable(d, x)));
+                failure: Try.Failure,
+                success: x => Try.Using(createDisposable, d => useDisposable(d, x)));
         }
 
         /// <summary>
@@ -79,14 +79,14 @@ namespace NiceTry.Combinators {
         [NotNull]
         public static ITry<T> Using<Disposable, T>([NotNull] this ITry @try, [NotNull] Func<Disposable> createDisposable,
             [NotNull] Func<Disposable, T> useDisposable) where Disposable : IDisposable {
-            @try.ThrowIfNull(nameof(@try));
+            @try.ThrowIfNullOrInvalid(nameof(@try));
             createDisposable.ThrowIfNull(nameof(createDisposable));
             useDisposable.ThrowIfNull(nameof(useDisposable));
 
             // ReSharper disable once AssignNullToNotNullAttribute
             return @try.Match(
-                Failure: Try.Failure<T>,
-                Success: () => Try.Using(createDisposable, useDisposable));
+                failure: Try.Failure<T>,
+                success: () => Try.Using(createDisposable, useDisposable));
         }
 
         /// <summary>
@@ -110,14 +110,14 @@ namespace NiceTry.Combinators {
         public static ITry<B> Using<Disposable, A, B>([NotNull] this ITry<A> @try,
             [NotNull] Func<Disposable> createDisposable,
             [NotNull] Func<Disposable, A, B> useDisposable) where Disposable : IDisposable {
-            @try.ThrowIfNull(nameof(@try));
+            @try.ThrowIfNullOrInvalid(nameof(@try));
             createDisposable.ThrowIfNull(nameof(createDisposable));
             useDisposable.ThrowIfNull(nameof(useDisposable));
 
             // ReSharper disable once AssignNullToNotNullAttribute
             return @try.Match(
-                Failure: Try.Failure<B>,
-                Success: a => Try.Using(createDisposable, d => useDisposable(d, a)));
+                failure: Try.Failure<B>,
+                success: a => Try.Using(createDisposable, d => useDisposable(d, a)));
         }
 
         /// <summary>
@@ -141,14 +141,14 @@ namespace NiceTry.Combinators {
         public static ITry<B> Using<Disposable, A, B>([NotNull] this ITry<A> @try,
             [NotNull] Func<A, Disposable> createDisposable,
             [NotNull] Func<Disposable, B> useDisposable) where Disposable : IDisposable {
-            @try.ThrowIfNull(nameof(@try));
+            @try.ThrowIfNullOrInvalid(nameof(@try));
             createDisposable.ThrowIfNull(nameof(createDisposable));
             useDisposable.ThrowIfNull(nameof(useDisposable));
 
             // ReSharper disable once AssignNullToNotNullAttribute
             return @try.Match(
-                Failure: Try.Failure<B>,
-                Success: a => Try.Using(() => createDisposable(a), useDisposable));
+                failure: Try.Failure<B>,
+                success: a => Try.Using(() => createDisposable(a), useDisposable));
         }
 
         /// <summary>
@@ -170,14 +170,14 @@ namespace NiceTry.Combinators {
         public static ITry UsingWith<Disposable>([NotNull] this ITry @try,
             [NotNull] Func<Disposable> createDisposable,
             [NotNull] Func<Disposable, ITry> useDisposable) where Disposable : IDisposable {
-            @try.ThrowIfNull(nameof(@try));
+            @try.ThrowIfNullOrInvalid(nameof(@try));
             createDisposable.ThrowIfNull(nameof(createDisposable));
             useDisposable.ThrowIfNull(nameof(useDisposable));
 
             // ReSharper disable once AssignNullToNotNullAttribute
             return @try.Match(
-                Failure: Try.Failure,
-                Success: () => Try.UsingWith(createDisposable, useDisposable));
+                failure: Try.Failure,
+                success: () => Try.UsingWith(createDisposable, useDisposable));
         }
 
         /// <summary>
@@ -200,14 +200,14 @@ namespace NiceTry.Combinators {
         public static ITry<T> UsingWith<Disposable, T>([NotNull] this ITry @try,
             [NotNull] Func<Disposable> createDisposable,
             [NotNull] Func<Disposable, ITry<T>> useDisposable) where Disposable : IDisposable {
-            @try.ThrowIfNull(nameof(@try));
+            @try.ThrowIfNullOrInvalid(nameof(@try));
             createDisposable.ThrowIfNull(nameof(createDisposable));
             useDisposable.ThrowIfNull(nameof(useDisposable));
 
             // ReSharper disable once AssignNullToNotNullAttribute
             return @try.Match(
-                Failure: Try.Failure<T>,
-                Success: () => Try.UsingWith(createDisposable, useDisposable));
+                failure: Try.Failure<T>,
+                success: () => Try.UsingWith(createDisposable, useDisposable));
         }
 
         /// <summary>
@@ -230,14 +230,14 @@ namespace NiceTry.Combinators {
         public static ITry UsingWith<Disposable, T>([NotNull] this ITry<T> @try,
             [NotNull] Func<T, Disposable> createDisposable,
             [NotNull] Func<Disposable, ITry> useDisposable) where Disposable : IDisposable {
-            @try.ThrowIfNull(nameof(@try));
+            @try.ThrowIfNullOrInvalid(nameof(@try));
             createDisposable.ThrowIfNull(nameof(createDisposable));
             useDisposable.ThrowIfNull(nameof(useDisposable));
 
             // ReSharper disable once AssignNullToNotNullAttribute
             return @try.Match(
-                Failure: Try.Failure,
-                Success: x => Try.UsingWith(() => createDisposable(x), useDisposable));
+                failure: Try.Failure,
+                success: x => Try.UsingWith(() => createDisposable(x), useDisposable));
         }
 
         /// <summary>
@@ -261,14 +261,14 @@ namespace NiceTry.Combinators {
         public static ITry<B> UsingWith<Disposable, A, B>([NotNull] this ITry<A> @try,
             [NotNull] Func<A, Disposable> createDisposable,
             [NotNull] Func<Disposable, ITry<B>> useDisposable) where Disposable : IDisposable {
-            @try.ThrowIfNull(nameof(@try));
+            @try.ThrowIfNullOrInvalid(nameof(@try));
             createDisposable.ThrowIfNull(nameof(createDisposable));
             useDisposable.ThrowIfNull(nameof(useDisposable));
 
             // ReSharper disable once AssignNullToNotNullAttribute
             return @try.Match(
-                Failure: Try.Failure<B>,
-                Success: a => Try.UsingWith(() => createDisposable(a), useDisposable));
+                failure: Try.Failure<B>,
+                success: a => Try.UsingWith(() => createDisposable(a), useDisposable));
         }
 
         /// <summary>
@@ -291,14 +291,14 @@ namespace NiceTry.Combinators {
         public static ITry UsingWith<Disposable, T>([NotNull] this ITry<T> @try,
             [NotNull] Func<Disposable> createDisposable,
             [NotNull] Func<Disposable, T, ITry> useDisposable) where Disposable : IDisposable {
-            @try.ThrowIfNull(nameof(@try));
+            @try.ThrowIfNullOrInvalid(nameof(@try));
             createDisposable.ThrowIfNull(nameof(createDisposable));
             useDisposable.ThrowIfNull(nameof(useDisposable));
 
             // ReSharper disable once AssignNullToNotNullAttribute
             return @try.Match(
-                Failure: Try.Failure,
-                Success: x => Try.UsingWith(createDisposable, d => useDisposable(d, x)));
+                failure: Try.Failure,
+                success: x => Try.UsingWith(createDisposable, d => useDisposable(d, x)));
         }
 
         /// <summary>
@@ -322,14 +322,14 @@ namespace NiceTry.Combinators {
         public static ITry<B> UsingWith<Disposable, A, B>([NotNull] this ITry<A> @try,
             [NotNull] Func<Disposable> createDisposable,
             [NotNull] Func<Disposable, A, ITry<B>> useDisposable) where Disposable : IDisposable {
-            @try.ThrowIfNull(nameof(@try));
+            @try.ThrowIfNullOrInvalid(nameof(@try));
             createDisposable.ThrowIfNull(nameof(createDisposable));
             useDisposable.ThrowIfNull(nameof(useDisposable));
 
             // ReSharper disable once AssignNullToNotNullAttribute
             return @try.Match(
-                Failure: Try.Failure<B>,
-                Success: a => Try.UsingWith(createDisposable, d => useDisposable(d, a)));
+                failure: Try.Failure<B>,
+                success: a => Try.UsingWith(createDisposable, d => useDisposable(d, a)));
         }
     }
 }

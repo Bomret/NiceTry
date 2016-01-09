@@ -16,13 +16,13 @@ namespace NiceTry.Combinators {
         /// </exception>
         [NotNull]
         public static ITry<B> Select<A, B>([NotNull] this ITry<A> @try, [NotNull] Func<A, B> @select) {
-            @try.ThrowIfNull(nameof(@try));
+            @try.ThrowIfNullOrInvalid(nameof(@try));
             @select.ThrowIfNull(nameof(@select));
 
             // ReSharper disable once AssignNullToNotNullAttribute
             return @try.Match(
-                Failure: Try.Failure<B>,
-                Success: a => Try.To(() => @select(a)));
+                failure: Try.Failure<B>,
+                success: a => Try.To(() => @select(a)));
         }
     }
 }

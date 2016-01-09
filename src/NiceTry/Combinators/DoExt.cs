@@ -16,8 +16,8 @@ namespace NiceTry.Combinators {
         /// </exception>
         [NotNull]
         public static ITry Do([NotNull] this ITry @try, [NotNull] Action action) {
-            @try.ThrowIfNull(nameof(@try));
             action.ThrowIfNull(nameof(action));
+            @try.ThrowIfNullOrInvalid(nameof(@try));
 
             return @try.IsFailure ? @try : Try.To(action);
         }
@@ -29,24 +29,24 @@ namespace NiceTry.Combinators {
         /// </summary>
         /// <param name="try"></param>
         /// <param name="action"></param>
-        /// <returns>A success if the operation succeeded or else a failure containig the encountered error.</returns>
+        /// <returns>A success if the operation succeeded or else a failure containing the encountered error.</returns>
         /// <exception cref="ArgumentNullException">
         ///     <paramref name="try" /> or <paramref name="action" /> is <see langword="null" />.
         /// </exception>
         [NotNull]
         public static ITry<T> Do<T>([NotNull] this ITry<T> @try, [NotNull] Action<T> action) {
-            @try.ThrowIfNull(nameof(@try));
             action.ThrowIfNull(nameof(action));
+            @try.ThrowIfNullOrInvalid(nameof(@try));
 
             // ReSharper disable once AssignNullToNotNullAttribute
             return @try.Match(
-                Failure: Try.Failure<T>,
-                Success: x => {
+                failure: Try.Failure<T>,
+                success: x => {
                     var copy = x;
                     return Try.To(() => action(copy))
                         .Match(
-                            Failure: Try.Failure<T>,
-                            Success: () => @try);
+                            failure: Try.Failure<T>,
+                            success: () => @try);
                 });
         }
     }

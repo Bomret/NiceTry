@@ -17,13 +17,13 @@ namespace NiceTry.Combinators {
         /// </exception>
         [NotNull]
         public static ITry<B> SelectMany<A, B>([NotNull] this ITry<A> @try, [NotNull] Func<A, ITry<B>> @select) {
-            @try.ThrowIfNull(nameof(@try));
+            @try.ThrowIfNullOrInvalid(nameof(@try));
             @select.ThrowIfNull(nameof(@select));
 
             // ReSharper disable once AssignNullToNotNullAttribute
             return @try.Match(
-                Failure: Try.Failure<B>,
-                Success: a => Try.To(() => @select(a)));
+                failure: Try.Failure<B>,
+                success: a => Try.To(() => @select(a)));
         }
 
         /// <summary>
@@ -43,17 +43,17 @@ namespace NiceTry.Combinators {
         [NotNull]
         public static ITry<C> SelectMany<A, B, C>([NotNull] this ITry<A> @try, [NotNull] Func<A, ITry<B>> trySelect,
             [NotNull] Func<A, B, C> resultSelect) {
-            @try.ThrowIfNull(nameof(@try));
+            @try.ThrowIfNullOrInvalid(nameof(@try));
             trySelect.ThrowIfNull(nameof(trySelect));
             resultSelect.ThrowIfNull(nameof(resultSelect));
 
             // ReSharper disable once AssignNullToNotNullAttribute
             return @try.Match(
-                Failure: Try.Failure<C>,
-                Success: a => Try.To(() => trySelect(a))
+                failure: Try.Failure<C>,
+                success: a => Try.To(() => trySelect(a))
                     .Match(
-                        Failure: Try.Failure<C>,
-                        Success: b => Try.To(() => resultSelect(a, b))));
+                        failure: Try.Failure<C>,
+                        success: b => Try.To(() => resultSelect(a, b))));
         }
     }
 }
