@@ -27,8 +27,8 @@ let info =
 // For typical project, no changes are needed below
 // --------------------------------------------------------------------------------------
 
-#load "../../packages/FSharp.Formatting/FSharp.Formatting.fsx"
-#I "../../packages/FAKE/tools/"
+#load "../../packages/build/FSharp.Formatting/FSharp.Formatting.fsx"
+#I "../../packages/build/FAKE/tools/"
 #r "NuGet.Core.dll"
 #r "FakeLib.dll"
 open Fake
