@@ -1,37 +1,39 @@
 ﻿namespace NiceTry.Tests
 
 open System
+open NUnit.Framework
 open FsCheck.NUnit
 open NiceTry
 open TheVoid
 
 module TryCreationTests =
-    [<Property>]
-    let ``Trying to execute actions that do not throw exceptions should always result in success`` (action : unit -> unit) =
-        Try.To action  = Try.Success Unit.Default
+    [<Test>]
+    let ``Trying to execute actions that do not throw exceptions should always result in success`` () =
+        Assert.AreEqual(Try.To (fun () -> ()), Try.Success Unit.Default)
 
     [<Property>]
-    let ``Trying to execute functions that do not throw exceptions should always result in success`` (func : unit -> string) =
-        Try.To func = Try.Success (func ())
+    let ``Trying to execute functions that do not throw exceptions should always result in success`` () =
+        let func = fun () -> "test"
+        Assert.AreEqual(Try.To func, Try.Success (func ()))
 
-    [<Property>]
+    [<Test>]
     let ``Trying to execute functions that do not throw exceptions and return instances of ITry<T> should always result in these instances`` () =
         let func = fun () -> Try.Success "test"
         
-        Try.To<string> func = func ()
+        Assert.AreEqual(Try.To<string> func, func ())
 
-    [<Property>]
+    [<Test>]
     let ``Trying to execute actions that throw exceptions should always result in failure`` () =
         let err = Exception "Expected err"
         let throw = fun () -> raise err; ()
 
-        Try.To throw = Try.Failure<Unit> err
+        Assert.AreEqual(Try.To throw, Try.Failure<Unit> err)
 
-    [<Property>]
+    [<Test>]
     let ``Trying to execute functions that throw exceptions should always result in failure`` () =
         let err = Exception "Expected err"
         let throw = fun () ->
             raise err
             0
 
-        Try.To throw = Try.Failure<int> err
+        Assert.AreEqual(Try.To throw, Try.Failure<int> err)
