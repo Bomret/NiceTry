@@ -14,7 +14,7 @@ namespace NiceTry {
             return ReferenceEquals(obj, null);
         }
 
-        public static void ThrowIfNullOrInvalid([NotNull] this ITry @try, string name) {
+        public static void ThrowIfNullOrInvalid<T>([NotNull] this ITry<T> @try, string name) {
             @try.ThrowIfNull(nameof(@try));
             if (@try.IsSuccess && @try.IsFailure)
                 throw new ArgumentException("The specified ITry does not represent either success or failure or represents both at once.", name);

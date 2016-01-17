@@ -2,8 +2,6 @@ using System;
 using System.Collections.Generic;
 using JetBrains.Annotations;
 
-// ReSharper disable CatchAllClause
-
 namespace NiceTry.Combinators {
     public static class JoinExt {
         /// <summary>

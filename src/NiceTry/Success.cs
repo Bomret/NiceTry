@@ -3,92 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 
-// ReSharper disable InconsistentNaming
-
 namespace NiceTry {
     /// <summary>
     ///     Represents the successful outcome of an operation.
     /// </summary>
     [DebuggerDisplay("{ToString(),nq}")]
-    public class Success : ITry {
-        /// <summary>
-        ///     Ths single instance of this object.
-        /// </summary>
-        internal static Success Instance { get; } = new Success();
-
-        protected Success() {}
+    public sealed class Success<T> : ITry<T> {
+        readonly T _value;
 
         public bool IsFailure => false;
         public bool IsSuccess => true;
-
-        public void Match(Action success, Action<Exception> failure) =>
-            success();
-
-        public T Match<T>(Func<T> success, Func<Exception, T> failure) =>
-            success();
-
-        public void IfSuccess(Action sideEffect) {
-            sideEffect.ThrowIfNull(nameof(sideEffect));
-
-            sideEffect();
-        }
-
-        public void IfFailure(Action<Exception> sideEffect) =>
-            sideEffect.ThrowIfNull(nameof(sideEffect));
-
-        #region Formatting
-
-        public override string ToString() => "Success()";
-
-        #endregion
-
-        #region Comparability
-
-        int IStructuralComparable.CompareTo(object other, IComparer comparer) {
-            if (other.IsNull()) return 1;
-
-            var asTry = other as ITry;
-            if (asTry.IsNull())
-                throw new ArgumentException("Provided object not of type Try", nameof(other));
-
-            return asTry.Match(
-                failure: _ => 1,
-                success: () => 0);
-        }
-
-        int IComparable<ITry>.CompareTo(ITry other) =>
-            ((IStructuralComparable) this).CompareTo(other, Comparer<object>.Default);
-
-        int IComparable.CompareTo(object obj) =>
-            ((IStructuralComparable) this).CompareTo(obj, Comparer<object>.Default);
-
-        #endregion
-
-        #region Equality
-
-        public bool Equals(ITry other) =>
-            ((IStructuralEquatable) this).Equals(other, EqualityComparer<object>.Default);
-
-        public override bool Equals(object obj) =>
-            ((IStructuralEquatable) this).Equals(obj, EqualityComparer<object>.Default);
-
-        public override int GetHashCode() =>
-            ((IStructuralEquatable) this).GetHashCode(EqualityComparer<object>.Default);
-
-        bool IStructuralEquatable.Equals(object other, IEqualityComparer comparer) =>
-            other is Success;
-
-        int IStructuralEquatable.GetHashCode(IEqualityComparer comparer) => 0;
-
-        #endregion
-    }
-
-    /// <summary>
-    ///     Represents the successful outcome of an operation that returned a result.
-    /// </summary>
-    [DebuggerDisplay("{ToString(),nq}")]
-    public sealed class Success<T> : Success, ITry<T> {
-        readonly T _value;
 
         internal Success(T value) {
             _value = value;
@@ -102,6 +26,8 @@ namespace NiceTry {
 
             sideEffect(_value);
         }
+
+        public void IfFailure(Action<Exception> sideEffect) {}
 
         #region Formatting
 

@@ -1,25 +1,12 @@
 ﻿using System;
 using JetBrains.Annotations;
+using TheVoid;
 
 namespace NiceTry {
     /// <summary>
     ///     Provides factory methods to create instances of <see cref="NiceTry.Try" /> and <see cref="Try" />.
     /// </summary>
     public static partial class Try {
-        /// <summary>
-        ///     Wraps the given <paramref name="error" /> in a <see cref="NiceTry.Failure" />.
-        /// </summary>
-        /// <param name="error"></param>
-        /// <returns></returns>
-        /// <exception cref="ArgumentNullException">
-        ///     <paramref name="error" /> is <see langword="null" />
-        /// </exception>
-        [NotNull]
-        public static ITry Failure([NotNull] Exception error) {
-            error.ThrowIfNull(nameof(error));
-            return new Failure(error);
-        }
-
         /// <summary>
         ///     Wraps the given <paramref name="error" /> in a <see cref="NiceTry.Failure{T}" />.
         /// </summary>
@@ -36,14 +23,7 @@ namespace NiceTry {
         }
 
         /// <summary>
-        ///     Returns the single instance of <see cref="NiceTry.Success" /> without a value.
-        /// </summary>
-        /// <returns></returns>
-        [NotNull]
-        public static ITry Success() => NiceTry.Success.Instance;
-
-        /// <summary>
-        ///     Wraps the given <paramref name="value" /> in a new <see cref="NiceTry.Success" />.
+        ///     Wraps the given <paramref name="value" /> in a new <see cref="NiceTry.Success{T}" />.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="value"></param>
@@ -53,7 +33,7 @@ namespace NiceTry {
 
         /// <summary>
         ///     Tries to execute the given <paramref name="work" /> synchronously.
-        ///     If an exception is thrown a <see cref="NiceTry.Failure" /> is returned otherwise <see cref="NiceTry.Success" />.
+        ///     If an exception is thrown a <see cref="NiceTry.Failure{T}" /> is returned otherwise <see cref="NiceTry.Success{T}" />.
         /// </summary>
         /// <param name="work"></param>
         /// <returns></returns>
@@ -61,15 +41,15 @@ namespace NiceTry {
         ///     <paramref name="work" /> is <see langword="null" />.
         /// </exception>
         [NotNull]
-        public static ITry To([NotNull] Action work) {
+        public static ITry<Unit> To([NotNull] Action work) {
             work.ThrowIfNull(nameof(work));
 
             try {
                 work();
-                return Success();
+                return Success(Unit.Default);
             }
             catch (Exception ex) {
-                return new Failure(ex);
+                return new Failure<Unit>(ex);
             }
         }
 
@@ -97,28 +77,10 @@ namespace NiceTry {
             }
         }
 
-        [NotNull]
-        public static ITry To([NotNull] Func<ITry> work) {
-            work.ThrowIfNull(nameof(work));
-
-            try {
-                var result = work();
-                if (result.IsNull()) {
-                    throw new ArgumentException("The specified expression returned null which is not allowed.",
-                        nameof(work));
-                }
-
-                return result;
-            }
-            catch (Exception ex) {
-                return Failure(ex);
-            }
-        }
-
         /// <summary>
         ///     Tries to execute the specified <paramref name="work" /> synchronously and return its result.
         ///     If an exception is thrown or <paramref name="work" /> returns <see langword="null" />, a
-        ///     <see cref="NiceTry.Failure{T}" /> is returned otherwise a <see cref="NiceTry.Success" />.
+        ///     <see cref="NiceTry.Failure{T}" /> is returned otherwise a <see cref="NiceTry.Success{T}" />.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="work"></param>

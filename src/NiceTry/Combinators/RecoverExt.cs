@@ -6,28 +6,6 @@ namespace NiceTry.Combinators {
         /// <summary>
         ///     Tries to recover from failure using the specified <paramref name="handleError" /> if the specified
         ///     <paramref name="try" /> represents failure. If the specified <paramref name="handleError" /> throws an exception, a
-        ///     <see cref="Failure" /> is returned.
-        /// </summary>
-        /// <param name="try"></param>
-        /// <param name="handleError"></param>
-        /// <returns></returns>
-        /// <exception cref="ArgumentNullException">
-        ///     <paramref name="try" /> or <paramref name="handleError" /> is <see langword="null" />.
-        /// </exception>
-        [NotNull]
-        public static ITry Recover(this ITry @try, Action<Exception> handleError) {
-            @try.ThrowIfNullOrInvalid(nameof(@try));
-            handleError.ThrowIfNull(nameof(handleError));
-
-            // ReSharper disable once AssignNullToNotNullAttribute
-            return @try.Match(
-                failure: err => Try.To(() => handleError(err)),
-                success: Try.Success);
-        }
-
-        /// <summary>
-        ///     Tries to recover from failure using the specified <paramref name="handleError" /> if the specified
-        ///     <paramref name="try" /> represents failure. If the specified <paramref name="handleError" /> throws an exception, a
         ///     <see cref="Failure{T}" /> is returned.
         /// </summary>
         /// <typeparam name="T" />
@@ -51,29 +29,7 @@ namespace NiceTry.Combinators {
         /// <summary>
         ///     Tries to recover from failure using the specified <paramref name="handleError" /> if the specified
         ///     <paramref name="try" /> represents failure. If the specified <paramref name="handleError" /> throws an exception, a
-        ///     <see cref="Failure" /> is returned.
-        /// </summary>
-        /// <param name="try"></param>
-        /// <param name="handleError"></param>
-        /// <returns></returns>
-        /// <exception cref="ArgumentNullException">
-        ///     <paramref name="try" /> or <paramref name="handleError" /> is <see langword="null" />.
-        /// </exception>
-        [NotNull]
-        public static ITry RecoverWith(this ITry @try, Func<Exception, ITry> handleError) {
-            @try.ThrowIfNullOrInvalid(nameof(@try));
-            handleError.ThrowIfNull(nameof(handleError));
-
-            // ReSharper disable once AssignNullToNotNullAttribute
-            return @try.Match(
-                failure: err => Try.To(() => handleError(err)),
-                success: Try.Success);
-        }
-
-        /// <summary>
-        ///     Tries to recover from failure using the specified <paramref name="handleError" /> if the specified
-        ///     <paramref name="try" /> represents failure. If the specified <paramref name="handleError" /> throws an exception, a
-        ///     <see cref="Failure" /> is returned.
+        ///     <see cref="Failure{T}" /> is returned.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="try"></param>

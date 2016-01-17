@@ -4,28 +4,9 @@ using JetBrains.Annotations;
 namespace NiceTry.Combinators {
     public static class DoExt {
         /// <summary>
-        ///     Executes the specified <paramref name="action" /> if the specified <paramref name="try" /> represents success.
-        ///     If it represents failure or the <paramref name="action" /> throws an exception,
-        ///     a <see cref="Failure" /> is returned.
-        /// </summary>
-        /// <param name="try"></param>
-        /// <param name="action"></param>
-        /// <returns></returns>
-        /// <exception cref="ArgumentNullException">
-        ///     <paramref name="try" /> or <paramref name="action" /> is <see langword="null" />.
-        /// </exception>
-        [NotNull]
-        public static ITry Do([NotNull] this ITry @try, [NotNull] Action action) {
-            action.ThrowIfNull(nameof(action));
-            @try.ThrowIfNullOrInvalid(nameof(@try));
-
-            return @try.IsFailure ? @try : Try.To(action);
-        }
-
-        /// <summary>
         ///     Executes the specified <paramref name="action" /> on the contained value if the specified <paramref name="try" />
         ///     represents success. If it represents failure or the <paramref name="action" /> throws an exception, a
-        ///     <see cref="Failure" /> is returned.
+        ///     <see cref="Failure{T}" /> is returned.
         /// </summary>
         /// <param name="try"></param>
         /// <param name="action"></param>
@@ -46,7 +27,7 @@ namespace NiceTry.Combinators {
                     return Try.To(() => action(copy))
                         .Match(
                             failure: Try.Failure<T>,
-                            success: () => @try);
+                            success: _ => @try);
                 });
         }
     }
