@@ -56,7 +56,10 @@
     <Compile Include="AssemblyInfo.fs" />
     <Compile Include="Try.Creation.Tests.fs" />
     <None Include="paket.references" />
-    <Compile Include="Combinators\SelectExtTests.fs" />
+    <Compile Include="Combinators\SelectExt.Tests.fs" />
+    <Compile Include="Combinators\SelectManyExt.Tests.fs" />
+    <Compile Include="Combinators\ApplyExt.Tests.fs" />
+    <Compile Include="Combinators\CatchExt.Tests.fs" />
   </ItemGroup>
   <PropertyGroup>
     <MinimumVisualStudioVersion Condition="'$(MinimumVisualStudioVersion)' == ''">11</MinimumVisualStudioVersion>

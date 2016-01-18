@@ -1,8 +1,7 @@
-﻿module NiceTry.Tests.Combinators
+﻿namespace NiceTry.Tests.Combinators
 
 open System
 open NUnit.Framework
-open FsCheck.NUnit
 open NiceTry
 open NiceTry.Combinators
 
@@ -13,7 +12,7 @@ module SelectExtTests =
 
     [<Test>]
     let ``Trying to transform values that throw exceptions should always result in failure`` () =
-        let err = Exception "Exception"
+        let err = Exception "Expected err"
         let throw = fun () -> raise err
         Assert.AreEqual(Try.Failure err, SelectExt.Select(Try.Success 3, fun _ -> throw ()))
 
