@@ -11,6 +11,7 @@ namespace NiceTry {
     [DebuggerDisplay("{ToString(),nq}")]
     public sealed class Failure<T> : ITry<T> {
         readonly Exception _error;
+
         public bool IsFailure => true;
         public bool IsSuccess => false;
 
@@ -35,16 +36,14 @@ namespace NiceTry {
 
         #region Equality
 
-        static int CombineHashCodes(int h1, int h2) =>
-            ((h1 << 5) + h1) ^ h2;
-
         bool IStructuralEquatable.Equals(object other, IEqualityComparer comparer) {
             var failure = other as Failure<T>;
-            return !failure.IsNull() && comparer.Equals(_error, failure._error);
+
+            return failure.IsNotNull() && comparer.Equals(_error, failure._error);
         }
 
         int IStructuralEquatable.GetHashCode(IEqualityComparer comparer) =>
-            CombineHashCodes(comparer.GetHashCode(IsFailure), comparer.GetHashCode(_error));
+            _.CombineHashCodes(comparer.GetHashCode(IsFailure), comparer.GetHashCode(_error));
 
         public bool Equals(ITry<T> other) =>
             ((IStructuralEquatable)this).Equals(other, EqualityComparer<object>.Default);
@@ -66,10 +65,11 @@ namespace NiceTry {
             ((IStructuralComparable)this).CompareTo(obj, Comparer<object>.Default);
 
         int IStructuralComparable.CompareTo(object other, IComparer comparer) {
-            if (other.IsNull()) return 1;
+            if(other.IsNull()) return 1;
+            if(ReferenceEquals(this, other)) return 0;
 
             var @try = other as ITry<T>;
-            if (@try.IsNull())
+            if(@try.IsNull())
                 throw new ArgumentException("Provided object not of type ITry<T>", nameof(other));
 
             return @try.Match(

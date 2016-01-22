@@ -44,13 +44,10 @@ namespace NiceTry {
         public static ITry<Unit> To([NotNull] Action work) {
             work.ThrowIfNull(nameof(work));
 
-            try {
+            return To(() => {
                 work();
                 return Success(Unit.Default);
-            }
-            catch (Exception ex) {
-                return new Failure<Unit>(ex);
-            }
+            });
         }
 
         /// <summary>
@@ -68,13 +65,10 @@ namespace NiceTry {
         public static ITry<T> To<T>([NotNull] Func<T> work) {
             work.ThrowIfNull(nameof(work));
 
-            try {
-                var result = work();
-                return Success(result);
-            }
-            catch (Exception ex) {
-                return Failure<T>(ex);
-            }
+            return To(() => {
+                var res = work();
+                return Success(res);
+            });
         }
 
         /// <summary>
@@ -94,14 +88,14 @@ namespace NiceTry {
 
             try {
                 var result = work();
-                if (result.IsNull()) {
-                    throw new ArgumentException("The specified expression returned null which is not allowed.",
+                if(result.IsNull()) {
+                    throw new ArgumentException(
+                        "The specified expression returned null which is not allowed.",
                         nameof(work));
                 }
 
                 return result;
-            }
-            catch (Exception ex) {
+            } catch(Exception ex) {
                 return Failure<T>(ex);
             }
         }

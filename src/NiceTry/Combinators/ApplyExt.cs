@@ -19,12 +19,11 @@ namespace NiceTry.Combinators {
         [NotNull]
         public static ITry<Unit> Apply<T>([NotNull] this ITry<T> @try, [NotNull] Action<T> apply) {
             apply.ThrowIfNull(nameof(apply));
-            @try.ThrowIfNullOrInvalid(nameof(@try));
 
-            // ReSharper disable once AssignNullToNotNullAttribute
-            return @try.Match(
-                failure: Try.Failure<Unit>,
-                success: x => Try.To(() => apply(x)));
+            return ApplyWith(@try, x => {
+                apply(x);
+                return Try.Success(Unit.Default);
+            });
         }
 
         /// <summary>

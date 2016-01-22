@@ -21,7 +21,7 @@ namespace NiceTry.Combinators {
 
             // ReSharper disable once AssignNullToNotNullAttribute
             return @try.Match(
-                failure: Try.Failure<T>,
+                failure: _ => @try,
                 success: x => {
                     var copy = x;
                     return Try.To(() => action(copy))

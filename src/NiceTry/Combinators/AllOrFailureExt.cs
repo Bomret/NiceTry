@@ -26,7 +26,7 @@ namespace NiceTry.Combinators {
                         failure: ex => err = ex,
                         success: x => res.Add(x));
 
-                    if (!err.IsNull())
+                    if (err.IsNotNull())
                         return Try.Failure<IEnumerable<T>>(err);
                 }
 

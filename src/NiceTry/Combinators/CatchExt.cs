@@ -21,20 +21,16 @@ namespace NiceTry.Combinators {
         public static ITry<T> Catch<TErr, T>([NotNull] this ITry<T> @try, [NotNull] Func<TErr, T> handleError)
             where TErr : Exception {
             handleError.ThrowIfNull(nameof(handleError));
-            @try.ThrowIfNullOrInvalid(nameof(@try));
 
-            // ReSharper disable once AssignNullToNotNullAttribute
-            return @try.Match(
-                success: Try.Success, 
-                failure: err => {
-                    var asErr = err as TErr;
-                    return asErr.IsNull() ? @try : Try.To(() => handleError(asErr));
-                });
+            return CatchWith<TErr, T>(@try, err => {
+                var res = handleError(err);
+                return Try.Success(res);
+            });
         }
 
         /// <summary>
         ///     If the specified <paramref name="try" /> represents failure and contains an exception of type
-        ///     <typeparamref name="TErr" />, the specified <paramref name="handleError" /> is executed and its result is returned.
+        ///     <typeparam name="TErr" />, the specified <paramref name="handleError" /> is executed and its result is returned.
         ///     If that fails a <see cref="Failure{T}" /> is returned, otherwise or if <paramref name="try" /> represents success,
         ///     a <see cref="Success{T}" /> is returned.
         /// </summary>
@@ -54,7 +50,7 @@ namespace NiceTry.Combinators {
 
             // ReSharper disable once AssignNullToNotNullAttribute
             return @try.Match(
-                success: Try.Success,
+                success: _ => @try,
                 failure: err => {
                     var asErr = err as TErr;
                     return asErr.IsNull() ? @try : Try.To(() => handleError(asErr));

@@ -17,13 +17,12 @@ namespace NiceTry.Combinators {
         /// </exception>
         [NotNull]
         public static ITry<T> Recover<T>(this ITry<T> @try, Func<Exception, T> handleError) {
-            @try.ThrowIfNullOrInvalid(nameof(@try));
             handleError.ThrowIfNull(nameof(handleError));
 
-            // ReSharper disable once AssignNullToNotNullAttribute
-            return @try.Match(
-                failure: err => Try.To(() => handleError(err)),
-                success: Try.Success);
+            return RecoverWith(@try, err => {
+                var res = handleError(err);
+                return Try.Success(res);
+            });
         }
 
         /// <summary>

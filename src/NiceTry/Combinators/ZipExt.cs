@@ -22,16 +22,12 @@ namespace NiceTry.Combinators {
         /// </exception>
         [NotNull]
         public static ITry<C> Zip<A, B, C>(this ITry<A> tryA, ITry<B> tryB, Func<A, B, C> zip) {
-            tryA.ThrowIfNullOrInvalid(nameof(tryA));
-            tryB.ThrowIfNullOrInvalid(nameof(tryB));
             zip.ThrowIfNull(nameof(zip));
 
-            // ReSharper disable once AssignNullToNotNullAttribute
-            return tryA.Match(
-                failure: Try.Failure<C>,
-                success: a => tryB.Match(
-                    failure: Try.Failure<C>,
-                    success: b => Try.To(() => zip(a, b))));
+            return ZipWith(tryA, tryB, (a, b) => {
+                var c = zip(a, b);
+                return Try.Success(c);
+            });
         }
 
         /// <summary>

@@ -23,12 +23,11 @@ namespace NiceTry {
         public static ITry<T> Using<Disposable, T>(
             [NotNull] Func<Disposable> createDisposable,
             [NotNull] Func<Disposable, T> useDisposable) where Disposable : IDisposable {
-            createDisposable.ThrowIfNull(nameof(createDisposable));
             useDisposable.ThrowIfNull(nameof(useDisposable));
 
-            return To(() => {
-                using (var d = createDisposable())
-                    return useDisposable(d);
+            return UsingWith(createDisposable, d => {
+                var res = useDisposable(d);
+                return Success(res);
             });
         }
 
@@ -50,12 +49,11 @@ namespace NiceTry {
         public static ITry<Unit> Using<Disposable>(
             [NotNull] Func<Disposable> createDisposable,
             [NotNull] Action<Disposable> useDisposable) where Disposable : IDisposable {
-            createDisposable.ThrowIfNull(nameof(createDisposable));
             useDisposable.ThrowIfNull(nameof(useDisposable));
 
-            return To(() => {
-                using (var d = createDisposable())
-                    useDisposable(d);
+            return UsingWith(createDisposable, d => {
+                useDisposable(d);
+                return Success(Unit.Default);
             });
         }
 
@@ -82,7 +80,7 @@ namespace NiceTry {
             useDisposable.ThrowIfNull(nameof(useDisposable));
 
             return To(() => {
-                using (var d = createDisposable())
+                using(var d = createDisposable())
                     return useDisposable(d);
             });
         }

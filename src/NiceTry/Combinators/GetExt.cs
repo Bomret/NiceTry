@@ -41,13 +41,8 @@ namespace NiceTry.Combinators {
         ///     <paramref name="try" /> or <paramref name="fallback" /> is <see langword="null" />.
         /// </exception>
         [CanBeNull]
-        public static T GetOrElse<T>([NotNull] this ITry<T> @try, [CanBeNull] T fallback) {
-            @try.ThrowIfNullOrInvalid(nameof(@try));
-
-            return @try.Match(
-                failure: _ => fallback,
-                success: x => x);
-        }
+        public static T GetOrElse<T>([NotNull] this ITry<T> @try, [CanBeNull] T fallback) =>
+        GetOrElse(@try, () => fallback);
 
         /// <summary>
         ///     Returns the value of the specified <paramref name="try" /> if it represents success or executes the
@@ -67,26 +62,6 @@ namespace NiceTry.Combinators {
 
             return @try.Match(
                 failure: _ => fallback(),
-                success: x => x);
-        }
-
-        /// <summary>
-        ///     Returns the value of the specified <paramref name="try" /> if it represents success or the default of
-        ///     <typeparam name="T" />
-        ///     if it represents failure.
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="try"></param>
-        /// <returns></returns>
-        /// <exception cref="ArgumentNullException">
-        ///     <paramref name="try" /> is <see langword="null" />.
-        /// </exception>
-        [CanBeNull]
-        public static T GetOrDefault<T>([NotNull] this ITry<T> @try) {
-            @try.ThrowIfNullOrInvalid(nameof(@try));
-
-            return @try.Match(
-                failure: _ => default(T),
                 success: x => x);
         }
     }

@@ -15,14 +15,8 @@ namespace NiceTry.Combinators {
         ///     <paramref name="try" /> is <see langword="null" />.
         /// </exception>
         [NotNull]
-        public static ITry<T> OrElse<T>([NotNull] this ITry<T> @try, [CanBeNull] T fallback) {
-            @try.ThrowIfNullOrInvalid(nameof(@try));
-            
-            // ReSharper disable once AssignNullToNotNullAttribute
-            return @try.Match(
-                failure: _ => Try.Success(fallback),
-                success: _ => @try);
-        }
+        public static ITry<T> OrElse<T>([NotNull] this ITry<T> @try, [CanBeNull] T fallback) =>
+        OrElseWith(@try, () => Try.Success(fallback));
 
         /// <summary>
         ///     Returns the specified <paramref name="try" /> if it represents success or else tries to evaluate the specified
@@ -37,13 +31,12 @@ namespace NiceTry.Combinators {
         /// </exception>
         [NotNull]
         public static ITry<T> OrElse<T>([NotNull] this ITry<T> @try, [NotNull] Func<T> fallback) {
-            @try.ThrowIfNullOrInvalid(nameof(@try));
             fallback.ThrowIfNull(nameof(fallback));
 
-            // ReSharper disable once AssignNullToNotNullAttribute
-            return @try.Match(
-                failure: _ => Try.To(fallback),
-                success: _ => @try);
+            return OrElseWith(@try, () => {
+                var res = fallback();
+                return Try.Success(res);
+            });
         }
 
         /// <summary>
@@ -59,13 +52,9 @@ namespace NiceTry.Combinators {
         /// </exception>
         [NotNull]
         public static ITry<T> OrElseWith<T>([NotNull] this ITry<T> @try, [NotNull] ITry<T> fallback) {
-            @try.ThrowIfNullOrInvalid(nameof(@try));
             fallback.ThrowIfNull(nameof(fallback));
 
-            // ReSharper disable once AssignNullToNotNullAttribute
-            return @try.Match(
-                failure: _ => fallback,
-                success: _ => @try);
+            return OrElseWith(@try, () => fallback);
         }
 
         /// <summary>

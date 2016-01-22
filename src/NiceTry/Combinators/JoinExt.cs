@@ -25,9 +25,8 @@ namespace NiceTry.Combinators {
         /// </exception>
         [NotNull]
         public static ITry<C> Join<A, B, K, C>(ITry<A> tryA, ITry<B> tryB, Func<A, K> aKeySelect,
-            Func<B, K> bKeySelect, Func<A, B, C> resultSelect) {
-            return Join(tryA, tryB, aKeySelect, bKeySelect, resultSelect, EqualityComparer<K>.Default);
-        }
+            Func<B, K> bKeySelect, Func<A, B, C> resultSelect) =>
+            Join(tryA, tryB, aKeySelect, bKeySelect, resultSelect, EqualityComparer<K>.Default);
 
         /// <summary>
         ///     Joins the results of <paramref name="tryA" /> and <paramref name="tryB" /> using the
@@ -57,7 +56,7 @@ namespace NiceTry.Combinators {
             aKeySelect.ThrowIfNull(nameof(aKeySelect));
             bKeySelect.ThrowIfNull(nameof(bKeySelect));
             resultSelect.ThrowIfNull(nameof(resultSelect));
-            
+
             // ReSharper disable once AssignNullToNotNullAttribute
             return tryA.Match(
                 failure: Try.Failure<C>,
@@ -68,11 +67,11 @@ namespace NiceTry.Combinators {
                         var bKey = bKeySelect(b);
                         var compare = keyCompare ?? EqualityComparer<K>.Default;
 
-                        if (compare.Equals(aKey, bKey)) {
+                        if(compare.Equals(aKey, bKey)) {
                             var result = resultSelect(a, b);
                             return Try.Success(result);
                         }
-                        return Try.Failure<C>(new Exception($"{tryA} and {tryB} could not be joined because their keys are not equal"));
+                        return Try.Failure<C>(new Exception($"{tryA} and {tryB} could not be joined because the selected keys are not equal"));
                     })));
         }
     }
