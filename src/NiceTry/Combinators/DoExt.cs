@@ -15,7 +15,7 @@ namespace NiceTry.Combinators {
         ///     <paramref name="try" /> or <paramref name="action" /> is <see langword="null" />.
         /// </exception>
         [NotNull]
-        public static ITry<T> Do<T>([NotNull] this ITry<T> @try, [NotNull] Action<T> action) {
+        public static Try<T> Do<T>([NotNull] this Try<T> @try, [NotNull] Action<T> action) {
             action.ThrowIfNull(nameof(action));
             @try.ThrowIfNullOrInvalid(nameof(@try));
 

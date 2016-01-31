@@ -3,7 +3,7 @@ using JetBrains.Annotations;
 
 namespace NiceTry.Combinators {
     public static class TransformExt {
-        public static ITry<B> Transform<A, B>([NotNull] this ITry<A> @try, [NotNull] Func<A, B> success, [NotNull] Func<Exception, B> failure) {
+        public static Try<B> Transform<A, B>([NotNull] this Try<A> @try, [NotNull] Func<A, B> success, [NotNull] Func<Exception, B> failure) {
             success.ThrowIfNull(nameof(success));
             failure.ThrowIfNull(nameof(failure));
 
@@ -18,7 +18,7 @@ namespace NiceTry.Combinators {
                 });
         }
 
-        public static ITry<B> TransformWith<A, B>([NotNull] this ITry<A> @try, [NotNull] Func<A, ITry<B>> success, [NotNull] Func<Exception, ITry<B>> failure) {
+        public static Try<B> TransformWith<A, B>([NotNull] this Try<A> @try, [NotNull] Func<A, Try<B>> success, [NotNull] Func<Exception, Try<B>> failure) {
             @try.ThrowIfNullOrInvalid(nameof(@try));
             success.ThrowIfNull(nameof(success));
             failure.ThrowIfNull(nameof(failure));

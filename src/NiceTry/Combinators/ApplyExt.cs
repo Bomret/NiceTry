@@ -17,7 +17,7 @@ namespace NiceTry.Combinators {
         ///     <paramref name="try" /> or <paramref name="apply" /> is <see langword="null" />.
         /// </exception>
         [NotNull]
-        public static ITry<Unit> Apply<T>([NotNull] this ITry<T> @try, [NotNull] Action<T> apply) {
+        public static Try<Unit> Apply<T>([NotNull] this Try<T> @try, [NotNull] Action<T> apply) {
             apply.ThrowIfNull(nameof(apply));
 
             return ApplyWith(@try, x => {
@@ -39,7 +39,7 @@ namespace NiceTry.Combinators {
         ///     <paramref name="try" /> or <paramref name="apply" /> is <see langword="null" />.
         /// </exception>
         [NotNull]
-        public static ITry<Unit> ApplyWith<T>([NotNull] this ITry<T> @try, [NotNull] Func<T, ITry<Unit>> apply) {
+        public static Try<Unit> ApplyWith<T>([NotNull] this Try<T> @try, [NotNull] Func<T, Try<Unit>> apply) {
             apply.ThrowIfNull(nameof(apply));
             @try.ThrowIfNullOrInvalid(nameof(@try));
 

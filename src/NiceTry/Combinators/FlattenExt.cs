@@ -13,7 +13,7 @@ namespace NiceTry.Combinators {
         ///     <paramref name="nestedTry" /> is <see langword="null" />.
         /// </exception>
         [NotNull]
-        public static ITry<T> Flatten<T>([NotNull] this ITry<ITry<T>> nestedTry) {
+        public static Try<T> Flatten<T>([NotNull] this Try<Try<T>> nestedTry) {
             nestedTry.ThrowIfNullOrInvalid(nameof(nestedTry));
 
             // ReSharper disable once AssignNullToNotNullAttribute

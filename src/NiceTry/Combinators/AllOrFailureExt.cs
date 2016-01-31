@@ -13,7 +13,7 @@ namespace NiceTry.Combinators {
         /// <typeparam name="T"></typeparam>
         /// <param name="enumerable"></param>
         /// <returns></returns>
-        public static ITry<IEnumerable<T>> AllOrFailure<T>(this IEnumerable<ITry<T>> enumerable) {
+        public static Try<IEnumerable<T>> AllOrFailure<T>(this IEnumerable<Try<T>> enumerable) {
             enumerable.ThrowIfNull(nameof(enumerable));
 
             return Try.To(() => {

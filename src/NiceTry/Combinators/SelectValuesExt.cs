@@ -14,7 +14,7 @@ namespace NiceTry.Combinators {
         /// <exception cref="ArgumentNullException">
         ///     <paramref name="enumerable" /> is <see langword="null" />.
         /// </exception>
-        public static IEnumerable<T> SelectValues<T>(this IEnumerable<ITry<T>> enumerable) {
+        public static IEnumerable<T> SelectValues<T>(this IEnumerable<Try<T>> enumerable) {
             enumerable.ThrowIfNull(nameof(enumerable));
 
             return enumerable

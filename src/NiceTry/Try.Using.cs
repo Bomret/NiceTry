@@ -20,7 +20,7 @@ namespace NiceTry {
         ///     <see langword="null" />.
         /// </exception>
         [NotNull]
-        public static ITry<T> Using<Disposable, T>(
+        public static Try<T> Using<Disposable, T>(
             [NotNull] Func<Disposable> createDisposable,
             [NotNull] Func<Disposable, T> useDisposable) where Disposable : IDisposable {
             useDisposable.ThrowIfNull(nameof(useDisposable));
@@ -46,7 +46,7 @@ namespace NiceTry {
         ///     <see langword="null" />.
         /// </exception>
         [NotNull]
-        public static ITry<Unit> Using<Disposable>(
+        public static Try<Unit> Using<Disposable>(
             [NotNull] Func<Disposable> createDisposable,
             [NotNull] Action<Disposable> useDisposable) where Disposable : IDisposable {
             useDisposable.ThrowIfNull(nameof(useDisposable));
@@ -73,9 +73,9 @@ namespace NiceTry {
         ///     <see langword="null" />.
         /// </exception>
         [NotNull]
-        public static ITry<T> UsingWith<Disposable, T>(
+        public static Try<T> UsingWith<Disposable, T>(
             [NotNull] Func<Disposable> createDisposable,
-            [NotNull] Func<Disposable, ITry<T>> useDisposable) where Disposable : IDisposable {
+            [NotNull] Func<Disposable, Try<T>> useDisposable) where Disposable : IDisposable {
             createDisposable.ThrowIfNull(nameof(createDisposable));
             useDisposable.ThrowIfNull(nameof(useDisposable));
 

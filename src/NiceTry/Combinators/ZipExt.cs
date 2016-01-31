@@ -21,7 +21,7 @@ namespace NiceTry.Combinators {
         ///     <paramref name="tryA" />, <paramref name="tryB" /> or <paramref name="zip" /> is <see langword="null" />.
         /// </exception>
         [NotNull]
-        public static ITry<C> Zip<A, B, C>(this ITry<A> tryA, ITry<B> tryB, Func<A, B, C> zip) {
+        public static Try<C> Zip<A, B, C>(this Try<A> tryA, Try<B> tryB, Func<A, B, C> zip) {
             zip.ThrowIfNull(nameof(zip));
 
             return ZipWith(tryA, tryB, (a, b) => {
@@ -47,7 +47,7 @@ namespace NiceTry.Combinators {
         ///     <paramref name="tryA" />, <paramref name="tryB" /> or <paramref name="zip" /> is <see langword="null" />.
         /// </exception>
         [NotNull]
-        public static ITry<C> ZipWith<A, B, C>(this ITry<A> tryA, ITry<B> tryB, Func<A, B, ITry<C>> zip) {
+        public static Try<C> ZipWith<A, B, C>(this Try<A> tryA, Try<B> tryB, Func<A, B, Try<C>> zip) {
             tryA.ThrowIfNullOrInvalid(nameof(tryA));
             tryB.ThrowIfNullOrInvalid(nameof(tryB));
             zip.ThrowIfNull(nameof(zip));

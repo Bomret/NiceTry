@@ -16,7 +16,7 @@ namespace NiceTry.Combinators {
         ///     <paramref name="try" /> or <paramref name="select" /> is <see langword="null" />.
         /// </exception>
         [NotNull]
-        public static ITry<B> SelectMany<A, B>([NotNull] this ITry<A> @try, [NotNull] Func<A, ITry<B>> @select) {
+        public static Try<B> SelectMany<A, B>([NotNull] this Try<A> @try, [NotNull] Func<A, Try<B>> @select) {
             @try.ThrowIfNullOrInvalid(nameof(@try));
             @select.ThrowIfNull(nameof(@select));
 
@@ -41,7 +41,7 @@ namespace NiceTry.Combinators {
         ///     <paramref name="try"/>, <paramref name="trySelect"/> or <paramref name="resultSelect"/> is <see langword="null"/>.
         /// </exception>
         [NotNull]
-        public static ITry<C> SelectMany<A, B, C>([NotNull] this ITry<A> @try, [NotNull] Func<A, ITry<B>> trySelect,
+        public static Try<C> SelectMany<A, B, C>([NotNull] this Try<A> @try, [NotNull] Func<A, Try<B>> trySelect,
             [NotNull] Func<A, B, C> resultSelect) {
             @try.ThrowIfNullOrInvalid(nameof(@try));
             trySelect.ThrowIfNull(nameof(trySelect));

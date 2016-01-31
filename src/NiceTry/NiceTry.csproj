@@ -66,6 +66,8 @@
     <Compile Include="Try.cs" />
     <Compile Include="Try.Using.cs" />
     <Compile Include="_.cs" />
+    <Compile Include="TryKind.cs" />
+    <Compile Include="Combinators\MatchExt.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

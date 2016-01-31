@@ -16,7 +16,7 @@ namespace NiceTry.Combinators {
         ///     <paramref name="try" /> or <paramref name="handleError" /> is <see langword="null" />.
         /// </exception>
         [NotNull]
-        public static ITry<T> Recover<T>(this ITry<T> @try, Func<Exception, T> handleError) {
+        public static Try<T> Recover<T>(this Try<T> @try, Func<Exception, T> handleError) {
             handleError.ThrowIfNull(nameof(handleError));
 
             return RecoverWith(@try, err => {
@@ -38,7 +38,7 @@ namespace NiceTry.Combinators {
         ///     <paramref name="try" /> or <paramref name="handleError" /> is <see langword="null" />.
         /// </exception>
         [NotNull]
-        public static ITry<T> RecoverWith<T>(this ITry<T> @try, Func<Exception, ITry<T>> handleError) {
+        public static Try<T> RecoverWith<T>(this Try<T> @try, Func<Exception, Try<T>> handleError) {
             @try.ThrowIfNullOrInvalid(nameof(@try));
             handleError.ThrowIfNull(nameof(handleError));
 

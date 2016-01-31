@@ -1,6 +1,7 @@
 ﻿using System;
 using JetBrains.Annotations;
 using TheVoid;
+using NiceTry.Combinators;
 
 namespace NiceTry {
     /// <summary>
@@ -17,7 +18,7 @@ namespace NiceTry {
         ///     <paramref name="error" /> is <see langword="null" />
         /// </exception>
         [NotNull]
-        public static ITry<T> Failure<T>([NotNull] Exception error) {
+        public static Try<T> Failure<T>([NotNull] Exception error) {
             error.ThrowIfNull(nameof(error));
             return new Failure<T>(error);
         }
@@ -29,7 +30,7 @@ namespace NiceTry {
         /// <param name="value"></param>
         /// <returns></returns>
         [NotNull]
-        public static ITry<T> Success<T>([CanBeNull] T value) => new Success<T>(value);
+        public static Try<T> Success<T>([CanBeNull] T value) => new Success<T>(value);
 
         /// <summary>
         ///     Tries to execute the given <paramref name="work" /> synchronously.
@@ -41,7 +42,7 @@ namespace NiceTry {
         ///     <paramref name="work" /> is <see langword="null" />.
         /// </exception>
         [NotNull]
-        public static ITry<Unit> To([NotNull] Action work) {
+        public static Try<Unit> To([NotNull] Action work) {
             work.ThrowIfNull(nameof(work));
 
             return To(() => {
@@ -62,7 +63,7 @@ namespace NiceTry {
         ///     <paramref name="work" /> is <see langword="null" />
         /// </exception>
         [NotNull]
-        public static ITry<T> To<T>([NotNull] Func<T> work) {
+        public static Try<T> To<T>([NotNull] Func<T> work) {
             work.ThrowIfNull(nameof(work));
 
             return To(() => {
@@ -83,7 +84,7 @@ namespace NiceTry {
         ///     <paramref name="work" /> is <see langword="null" />
         /// </exception>
         [NotNull]
-        public static ITry<T> To<T>([NotNull] Func<ITry<T>> work) {
+        public static Try<T> To<T>([NotNull] Func<Try<T>> work) {
             work.ThrowIfNull(nameof(work));
 
             try {
@@ -109,7 +110,7 @@ namespace NiceTry {
         /// <param name="func"></param>
         /// <returns></returns>
         [NotNull]
-        public static Func<ITry<A>, ITry<B>> Lift<A, B>([NotNull] Func<A, B> func) {
+        public static Func<Try<A>, Try<B>> Lift<A, B>([NotNull] Func<A, B> func) {
             func.ThrowIfNull(nameof(func));
             return ta => ta.Match(
                 failure: Failure<B>,
@@ -126,7 +127,7 @@ namespace NiceTry {
         /// <param name="func"></param>
         /// <returns></returns>
         [NotNull]
-        public static Func<ITry<A>, ITry<B>, ITry<C>> Lift2<A, B, C>([NotNull] Func<A, B, C> func) {
+        public static Func<Try<A>, Try<B>, Try<C>> Lift2<A, B, C>([NotNull] Func<A, B, C> func) {
             func.ThrowIfNull(nameof(func));
             return (ta, tb) => ta.Match(
                 failure: Failure<C>,

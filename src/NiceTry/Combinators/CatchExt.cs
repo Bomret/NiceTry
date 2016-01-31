@@ -18,7 +18,7 @@ namespace NiceTry.Combinators {
         ///     <paramref name="try"/> or <paramref name="handleError"/> is <see langword="null"/>.
         /// </exception>
         [NotNull]
-        public static ITry<T> Catch<TErr, T>([NotNull] this ITry<T> @try, [NotNull] Func<TErr, T> handleError)
+        public static Try<T> Catch<TErr, T>([NotNull] this Try<T> @try, [NotNull] Func<TErr, T> handleError)
             where TErr : Exception {
             handleError.ThrowIfNull(nameof(handleError));
 
@@ -43,7 +43,7 @@ namespace NiceTry.Combinators {
         ///     <paramref name="try"/> or <paramref name="handleError"/> is <see langword="null"/>.
         /// </exception>
         [NotNull]
-        public static ITry<T> CatchWith<TErr, T>([NotNull] this ITry<T> @try, [NotNull] Func<TErr, ITry<T>> handleError)
+        public static Try<T> CatchWith<TErr, T>([NotNull] this Try<T> @try, [NotNull] Func<TErr, Try<T>> handleError)
             where TErr : Exception {
             handleError.ThrowIfNull(nameof(handleError));
             @try.ThrowIfNullOrInvalid(nameof(@try));

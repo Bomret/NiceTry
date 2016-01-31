@@ -24,7 +24,7 @@ namespace NiceTry.Combinators {
         ///     or <paramref name="resultSelect" /> is <see langword="null" />.
         /// </exception>
         [NotNull]
-        public static ITry<C> Join<A, B, K, C>(ITry<A> tryA, ITry<B> tryB, Func<A, K> aKeySelect,
+        public static Try<C> Join<A, B, K, C>(Try<A> tryA, Try<B> tryB, Func<A, K> aKeySelect,
             Func<B, K> bKeySelect, Func<A, B, C> resultSelect) =>
             Join(tryA, tryB, aKeySelect, bKeySelect, resultSelect, EqualityComparer<K>.Default);
 
@@ -49,7 +49,7 @@ namespace NiceTry.Combinators {
         ///     or <paramref name="resultSelect" /> is <see langword="null" />.
         /// </exception>
         [NotNull]
-        public static ITry<C> Join<A, B, K, C>(ITry<A> tryA, ITry<B> tryB, Func<A, K> aKeySelect,
+        public static Try<C> Join<A, B, K, C>(Try<A> tryA, Try<B> tryB, Func<A, K> aKeySelect,
             Func<B, K> bKeySelect, Func<A, B, C> resultSelect, IEqualityComparer<K> keyCompare) {
             tryA.ThrowIfNullOrInvalid(nameof(tryA));
             tryB.ThrowIfNullOrInvalid(nameof(tryB));

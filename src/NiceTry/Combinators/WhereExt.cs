@@ -15,7 +15,7 @@ namespace NiceTry.Combinators {
         ///     <paramref name="try"/> or <paramref name="predicate"/> is <see langword="null"/>.
         /// </exception>
         [NotNull]
-        public static ITry<T> Where<T>(this ITry<T> @try, Func<T, bool> predicate) {
+        public static Try<T> Where<T>(this Try<T> @try, Func<T, bool> predicate) {
             @try.ThrowIfNullOrInvalid(nameof(@try));
             predicate.ThrowIfNull(nameof(predicate));
 

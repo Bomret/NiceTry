@@ -11,7 +11,7 @@ namespace NiceTry.Combinators {
         /// <param name="try"></param>
         /// <param name="action"></param>
         /// <returns></returns>
-        public static ITry<T> Finally<T>(this ITry<T> @try, Action action) {
+        public static Try<T> Finally<T>(this Try<T> @try, Action action) {
             action.ThrowIfNull(nameof(action));
             @try.ThrowIfNullOrInvalid(nameof(@try));
 

@@ -6,7 +6,7 @@ using JetBrains.Annotations;
 namespace NiceTry.Combinators {
     public static class SwitchExt {
         [NotNull]
-        public static ITry<T> Switch<T>(this ITry<T> @try, [NotNull] params ITry<T>[] candidates) {
+        public static Try<T> Switch<T>(this Try<T> @try, [NotNull] params Try<T>[] candidates) {
             @try.ThrowIfNullOrInvalid(nameof(@try));
             candidates.ThrowIfNull(nameof(candidates));
 
@@ -14,7 +14,7 @@ namespace NiceTry.Combinators {
         }
 
         [NotNull]
-        public static ITry<T> Switch<T>(this ITry<T> @try, [NotNull] IEnumerable<ITry<T>> enumerable) {
+        public static Try<T> Switch<T>(this Try<T> @try, [NotNull] IEnumerable<Try<T>> enumerable) {
             @try.ThrowIfNullOrInvalid(nameof(@try));
             enumerable.ThrowIfNull(nameof(enumerable));
 
@@ -22,7 +22,7 @@ namespace NiceTry.Combinators {
         }
 
         [NotNull]
-        public static ITry<T> SwitchOn<T>([NotNull] this IEnumerable<ITry<T>> enumerable) {
+        public static Try<T> SwitchOn<T>([NotNull] this IEnumerable<Try<T>> enumerable) {
             enumerable.ThrowIfNull(nameof(enumerable));
 
             return Try.To(() => {
