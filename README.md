@@ -7,18 +7,17 @@ A type for the classical try/catch statement that allows functional and bloat fr
 [![Stories in Ready](https://badge.waffle.io/Bomret/NiceTry.svg?label=ready&title=Ready)](http://waffle.io/Bomret/NiceTry)
 
 ## Build status
-|  |  BuildScript | Status of last build |
-| :------ | :------: | :------: |
-| **Mono** | [build.sh](https://github.com/Bomret/NiceTry/blob/master/build.sh) | [![Travis build status](https://travis-ci.org/Bomret/NiceTry.svg)](https://travis-ci.org/Bomret/NiceTry) |
-| **Windows** | [build.cmd](https://github.com/Bomret/NiceTry/blob/master/build.cmd) | [![AppVeyor Build status](http://img.shields.io/appveyor/ci/stefanreichel/nicetry.svg)](https://ci.appveyor.com/project/StefanReichel/nicetry) |
+|  |  Status of last build |
+| :------ | :------: |
+| **Mono** | [![Travis build status](https://img.shields.io/travis/Bomret/NiceTry.svg)](https://travis-ci.org/Bomret/NiceTry) |
+| **Windows** | [![AppVeyor Build status](https://img.shields.io/appveyor/ci/stefanreichel/nicetry.svg)](https://ci.appveyor.com/project/StefanReichel/nicetry) |
 
 ## Example
-Reading the content type of a url as string and printing it to the console. If any of the lambdas throws an exception calls to `Select` and `Where` would not execute and *"An error occured: {err}."* would be printed to the console. The same would happen if the predicate `contentType.StartsWith("text")` would not hold in the Where predicate.
+Reading the content type of a url as string and printing it to the console. If any of the lambdas throws an exception the calls to `Select` and `Match` would not execute and *"An error occured: {err}."* would be printed to the console.
 
 ```csharp
 Try.To(() => WebRequest.Create(Url) as HttpWebRequest)
     .Select(request => request.GetResponse()?.ContentType)
-    .Where(contentType => contentType.StartsWith("text"))
     .Match(
         Success: contentType => Console.WriteLine($"Content-Type: {contentType}"),
         Failure: err => Console.WriteLine($"An error occured: {err}."));
@@ -30,7 +29,6 @@ The same can be written using LINQ syntax:
 var maybeText =
     from req in Try.To(() => WebRequest.Create(Url) as HttpWebRequest)
     let contentType = req.GetResponse()?.ContentType
-    where contentType.StartsWith("text")
     select contentType;
         
 maybeText.Match(
@@ -91,10 +89,10 @@ public bool TryGet(out value) => // ...
 ------
 
 ## Basics
-`ITry` and `ITry<T>` represent the successful or failed outcome of an operation. `ITry<T>` might contain a value that was produced by said operation.
+`Try<T>` represents the successful or failed outcome of an operation. It might contain a value that was produced by said operation.
 
 ```csharp
-ITry<int> result = Try.To(() => 1 + 1);
+Try<int> result = Try.To(() => 1 + 1);
 ```
 The above example would evaluate `1 + 1` and - because that does not throw an exception - return a `Success<T>` and store it in the variable `result`. The result of the calculation is stored inside the `Success<T>` and can be accessed using the `Match`, `IfSuccess` or several `Get*` methods:
 
@@ -283,18 +281,6 @@ Option<string> result = Option.From(2).Select(i => i.ToString());
 Option<string> result = Option.From(2).SelectMany(i => Option.From(i.ToString()));
 ```
 `SelectMany` allows to apply a function to the value of a `Some` that returns another `Option` and avoid the nesting that would occur otherwise. In the above example `result` would be a `Some` with Value `"5"`. If `Some` would have been used, `result` would have been a `Option<Option<string>>`.
-
-### Where
-```csharp
-var result = Option.From(5).Where(i => i == 5);
-```
-`Where` checks if a given predicate holds true for an `Option`. In the above example `result` would be a `Some` with Value `5`. If the predicate `i => i == 5` would not hold, `result` would have been `None`.
-
-### Reject
-```csharp
-var result = Option.From(5).Reject(i => i == 5);
-```
-`Reject` does the exact opposite of `Where`. In the above example `result` would be `None`. If the predicate `i => i == 5` would not hold, `result` would have been a `Some` with value `5`.
 
 ### Zip
 ```csharp
