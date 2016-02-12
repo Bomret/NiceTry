@@ -188,10 +188,13 @@ Target "PublishNuget" (fun _ ->
 
 Target "GenerateDocs" (fun _ ->
     trace (sprintf "Building documentation...")
+    
+    let docfxPath = "packages" @@ "build" @@ "docfc" @@ "tools" @@ "docfx.exe"
+    
     let exit = 
         ExecProcess
             (fun info ->
-                info.FileName <- "docfx"
+                info.FileName <- docfxPath
                 info.Arguments <- "docfx.json"
                 info.WorkingDirectory <- "docs")
             TimeSpan.MaxValue
