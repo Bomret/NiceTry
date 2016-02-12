@@ -25,12 +25,7 @@ namespace NiceTry.Combinators {
         public static Try<T> SwitchOn<T>([NotNull] this IEnumerable<Try<T>> enumerable) {
             enumerable.ThrowIfNull(nameof(enumerable));
 
-            return Try.To(() => {
-                var success = enumerable.FirstOrDefault(t => t.IsSuccess);
-                return success.IsNull()
-                    ? Try.Failure<T>(new Exception("The specified enumerable is empty or contained no success."))
-                    : success;
-            });
+            return Try.To(() => enumerable.FirstOrDefault(t => t.IsSuccess));
         }
     }
 }

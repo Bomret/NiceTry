@@ -2,13 +2,17 @@ source https://nuget.org/api/v2
 
 nuget JetBrains.Annotations ~> 10
 nuget TheVoid ~> 0
-nuget NUnit ~> 2
-nuget NUnit.Runners ~> 2
 
 group Build
 	source https://nuget.org/api/v2
 	
-	nuget FSharp.Formatting ~> 2
 	nuget FAKE ~> 4
 	nuget SourceLink.Fake ~> 1
+    nuget docfx.msbuild ~> 1
 	github fsharp/FAKE modules/Octokit/Octokit.fsx
+    
+group Test
+	source https://nuget.org/api/v2
+
+    nuget NUnit ~> 2
+    nuget NUnit.Runners ~> 2

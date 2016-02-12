@@ -167,7 +167,7 @@ $RECYCLE.BIN/
 packages/
 
 # Generated documentation folder
-docs/output/
+docs/_site/
 
 # Temp folder used for publishing docs
 temp/

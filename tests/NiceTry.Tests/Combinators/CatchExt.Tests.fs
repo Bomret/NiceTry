@@ -6,5 +6,6 @@ open NiceTry
 open NiceTry.Combinators
 
 module CatchExtTests =
+    [<Test>]
     let ``Catching and handling specific exceptions should return in success`` () =
         Assert.AreEqual(Try.Success 3, CatchExt.Catch<InvalidOperationException, int>(Try.Failure<int> (InvalidOperationException ()), fun _ -> 3))

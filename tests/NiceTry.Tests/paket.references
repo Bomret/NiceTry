@@ -1,2 +1,4 @@
-﻿NUnit
-TheVoid
+﻿TheVoid
+
+group Test
+    NUnit

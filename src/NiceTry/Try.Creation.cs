@@ -83,6 +83,9 @@ namespace NiceTry {
         /// <exception cref="ArgumentNullException">
         ///     <paramref name="work" /> is <see langword="null" />
         /// </exception>
+        /// <exception cref="ArgumentException">
+        ///     <paramref name="work" /> produces <see langword="null" />
+        /// </exception>
         [NotNull]
         public static Try<T> To<T>([NotNull] Func<Try<T>> work) {
             work.ThrowIfNull(nameof(work));

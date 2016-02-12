@@ -8,7 +8,7 @@ namespace NiceTry.Combinators {
     /// </summary>
     public static class AllOrFailureExt {
         /// <summary>
-        /// Returns a single <see cref="Success{T}"/> if all elements in the specified <paramref name="enumerable"/> represent success, or a <see cref="Failure{T}"/> otherwise.
+        /// Returns a single <see cref="Success{T}"/> if all elements in the specified <paramref name="enumerable"/> represent success, or the first <see cref="Failure{T}"/> otherwise.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="enumerable"></param>
