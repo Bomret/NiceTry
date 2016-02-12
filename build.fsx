@@ -189,7 +189,7 @@ Target "PublishNuget" (fun _ ->
 Target "GenerateDocs" (fun _ ->
     trace (sprintf "Building documentation...")
     
-    let docfxPath = "packages" @@ "build" @@ "docfc" @@ "tools" @@ "docfx.exe"
+    let docfxPath = __SOURCE_DIRECTORY__ @@ "packages" @@ "build" @@ "docfx.msbuild" @@ "tools" @@ "docfx.exe"
     
     let exit = 
         ExecProcess
