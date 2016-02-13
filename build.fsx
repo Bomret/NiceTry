@@ -262,7 +262,10 @@ Target "All" DoNothing
   ==> "Build"
   ==> "CopyBinaries"
   ==> "RunTests"
+#if MONO
+#else
   ==> "GenerateDocs"
+#endif
   ==> "All"
   =?> ("ReleaseDocs",isLocalBuild)
 
