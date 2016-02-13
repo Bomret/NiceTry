@@ -1,11 +1,10 @@
 ﻿using System;
-using JetBrains.Annotations;
 using TheVoid;
 using NiceTry.Combinators;
 
 namespace NiceTry {
     /// <summary>
-    ///     Provides factory methods to create instances of <see cref="NiceTry.Try" /> and <see cref="Try" />.
+    ///     Provides factory methods to create instances of <see cref="NiceTry.Try" />.
     /// </summary>
     public static partial class Try {
         /// <summary>
@@ -17,8 +16,7 @@ namespace NiceTry {
         /// <exception cref="ArgumentNullException">
         ///     <paramref name="error" /> is <see langword="null" />
         /// </exception>
-        [NotNull]
-        public static Try<T> Failure<T>([NotNull] Exception error) {
+        public static Try<T> Failure<T>(Exception error) {
             error.ThrowIfNull(nameof(error));
             return new Failure<T>(error);
         }
@@ -29,8 +27,7 @@ namespace NiceTry {
         /// <typeparam name="T"></typeparam>
         /// <param name="value"></param>
         /// <returns></returns>
-        [NotNull]
-        public static Try<T> Success<T>([CanBeNull] T value) => new Success<T>(value);
+        public static Try<T> Success<T>(T value) => new Success<T>(value);
 
         /// <summary>
         ///     Tries to execute the given <paramref name="work" /> synchronously.
@@ -41,8 +38,7 @@ namespace NiceTry {
         /// <exception cref="ArgumentNullException">
         ///     <paramref name="work" /> is <see langword="null" />.
         /// </exception>
-        [NotNull]
-        public static Try<Unit> To([NotNull] Action work) {
+        public static Try<Unit> To(Action work) {
             work.ThrowIfNull(nameof(work));
 
             return To(() => {
@@ -62,8 +58,7 @@ namespace NiceTry {
         /// <exception cref="ArgumentNullException">
         ///     <paramref name="work" /> is <see langword="null" />
         /// </exception>
-        [NotNull]
-        public static Try<T> To<T>([NotNull] Func<T> work) {
+        public static Try<T> To<T>(Func<T> work) {
             work.ThrowIfNull(nameof(work));
 
             return To(() => {
@@ -86,8 +81,7 @@ namespace NiceTry {
         /// <exception cref="ArgumentException">
         ///     <paramref name="work" /> produces <see langword="null" />
         /// </exception>
-        [NotNull]
-        public static Try<T> To<T>([NotNull] Func<Try<T>> work) {
+        public static Try<T> To<T>(Func<Try<T>> work) {
             work.ThrowIfNull(nameof(work));
 
             try {
@@ -106,14 +100,13 @@ namespace NiceTry {
 
         /// <summary>
         ///     Transforms the specified <paramref name="func" /> into a form which can be applied to an instance of
-        ///     <see cref="ITry{T}" /> instead of <typeparamref name="A" />.
+        ///     <see cref="Try{T}" /> instead of <typeparamref name="A" />.
         /// </summary>
         /// <typeparam name="A"></typeparam>
         /// <typeparam name="B"></typeparam>
         /// <param name="func"></param>
         /// <returns></returns>
-        [NotNull]
-        public static Func<Try<A>, Try<B>> Lift<A, B>([NotNull] Func<A, B> func) {
+        public static Func<Try<A>, Try<B>> Lift<A, B>(Func<A, B> func) {
             func.ThrowIfNull(nameof(func));
             return ta => ta.Match(
                 failure: Failure<B>,
@@ -122,15 +115,14 @@ namespace NiceTry {
 
         /// <summary>
         ///     Transforms the specified <paramref name="func" /> into a form which can be applied to two instance of
-        ///     <see cref="ITry{T}" /> instead of <typeparamref name="A" /> and <typeparamref name="B" />.
+        ///     <see cref="Try{T}" /> instead of <typeparamref name="A" /> and <typeparamref name="B" />.
         /// </summary>
         /// <typeparam name="A"></typeparam>
         /// <typeparam name="B"></typeparam>
         /// <typeparam name="C"></typeparam>
         /// <param name="func"></param>
         /// <returns></returns>
-        [NotNull]
-        public static Func<Try<A>, Try<B>, Try<C>> Lift2<A, B, C>([NotNull] Func<A, B, C> func) {
+        public static Func<Try<A>, Try<B>, Try<C>> Lift2<A, B, C>(Func<A, B, C> func) {
             func.ThrowIfNull(nameof(func));
             return (ta, tb) => ta.Match(
                 failure: Failure<C>,

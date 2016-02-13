@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 
 namespace NiceTry.Combinators {
+    /// <summary>
+    ///     Provides extension methods for <see cref="Try{T}"/> to extract values from enumerables of <see cref="Try{T}"/>.
+    /// </summary>
     public static class SelectValuesExt {
         /// <summary>
         ///     Returns an <see cref="IEnumerable{T}" /> that contains only the values contained in the elements of the specified
@@ -10,7 +13,7 @@ namespace NiceTry.Combinators {
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="enumerable"></param>
-        /// <returns></returns>
+        /// <returns>An <see cref="IEnumerable{T}"/> that contains all extracted values.</returns>
         /// <exception cref="ArgumentNullException">
         ///     <paramref name="enumerable" /> is <see langword="null" />.
         /// </exception>
@@ -18,11 +21,8 @@ namespace NiceTry.Combinators {
             enumerable.ThrowIfNull(nameof(enumerable));
 
             return enumerable
-                .Select(t => t.Match(
-                    failure: _ => new {hasVal = false, val = default(T)},
-                    success: x => new {hasVal = true, val = x}))
-                .Where(o => o.hasVal)
-                .Select(o => o.val);
+                        .Where(t => t.IsSuccess)
+                        .Select(t => ((Success<T>)t).Value);
         }
     }
 }

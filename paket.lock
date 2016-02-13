@@ -1,7 +1,6 @@
 NUGET
   remote: https://www.nuget.org/api/v2
   specs:
-    JetBrains.Annotations (10.0.0)
     TheVoid (0.5.0)
 
 GROUP Build

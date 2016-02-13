@@ -1,7 +1,10 @@
 using System;
-using JetBrains.Annotations;
+using static NiceTry.Predef;
 
 namespace NiceTry.Combinators {
+    /// <summary>
+    ///     Provides extension methods for <see cref="Try{T}"/> to provide fallbacks in case of failure.
+    /// </summary>
     public static class OrElseExt {
         /// <summary>
         ///     Returns the specified <paramref name="try" /> if it represents success or else a <see cref="Success{T}" />
@@ -10,13 +13,11 @@ namespace NiceTry.Combinators {
         /// <typeparam name="T"></typeparam>
         /// <param name="try"></param>
         /// <param name="fallback"></param>
-        /// <returns></returns>
         /// <exception cref="ArgumentNullException">
         ///     <paramref name="try" /> is <see langword="null" />.
-        /// </exception>
-        [NotNull]
-        public static Try<T> OrElse<T>([NotNull] this Try<T> @try, [CanBeNull] T fallback) =>
-        OrElseWith(@try, () => Try.Success(fallback));
+        /// </exception>        
+        public static Try<T> OrElse<T>(this Try<T> @try, T fallback) =>
+            OrElseWith(@try, () => Ok(fallback));
 
         /// <summary>
         ///     Returns the specified <paramref name="try" /> if it represents success or else tries to evaluate the specified
@@ -25,17 +26,15 @@ namespace NiceTry.Combinators {
         /// <typeparam name="T"></typeparam>
         /// <param name="try"></param>
         /// <param name="fallback"></param>
-        /// <returns></returns>
         /// <exception cref="ArgumentNullException">
         ///     <paramref name="try" /> or <paramref name="fallback"/> is <see langword="null" />.
-        /// </exception>
-        [NotNull]
-        public static Try<T> OrElse<T>([NotNull] this Try<T> @try, [NotNull] Func<T> fallback) {
+        /// </exception>        
+        public static Try<T> OrElse<T>(this Try<T> @try, Func<T> fallback) {
             fallback.ThrowIfNull(nameof(fallback));
 
             return OrElseWith(@try, () => {
                 var res = fallback();
-                return Try.Success(res);
+                return Ok(res);
             });
         }
 
@@ -46,12 +45,10 @@ namespace NiceTry.Combinators {
         /// <typeparam name="T"></typeparam>
         /// <param name="try"></param>
         /// <param name="fallback"></param>
-        /// <returns></returns>
         /// <exception cref="ArgumentNullException">
         ///     <paramref name="try" /> or <paramref name="fallback"/> is <see langword="null" />.
         /// </exception>
-        [NotNull]
-        public static Try<T> OrElseWith<T>([NotNull] this Try<T> @try, [NotNull] Try<T> fallback) {
+        public static Try<T> OrElseWith<T>(this Try<T> @try, Try<T> fallback) {
             fallback.ThrowIfNull(nameof(fallback));
 
             return OrElseWith(@try, () => fallback);
@@ -64,18 +61,15 @@ namespace NiceTry.Combinators {
         /// <typeparam name="T"></typeparam>
         /// <param name="try"></param>
         /// <param name="fallback"></param>
-        /// <returns></returns>
         /// <exception cref="ArgumentNullException">
         ///     <paramref name="try" /> or <paramref name="fallback"/> is <see langword="null" />.
-        /// </exception>
-        [NotNull]
-        public static Try<T> OrElseWith<T>([NotNull] this Try<T> @try, [NotNull] Func<Try<T>> fallback) {
-            @try.ThrowIfNullOrInvalid(nameof(@try));
+        /// </exception>        
+        public static Try<T> OrElseWith<T>(this Try<T> @try, Func<Try<T>> fallback) {
+            @try.ThrowIfNull(nameof(@try));
             fallback.ThrowIfNull(nameof(fallback));
 
-            // ReSharper disable once AssignNullToNotNullAttribute
             return @try.Match(
-                failure: _ => Try.To(fallback),
+                failure: _ => Try(fallback),
                 success: _ => @try);
         }
     }

@@ -1,8 +1,11 @@
 using System;
-using JetBrains.Annotations;
 using TheVoid;
+using static NiceTry.Predef;
 
 namespace NiceTry.Combinators {
+    /// <summary>
+    ///     Provides extension methods for <see cref="Try{T}"/> to execute side effects on the value therein.
+    /// </summary>
     public static class ApplyExt {
         /// <summary>
         ///     Applies the specified <paramref name="apply" /> to the value of the specified <paramref name="try" /> if that
@@ -12,17 +15,18 @@ namespace NiceTry.Combinators {
         /// <typeparam name="T"></typeparam>
         /// <param name="try"></param>
         /// <param name="apply"></param>
-        /// <returns></returns>
+        /// <exception cref="ArgumentException">
+        ///     The property Kind of <paramref name="try"/> is not a valid value of <see cref="TryKind"/>.
+        /// </exception>
         /// <exception cref="ArgumentNullException">
         ///     <paramref name="try" /> or <paramref name="apply" /> is <see langword="null" />.
         /// </exception>
-        [NotNull]
-        public static Try<Unit> Apply<T>([NotNull] this Try<T> @try, [NotNull] Action<T> apply) {
+        public static Try<Unit> Apply<T>(this Try<T> @try, Action<T> apply) {
             apply.ThrowIfNull(nameof(apply));
 
             return ApplyWith(@try, x => {
                 apply(x);
-                return Try.Success(Unit.Default);
+                return Ok(Unit.Default);
             });
         }
 
@@ -34,19 +38,19 @@ namespace NiceTry.Combinators {
         /// <typeparam name="T"></typeparam>
         /// <param name="try"></param>
         /// <param name="apply"></param>
-        /// <returns></returns>
+        /// <exception cref="ArgumentException">
+        ///     The property Kind of <paramref name="try"/> is not a valid value of <see cref="TryKind"/>.
+        /// </exception>
         /// <exception cref="ArgumentNullException">
         ///     <paramref name="try" /> or <paramref name="apply" /> is <see langword="null" />.
         /// </exception>
-        [NotNull]
-        public static Try<Unit> ApplyWith<T>([NotNull] this Try<T> @try, [NotNull] Func<T, Try<Unit>> apply) {
+        public static Try<Unit> ApplyWith<T>(this Try<T> @try, Func<T, Try<Unit>> apply) {
             apply.ThrowIfNull(nameof(apply));
-            @try.ThrowIfNullOrInvalid(nameof(@try));
+            @try.ThrowIfNull(nameof(@try));
 
-            // ReSharper disable once AssignNullToNotNullAttribute
             return @try.Match(
-                failure: Try.Failure<Unit>,
-                success: x => Try.To(() => apply(x)));
+                failure: Fail<Unit>,
+                success: x => Try(() => apply(x)));
         }
     }
 }

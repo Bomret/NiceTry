@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using static NiceTry.Predef;
 
 namespace NiceTry.Combinators {
     /// <summary>
-    /// Provides extensions for working with <see cref="IEnumerable{T}"/> that contain instances of <see cref="ITry{T}"/>.
+    ///     Provides extensions for working with <see cref="IEnumerable{T}"/> that contain instances of <see cref="Try{T}"/>.
     /// </summary>
     public static class AllOrFailureExt {
         /// <summary>
@@ -16,21 +17,21 @@ namespace NiceTry.Combinators {
         public static Try<IEnumerable<T>> AllOrFailure<T>(this IEnumerable<Try<T>> enumerable) {
             enumerable.ThrowIfNull(nameof(enumerable));
 
-            return Try.To(() => {
+            return Try(() => {
                 var res = new List<T>();
-                foreach (var @try in enumerable) {
-                    @try.ThrowIfNullOrInvalid(nameof(@try));
+                foreach(var @try in enumerable) {
+                    @try.ThrowIfNull(nameof(@try));
 
                     Exception err = null;
                     @try.Match(
                         failure: ex => err = ex,
                         success: x => res.Add(x));
 
-                    if (err.IsNotNull())
-                        return Try.Failure<IEnumerable<T>>(err);
+                    if(err.IsNotNull())
+                        return Fail<IEnumerable<T>>(err);
                 }
 
-                return Try.Success(res.AsEnumerable());
+                return Ok(res.AsEnumerable());
             });
         }
     }

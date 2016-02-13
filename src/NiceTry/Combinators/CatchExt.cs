@@ -1,7 +1,10 @@
 using System;
-using JetBrains.Annotations;
+using static NiceTry.Predef;
 
 namespace NiceTry.Combinators {
+    /// <summary>
+    ///     Provides extension methods for <see cref="Try{T}"/> to handle catched errors.
+    /// </summary>
     public static class CatchExt {
         /// <summary>
         ///     If the specified <paramref name="try" /> represents failure and contains an exception of type
@@ -13,18 +16,16 @@ namespace NiceTry.Combinators {
         /// <typeparam name="T"></typeparam>
         /// <param name="try"></param>
         /// <param name="handleError"></param>
-        /// <returns></returns>
         /// <exception cref="ArgumentNullException">
         ///     <paramref name="try"/> or <paramref name="handleError"/> is <see langword="null"/>.
         /// </exception>
-        [NotNull]
-        public static Try<T> Catch<TErr, T>([NotNull] this Try<T> @try, [NotNull] Func<TErr, T> handleError)
+        public static Try<T> Catch<TErr, T>(this Try<T> @try, Func<TErr, T> handleError)
             where TErr : Exception {
             handleError.ThrowIfNull(nameof(handleError));
 
             return CatchWith<TErr, T>(@try, err => {
                 var res = handleError(err);
-                return Try.Success(res);
+                return Ok(res);
             });
         }
 
@@ -42,18 +43,16 @@ namespace NiceTry.Combinators {
         /// <exception cref="ArgumentNullException">
         ///     <paramref name="try"/> or <paramref name="handleError"/> is <see langword="null"/>.
         /// </exception>
-        [NotNull]
-        public static Try<T> CatchWith<TErr, T>([NotNull] this Try<T> @try, [NotNull] Func<TErr, Try<T>> handleError)
+        public static Try<T> CatchWith<TErr, T>(this Try<T> @try, Func<TErr, Try<T>> handleError)
             where TErr : Exception {
             handleError.ThrowIfNull(nameof(handleError));
-            @try.ThrowIfNullOrInvalid(nameof(@try));
+            @try.ThrowIfNull(nameof(@try));
 
-            // ReSharper disable once AssignNullToNotNullAttribute
             return @try.Match(
                 success: _ => @try,
                 failure: err => {
                     var asErr = err as TErr;
-                    return asErr.IsNull() ? @try : Try.To(() => handleError(asErr));
+                    return asErr.IsNull() ? @try : Try(() => handleError(asErr));
                 });
         }
     }

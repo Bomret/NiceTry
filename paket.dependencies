@@ -1,6 +1,5 @@
 source https://nuget.org/api/v2
 
-nuget JetBrains.Annotations ~> 10
 nuget TheVoid ~> 0
 
 group Build

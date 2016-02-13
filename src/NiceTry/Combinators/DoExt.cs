@@ -1,7 +1,10 @@
 using System;
-using JetBrains.Annotations;
+using static NiceTry.Predef;
 
 namespace NiceTry.Combinators {
+    /// <summary>
+    ///     Provides extension methods for <see cref="Try{T}"/> to execute side effects on the value therein.
+    /// </summary>
     public static class DoExt {
         /// <summary>
         ///     Executes the specified <paramref name="action" /> on the contained value if the specified <paramref name="try" />
@@ -13,20 +16,17 @@ namespace NiceTry.Combinators {
         /// <returns>A success if the operation succeeded or else a failure containing the encountered error.</returns>
         /// <exception cref="ArgumentNullException">
         ///     <paramref name="try" /> or <paramref name="action" /> is <see langword="null" />.
-        /// </exception>
-        [NotNull]
-        public static Try<T> Do<T>([NotNull] this Try<T> @try, [NotNull] Action<T> action) {
+        /// </exception> 
+        public static Try<T> Do<T>(this Try<T> @try, Action<T> action) {
             action.ThrowIfNull(nameof(action));
-            @try.ThrowIfNullOrInvalid(nameof(@try));
+            @try.ThrowIfNull(nameof(@try));
 
-            // ReSharper disable once AssignNullToNotNullAttribute
             return @try.Match(
                 failure: _ => @try,
-                success: x => 
-                    Try.To(() => action(x))
-                        .Match(
-                            failure: Try.Failure<T>,
-                            success: _ => @try));
+                success: x =>
+                    Try(() => action(x)).Match(
+                        failure: Fail<T>,
+                        success: _ => @try));
         }
     }
 }

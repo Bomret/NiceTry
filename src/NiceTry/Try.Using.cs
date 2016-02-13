@@ -1,6 +1,6 @@
 using System;
-using JetBrains.Annotations;
 using TheVoid;
+using static NiceTry.Predef;
 
 namespace NiceTry {
     public static partial class Try {
@@ -19,10 +19,9 @@ namespace NiceTry {
         ///     <paramref name="createDisposable" /> or <paramref name="useDisposable" /> is
         ///     <see langword="null" />.
         /// </exception>
-        [NotNull]
         public static Try<T> Using<Disposable, T>(
-            [NotNull] Func<Disposable> createDisposable,
-            [NotNull] Func<Disposable, T> useDisposable) where Disposable : IDisposable {
+            Func<Disposable> createDisposable,
+            Func<Disposable, T> useDisposable) where Disposable : IDisposable {
             useDisposable.ThrowIfNull(nameof(useDisposable));
 
             return UsingWith(createDisposable, d => {
@@ -45,10 +44,9 @@ namespace NiceTry {
         ///     <paramref name="createDisposable" /> or <paramref name="useDisposable" /> is
         ///     <see langword="null" />.
         /// </exception>
-        [NotNull]
         public static Try<Unit> Using<Disposable>(
-            [NotNull] Func<Disposable> createDisposable,
-            [NotNull] Action<Disposable> useDisposable) where Disposable : IDisposable {
+            Func<Disposable> createDisposable,
+            Action<Disposable> useDisposable) where Disposable : IDisposable {
             useDisposable.ThrowIfNull(nameof(useDisposable));
 
             return UsingWith(createDisposable, d => {
@@ -72,14 +70,13 @@ namespace NiceTry {
         ///     <paramref name="createDisposable" /> or <paramref name="useDisposable" /> is
         ///     <see langword="null" />.
         /// </exception>
-        [NotNull]
         public static Try<T> UsingWith<Disposable, T>(
-            [NotNull] Func<Disposable> createDisposable,
-            [NotNull] Func<Disposable, Try<T>> useDisposable) where Disposable : IDisposable {
+            Func<Disposable> createDisposable,
+            Func<Disposable, Try<T>> useDisposable) where Disposable : IDisposable {
             createDisposable.ThrowIfNull(nameof(createDisposable));
             useDisposable.ThrowIfNull(nameof(useDisposable));
 
-            return To(() => {
+            return Try(() => {
                 using(var d = createDisposable())
                     return useDisposable(d);
             });

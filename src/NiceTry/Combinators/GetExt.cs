@@ -1,7 +1,9 @@
 using System;
-using JetBrains.Annotations;
 
 namespace NiceTry.Combinators {
+    /// <summary>
+    ///     Provides extension methods for <see cref="Try{T}"/> to get the value therein.
+    /// </summary>
     public static class GetExt {
         /// <summary>
         ///     Returns the value of the specified <paramref name="try" /> if it represents success or throws a
@@ -9,16 +11,14 @@ namespace NiceTry.Combinators {
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="try"></param>
-        /// <returns></returns>
         /// <exception cref="InvalidOperationException">
         ///     <paramref name="try" /> represents failure.
         /// </exception>
         /// <exception cref="ArgumentNullException">
         ///     <paramref name="try" /> is <see langword="null" />.
-        /// </exception>
-        [CanBeNull]
-        public static T Get<T>([NotNull] this Try<T> @try) {
-            @try.ThrowIfNullOrInvalid(nameof(@try));
+        /// </exception>      
+        public static T Get<T>(this Try<T> @try) {
+            @try.ThrowIfNull(nameof(@try));
 
             return @try.Match(
                 failure: err => {
@@ -36,12 +36,10 @@ namespace NiceTry.Combinators {
         /// <typeparam name="T"></typeparam>
         /// <param name="try"></param>
         /// <param name="fallback"></param>
-        /// <returns></returns>
         /// <exception cref="ArgumentNullException">
         ///     <paramref name="try" /> or <paramref name="fallback" /> is <see langword="null" />.
         /// </exception>
-        [CanBeNull]
-        public static T GetOrElse<T>([NotNull] this Try<T> @try, [CanBeNull] T fallback) =>
+        public static T GetOrElse<T>(this Try<T> @try, T fallback) =>
             GetOrElse(@try, () => fallback);
 
         /// <summary>
@@ -51,13 +49,11 @@ namespace NiceTry.Combinators {
         /// <typeparam name="T"></typeparam>
         /// <param name="try"></param>
         /// <param name="fallback"></param>
-        /// <returns></returns>
         /// <exception cref="ArgumentNullException">
         ///     <paramref name="try" /> or <paramref name="fallback" /> is <see langword="null" />.
         /// </exception>
-        [CanBeNull]
-        public static T GetOrElse<T>([NotNull] this Try<T> @try, [NotNull] Func<T> fallback) {
-            @try.ThrowIfNullOrInvalid(nameof(@try));
+        public static T GetOrElse<T>(this Try<T> @try, Func<T> fallback) {
+            @try.ThrowIfNull(nameof(@try));
             fallback.ThrowIfNull(nameof(fallback));
 
             return @try.Match(

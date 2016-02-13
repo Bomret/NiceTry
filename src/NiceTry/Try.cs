@@ -88,7 +88,7 @@ namespace NiceTry {
         #region Formatting
 
         public override string ToString() => this.Match(
-            failure: err => $"Failure({err.GetType()})",
+            failure: err => $"Failure({err.Message})",
             success: x => $"Success({x})");
 
         #endregion

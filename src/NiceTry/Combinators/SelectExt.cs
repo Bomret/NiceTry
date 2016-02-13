@@ -1,7 +1,10 @@
 using System;
-using JetBrains.Annotations;
+using static NiceTry.Predef;
 
 namespace NiceTry.Combinators {
+    /// <summary>
+    ///     Provides extension methods for <see cref="Try{T}"/> to transform the value therein into a new form.
+    /// </summary>
     public static class SelectExt {
         /// <summary>
         ///     Projects the value of the specified <paramref name="try" /> into a new form if it represents success.
@@ -10,19 +13,16 @@ namespace NiceTry.Combinators {
         /// <typeparam name="B"></typeparam>
         /// <param name="try"></param>
         /// <param name="select"></param>
-        /// <returns></returns>
         /// <exception cref="ArgumentNullException">
         ///     <paramref name="try" /> or <paramref name="select" /> is <see langword="null" />.
         /// </exception>
-        [NotNull]
-        public static Try<B> Select<A, B>([NotNull] this Try<A> @try, [NotNull] Func<A, B> @select) {
-            @try.ThrowIfNullOrInvalid(nameof(@try));
+        public static Try<B> Select<A, B>(this Try<A> @try, Func<A, B> @select) {
+            @try.ThrowIfNull(nameof(@try));
             @select.ThrowIfNull(nameof(@select));
 
-            // ReSharper disable once AssignNullToNotNullAttribute
             return @try.Match(
-                failure: Try.Failure<B>,
-                success: a => Try.To(() => @select(a)));
+                failure: Fail<B>,
+                success: a => Try(() => @select(a)));
         }
     }
 }
