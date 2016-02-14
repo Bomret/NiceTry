@@ -8,13 +8,13 @@ namespace NiceTry {
     /// </summary>
     public static partial class Try {
         /// <summary>
-        ///     Wraps the given <paramref name="error" /> in a <see cref="NiceTry.Failure{T}" />.
+        ///     Wraps the specified <paramref name="error" /> in a <see cref="NiceTry.Failure{T}" />.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="error"></param>
-        /// <returns></returns>
+        /// <returns>The resulting failure as <see cref="Try{T}"/>.</returns>
         /// <exception cref="ArgumentNullException">
-        ///     <paramref name="error" /> is <see langword="null" />
+        ///     <paramref name="error" /> is <see langword="null" />.
         /// </exception>
         public static Try<T> Failure<T>(Exception error) {
             error.ThrowIfNull(nameof(error));
@@ -22,15 +22,14 @@ namespace NiceTry {
         }
 
         /// <summary>
-        ///     Wraps the given <paramref name="value" /> in a new <see cref="NiceTry.Success{T}" />.
+        ///     Wraps the specified <paramref name="value" /> in a new <see cref="NiceTry.Success{T}" />.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="value"></param>
-        /// <returns></returns>
         public static Try<T> Success<T>(T value) => new Success<T>(value);
 
         /// <summary>
-        ///     Tries to execute the given <paramref name="work" /> synchronously.
+        ///     Tries to execute the specified <paramref name="work" /> synchronously.
         ///     If an exception is thrown a <see cref="NiceTry.Failure{T}" /> is returned otherwise <see cref="NiceTry.Success{T}" />.
         /// </summary>
         /// <param name="work"></param>
@@ -48,7 +47,7 @@ namespace NiceTry {
         }
 
         /// <summary>
-        ///     Tries to execute the given <paramref name="work" /> synchronously and return its result.
+        ///     Tries to execute the specified <paramref name="work" /> synchronously and return its result.
         ///     If an exception is thrown a <see cref="NiceTry.Failure{T}" /> is returned otherwise a
         ///     <see cref="NiceTry.Success{T}" />.
         /// </summary>

@@ -1,36 +1,48 @@
 ﻿namespace NiceTry.Tests.Combinators
 
-open System
 open NUnit.Framework
 open NiceTry
 open NiceTry.Combinators
+open System
 open TheVoid
 
-module ApplyExtTests =
+module ApplyExtTests = 
     [<Test>]
-    let ``Applying actions that don't throw exceptions should result in success`` () =
-        Assert.AreEqual(Try.Success Unit.Default, ApplyExt.Apply(Try.Success 3, fun _ -> ignore ()))
-
+    let ``Applying actions that don't throw exceptions should result in success``() = 
+        let original = Try.Success 3
+        let result = original.Apply(fun i -> i |> ignore)
+        Assert.AreEqual(Try.Success Unit.Default, result)
+    
     [<Test>]
-    let ``Applying actions to failure should result in failure`` () =
+    let ``Applying actions to failure should result in failure``() = 
         let err = Exception "Expected err"
-        Assert.AreEqual(Try.Failure<TheVoid.Unit> err, ApplyExt.Apply(Try.Failure<int> err, fun _ -> ignore ()))
-
+        let original = Try.Failure<int> err
+        let result = original.Apply(fun i -> i |> ignore)
+        Assert.AreEqual(Try.Failure<TheVoid.Unit> err, result)
+    
     [<Test>]
-    let ``Applying actions that throw exceptions should result in failure`` () =
+    let ``Applying actions that throw exceptions should result in failure``() = 
         let err = Exception "Expected err"
-        Assert.AreEqual(Try.Failure<Unit> err, ApplyExt.Apply(Try.Success 3, fun _ -> raise err))
-
+        let original = Try.Success 3
+        let result = original.Apply(fun _ -> raise err)
+        Assert.AreEqual(Try.Failure<Unit> err, result)
+    
     [<Test>]
-    let ``Applying functions that return Unit and don't throw exceptions should result in success`` () =
-        Assert.AreEqual(Try.Success Unit.Default, ApplyExt.ApplyWith(Try.Success 3, fun _ -> Try.Success Unit.Default))
-
+    let ``Applying functions that return Unit and don't throw exceptions should result in success``() = 
+        let original = Try.Success 3
+        let result = original.ApplyWith(fun _ -> Try.Success Unit.Default)
+        Assert.AreEqual(Try.Success Unit.Default, result)
+    
     [<Test>]
-    let ``Applying functions that return Unit to failure should result in failure`` () =
+    let ``Applying functions that return Unit to failure should result in failure``() = 
         let err = Exception "Expected err"
-        Assert.AreEqual(Try.Failure<TheVoid.Unit> err, ApplyExt.ApplyWith(Try.Failure<int> err, fun _ -> Try.Success Unit.Default))
-
+        let original = Try.Failure<int> err
+        let result = original.ApplyWith(fun _ -> Try.Success Unit.Default)
+        Assert.AreEqual(Try.Failure<TheVoid.Unit> err, result)
+    
     [<Test>]
-    let ``Applying functions that return Unit and throw exceptions should result in failure`` () =
+    let ``Applying functions that return Unit and throw exceptions should result in failure``() = 
         let err = Exception "Expected err"
-        Assert.AreEqual(Try.Failure<Unit> err, ApplyExt.ApplyWith(Try.Success 3, fun _ -> raise err))
+        let original = Try.Failure<int> err
+        let result = original.ApplyWith(fun _ -> raise err)
+        Assert.AreEqual(Try.Failure<Unit> err, result)

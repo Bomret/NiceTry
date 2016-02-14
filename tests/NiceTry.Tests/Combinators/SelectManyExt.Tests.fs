@@ -8,21 +8,25 @@ open System
 module SelectManyExtTests = 
     [<Test>]
     let ``Trying to transform values that do not throw exceptions should always result in the resulting Try``() = 
-        Assert.AreEqual(Try.Success 4, SelectManyExt.SelectMany(Try.Success 3, fun i -> Try.To(fun () -> i + 1)))
+        let original = Try.Success 3
+        let result = original.SelectMany(fun i -> Try.To(fun () -> i + 1))
+        Assert.AreEqual(Try.Success 4, result)
     
     [<Test>]
     let ``Trying to transform values that throw exceptions should always result in failure``() = 
         let err = Exception "Expected err"
+        let original = Try.Success 3
         
-        let throw = 
-            fun () -> 
-                raise err
-                4
-        Assert.AreEqual
-            (Try.Failure<int> err, SelectManyExt.SelectMany(Try.Success 3, fun _ -> Try.To(fun () -> throw())))
+        let result = 
+            original.SelectMany(fun _ -> 
+                Try.To(fun () -> 
+                    raise err
+                    4))
+        Assert.AreEqual(Try.Failure<int> err, result)
     
     [<Test>]
     let ``Trying to transform failure should always result in failure``() = 
         let err = Exception "Expected err"
-        Assert.AreEqual
-            (Try.Failure<int> err, SelectManyExt.SelectMany(Try.Failure<int> err, fun i -> Try.To(fun () -> i + 1)))
+        let original = Try.Failure<int> err
+        let result = original.SelectMany(fun i -> Try.To(fun () -> i + 1))
+        Assert.AreEqual(Try.Failure<int> err, result)

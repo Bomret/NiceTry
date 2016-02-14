@@ -1,8 +1,8 @@
 ﻿namespace NiceTry.Tests
 
-open System
 open NUnit.Framework
 open NiceTry
+open System
 open TheVoid
 
 module TryCreationTests = 

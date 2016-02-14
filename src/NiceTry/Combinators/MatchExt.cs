@@ -6,7 +6,7 @@ namespace NiceTry.Combinators {
     /// </summary>
     public static class MatchExt {
         /// <summary>
-        ///     Executes one of the given functions for success and failure and returns the result, depending on wether the specified <paramref name="try"/> represents success or failure.
+        ///     Executes one of the specified functions for success and failure and returns the result, depending on wether the specified <paramref name="try"/> represents success or failure.
         /// </summary>
         /// <param name="try"></param>
         /// <param name="success"></param>
@@ -33,7 +33,7 @@ namespace NiceTry.Combinators {
         }
 
         /// <summary>
-        ///     Executes one of the given side effects for success and failure, depending on wether the specified <paramref name="try"/> represents success or failure.
+        ///     Executes one of the specified side effects for success and failure, depending on wether the specified <paramref name="try"/> represents success or failure.
         /// </summary>
         /// <param name="success"></param>
         /// <param name="failure"></param>
