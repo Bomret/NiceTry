@@ -17,7 +17,7 @@ module FinallyExtTests =
     
     [<Test>]
     let ``Executing a finally side effect on a failure should indeed execute it``() = 
-        let err = InvalidOperationException()
+        let err = InvalidOperationException "Expected error"
         let original = Try.Failure<int> err
         let mutable wasSideEffectExecuted = false
         original.Finally(fun () -> wasSideEffectExecuted <- true) |> should be (sameAs original)
