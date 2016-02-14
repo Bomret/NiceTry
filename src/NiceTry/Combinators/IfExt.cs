@@ -1,6 +1,6 @@
 ﻿using System;
-using NiceTry;
-namespace Combinators {
+
+namespace NiceTry.Combinators {
     /// <summary>
     ///     Provides extension methods for <see cref="Try{T}"/> to apply side effects for success and failure separately.
     /// </summary>

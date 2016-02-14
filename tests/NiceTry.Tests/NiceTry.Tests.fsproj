@@ -58,6 +58,7 @@
     <Compile Include="Combinators\FlattenExt.Tests.fs" />
     <Compile Include="Combinators\GetExt.Tests.fs" />
     <None Include="app.config" />
+    <Compile Include="Combinators\IfExt.Tests.fs" />
   </ItemGroup>
   <PropertyGroup>
     <MinimumVisualStudioVersion Condition="'$(MinimumVisualStudioVersion)' == ''">11</MinimumVisualStudioVersion>
