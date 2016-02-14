@@ -1,5 +1,6 @@
 ﻿namespace NiceTry.Tests.Combinators
 
+open FsUnit
 open NUnit.Framework
 open NiceTry
 open NiceTry.Combinators
@@ -7,16 +8,18 @@ open System
 
 module SelectExtTests = 
     [<Test>]
-    let ``Trying to transform values that do not throw exceptions should always result in success containing the transformed value``() = 
-        let original = Try.Success 3
-        Assert.AreEqual(Try.Success 4, SelectExt.Select(original, fun i -> i + 1))
+    let ``Trying to transform values that do not throw exceptions should result in success containing the transformed value``() = 
+        (Try.Success 3).Select(fun i -> string i) |> should equal (Try.Success "3")
     
     [<Test>]
-    let ``Trying to transform values that throw exceptions should always result in failure``() = 
+    let ``Trying to transform values that throw exceptions should result in failure``() = 
         let err = Exception "Expected err"
-        Assert.AreEqual(Try.Failure err, SelectExt.Select(Try.Success 3, fun _ -> raise err))
+        (Try.Success 3).Select(fun i -> 
+            raise err
+            string i)
+        |> should equal (Try.Failure<string> err)
     
     [<Test>]
-    let ``Trying to transform failure should always result in failure``() = 
+    let ``Trying to transform failure should result in failure``() = 
         let err = Exception "Expected err"
-        Assert.AreEqual(Try.Failure<int> err, SelectExt.Select(Try.Failure<int> err, fun i -> i + 1))
+        (Try.Failure<int> err).Select(fun i -> string i) |> should equal (Try.Failure<string> err)

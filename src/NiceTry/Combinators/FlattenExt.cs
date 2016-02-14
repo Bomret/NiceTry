@@ -1,7 +1,8 @@
 using System;
 using static NiceTry.Predef;
 
-namespace NiceTry.Combinators {
+namespace NiceTry.Combinators
+{
     /// <summary>
     ///     Provides extension methods for <see cref="Try{T}"/> to extract nested instances.
     /// </summary>

@@ -1,5 +1,6 @@
 ﻿namespace NiceTry.Tests.Combinators
 
+open FsUnit
 open NUnit.Framework
 open NiceTry
 open NiceTry.Combinators
@@ -8,25 +9,18 @@ open System
 module SelectManyExtTests = 
     [<Test>]
     let ``Trying to transform values that do not throw exceptions should always result in the resulting Try``() = 
-        let original = Try.Success 3
-        let result = original.SelectMany(fun i -> Try.To(fun () -> i + 1))
-        Assert.AreEqual(Try.Success 4, result)
+        (Try.Success 3).SelectMany(fun i -> Try.To(fun () -> string i)) |> should equal (Try.Success "3")
     
     [<Test>]
     let ``Trying to transform values that throw exceptions should always result in failure``() = 
-        let err = Exception "Expected err"
-        let original = Try.Success 3
-        
-        let result = 
-            original.SelectMany(fun _ -> 
-                Try.To(fun () -> 
-                    raise err
-                    4))
-        Assert.AreEqual(Try.Failure<int> err, result)
+        let err = NotSupportedException()
+        (Try.Success 3).SelectMany(fun i -> 
+            Try.To(fun () -> 
+                raise err
+                string i))
+        |> should equal (Try.Failure<string> err)
     
     [<Test>]
     let ``Trying to transform failure should always result in failure``() = 
         let err = Exception "Expected err"
-        let original = Try.Failure<int> err
-        let result = original.SelectMany(fun i -> Try.To(fun () -> i + 1))
-        Assert.AreEqual(Try.Failure<int> err, result)
+        (Try.Failure<int> err).SelectMany(fun i -> Try.To(fun () -> string i)) |> should equal (Try.Failure<string> err)

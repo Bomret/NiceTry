@@ -1,5 +1,6 @@
 ﻿namespace NiceTry.Tests
 
+open FsUnit
 open NUnit.Framework
 open NiceTry
 open System
@@ -16,8 +17,8 @@ module TryUsingTests =
         let disp = new TestDisposable()
         let createD = fun () -> disp
         let useD = fun d -> 42
-        Assert.AreEqual(Try.Success<int> 42, Try.Using(createD, useD))
-        Assert.IsTrue disp.IsDisposed
+        Try.Using(createD, useD) |> should equal (Try.Success 42)
+        disp.IsDisposed |> should be True
     
     [<Test>]
     let ``Trying and failing using a IDisposable should dispose it properly``() = 
@@ -29,5 +30,5 @@ module TryUsingTests =
             fun d -> 
                 raise err
                 42
-        Assert.AreEqual(Try.Failure<int> err, Try.Using(createD, useD))
-        Assert.IsTrue disp.IsDisposed
+        Try.Using(createD, useD) |> should equal (Try.Failure<int> err)
+        disp.IsDisposed |> should be True
