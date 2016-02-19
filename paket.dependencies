@@ -6,9 +6,12 @@ group Build
 	source https://nuget.org/api/v2
 	
 	nuget FAKE ~> 4
+    nuget Paket.Core
 	nuget SourceLink.Fake ~> 1
     nuget docfx.msbuild ~> 1
+    
 	github fsharp/FAKE modules/Octokit/Octokit.fsx
+    github fsprojects/Chessie src/Chessie/ErrorHandling.fs
     
 group Test
 	source https://nuget.org/api/v2

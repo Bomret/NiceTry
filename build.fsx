@@ -3,6 +3,10 @@
 // --------------------------------------------------------------------------------------
 
 #r @"packages/build/FAKE/tools/FakeLib.dll"
+#r "packages/build/Chessie/lib/net40/Chessie.dll"
+#r "packages/build/Paket.Core/lib/net45/Paket.Core.dll"
+
+open Paket
 open Fake
 open Fake.Git
 open Fake.AssemblyInfoFile
@@ -10,6 +14,8 @@ open Fake.ReleaseNotesHelper
 open Fake.UserInputHelper
 open System
 open System.IO
+open System.Collections.Generic
+
 #if MONO
 #else
 #load "packages/build/SourceLink.Fake/tools/Fake.fsx"
@@ -203,6 +209,52 @@ Target "GenerateDocs" (fun _ ->
     ()
 )
 
+type Dependency = {
+    Group: string
+    Name: string
+    Version: string 
+}
+
+let getDependenciesByGroup () =
+    let deps = Paket.Dependencies.Locate ()
+
+    deps.GetDirectDependencies ()
+    |> Seq.map (fun t -> 
+        let g, n, v = t
+        {Group = g; Name = n; Version = v})
+    |> Seq.groupBy (fun dep -> dep.Group)
+    |> Map.ofSeq
+
+Target "GenerateDependenciesDocs" (fun _ ->
+    trace "Building dependencies documentation..."
+    
+    let template = sprintf """
+# Package dependencies
+This document provides an overview of the used package dependencies and versions, sorted by their associated group.
+
+%s"""
+
+    let toMarkdownString (group: KeyValuePair<_, _>) =
+        let packageList =
+            group.Value
+            |> Seq.map (fun dep -> sprintf "%s | %s" dep.Name dep.Version)
+            |> String.concat Environment.NewLine
+            
+        (sprintf """## %s
+Name | Version
+--- | ---
+%s
+""" group.Key packageList)
+
+    let markdown = 
+        getDependenciesByGroup ()
+        |> Seq.map (fun g -> toMarkdownString g)
+        |> String.concat Environment.NewLine
+        |> template
+
+    File.WriteAllText("docs" @@ "articles" @@ "soup.md", markdown)
+)
+
 // --------------------------------------------------------------------------------------
 // Release Scripts
 
@@ -266,6 +318,7 @@ Target "All" DoNothing
 #else
   ==> "GenerateDocs"
 #endif
+  ==> "GenerateDependenciesDocs"
   ==> "All"
   =?> ("ReleaseDocs",isLocalBuild)
 
@@ -279,6 +332,9 @@ Target "All" DoNothing
 
 "CleanDocs"
   ==> "GenerateDocs"
+  
+"CleanDocs"
+  ==> "GenerateDependenciesDocs"
 
 "ReleaseDocs"
   ==> "Release"
