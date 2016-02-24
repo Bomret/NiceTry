@@ -25,7 +25,7 @@ namespace NiceTry.Combinators {
                     Exception err = null;
                     @try.Match(
                         failure: ex => err = ex,
-                        success: x => res.Add(x));
+						success: res.Add);
 
                     if(err.IsNotNull())
                         return Fail<IEnumerable<T>>(err);

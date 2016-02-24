@@ -129,7 +129,7 @@ Target "Clean" (fun _ ->
 )
 
 Target "CleanDocs" (fun _ ->
-    CleanDirs ["docs/output"]
+    CleanDirs ["docs/_site"; "docs/obj"]
 )
 
 // --------------------------------------------------------------------------------------

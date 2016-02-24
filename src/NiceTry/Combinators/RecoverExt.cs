@@ -43,7 +43,7 @@ namespace NiceTry.Combinators {
 
             return @try.Match(
                 failure: err => Try(() => handleError(err)),
-                success: Ok);
+                success: _ => @try);
         }
     }
 }

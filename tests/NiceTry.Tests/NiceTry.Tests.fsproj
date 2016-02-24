@@ -1,11 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>d78f4404-d498-45ea-9077-0139c5d84723</ProjectGuid>
+    <ProjectGuid>{D78F4404-D498-45EA-9077-0139C5D84723}</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>NiceTry.Tests</RootNamespace>
     <AssemblyName>NiceTry.Tests</AssemblyName>
@@ -18,7 +17,6 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <Tailcalls>false</Tailcalls>
     <OutputPath>bin\Debug\</OutputPath>
@@ -34,23 +32,22 @@
     <DefineConstants>TRACE</DefineConstants>
     <WarningLevel>3</WarningLevel>
     <DocumentationFile>bin\Release\NiceTry.Tests.XML</DocumentationFile>
+    <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="mscorlib" />
-    <Reference Include="FSharp.Core, Version=$(TargetFSharpCoreVersion), Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Numerics" />
+    <Reference Include="FSharp.Core">
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.fs" />
     <Compile Include="Try.Creation.Tests.fs" />
     <Compile Include="Try.Using.Tests.fs" />
     <None Include="paket.references" />
-    <Compile Include="Combinators\SelectExt.Tests.fs" />
-    <Compile Include="Combinators\SelectManyExt.Tests.fs" />
     <Compile Include="Combinators\ApplyExt.Tests.fs" />
     <Compile Include="Combinators\CatchExt.Tests.fs" />
     <Compile Include="Combinators\DoExt.Tests.fs" />
@@ -59,6 +56,11 @@
     <Compile Include="Combinators\GetExt.Tests.fs" />
     <Compile Include="Combinators\IfExt.Tests.fs" />
     <None Include="app.config" />
+    <Compile Include="Combinators\MatchExt.Tests.fs" />
+    <Compile Include="Combinators\OrElseExt.Tests.fs" />
+    <Compile Include="Combinators\RecoverExt.Tests.fs" />
+    <Compile Include="Combinators\SelectExt.Tests.fs" />
+    <Compile Include="Combinators\SelectManyExt.Tests.fs" />
   </ItemGroup>
   <PropertyGroup>
     <MinimumVisualStudioVersion Condition="'$(MinimumVisualStudioVersion)' == ''">11</MinimumVisualStudioVersion>
@@ -86,8 +88,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\NiceTry\NiceTry.csproj">
       <Name>NiceTry</Name>
-      <Project>{5e85ec8c-669b-4761-b89f-5a89336f9113}</Project>
-      <Private>True</Private>
+      <Project>{5E85EC8C-669B-4761-B89F-5A89336F9113}</Project>
     </ProjectReference>
   </ItemGroup>
   <Choose>

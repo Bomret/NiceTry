@@ -6,7 +6,7 @@ group Build
 	source https://nuget.org/api/v2
 	
 	nuget FAKE ~> 4
-    nuget Paket.Core
+    nuget Paket.Core ~> 2
 	nuget SourceLink.Fake ~> 1
     nuget docfx.msbuild ~> 1
     

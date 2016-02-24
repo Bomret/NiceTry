@@ -9,7 +9,7 @@ NUGET
   specs:
     Chessie (0.4.0)
       FSharp.Core
-    docfx.msbuild (1.4.2)
+    docfx.msbuild (1.5.0)
     FAKE (4.20.0)
     FSharp.Core (4.0.0.1)
     Microsoft.Bcl (1.1.10)
@@ -33,7 +33,7 @@ GITHUB
       Octokit
   remote: fsprojects/Chessie
   specs:
-    src/Chessie/ErrorHandling.fs (ee4acb4cda067b0b0329d3678a594808ce4650ac)
+    src/Chessie/ErrorHandling.fs (d957821d60696cd5e8d4c068bbad9406f00680a8)
 GROUP Test
 NUGET
   remote: https://www.nuget.org/api/v2
