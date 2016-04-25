@@ -1,8 +1,9 @@
 using System;
+using static NiceTry._;
 
 namespace NiceTry.Combinators {
     /// <summary>
-    ///     Provides extension methods for <see cref="Try{T}"/> to get the value therein.
+    ///     Provides extension methods for <see cref="Try{T}" /> to get the value therein. 
     /// </summary>
     public static class GetExt {
         /// <summary>
@@ -11,12 +12,8 @@ namespace NiceTry.Combinators {
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="try"></param>
-        /// <exception cref="InvalidOperationException">
-        ///     <paramref name="try" /> represents failure.
-        /// </exception>
-        /// <exception cref="ArgumentNullException">
-        ///     <paramref name="try" /> is <see langword="null" />.
-        /// </exception>      
+        /// <exception cref="InvalidOperationException"> <paramref name="try" /> represents failure. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="try" /> is <see langword="null" />. </exception>
         public static T Get<T>(this Try<T> @try) {
             @try.ThrowIfNull(nameof(@try));
 
@@ -26,7 +23,7 @@ namespace NiceTry.Combinators {
                         "A failure does not contain a value. Use the InnerException property to see the exception that caused the failure.",
                         err);
                 },
-                success: x => x);
+                success: Id);
         }
 
         /// <summary>
@@ -58,7 +55,7 @@ namespace NiceTry.Combinators {
 
             return @try.Match(
                 failure: _ => fallback(),
-                success: x => x);
+                success: Id);
         }
     }
 }

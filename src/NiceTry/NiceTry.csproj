@@ -42,18 +42,24 @@
     <None Include="paket.template" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Combinators\AggregateTryExt.cs" />
     <Compile Include="Combinators\ApplyExt.cs" />
     <Compile Include="Combinators\CatchExt.cs" />
+    <Compile Include="Combinators\ContainsExt.cs" />
     <Compile Include="Combinators\DoExt.cs" />
+    <Compile Include="Combinators\ExchangeExt.cs" />
     <Compile Include="Combinators\FinallyExt.cs" />
+    <Compile Include="Combinators\FirstTryExt.cs" />
     <Compile Include="Combinators\FlattenExt.cs" />
     <Compile Include="Combinators\GetExt.cs" />
+    <Compile Include="Combinators\LastTryExt.cs" />
     <Compile Include="Combinators\OrElseExt.cs" />
     <Compile Include="Combinators\RecoverExt.cs" />
     <Compile Include="Combinators\SelectExt.cs" />
     <Compile Include="Combinators\SelectManyExt.cs" />
     <Compile Include="Combinators\AllOrFailureExt.cs" />
     <Compile Include="Combinators\SelectValuesExt.cs" />
+    <Compile Include="Combinators\SingleTryExt.cs" />
     <Compile Include="Combinators\SwitchExt.cs" />
     <Compile Include="Combinators\TransformExt.cs" />
     <Compile Include="Combinators\UsingExt.cs" />
@@ -63,12 +69,11 @@
     <Compile Include="Success.cs" />
     <Compile Include="Try.Creation.cs" />
     <Compile Include="Try.cs" />
+    <Compile Include="Try.Enumerable.cs" />
     <Compile Include="Try.Using.cs" />
     <Compile Include="_.cs" />
     <Compile Include="TryKind.cs" />
-    <Compile Include="Combinators\MatchExt.cs" />
     <Compile Include="Predef.cs" />
-    <Compile Include="Combinators\IfExt.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

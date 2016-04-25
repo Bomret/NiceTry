@@ -1,17 +1,40 @@
+using System;
+
 namespace NiceTry {
     /// <summary>
-    ///     Represents the successful outcome of an operation.
+    ///     Represents the successful outcome of an operation. 
     /// </summary>
     public sealed class Success<T> : Try<T> {
-        /// <summary>
-        ///     The result of a successful operation.
-        /// </summary>
-        /// <value>The value.</value>
-        public T Value { get; }
+        T _value;
+
         public override TryKind Kind => TryKind.Success;
 
         internal Success(T value) {
-            Value = value;
+            _value = value;
+        }
+
+        public override void IfFailure(Action<Exception> failure) {
+            failure.ThrowIfNull(nameof(failure));
+        }
+
+        public override void IfSuccess(Action<T> success) {
+            success.ThrowIfNull(nameof(success));
+
+            success(_value);
+        }
+
+        public override void Match(Action<T> success, Action<Exception> failure) {
+            success.ThrowIfNull(nameof(success));
+            failure.ThrowIfNull(nameof(failure));
+
+            success(_value);
+        }
+
+        public override B Match<B>(Func<T, B> success, Func<Exception, B> failure) {
+            success.ThrowIfNull(nameof(success));
+            failure.ThrowIfNull(nameof(failure));
+
+            return success(_value);
         }
     }
 }

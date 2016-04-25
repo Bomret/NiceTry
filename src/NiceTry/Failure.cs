@@ -2,17 +2,39 @@ using System;
 
 namespace NiceTry {
     /// <summary>
-    ///     Represents the failed outcome of an operation.
+    ///     Represents the failed outcome of an operation. 
     /// </summary>
     public sealed class Failure<T> : Try<T> {
-        /// <summary>
-        ///     The error that led to this failure.
-        /// </summary>
-        public Exception Error { get; }
+        Exception _error;
+
         public override TryKind Kind => TryKind.Failure;
 
         internal Failure(Exception error) {
-            Error = error;
+            _error = error;
+        }
+
+        public override void IfFailure(Action<Exception> failure) {
+            failure.ThrowIfNull(nameof(failure));
+
+            failure(_error);
+        }
+
+        public override void IfSuccess(Action<T> success) {
+            success.ThrowIfNull(nameof(success));
+        }
+
+        public override void Match(Action<T> success, Action<Exception> failure) {
+            success.ThrowIfNull(nameof(success));
+            failure.ThrowIfNull(nameof(failure));
+
+            failure(_error);
+        }
+
+        public override B Match<B>(Func<T, B> success, Func<Exception, B> failure) {
+            success.ThrowIfNull(nameof(success));
+            failure.ThrowIfNull(nameof(failure));
+
+            return failure(_error);
         }
     }
 }

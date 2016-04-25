@@ -43,25 +43,6 @@
       <Private>True</Private>
     </Reference>
   </ItemGroup>
-  <ItemGroup>
-    <Compile Include="AssemblyInfo.fs" />
-    <Compile Include="Try.Creation.Tests.fs" />
-    <Compile Include="Try.Using.Tests.fs" />
-    <None Include="paket.references" />
-    <Compile Include="Combinators\ApplyExt.Tests.fs" />
-    <Compile Include="Combinators\CatchExt.Tests.fs" />
-    <Compile Include="Combinators\DoExt.Tests.fs" />
-    <Compile Include="Combinators\FinallyExt.Tests.fs" />
-    <Compile Include="Combinators\FlattenExt.Tests.fs" />
-    <Compile Include="Combinators\GetExt.Tests.fs" />
-    <Compile Include="Combinators\IfExt.Tests.fs" />
-    <None Include="app.config" />
-    <Compile Include="Combinators\MatchExt.Tests.fs" />
-    <Compile Include="Combinators\OrElseExt.Tests.fs" />
-    <Compile Include="Combinators\RecoverExt.Tests.fs" />
-    <Compile Include="Combinators\SelectExt.Tests.fs" />
-    <Compile Include="Combinators\SelectManyExt.Tests.fs" />
-  </ItemGroup>
   <PropertyGroup>
     <MinimumVisualStudioVersion Condition="'$(MinimumVisualStudioVersion)' == ''">11</MinimumVisualStudioVersion>
   </PropertyGroup>
@@ -124,5 +105,22 @@
       <Private>True</Private>
       <Paket>True</Paket>
     </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ApplyExt.Tests.fs" />
+    <Compile Include="AssemblyInfo.fs" />
+    <Compile Include="CatchExt.Tests.fs" />
+    <Compile Include="DoExt.Tests.fs" />
+    <Compile Include="FinallyExt.Tests.fs" />
+    <Compile Include="FlattenExt.Tests.fs" />
+    <Compile Include="GetExt.Tests.fs" />
+    <Compile Include="IfExt.Tests.fs" />
+    <Compile Include="MatchExt.Tests.fs" />
+    <Compile Include="OrElseExt.Tests.fs" />
+    <Compile Include="RecoverExt.Tests.fs" />
+    <Compile Include="SelectExt.Tests.fs" />
+    <Compile Include="SelectManyExt.Tests.fs" />
+    <Compile Include="Try.Creation.Tests.fs" />
+    <Compile Include="Try.Using.Tests.fs" />
   </ItemGroup>
 </Project>
