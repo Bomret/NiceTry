@@ -19,5 +19,5 @@ summary
     A type for the classic try/catch statement, inspired by the Try type in Scala.
 description
     A type for the classical try/catch statement that allows functional and bloat free error handling. Inspired by the Try type in Scala.
-
-
+excludeddependencies
+	Jetbrains.Annotations
