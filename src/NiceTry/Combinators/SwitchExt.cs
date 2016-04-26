@@ -1,3 +1,5 @@
+using JetBrains.Annotations;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using static NiceTry.Predef;
@@ -12,13 +14,14 @@ namespace NiceTry.Combinators {
         ///     <paramref name="candidates" /> for the first success. If no success can be found, a
         ///     <see cref="Failure{T}" /> is returned.
         /// </summary>
-        /// <param name="try">       </param>
+        /// <param name="try"></param>
         /// <param name="candidates"></param>
         /// <typeparam name="T"></typeparam>
         /// <exception cref="ArgumentNullException">
         ///     <paramref name="try" /> or <paramref name="candidates" /> is <see langword="null" />.
         /// </exception>
-        public static Try<T> Switch<T>(this Try<T> @try, params Try<T>[] candidates) {
+        [NotNull]
+        public static Try<T> Switch<T>([NotNull] this Try<T> @try, [NotNull] params Try<T>[] candidates) {
             @try.ThrowIfNull(nameof(@try));
             candidates.ThrowIfNull(nameof(candidates));
 
@@ -30,13 +33,14 @@ namespace NiceTry.Combinators {
         ///     <paramref name="candidates" /> for the first success. If no success can be found, a
         ///     <see cref="Failure{T}" /> is returned.
         /// </summary>
-        /// <param name="try">       </param>
+        /// <param name="try"></param>
         /// <param name="candidates"></param>
         /// <typeparam name="T"></typeparam>
         /// <exception cref="ArgumentNullException">
         ///     <paramref name="try" /> or <paramref name="candidates" /> is <see langword="null" />.
         /// </exception>
-        public static Try<T> Switch<T>(this Try<T> @try, IEnumerable<Try<T>> candidates) {
+        [NotNull]
+        public static Try<T> Switch<T>([NotNull] this Try<T> @try, [NotNull] IEnumerable<Try<T>> candidates) {
             @try.ThrowIfNull(nameof(@try));
             candidates.ThrowIfNull(nameof(candidates));
 
@@ -50,7 +54,8 @@ namespace NiceTry.Combinators {
         /// <param name="candidates"></param>
         /// <typeparam name="T"></typeparam>
         /// <exception cref="ArgumentNullException"> <paramref name="candidates" /> is <see langword="null" />. </exception>
-        public static Try<T> Switch<T>(this IEnumerable<Try<T>> candidates) {
+        [NotNull]
+        public static Try<T> Switch<T>([NotNull] this IEnumerable<Try<T>> candidates) {
             candidates.ThrowIfNull(nameof(candidates));
 
             return Try(() => candidates.First(t => t.IsSuccess));

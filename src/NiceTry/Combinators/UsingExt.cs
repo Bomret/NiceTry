@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System;
 using TheVoid;
 using static NiceTry.Predef;
@@ -15,16 +16,17 @@ namespace NiceTry.Combinators {
         /// </summary>
         /// <typeparam name="Disposable"></typeparam>
         /// <typeparam name="T"></typeparam>
-        /// <param name="try">             </param>
+        /// <param name="try"></param>
         /// <param name="createDisposable"></param>
-        /// <param name="useDisposable">   </param>
+        /// <param name="useDisposable"></param>
         /// <exception cref="ArgumentNullException">
         ///     <paramref name="createDisposable" /> or <paramref name="useDisposable" /> is <see langword="null" />.
         /// </exception>
+        [NotNull]
         public static Try<Unit> Using<Disposable, T>(
-            this Try<T> @try,
-            Func<Disposable> createDisposable,
-            Action<Disposable, T> useDisposable) where Disposable : IDisposable {
+            [NotNull] this Try<T> @try,
+            [NotNull] Func<Disposable> createDisposable,
+            [NotNull] Action<Disposable, T> useDisposable) where Disposable : IDisposable {
             @try.ThrowIfNull(nameof(@try));
             createDisposable.ThrowIfNull(nameof(createDisposable));
             useDisposable.ThrowIfNull(nameof(useDisposable));
@@ -44,16 +46,17 @@ namespace NiceTry.Combinators {
         /// <typeparam name="Disposable"></typeparam>
         /// <typeparam name="A"></typeparam>
         /// <typeparam name="B"></typeparam>
-        /// <param name="try">             </param>
+        /// <param name="try"></param>
         /// <param name="createDisposable"></param>
-        /// <param name="useDisposable">   </param>
+        /// <param name="useDisposable"></param>
         /// <exception cref="ArgumentNullException">
         ///     <paramref name="createDisposable" /> or <paramref name="useDisposable" /> is <see langword="null" />.
         /// </exception>
+        [NotNull]
         public static Try<B> Using<Disposable, A, B>(
-            this Try<A> @try,
-            Func<Disposable> createDisposable,
-            Func<Disposable, A, B> useDisposable) where Disposable : IDisposable {
+            [NotNull] this Try<A> @try,
+            [NotNull] Func<Disposable> createDisposable,
+            [NotNull] Func<Disposable, A, B> useDisposable) where Disposable : IDisposable {
             @try.ThrowIfNull(nameof(@try));
             createDisposable.ThrowIfNull(nameof(createDisposable));
             useDisposable.ThrowIfNull(nameof(useDisposable));
@@ -73,16 +76,17 @@ namespace NiceTry.Combinators {
         /// <typeparam name="Disposable"></typeparam>
         /// <typeparam name="A"></typeparam>
         /// <typeparam name="B"></typeparam>
-        /// <param name="try">             </param>
+        /// <param name="try"></param>
         /// <param name="createDisposable"></param>
-        /// <param name="useDisposable">   </param>
+        /// <param name="useDisposable"></param>
         /// <exception cref="ArgumentNullException">
         ///     <paramref name="createDisposable" /> or <paramref name="useDisposable" /> is <see langword="null" />.
         /// </exception>
+        [NotNull]
         public static Try<B> Using<Disposable, A, B>(
-            this Try<A> @try,
-            Func<A, Disposable> createDisposable,
-            Func<Disposable, B> useDisposable) where Disposable : IDisposable {
+            [NotNull] this Try<A> @try,
+            [NotNull] Func<A, Disposable> createDisposable,
+            [NotNull] Func<Disposable, B> useDisposable) where Disposable : IDisposable {
             @try.ThrowIfNull(nameof(@try));
             createDisposable.ThrowIfNull(nameof(createDisposable));
             useDisposable.ThrowIfNull(nameof(useDisposable));
@@ -102,15 +106,17 @@ namespace NiceTry.Combinators {
         /// <typeparam name="Disposable"></typeparam>
         /// <typeparam name="A"></typeparam>
         /// <typeparam name="B"></typeparam>
-        /// <param name="try">             </param>
+        /// <param name="try"></param>
         /// <param name="createDisposable"></param>
-        /// <param name="useDisposable">   </param>
+        /// <param name="useDisposable"></param>
         /// <exception cref="ArgumentNullException">
         ///     <paramref name="createDisposable" /> or <paramref name="useDisposable" /> is <see langword="null" />.
         /// </exception>
-        public static Try<B> UsingWith<Disposable, A, B>(this Try<A> @try,
-            Func<A, Disposable> createDisposable,
-            Func<Disposable, Try<B>> useDisposable) where Disposable : IDisposable {
+        [NotNull]
+        public static Try<B> UsingWith<Disposable, A, B>(
+            [NotNull] this Try<A> @try,
+            [NotNull] Func<A, Disposable> createDisposable,
+            [NotNull] Func<Disposable, Try<B>> useDisposable) where Disposable : IDisposable {
             @try.ThrowIfNull(nameof(@try));
             createDisposable.ThrowIfNull(nameof(createDisposable));
             useDisposable.ThrowIfNull(nameof(useDisposable));
@@ -129,15 +135,17 @@ namespace NiceTry.Combinators {
         /// <typeparam name="Disposable"></typeparam>
         /// <typeparam name="A"></typeparam>
         /// <typeparam name="B"></typeparam>
-        /// <param name="try">             </param>
+        /// <param name="try"></param>
         /// <param name="createDisposable"></param>
-        /// <param name="useDisposable">   </param>
+        /// <param name="useDisposable"></param>
         /// <exception cref="ArgumentNullException">
         ///     <paramref name="createDisposable" /> or <paramref name="useDisposable" /> is <see langword="null" />.
         /// </exception>
-        public static Try<B> UsingWith<Disposable, A, B>(this Try<A> @try,
-            Func<Disposable> createDisposable,
-            Func<Disposable, A, Try<B>> useDisposable) where Disposable : IDisposable {
+        [NotNull]
+        public static Try<B> UsingWith<Disposable, A, B>(
+            [NotNull] this Try<A> @try,
+            [NotNull] Func<Disposable> createDisposable,
+            [NotNull] Func<Disposable, A, Try<B>> useDisposable) where Disposable : IDisposable {
             @try.ThrowIfNull(nameof(@try));
             createDisposable.ThrowIfNull(nameof(createDisposable));
             useDisposable.ThrowIfNull(nameof(useDisposable));

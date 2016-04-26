@@ -1,4 +1,4 @@
-﻿using NiceTry.Combinators;
+﻿using JetBrains.Annotations;
 using System;
 using TheVoid;
 
@@ -13,7 +13,8 @@ namespace NiceTry {
         /// <typeparam name="T"></typeparam>
         /// <param name="error"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="error" /> is <see langword="null" />. </exception>
-        public static Try<T> Failure<T>(Exception error) {
+        [NotNull]
+        public static Try<T> Failure<T>([NotNull] Exception error) {
             error.ThrowIfNull(nameof(error));
 
             return new Failure<T>(error);
@@ -26,7 +27,8 @@ namespace NiceTry {
         /// <typeparam name="A"></typeparam>
         /// <typeparam name="B"></typeparam>
         /// <param name="func"></param>
-        public static Func<Try<A>, Try<B>> Lift<A, B>(Func<A, B> func) {
+        [NotNull]
+        public static Func<Try<A>, Try<B>> Lift<A, B>([NotNull] Func<A, B> func) {
             func.ThrowIfNull(nameof(func));
 
             return ta => ta.Match(
@@ -42,7 +44,8 @@ namespace NiceTry {
         /// <typeparam name="B"></typeparam>
         /// <typeparam name="C"></typeparam>
         /// <param name="func"></param>
-        public static Func<Try<A>, Try<B>, Try<C>> Lift2<A, B, C>(Func<A, B, C> func) {
+        [NotNull]
+        public static Func<Try<A>, Try<B>, Try<C>> Lift2<A, B, C>([NotNull] Func<A, B, C> func) {
             func.ThrowIfNull(nameof(func));
 
             return (ta, tb) => ta.Match(
@@ -57,7 +60,8 @@ namespace NiceTry {
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="value"></param>
-        public static Try<T> Success<T>(T value) => new Success<T>(value);
+        [NotNull]
+        public static Try<T> Success<T>([CanBeNull] T value) => new Success<T>(value);
 
         /// <summary>
         ///     Tries to execute the specified <paramref name="work" /> synchronously. If an exception is thrown a
@@ -65,7 +69,8 @@ namespace NiceTry {
         /// </summary>
         /// <param name="work"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="work" /> is <see langword="null" />. </exception>
-        public static Try<Unit> To(Action work) {
+        [NotNull]
+        public static Try<Unit> To([NotNull] Action work) {
             work.ThrowIfNull(nameof(work));
 
             return To(() => {
@@ -81,7 +86,8 @@ namespace NiceTry {
         /// <typeparam name="T"></typeparam>
         /// <param name="work"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="work" /> is <see langword="null" /> </exception>
-        public static Try<T> To<T>(Func<T> work) {
+        [NotNull]
+        public static Try<T> To<T>([NotNull] Func<T> work) {
             work.ThrowIfNull(nameof(work));
 
             return To(() => {
@@ -99,7 +105,8 @@ namespace NiceTry {
         /// <param name="work"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="work" /> is <see langword="null" /> </exception>
         /// <exception cref="ArgumentException"> <paramref name="work" /> produces <see langword="null" /> </exception>
-        public static Try<T> To<T>(Func<Try<T>> work) {
+        [NotNull]
+        public static Try<T> To<T>([NotNull] Func<Try<T>> work) {
             work.ThrowIfNull(nameof(work));
 
             Try<T> result;

@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System;
 using static NiceTry.Predef;
 
@@ -14,13 +15,15 @@ namespace NiceTry.Combinators {
         /// </summary>
         /// <typeparam name="TErr"></typeparam>
         /// <typeparam name="T"></typeparam>
-        /// <param name="try">        </param>
+        /// <param name="try"></param>
         /// <param name="handleError"></param>
         /// <exception cref="ArgumentNullException">
         ///     <paramref name="try" /> or <paramref name="handleError" /> is <see langword="null" />.
         /// </exception>
-        public static Try<T> Catch<TErr, T>(this Try<T> @try, Func<TErr, T> handleError)
+        [NotNull]
+        public static Try<T> Catch<TErr, T>([NotNull] this Try<T> @try, [NotNull] Func<TErr, T> handleError)
             where TErr : Exception {
+            @try.ThrowIfNull(nameof(@try));
             handleError.ThrowIfNull(nameof(handleError));
 
             return CatchWith<TErr, T>(@try, err => {
@@ -37,16 +40,17 @@ namespace NiceTry.Combinators {
         /// </summary>
         /// <typeparam name="TErr"></typeparam>
         /// <typeparam name="T"></typeparam>
-        /// <param name="try">        </param>
+        /// <param name="try"></param>
         /// <param name="handleError"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException">
         ///     <paramref name="try" /> or <paramref name="handleError" /> is <see langword="null" />.
         /// </exception>
-        public static Try<T> CatchWith<TErr, T>(this Try<T> @try, Func<TErr, Try<T>> handleError)
+        [NotNull]
+        public static Try<T> CatchWith<TErr, T>([NotNull] this Try<T> @try, [NotNull] Func<TErr, Try<T>> handleError)
             where TErr : Exception {
-            handleError.ThrowIfNull(nameof(handleError));
             @try.ThrowIfNull(nameof(@try));
+            handleError.ThrowIfNull(nameof(handleError));
 
             return @try.Match(
                 success: _ => @try,

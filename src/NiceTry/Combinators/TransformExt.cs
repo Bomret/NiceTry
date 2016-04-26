@@ -1,4 +1,5 @@
-﻿using System;
+﻿using JetBrains.Annotations;
+using System;
 using static NiceTry.Predef;
 
 namespace NiceTry.Combinators {
@@ -10,7 +11,7 @@ namespace NiceTry.Combinators {
         ///     Transform the specified <paramref name="try" /> using one of the specified functions for
         ///     <paramref name="success" /> and <paramref name="failure" />.
         /// </summary>
-        /// <param name="try">    </param>
+        /// <param name="try"></param>
         /// <param name="success"></param>
         /// <param name="failure"></param>
         /// <typeparam name="A"></typeparam>
@@ -18,7 +19,11 @@ namespace NiceTry.Combinators {
         /// <exception cref="ArgumentNullException">
         ///     <paramref name="try" />, <paramref name="success" /> or <paramref name="failure" /> is <see langword="null" />.
         /// </exception>
-        public static Try<B> Transform<A, B>(this Try<A> @try, Func<A, B> success, Func<Exception, B> failure) {
+        [NotNull]
+        public static Try<B> Transform<A, B>(
+            [NotNull] this Try<A> @try,
+            [NotNull] Func<A, B> success,
+            [NotNull] Func<Exception, B> failure) {
             @try.ThrowIfNull(nameof(@try));
             success.ThrowIfNull(nameof(success));
             failure.ThrowIfNull(nameof(failure));
@@ -39,7 +44,7 @@ namespace NiceTry.Combinators {
         ///     Transform the specified <paramref name="try" /> using one of the specified functions for
         ///     <paramref name="success" /> and <paramref name="failure" />.
         /// </summary>
-        /// <param name="try">    </param>
+        /// <param name="try"></param>
         /// <param name="success"></param>
         /// <param name="failure"></param>
         /// <typeparam name="A"></typeparam>
@@ -47,7 +52,11 @@ namespace NiceTry.Combinators {
         /// <exception cref="ArgumentNullException">
         ///     <paramref name="try" />, <paramref name="success" /> or <paramref name="failure" /> is <see langword="null" />.
         /// </exception>
-        public static Try<B> TransformWith<A, B>(this Try<A> @try, Func<A, Try<B>> success, Func<Exception, Try<B>> failure) {
+        [NotNull]
+        public static Try<B> TransformWith<A, B>(
+            [NotNull] this Try<A> @try,
+            [NotNull] Func<A, Try<B>> success,
+            [NotNull] Func<Exception, Try<B>> failure) {
             @try.ThrowIfNull(nameof(@try));
             success.ThrowIfNull(nameof(success));
             failure.ThrowIfNull(nameof(failure));

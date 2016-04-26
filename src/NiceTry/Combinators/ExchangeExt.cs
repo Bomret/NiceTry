@@ -1,4 +1,5 @@
-﻿using System;
+﻿using JetBrains.Annotations;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using static NiceTry.Predef;
@@ -13,7 +14,8 @@ namespace NiceTry.Combinators {
         /// <typeparam name="T"></typeparam>
         /// <param name="tryEnumerable"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="tryEnumerable" /> is <see langword="null" />. </exception>
-        public static IEnumerable<Try<T>> Exchange<T>(this Try<IEnumerable<T>> tryEnumerable) {
+        [NotNull]
+        public static IEnumerable<Try<T>> Exchange<T>([NotNull] this Try<IEnumerable<T>> tryEnumerable) {
             tryEnumerable.ThrowIfNull(nameof(tryEnumerable));
 
             return tryEnumerable.Match(
@@ -27,7 +29,9 @@ namespace NiceTry.Combinators {
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="tryArray"></param>
-        public static Try<T>[] Exchange<T>(this Try<T[]> tryArray) {
+        /// <exception cref="ArgumentNullException"> <paramref name="tryEnumerable" /> is <see langword="null" />. </exception>
+        [NotNull]
+        public static Try<T>[] Exchange<T>([NotNull] this Try<T[]> tryArray) {
             tryArray.ThrowIfNull(nameof(tryArray));
 
             return tryArray.Match(

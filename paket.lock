@@ -1,6 +1,11 @@
 NUGET
   remote: https://www.nuget.org/api/v2
   specs:
+    JetBrains.Annotations (10.1.4)
+      System.Runtime (>= 4.0.0) - framework: dnxcore50
+    System.Private.Uri (4.0.0) - framework: dnxcore50
+    System.Runtime (4.0.20) - framework: dnxcore50
+      System.Private.Uri (>= 4.0.0) - framework: dnxcore50
     TheVoid (0.5.0)
 
 GROUP Build

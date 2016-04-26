@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System;
 using static NiceTry.Predef;
 
@@ -13,13 +14,13 @@ namespace NiceTry.Combinators {
         /// </summary>
         /// <param name="try"></param>
         /// <param name="action"></param>
-        /// <returns> A success if the operation succeeded or else a failure containing the encountered error. </returns>
         /// <exception cref="ArgumentNullException">
         ///     <paramref name="try" /> or <paramref name="action" /> is <see langword="null" />.
         /// </exception>
-        public static Try<T> Do<T>(this Try<T> @try, Action<T> action) {
-            action.ThrowIfNull(nameof(action));
+        [NotNull]
+        public static Try<T> Do<T>([NotNull] this Try<T> @try, [NotNull] Action<T> action) {
             @try.ThrowIfNull(nameof(@try));
+            action.ThrowIfNull(nameof(action));
 
             return @try.Match(
                 failure: Fail<T>,

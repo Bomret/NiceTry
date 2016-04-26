@@ -1,4 +1,5 @@
-﻿using NiceTry.Combinators;
+﻿using JetBrains.Annotations;
+using NiceTry.Combinators;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -14,7 +15,8 @@ namespace NiceTry {
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="candidates"></param>
-        public static Try<IEnumerable<T>> AllOrFailure<T>(params Try<T>[] candidates) =>
+        [NotNull]
+        public static Try<IEnumerable<T>> AllOrFailure<T>([NotNull] params Try<T>[] candidates) =>
             candidates.AsEnumerable().AllOrFailure();
 
         /// <summary>
@@ -24,7 +26,8 @@ namespace NiceTry {
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="candidates"></param>
-        public static Try<IEnumerable<T>> AllOrFailure<T>(IEnumerable<Try<T>> candidates) =>
+        [NotNull]
+        public static Try<IEnumerable<T>> AllOrFailure<T>([NotNull] IEnumerable<Try<T>> candidates) =>
             candidates.AllOrFailure();
 
         /// <summary>
@@ -34,7 +37,8 @@ namespace NiceTry {
         /// <typeparam name="T"></typeparam>
         /// <param name="candidates"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="candidates" /> is <see langword="null" />. </exception>
-        public static IEnumerable<T> SelectValues<T>(params Try<T>[] candidates) =>
+        [NotNull]
+        public static IEnumerable<T> SelectValues<T>([NotNull] params Try<T>[] candidates) =>
             candidates.SelectValues();
 
         /// <summary>
@@ -44,7 +48,8 @@ namespace NiceTry {
         /// <typeparam name="T"></typeparam>
         /// <param name="candidates"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="candidates" /> is <see langword="null" />. </exception>
-        public static IEnumerable<T> SelectValues<T>(IEnumerable<Try<T>> candidates) =>
+        [NotNull]
+        public static IEnumerable<T> SelectValues<T>([NotNull] IEnumerable<Try<T>> candidates) =>
             candidates.SelectValues();
 
         /// <summary>
@@ -54,7 +59,8 @@ namespace NiceTry {
         /// <param name="candidates"></param>
         /// <typeparam name="T"></typeparam>
         /// <exception cref="ArgumentNullException"> <paramref name="candidates" /> is <see langword="null" />. </exception>
-        public static Try<T> Switch<T>(params Try<T>[] candidates) =>
+        [NotNull]
+        public static Try<T> Switch<T>([NotNull] params Try<T>[] candidates) =>
             candidates.Switch();
 
         /// <summary>
@@ -64,7 +70,8 @@ namespace NiceTry {
         /// <param name="candidates"></param>
         /// <typeparam name="T"></typeparam>
         /// <exception cref="ArgumentNullException"> <paramref name="candidates" /> is <see langword="null" />. </exception>
-        public static Try<T> Switch<T>(IEnumerable<Try<T>> candidates) =>
+        [NotNull]
+        public static Try<T> Switch<T>([NotNull] IEnumerable<Try<T>> candidates) =>
             candidates.Switch();
     }
 }

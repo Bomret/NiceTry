@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System;
 using static NiceTry.Predef;
 
@@ -16,9 +17,10 @@ namespace NiceTry.Combinators {
         /// <exception cref="ArgumentNullException">
         ///     <paramref name="try" /> or <paramref name="select" /> is <see langword="null" />.
         /// </exception>
+        [NotNull]
         public static Try<B> Select<A, B>(
-            this Try<A> @try,
-            Func<A, B> @select) {
+            [NotNull] this Try<A> @try,
+            [NotNull] Func<A, B> @select) {
             @try.ThrowIfNull(nameof(@try));
             @select.ThrowIfNull(nameof(@select));
 

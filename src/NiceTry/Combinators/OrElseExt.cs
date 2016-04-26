@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System;
 using static NiceTry.Predef;
 
@@ -14,7 +15,8 @@ namespace NiceTry.Combinators {
         /// <param name="try"></param>
         /// <param name="fallback"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="try" /> is <see langword="null" />. </exception>
-        public static Try<T> OrElse<T>(this Try<T> @try, T fallback) {
+        [NotNull]
+        public static Try<T> OrElse<T>([NotNull] this Try<T> @try, [CanBeNull] T fallback) {
             @try.ThrowIfNull(nameof(@try));
 
             return OrElseWith(@try, () => Ok(fallback));
@@ -30,7 +32,8 @@ namespace NiceTry.Combinators {
         /// <exception cref="ArgumentNullException">
         ///     <paramref name="try" /> or <paramref name="fallback" /> is <see langword="null" />.
         /// </exception>
-        public static Try<T> OrElse<T>(this Try<T> @try, Func<T> fallback) {
+        [NotNull]
+        public static Try<T> OrElse<T>([NotNull] this Try<T> @try, [NotNull] Func<T> fallback) {
             @try.ThrowIfNull(nameof(@try));
             fallback.ThrowIfNull(nameof(fallback));
 
@@ -49,7 +52,8 @@ namespace NiceTry.Combinators {
         /// <exception cref="ArgumentNullException">
         ///     <paramref name="try" /> or <paramref name="fallback" /> is <see langword="null" />.
         /// </exception>
-        public static Try<T> OrElseWith<T>(this Try<T> @try, Try<T> fallback) {
+        [NotNull]
+        public static Try<T> OrElseWith<T>([NotNull] this Try<T> @try, [NotNull] Try<T> fallback) {
             @try.ThrowIfNull(nameof(@try));
             fallback.ThrowIfNull(nameof(fallback));
 
@@ -66,7 +70,8 @@ namespace NiceTry.Combinators {
         /// <exception cref="ArgumentNullException">
         ///     <paramref name="try" /> or <paramref name="fallback" /> is <see langword="null" />.
         /// </exception>
-        public static Try<T> OrElseWith<T>(this Try<T> @try, Func<Try<T>> fallback) {
+        [NotNull]
+        public static Try<T> OrElseWith<T>([NotNull] this Try<T> @try, [NotNull] Func<Try<T>> fallback) {
             @try.ThrowIfNull(nameof(@try));
             fallback.ThrowIfNull(nameof(fallback));
 

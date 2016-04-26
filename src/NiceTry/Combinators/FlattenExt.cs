@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using static NiceTry.Predef;
 
 namespace NiceTry.Combinators {
@@ -11,7 +12,8 @@ namespace NiceTry.Combinators {
         /// <typeparam name="T"></typeparam>
         /// <param name="nestedTry"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="nestedTry" /> is <see langword="null" />. </exception>
-        public static Try<T> Flatten<T>(this Try<Try<T>> nestedTry) {
+        [NotNull]
+        public static Try<T> Flatten<T>([NotNull]this Try<Try<T>> nestedTry) {
             nestedTry.ThrowIfNull(nameof(nestedTry));
 
             return nestedTry.Match(

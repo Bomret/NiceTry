@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System;
 using static NiceTry.Predef;
 
@@ -17,11 +18,14 @@ namespace NiceTry.Combinators {
         /// <typeparam name="C"></typeparam>
         /// <param name="tryA"></param>
         /// <param name="tryB"></param>
-        /// <param name="zip"> </param>
+        /// <param name="zip"></param>
         /// <exception cref="ArgumentNullException">
         ///     <paramref name="tryA" />, <paramref name="tryB" /> or <paramref name="zip" /> is <see langword="null" />.
         /// </exception>
-        public static Try<C> Zip<A, B, C>(this Try<A> tryA, Try<B> tryB, Func<A, B, C> zip) {
+        [NotNull]
+        public static Try<C> Zip<A, B, C>(
+            [NotNull] this Try<A> tryA, Try<B> tryB,
+            [NotNull] Func<A, B, C> zip) {
             tryA.ThrowIfNull(nameof(tryA));
             tryB.ThrowIfNull(nameof(tryB));
             zip.ThrowIfNull(nameof(zip));
@@ -43,11 +47,15 @@ namespace NiceTry.Combinators {
         /// <typeparam name="C"></typeparam>
         /// <param name="tryA"></param>
         /// <param name="tryB"></param>
-        /// <param name="zip"> </param>
+        /// <param name="zip"></param>
         /// <exception cref="ArgumentNullException">
         ///     <paramref name="tryA" />, <paramref name="tryB" /> or <paramref name="zip" /> is <see langword="null" />.
         /// </exception>
-        public static Try<C> ZipWith<A, B, C>(this Try<A> tryA, Try<B> tryB, Func<A, B, Try<C>> zip) {
+        [NotNull]
+        public static Try<C> ZipWith<A, B, C>(
+            [NotNull] this Try<A> tryA,
+            [NotNull] Try<B> tryB,
+            [NotNull] Func<A, B, Try<C>> zip) {
             tryA.ThrowIfNull(nameof(tryA));
             tryB.ThrowIfNull(nameof(tryB));
             zip.ThrowIfNull(nameof(zip));

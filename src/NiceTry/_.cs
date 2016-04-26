@@ -10,7 +10,7 @@ namespace NiceTry {
             return obj;
         }
 
-        public static T Id<T>(T t) => t;
+        public static T Id<T>(T x) => x;
 
         public static bool IsNotNull(this object obj) => !ReferenceEquals(obj, null);
 

@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System;
 using static NiceTry._;
 
@@ -14,7 +15,8 @@ namespace NiceTry.Combinators {
         /// <param name="try"></param>
         /// <exception cref="InvalidOperationException"> <paramref name="try" /> represents failure. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="try" /> is <see langword="null" />. </exception>
-        public static T Get<T>(this Try<T> @try) {
+        [CanBeNull]
+        public static T Get<T>([NotNull] this Try<T> @try) {
             @try.ThrowIfNull(nameof(@try));
 
             return @try.Match(
@@ -36,7 +38,8 @@ namespace NiceTry.Combinators {
         /// <exception cref="ArgumentNullException">
         ///     <paramref name="try" /> or <paramref name="fallback" /> is <see langword="null" />.
         /// </exception>
-        public static T GetOrElse<T>(this Try<T> @try, T fallback) =>
+        [CanBeNull]
+        public static T GetOrElse<T>([NotNull] this Try<T> @try, [CanBeNull] T fallback) =>
             GetOrElse(@try, () => fallback);
 
         /// <summary>
@@ -49,7 +52,8 @@ namespace NiceTry.Combinators {
         /// <exception cref="ArgumentNullException">
         ///     <paramref name="try" /> or <paramref name="fallback" /> is <see langword="null" />.
         /// </exception>
-        public static T GetOrElse<T>(this Try<T> @try, Func<T> fallback) {
+        [CanBeNull]
+        public static T GetOrElse<T>([NotNull] this Try<T> @try, [NotNull] Func<T> fallback) {
             @try.ThrowIfNull(nameof(@try));
             fallback.ThrowIfNull(nameof(fallback));
 

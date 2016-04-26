@@ -1,4 +1,5 @@
-﻿using System;
+﻿using JetBrains.Annotations;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -26,13 +27,13 @@ namespace NiceTry {
         /// </summary>
         public abstract TryKind Kind { get; }
 
-        public abstract void IfFailure(Action<Exception> failure);
+        public abstract void IfFailure([NotNull] Action<Exception> failure);
 
-        public abstract void IfSuccess(Action<T> success);
+        public abstract void IfSuccess([NotNull] Action<T> success);
 
-        public abstract void Match(Action<T> success, Action<Exception> failure);
+        public abstract void Match([NotNull] Action<T> success, [NotNull] Action<Exception> failure);
 
-        public abstract B Match<B>(Func<T, B> success, Func<Exception, B> failure);
+        public abstract B Match<B>([NotNull] Func<T, B> success, [NotNull] Func<Exception, B> failure);
 
         #region Equality
 

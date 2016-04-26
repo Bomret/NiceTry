@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System;
 using static NiceTry.Predef;
 
@@ -17,9 +18,10 @@ namespace NiceTry.Combinators {
         /// <exception cref="ArgumentNullException">
         ///     <paramref name="try" /> or <paramref name="select" /> is <see langword="null" />.
         /// </exception>
+        [NotNull]
         public static Try<B> SelectMany<A, B>(
-            this Try<A> @try,
-            Func<A, Try<B>> @select) {
+            [NotNull] this Try<A> @try,
+            [NotNull] Func<A, Try<B>> @select) {
             @try.ThrowIfNull(nameof(@try));
             @select.ThrowIfNull(nameof(@select));
 
@@ -41,10 +43,11 @@ namespace NiceTry.Combinators {
         /// <exception cref="ArgumentNullException">
         ///     <paramref name="try" />, <paramref name="trySelect" /> or <paramref name="resultSelect" /> is <see langword="null" />.
         /// </exception>
+        [NotNull]
         public static Try<C> SelectMany<A, B, C>(
-            this Try<A> @try,
-            Func<A, Try<B>> trySelect,
-            Func<A, B, C> resultSelect) {
+            [NotNull] this Try<A> @try,
+            [NotNull] Func<A, Try<B>> trySelect,
+            [NotNull] Func<A, B, C> resultSelect) {
             @try.ThrowIfNull(nameof(@try));
             trySelect.ThrowIfNull(nameof(trySelect));
             resultSelect.ThrowIfNull(nameof(resultSelect));

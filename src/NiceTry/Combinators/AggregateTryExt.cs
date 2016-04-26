@@ -1,4 +1,5 @@
-﻿using System;
+﻿using JetBrains.Annotations;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -12,13 +13,14 @@ namespace NiceTry.Combinators {
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="enumerable"></param>
-        /// <param name="aggregate"> </param>
+        /// <param name="aggregate"></param>
         /// <exception cref="ArgumentNullException">
         ///     <paramref name="enumerable" /> or <paramref name="aggregate" /> is <see langword="null" />.
         /// </exception>
+        [NotNull]
         public static Try<T> AggregateTry<T>(
-            this IEnumerable<Try<T>> enumerable,
-            Func<T, T, T> aggregate) {
+            [NotNull] this IEnumerable<Try<T>> enumerable,
+            [NotNull] Func<T, T, T> aggregate) {
             enumerable.ThrowIfNull(nameof(enumerable));
             aggregate.ThrowIfNull(nameof(aggregate));
 
@@ -38,15 +40,16 @@ namespace NiceTry.Combinators {
         /// <typeparam name="A"></typeparam>
         /// <typeparam name="B"></typeparam>
         /// <param name="enumerable"></param>
-        /// <param name="seed">      </param>
-        /// <param name="aggregate"> </param>
+        /// <param name="seed"></param>
+        /// <param name="aggregate"></param>
         /// <exception cref="ArgumentNullException">
         ///     <paramref name="enumerable" /> or <paramref name="aggregate" /> is <see langword="null" />.
         /// </exception>
+        [NotNull]
         public static Try<B> AggregateTry<A, B>(
-            this IEnumerable<Try<A>> enumerable,
-            B seed,
-            Func<B, A, B> aggregate) {
+            [NotNull] this IEnumerable<Try<A>> enumerable,
+            [CanBeNull] B seed,
+            [NotNull] Func<B, A, B> aggregate) {
             enumerable.ThrowIfNull(nameof(enumerable));
             aggregate.ThrowIfNull(nameof(aggregate));
 
@@ -67,18 +70,19 @@ namespace NiceTry.Combinators {
         /// <typeparam name="A"></typeparam>
         /// <typeparam name="B"></typeparam>
         /// <typeparam name="C"></typeparam>
-        /// <param name="enumerable">  </param>
-        /// <param name="seed">        </param>
-        /// <param name="aggregate">   </param>
+        /// <param name="enumerable"></param>
+        /// <param name="seed"></param>
+        /// <param name="aggregate"></param>
         /// <param name="resultSelect"></param>
         /// <exception cref="ArgumentNullException">
         ///     <paramref name="enumerable" /> or <paramref name="aggregate" /> or <paramref name="resultSelect" /> is <see langword="null" />.
         /// </exception>
+        [NotNull]
         public static Try<C> AggregateTry<A, B, C>(
-            this IEnumerable<Try<A>> enumerable,
-            B seed,
-            Func<B, A, B> aggregate,
-            Func<B, C> resultSelect) {
+            [NotNull] this IEnumerable<Try<A>> enumerable,
+            [CanBeNull] B seed,
+            [NotNull] Func<B, A, B> aggregate,
+            [NotNull] Func<B, C> resultSelect) {
             enumerable.ThrowIfNull(nameof(enumerable));
             aggregate.ThrowIfNull(nameof(aggregate));
             resultSelect.ThrowIfNull(nameof(resultSelect));

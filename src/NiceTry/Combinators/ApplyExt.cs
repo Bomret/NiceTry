@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System;
 using TheVoid;
 using static NiceTry.Predef;
@@ -13,7 +14,7 @@ namespace NiceTry.Combinators {
         ///     <see cref="Failure{T}" /> is returned.
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="try">  </param>
+        /// <param name="try"></param>
         /// <param name="apply"></param>
         /// <exception cref="ArgumentException">
         ///     The property Kind of <paramref name="try" /> is not a valid value of <see cref="TryKind" />.
@@ -21,7 +22,9 @@ namespace NiceTry.Combinators {
         /// <exception cref="ArgumentNullException">
         ///     <paramref name="try" /> or <paramref name="apply" /> is <see langword="null" />.
         /// </exception>
-        public static Try<Unit> Apply<T>(this Try<T> @try, Action<T> apply) {
+        [NotNull]
+        public static Try<Unit> Apply<T>([NotNull] this Try<T> @try, [NotNull] Action<T> apply) {
+            @try.ThrowIfNull(nameof(@try));
             apply.ThrowIfNull(nameof(apply));
 
             return ApplyWith(@try, x => {
@@ -36,7 +39,7 @@ namespace NiceTry.Combinators {
         ///     <see cref="Failure{T}" /> is returned.
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="try">  </param>
+        /// <param name="try"></param>
         /// <param name="apply"></param>
         /// <exception cref="ArgumentException">
         ///     The property Kind of <paramref name="try" /> is not a valid value of <see cref="TryKind" />.
@@ -44,7 +47,8 @@ namespace NiceTry.Combinators {
         /// <exception cref="ArgumentNullException">
         ///     <paramref name="try" /> or <paramref name="apply" /> is <see langword="null" />.
         /// </exception>
-        public static Try<Unit> ApplyWith<T>(this Try<T> @try, Func<T, Try<Unit>> apply) {
+        [NotNull]
+        public static Try<Unit> ApplyWith<T>([NotNull] this Try<T> @try, [NotNull] Func<T, Try<Unit>> apply) {
             apply.ThrowIfNull(nameof(apply));
             @try.ThrowIfNull(nameof(@try));
 

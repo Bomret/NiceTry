@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using JetBrains.Annotations;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace NiceTry.Combinators {
@@ -13,7 +14,8 @@ namespace NiceTry.Combinators {
         /// <typeparam name="T"></typeparam>
         /// <param name="enumerable"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="enumerable" /> is <see langword="null" />. </exception>
-        public static IEnumerable<T> SelectValues<T>(this IEnumerable<Try<T>> enumerable) {
+        [NotNull]
+        public static IEnumerable<T> SelectValues<T>([NotNull] this IEnumerable<Try<T>> enumerable) {
             enumerable.ThrowIfNull(nameof(enumerable));
 
             return enumerable

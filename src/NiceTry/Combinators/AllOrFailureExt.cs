@@ -1,4 +1,5 @@
-﻿using System;
+﻿using JetBrains.Annotations;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using static NiceTry.Predef;
@@ -18,7 +19,8 @@ namespace NiceTry.Combinators {
         /// <exception cref="ArgumentException">
         ///     <paramref name="enumerable" /> contains <see langword="null" /> elements.
         /// </exception>
-        public static Try<IEnumerable<T>> AllOrFailure<T>(this IEnumerable<Try<T>> enumerable) {
+        [NotNull]
+        public static Try<IEnumerable<T>> AllOrFailure<T>([NotNull] this IEnumerable<Try<T>> enumerable) {
             enumerable.ThrowIfNull(nameof(enumerable));
 
             var res = new List<T>();
@@ -48,7 +50,8 @@ namespace NiceTry.Combinators {
         /// <exception cref="ArgumentException">
         ///     <paramref name="array" /> contains <see langword="null" /> elements.
         /// </exception>
-        public static Try<T[]> AllOrFailure<T>(this Try<T>[] array) {
+        [NotNull]
+        public static Try<T[]> AllOrFailure<T>([NotNull] this Try<T>[] array) {
             array.ThrowIfNull(nameof(array));
 
             var res = new List<T>();

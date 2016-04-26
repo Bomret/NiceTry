@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System;
 using static NiceTry.Predef;
 
@@ -17,7 +18,8 @@ namespace NiceTry.Combinators {
         /// <exception cref="ArgumentNullException">
         ///     <paramref name="try" /> or <paramref name="handleError" /> is <see langword="null" />.
         /// </exception>
-        public static Try<T> Recover<T>(this Try<T> @try, Func<Exception, T> handleError) {
+        [NotNull]
+        public static Try<T> Recover<T>([NotNull] this Try<T> @try, [NotNull] Func<Exception, T> handleError) {
             @try.ThrowIfNull(nameof(@try));
             handleError.ThrowIfNull(nameof(handleError));
 
@@ -38,7 +40,8 @@ namespace NiceTry.Combinators {
         /// <exception cref="ArgumentNullException">
         ///     <paramref name="try" /> or <paramref name="handleError" /> is <see langword="null" />.
         /// </exception>
-        public static Try<T> RecoverWith<T>(this Try<T> @try, Func<Exception, Try<T>> handleError) {
+        [NotNull]
+        public static Try<T> RecoverWith<T>([NotNull] this Try<T> @try, [NotNull] Func<Exception, Try<T>> handleError) {
             @try.ThrowIfNull(nameof(@try));
             handleError.ThrowIfNull(nameof(handleError));
 

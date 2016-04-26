@@ -1,4 +1,5 @@
-﻿using System;
+﻿using JetBrains.Annotations;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using static NiceTry.Predef;
@@ -12,7 +13,8 @@ namespace NiceTry.Combinators {
         /// <typeparam name="T"></typeparam>
         /// <param name="enumerable"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="enumerable" /> is <see langword="null" />. </exception>
-        public static Try<T> LastTry<T>(this IEnumerable<T> enumerable) {
+        [NotNull]
+        public static Try<T> LastTry<T>([NotNull] this IEnumerable<T> enumerable) {
             enumerable.ThrowIfNull(nameof(enumerable));
 
             return Try(enumerable.Last);
@@ -29,8 +31,10 @@ namespace NiceTry.Combinators {
         /// <exception cref="ArgumentNullException">
         ///     <paramref name="enumerable" /> or <paramref name="predicate" /> is <see langword="null" />.
         /// </exception>
-        public static Try<T> LastTry<T>(this IEnumerable<T> enumerable, Func<T, bool> predicate) {
+        [NotNull]
+        public static Try<T> LastTry<T>([NotNull] this IEnumerable<T> enumerable, [NotNull] Func<T, bool> predicate) {
             enumerable.ThrowIfNull(nameof(enumerable));
+            predicate.ThrowIfNull(nameof(predicate));
 
             return Try(() => enumerable.Last(predicate));
         }

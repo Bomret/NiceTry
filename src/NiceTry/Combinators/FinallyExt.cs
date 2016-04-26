@@ -1,4 +1,5 @@
-﻿using System;
+﻿using JetBrains.Annotations;
+using System;
 using static NiceTry.Predef;
 
 namespace NiceTry.Combinators {
@@ -14,7 +15,8 @@ namespace NiceTry.Combinators {
         /// <typeparam name="T"></typeparam>
         /// <param name="try"></param>
         /// <param name="action"></param>
-        public static Try<T> Finally<T>(this Try<T> @try, Action action) {
+        [NotNull]
+        public static Try<T> Finally<T>([NotNull] this Try<T> @try, [NotNull] Action action) {
             action.ThrowIfNull(nameof(action));
             @try.ThrowIfNull(nameof(@try));
 
