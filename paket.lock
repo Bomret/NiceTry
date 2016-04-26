@@ -25,7 +25,7 @@ NUGET
       Microsoft.Bcl.Build (>= 1.0.14)
     Newtonsoft.Json (8.0.3)
     Octokit (0.19)
-      Microsoft.Net.Http  - framework: net10, net11, net20, net30, net35, net40, net40-full
+      Microsoft.Net.Http
     Paket.Core (2.63.2)
       Chessie
       FSharp.Core
