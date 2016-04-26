@@ -5,15 +5,16 @@ This document provides an overview of the used package dependencies and versions
 ## Build
 Name | Version
 --- | ---
-docfx.msbuild | 1.4.2
-FAKE | 4.20.0
-Paket.Core | 2.50.11
-SourceLink.Fake | 1.1.0
+docfx.msbuild | 1.8
+FAKE | 4.25.4
+Paket.Core | 2.63.2
+SourceLink.Fake | 1.1
 
 ## Main
 Name | Version
 --- | ---
-TheVoid | 0.5.0
+JetBrains.Annotations | 10.1.4
+TheVoid | 0.5
 
 ## Test
 Name | Version
