@@ -6,7 +6,7 @@ This document provides an overview of the used package dependencies and versions
 Name | Version
 --- | ---
 docfx.msbuild | 1.8
-FAKE | 4.25.4
+FAKE | 4.25.5
 Paket.Core | 2.63.2
 SourceLink.Fake | 1.1
 

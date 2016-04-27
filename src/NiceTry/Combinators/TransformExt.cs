@@ -28,7 +28,7 @@ namespace NiceTry.Combinators {
             success.ThrowIfNull(nameof(success));
             failure.ThrowIfNull(nameof(failure));
 
-            return TransformWith(
+            return Transform(
                 @try,
                 a => {
                     var res = success(a);
@@ -53,7 +53,7 @@ namespace NiceTry.Combinators {
         ///     <paramref name="try" />, <paramref name="success" /> or <paramref name="failure" /> is <see langword="null" />.
         /// </exception>
         [NotNull]
-        public static Try<B> TransformWith<A, B>(
+        public static Try<B> Transform<A, B>(
             [NotNull] this Try<A> @try,
             [NotNull] Func<A, Try<B>> success,
             [NotNull] Func<Exception, Try<B>> failure) {

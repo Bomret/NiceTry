@@ -31,7 +31,7 @@ namespace NiceTry.Combinators {
             createDisposable.ThrowIfNull(nameof(createDisposable));
             useDisposable.ThrowIfNull(nameof(useDisposable));
 
-            return UsingWith(@try, createDisposable, (d, x) => {
+            return Using(@try, createDisposable, (d, x) => {
                 useDisposable(d, x);
                 return Ok(Unit.Default);
             });
@@ -61,7 +61,7 @@ namespace NiceTry.Combinators {
             createDisposable.ThrowIfNull(nameof(createDisposable));
             useDisposable.ThrowIfNull(nameof(useDisposable));
 
-            return UsingWith(@try, createDisposable, (d, a) => {
+            return Using(@try, createDisposable, (d, a) => {
                 var b = useDisposable(d, a);
                 return Ok(b);
             });
@@ -91,7 +91,7 @@ namespace NiceTry.Combinators {
             createDisposable.ThrowIfNull(nameof(createDisposable));
             useDisposable.ThrowIfNull(nameof(useDisposable));
 
-            return UsingWith(@try, createDisposable, d => {
+            return Using(@try, createDisposable, d => {
                 var res = useDisposable(d);
                 return Ok(res);
             });
@@ -113,7 +113,7 @@ namespace NiceTry.Combinators {
         ///     <paramref name="createDisposable" /> or <paramref name="useDisposable" /> is <see langword="null" />.
         /// </exception>
         [NotNull]
-        public static Try<B> UsingWith<Disposable, A, B>(
+        public static Try<B> Using<Disposable, A, B>(
             [NotNull] this Try<A> @try,
             [NotNull] Func<A, Disposable> createDisposable,
             [NotNull] Func<Disposable, Try<B>> useDisposable) where Disposable : IDisposable {
@@ -123,7 +123,7 @@ namespace NiceTry.Combinators {
 
             return @try.Match(
                 failure: Fail<B>,
-                success: a => Try.UsingWith(() => createDisposable(a), useDisposable));
+                success: a => Try.Using(() => createDisposable(a), useDisposable));
         }
 
         /// <summary>
@@ -142,7 +142,7 @@ namespace NiceTry.Combinators {
         ///     <paramref name="createDisposable" /> or <paramref name="useDisposable" /> is <see langword="null" />.
         /// </exception>
         [NotNull]
-        public static Try<B> UsingWith<Disposable, A, B>(
+        public static Try<B> Using<Disposable, A, B>(
             [NotNull] this Try<A> @try,
             [NotNull] Func<Disposable> createDisposable,
             [NotNull] Func<Disposable, A, Try<B>> useDisposable) where Disposable : IDisposable {
@@ -152,7 +152,7 @@ namespace NiceTry.Combinators {
 
             return @try.Match(
                 failure: Fail<B>,
-                success: a => Try.UsingWith(createDisposable, d => useDisposable(d, a)));
+                success: a => Try.Using(createDisposable, d => useDisposable(d, a)));
         }
     }
 }

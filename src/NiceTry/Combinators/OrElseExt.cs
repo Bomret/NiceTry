@@ -19,7 +19,7 @@ namespace NiceTry.Combinators {
         public static Try<T> OrElse<T>([NotNull] this Try<T> @try, [CanBeNull] T fallback) {
             @try.ThrowIfNull(nameof(@try));
 
-            return OrElseWith(@try, () => Ok(fallback));
+            return OrElse(@try, () => Ok(fallback));
         }
 
         /// <summary>
@@ -37,7 +37,7 @@ namespace NiceTry.Combinators {
             @try.ThrowIfNull(nameof(@try));
             fallback.ThrowIfNull(nameof(fallback));
 
-            return OrElseWith(@try, () => {
+            return OrElse(@try, () => {
                 var res = fallback();
                 return Ok(res);
             });
@@ -53,11 +53,11 @@ namespace NiceTry.Combinators {
         ///     <paramref name="try" /> or <paramref name="fallback" /> is <see langword="null" />.
         /// </exception>
         [NotNull]
-        public static Try<T> OrElseWith<T>([NotNull] this Try<T> @try, [NotNull] Try<T> fallback) {
+        public static Try<T> OrElse<T>([NotNull] this Try<T> @try, [NotNull] Try<T> fallback) {
             @try.ThrowIfNull(nameof(@try));
             fallback.ThrowIfNull(nameof(fallback));
 
-            return OrElseWith(@try, () => fallback);
+            return OrElse(@try, () => fallback);
         }
 
         /// <summary>
@@ -71,7 +71,7 @@ namespace NiceTry.Combinators {
         ///     <paramref name="try" /> or <paramref name="fallback" /> is <see langword="null" />.
         /// </exception>
         [NotNull]
-        public static Try<T> OrElseWith<T>([NotNull] this Try<T> @try, [NotNull] Func<Try<T>> fallback) {
+        public static Try<T> OrElse<T>([NotNull] this Try<T> @try, [NotNull] Func<Try<T>> fallback) {
             @try.ThrowIfNull(nameof(@try));
             fallback.ThrowIfNull(nameof(fallback));
 

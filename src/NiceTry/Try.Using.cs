@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System;
 using TheVoid;
 using static NiceTry.Predef;
@@ -13,17 +14,18 @@ namespace NiceTry {
         /// <typeparam name="Disposable"></typeparam>
         /// <typeparam name="T"></typeparam>
         /// <param name="createDisposable"></param>
-        /// <param name="useDisposable">   </param>
+        /// <param name="useDisposable"></param>
         /// <exception cref="ArgumentNullException">
         ///     <paramref name="createDisposable" /> or <paramref name="useDisposable" /> is <see langword="null" />.
         /// </exception>
+        [NotNull]
         public static Try<T> Using<Disposable, T>(
-            Func<Disposable> createDisposable,
-            Func<Disposable, T> useDisposable) where Disposable : IDisposable {
+            [NotNull] Func<Disposable> createDisposable,
+            [NotNull] Func<Disposable, T> useDisposable) where Disposable : IDisposable {
             createDisposable.ThrowIfNull(nameof(createDisposable));
             useDisposable.ThrowIfNull(nameof(useDisposable));
 
-            return UsingWith(createDisposable, disp => {
+            return Using(createDisposable, disp => {
                 var res = useDisposable(disp);
                 return Success(res);
             });
@@ -37,17 +39,18 @@ namespace NiceTry {
         /// </summary>
         /// <typeparam name="Disposable"></typeparam>
         /// <param name="createDisposable"></param>
-        /// <param name="useDisposable">   </param>
+        /// <param name="useDisposable"></param>
         /// <exception cref="ArgumentNullException">
         ///     <paramref name="createDisposable" /> or <paramref name="useDisposable" /> is <see langword="null" />.
         /// </exception>
+        [NotNull]
         public static Try<Unit> Using<Disposable>(
-            Func<Disposable> createDisposable,
-            Action<Disposable> useDisposable) where Disposable : IDisposable {
+            [NotNull] Func<Disposable> createDisposable,
+            [NotNull] Action<Disposable> useDisposable) where Disposable : IDisposable {
             createDisposable.ThrowIfNull(nameof(createDisposable));
             useDisposable.ThrowIfNull(nameof(useDisposable));
 
-            return UsingWith(createDisposable, d => {
+            return Using(createDisposable, d => {
                 useDisposable(d);
                 return Success(Unit.Default);
             });
@@ -62,13 +65,14 @@ namespace NiceTry {
         /// <typeparam name="Disposable"></typeparam>
         /// <typeparam name="T"></typeparam>
         /// <param name="createDisposable"></param>
-        /// <param name="useDisposable">   </param>
+        /// <param name="useDisposable"></param>
         /// <exception cref="ArgumentNullException">
         ///     <paramref name="createDisposable" /> or <paramref name="useDisposable" /> is <see langword="null" />.
         /// </exception>
-        public static Try<T> UsingWith<Disposable, T>(
-            Func<Disposable> createDisposable,
-            Func<Disposable, Try<T>> useDisposable) where Disposable : IDisposable {
+        [NotNull]
+        public static Try<T> Using<Disposable, T>(
+            [NotNull] Func<Disposable> createDisposable,
+            [NotNull] Func<Disposable, Try<T>> useDisposable) where Disposable : IDisposable {
             createDisposable.ThrowIfNull(nameof(createDisposable));
             useDisposable.ThrowIfNull(nameof(useDisposable));
 

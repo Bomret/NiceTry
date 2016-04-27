@@ -39,6 +39,6 @@ namespace NiceTry {
         public static Try<T> Using<Disposable, T>(
             [NotNull] Func<Disposable> createDisposable,
             [NotNull] Func<Disposable, Try<T>> useDisposable) where Disposable : IDisposable =>
-            NiceTry.Try.UsingWith(createDisposable, useDisposable);
+            NiceTry.Try.Using(createDisposable, useDisposable);
     }
 }

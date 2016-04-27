@@ -23,7 +23,7 @@ namespace NiceTry.Combinators {
             @try.ThrowIfNull(nameof(@try));
             handleError.ThrowIfNull(nameof(handleError));
 
-            return RecoverWith(@try, err => {
+            return Recover(@try, err => {
                 var res = handleError(err);
                 return Ok(res);
             });
@@ -41,7 +41,7 @@ namespace NiceTry.Combinators {
         ///     <paramref name="try" /> or <paramref name="handleError" /> is <see langword="null" />.
         /// </exception>
         [NotNull]
-        public static Try<T> RecoverWith<T>([NotNull] this Try<T> @try, [NotNull] Func<Exception, Try<T>> handleError) {
+        public static Try<T> Recover<T>([NotNull] this Try<T> @try, [NotNull] Func<Exception, Try<T>> handleError) {
             @try.ThrowIfNull(nameof(@try));
             handleError.ThrowIfNull(nameof(handleError));
 

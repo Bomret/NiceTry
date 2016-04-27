@@ -188,23 +188,22 @@ Target "PublishNuget" (fun _ ->
             WorkingDir = "bin" })
 )
 
-
 // --------------------------------------------------------------------------------------
 // Generate the documentation
 
 Target "GenerateDocs" (fun _ ->
     trace (sprintf "Building documentation...")
-    
+
     let docfxPath = __SOURCE_DIRECTORY__ @@ "packages" @@ "build" @@ "docfx.msbuild" @@ "tools" @@ "docfx.exe"
-    
-    let exit = 
+
+    let exit =
         ExecProcess
             (fun info ->
                 info.FileName <- docfxPath
                 info.Arguments <- "docfx.json"
                 info.WorkingDirectory <- "docs")
             TimeSpan.MaxValue
-        
+
     if exit <> 0 then failwith "generating documentation failed"
     ()
 )
@@ -212,14 +211,14 @@ Target "GenerateDocs" (fun _ ->
 type Dependency = {
     Group: string
     Name: string
-    Version: string 
+    Version: string
 }
 
 let getDependenciesByGroup () =
     let deps = Paket.Dependencies.Locate ()
 
     deps.GetDirectDependencies ()
-    |> Seq.map (fun t -> 
+    |> Seq.map (fun t ->
         let g, n, v = t
         {Group = g; Name = n; Version = v})
     |> Seq.groupBy (fun dep -> dep.Group)
@@ -227,7 +226,7 @@ let getDependenciesByGroup () =
 
 Target "GenerateDependenciesDocs" (fun _ ->
     trace "Building dependencies documentation..."
-    
+
     let template = sprintf """
 # Package dependencies
 This document provides an overview of the used package dependencies and versions, sorted by their associated group.
@@ -239,16 +238,16 @@ This document provides an overview of the used package dependencies and versions
             group.Value
             |> Seq.map (fun dep -> sprintf "%s | %s" dep.Name dep.Version)
             |> String.concat Environment.NewLine
-            
+
         (sprintf """## %s
 Name | Version
 --- | ---
 %s
 """ group.Key packageList)
 
-    let markdown = 
+    let markdown =
         getDependenciesByGroup ()
-        |> Seq.map (fun g -> toMarkdownString g)
+        |> Seq.map toMarkdownString
         |> String.concat Environment.NewLine
         |> template
 
@@ -332,7 +331,7 @@ Target "All" DoNothing
 
 "CleanDocs"
   ==> "GenerateDocs"
-  
+
 "CleanDocs"
   ==> "GenerateDependenciesDocs"
 

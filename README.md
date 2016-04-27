@@ -13,14 +13,14 @@ A type for the classical try/catch statement that allows functional and bloat fr
 | **Windows** | [![AppVeyor Build status](https://img.shields.io/appveyor/ci/stefanreichel/nicetry.svg)](https://ci.appveyor.com/project/StefanReichel/nicetry) |
 
 ## Example
-Reading the content type of a url as string and printing it to the console. If any of the lambdas throws an exception the calls to `Select` and `Match` would not execute and *"An error occured: {err}."* would be printed to the console.
+Reading the content type of a url as string and printing it to the console. If any of the lambdas throws an exception the calls to `Select` and `Match` would not execute and *"An error occured: {error details}."* would be printed to the console.
 
 ```csharp
 Try.To(() => WebRequest.Create(Url) as HttpWebRequest)
     .Select(request => request.GetResponse()?.ContentType)
     .Match(
-        Success: contentType => Console.WriteLine($"Content-Type: {contentType}"),
-        Failure: err => Console.WriteLine($"An error occured: {err}."));
+        success: contentType => Console.WriteLine($"Content-Type: {contentType}"),
+        failure: err => Console.WriteLine($"An error occured: {err}."));
 ```
 
 The same can be written using LINQ syntax:
@@ -30,16 +30,16 @@ var maybeText =
     from req in Try.To(() => WebRequest.Create(Url) as HttpWebRequest)
     let contentType = req.GetResponse()?.ContentType
     select contentType;
-        
+
 maybeText.Match(
-    Success: contentType => Console.WriteLine($"Content-Type: {contentType}"),
-    Failure: err => Console.WriteLine($"An error occured: {err}."));
+    success: contentType => Console.WriteLine($"Content-Type: {contentType}"),
+    failure: err => Console.WriteLine($"An error occured: {err}."));
 ```
 
 ------
 
 ## License
-The [MIT License](http://opensource.org/licenses/MIT)
+The [Mozilla Public License Version 2.0](https://opensource.org/licenses/MPL-2.0)
 
 ## Troubleshooting and support
 Did you find a bug or have an idea for a new feature? Open a new [Issue](https://github.com/Bomret/NiceTry/issues).
@@ -99,11 +99,11 @@ The above example would evaluate `1 + 1` and - because that does not throw an ex
 ```csharp
 // using the Match method
 result.Match(
-    Failure: err => { /* an excepton was catched and is provided by err */ },
-    Success: val => /* The operation successfully returned a value provided by val */);
-        
+    failure: err => /* an excepton was catched and is provided by err */,
+    success: val => /* The operation successfully returned a value provided by val */);
+
 // or using IfSuccess
-result.IfSuccess(val => /* The operation successfully returned a value provided by val */); 
+result.IfSuccess(val => /* The operation successfully returned a value provided by val */);
 ```
 To find out if `result` represents success or failure it provides the boolean properties `IsSuccess` and `IsFailure`:
 
@@ -115,65 +115,53 @@ if(result.IsSuccess)
 ### Match
 ```csharp
 Try.To(() => 1 + 1).Match(
-    Failure: err => { /* an excepton was catched and is provided by err */ },
-    Success: val => /* The operation successfully returned a value provided by val */);
+    failure: err => { /* an excepton was catched and is provided by err */ },
+    success: val => /* The operation successfully returned a value provided by val */);
 ```
 `Match` allows to use a pattern matching like callback registration. Only the appropriate function parameter for success or failure is executed and gets the value or exception to work with.
 
 ```csharp
 string result = Try.To(() => 1 + 1).Match(
-    Failure: err => err.ToString(),
-   	Success: val => val.ToString());
+    failure: err => err.ToString(),
+   	success: val => val.ToString());
 ```
 This overload for `Match` produces a value. In the above example `result` would be the string `"2"`.
 
 ### IfSuccess
 ```csharp
-Try.To(someFunc).IfSuccess(value => /* Do something with the value */);
+Try.To(() => someFunc())
+   .IfSuccess(value => /* do something with the value */);
 ```
 `IfSuccess` is only executed if `someFunc` does not throw an exception and delegates the produced value to its enclosed callback.
 
 ### IfFailure
 ```csharp
-Try.To(someFunc).IfFailure(err => /* React to the error */);
+Try.To(() => someFunc())
+   .IfFailure(err => /* react to the error */);
 ```
 `IfFailure` is only executed if `someFunc` throws an exception and delegates the catched exception to its enclosed callback.
 
 ## Recommended usage
-Every method that may not return a value in some circumstances should return an `Option<T>` instead of the result directly. That way, eventual `null` references or the usage of "magic values" can be avoided.
-Optional parameters can also be expressed more clearly with an `Option<T>` instead of some arbitrary value that has to be checked inside the method, which can easily be forgotten. And you don't have to place them last in the parameter list.
+Every method that may throw an exception in some circumstances should return a `Try<T>` instead of the result directly. That way, eventual unexpected exceptions can be avoided. It is adviseable to not catch exceptions that signal developer errors, like ArgumentException or ArgumentNullException for example.
 
 So instead of this:
 ```csharp
-string DoSomethingThatCouldReturnNull(string arg) { /* ... */ }
-int DoSomethingThatCouldReturnAMagicValue(string arg) { /* ... */ }
-void DoSomethingWithAnOptionalParameter(double wouldBeSecond, int? wouldBeFirst = null) { /* ... */ }
+string DoSomethingThatCouldThrow(string arg) { /* ... */ }
 ```
 
 write this:
 ```csharp
-Option<string> DoSomethingThatCouldReturnNull(string arg) { /* ... */ }
-Option<int> DoSomethingThatCouldReturnAMagicValue(string arg) { /* ... */ }
-void DoSomethingWithAnOptionalParameter(Option<int> first, double second) { /* ... */ }
+Try<string> DoSomethingThatCouldThrow(string arg) { /* ... */ }
 ```
 
-## Creating an Option
-There are several ways to create an `Option<T>`.
+## Creating a Try
+There are several ways to create a `Try<T>`.
 
-### From
+### Try.To
 ```csharp
-Option<int> option = Option.From(2);
-// same as
-Option<int> option = 2;
+Try<int> @try = Try.To(() => 1 + 1);
 ```
-Evaluates a `T` synchronously and returns a `Some` if the value is not null or `None` otherwise. Always returns `Some`for non-nullable (value) types.
-
-```csharp
-DateTime? now = DateTime.Now;
-
-Option<DateTime> option = Option.From(now);
-```
-Evaluates a `T?` synchronously and returns a `Some` if the value is not null or `None` otherwise.
+Evaluates a `Func<T>` synchronously and returns a `Success<T>` if no exception is thrown or a `Failure<T>` otherwise.
 
 ### FromTryPattern
 ```csharp
@@ -195,7 +183,7 @@ Returns `None` that represents the absence of a value.
 ```csharp
 Option<int> none = 3.ToOption();
 ```
-Converts any value to an `Option<T>` by calling `Option.From` on it. 
+Converts any value to an `Option<T>` by calling `Option.From` on it.
 
 ### Using static imports in C# 6
 C# 6 offers the feature to statically import classes and use the static methods therein without having to prefix them with the class name.
