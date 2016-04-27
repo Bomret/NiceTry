@@ -7,10 +7,9 @@ namespace NiceTry {
     public sealed class Failure<T> : Try<T> {
         Exception _error;
 
-        public override TryKind Kind => TryKind.Failure;
-
         internal Failure(Exception error) {
             _error = error;
+            _isSuccess = false;
         }
 
         public override void IfFailure(Action<Exception> failure) {

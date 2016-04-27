@@ -105,7 +105,7 @@ result.Match(
 // or using IfSuccess
 result.IfSuccess(val => /* The operation successfully returned a value provided by val */);
 ```
-To find out if `result` represents success or failure it provides the boolean properties `IsSuccess` and `IsFailure`:
+To find out if `result` represents success or failure, it provides the boolean properties `IsSuccess` and `IsFailure`:
 
 ```csharp
 if(result.IsSuccess)

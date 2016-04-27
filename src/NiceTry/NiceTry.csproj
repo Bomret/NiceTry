@@ -72,7 +72,6 @@
     <Compile Include="Try.Enumerable.cs" />
     <Compile Include="Try.Using.cs" />
     <Compile Include="_.cs" />
-    <Compile Include="TryKind.cs" />
     <Compile Include="Predef.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />

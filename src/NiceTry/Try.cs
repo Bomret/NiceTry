@@ -11,28 +11,51 @@ namespace NiceTry {
     /// <typeparam name="T"></typeparam>
     [DebuggerDisplay("{ToString(),nq}")]
     public abstract class Try<T> : IComparable<Try<T>>, IEquatable<Try<T>>, IComparable, IStructuralComparable, IStructuralEquatable {
+        protected bool _isSuccess;
 
         /// <summary>
         ///     Indicates if this represents failure. 
         /// </summary>
-        public bool IsFailure => Kind == TryKind.Failure;
+        public bool IsFailure => !_isSuccess;
 
         /// <summary>
         ///     Indicates if this represents success. 
         /// </summary>
-        public bool IsSuccess => Kind == TryKind.Success;
+        public bool IsSuccess => _isSuccess;
 
         /// <summary>
-        ///     Indicates the kind of this instance. 
+        ///     Executes the specified <paramref name="sideEffect" /> only if this instance represents failure. 
         /// </summary>
-        public abstract TryKind Kind { get; }
+        /// <param name="sideEffect"></param>
+        /// <exception cref="ArgumentNullException"> <paramref name="sideEffect" /> is <see langword="null" />. </exception>
+        public abstract void IfFailure([NotNull] Action<Exception> sideEffect);
 
-        public abstract void IfFailure([NotNull] Action<Exception> failure);
-
+        /// <summary>
+        ///     Executes the specified <paramref name="sideEffect" /> only if this instance represents success. 
+        /// </summary>
+        /// <param name="sideEffect"></param>
+        /// <exception cref="ArgumentNullException"> <paramref name="sideEffect" /> is <see langword="null" />. </exception>
         public abstract void IfSuccess([NotNull] Action<T> success);
 
+        /// <summary>
+        ///     Executes on of the specified side effects, depending on wether this instance represents success or failure. 
+        /// </summary>
+        /// <param name="success"></param>
+        /// <param name="failure"></param>
+        /// <exception cref="ArgumentNullException">
+        ///     <paramref name="success" /> or <paramref name="failure" /> is <see langword="null" />.
+        /// </exception>
         public abstract void Match([NotNull] Action<T> success, [NotNull] Action<Exception> failure);
 
+        /// <summary>
+        ///     Executes on of the specified side effects, depending on wether this instance represents success or
+        ///     failure, and returns the produced result.
+        /// </summary>
+        /// <param name="success"></param>
+        /// <param name="failure"></param>
+        /// <exception cref="ArgumentNullException">
+        ///     <paramref name="success" /> or <paramref name="failure" /> is <see langword="null" />.
+        /// </exception>
         public abstract B Match<B>([NotNull] Func<T, B> success, [NotNull] Func<Exception, B> failure);
 
         #region Equality
@@ -61,9 +84,9 @@ namespace NiceTry {
                     success: otherX => comparer.Equals(x, otherX)));
         }
 
-        int IStructuralEquatable.GetHashCode(IEqualityComparer comparer) => this.Match(
-            failure: err => _.CombineHashCodes(comparer.GetHashCode(Kind), comparer.GetHashCode(err)),
-            success: x => _.CombineHashCodes(comparer.GetHashCode(Kind), comparer.GetHashCode(x)));
+        int IStructuralEquatable.GetHashCode(IEqualityComparer comparer) => Match(
+            failure: err => comparer.GetHashCode(err),
+            success: x => comparer.GetHashCode(x));
 
         #endregion Equality
 
@@ -83,7 +106,7 @@ namespace NiceTry {
             if (@try.IsNull())
                 throw new ArgumentException("Provided object not of type Try<T>", nameof(other));
 
-            return this.Match(
+            return Match(
                 failure: err => @try.Match(
                     failure: otherErr => comparer.Compare(err, otherErr),
                     success: _ => -1),
@@ -96,7 +119,7 @@ namespace NiceTry {
 
         #region Formatting
 
-        public override string ToString() => this.Match(
+        public override string ToString() => Match(
             failure: err => $"Failure({err.Message})",
             success: x => $"Success({x})");
 
