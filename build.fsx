@@ -324,6 +324,7 @@ Target "All" DoNothing
 "Clean"
   ==> "GenerateDocs"
   ==> "AssemblyInfo"
+  ==> "GenerateDocs"
   ==> "Build"
   ==> "CopyBinaries"
   ==> "RunTests"
