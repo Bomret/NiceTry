@@ -94,7 +94,7 @@ public bool TryGet(out value) => // ...
 ```csharp
 Try<int> result = Try.To(() => 1 + 1);
 ```
-The above example would evaluate `1 + 1` and - because that does not throw an exception - return a `Success<T>` and store it in the variable `result`. The result of the calculation is stored inside the `Success<T>` and can be accessed using the `Match`, `IfSuccess` or several `Get*` methods:
+The above example would evaluate `1 + 1` and - because that does not throw an exception - return a `Success<T>` and store it in the variable `result`. The result of the calculation is stored inside the `Success<T>` and can be accessed using the several methods, which are explined below:
 
 ```csharp
 // using the Match method
@@ -112,7 +112,57 @@ if(result.IsSuccess)
     // do something;
 ```
 
-### Match
+### Creating a Try
+There are several ways to create a `Try<T>`.
+
+#### Try.To
+Evaluates a `Func<T>` synchronously and returns a `Success<T>` if no exception is thrown or a `Failure<T>` otherwise.
+
+```csharp
+Try<int> @try = Try.To(() => 1 + 1);
+```
+#### Try.Success
+Creates a `Try<T>` that represents success and wraps the specified value.
+
+```csharp
+Try<int> two = Try.Success(2);
+```
+
+#### Try.Failure
+Creates a `Try<T>` that represents faliure and wraps the specified exception. Throws an `ArgumentNullException` when called with `null`.
+
+```csharp
+Try<int> failure = Try.Failure<int>(exception);
+```
+
+#### Try.Using
+Properly creates, uses and disposes an `IDisposable` and creates a `Try<T>` that wraps the outcome of the operation.
+
+```csharp
+Try<string> content = Try.Using(
+        () => File.OpenRead("story.txt"),
+        stream => stream.ReadToEnd());
+```
+
+#### Using static imports in C# 6
+C# 6 offers the feature to statically import classes and use the static methods therein without having to prefix them with the class name.
+NiceTry provides a specific module for taking advantage of this feature.
+```csharp
+using static NiceTry.Predef
+
+Try<int> two = Ok(2);
+
+Try<int> err = Fail<int>(exception);
+
+Try<int> two = Try(() => 1 + 1);
+
+Try<string> two = Using(() => File.OpenRead("someFile.txt"), stream => stream.ReadToEnd());
+```
+
+### Accessing the wrapped value or exception
+`Try<T>` implements a couple of methods to access the wrapped value or exception.
+
+#### Match
 ```csharp
 Try.To(() => 1 + 1).Match(
     failure: err => { /* an excepton was catched and is provided by err */ },
@@ -127,14 +177,14 @@ string result = Try.To(() => 1 + 1).Match(
 ```
 This overload for `Match` produces a value. In the above example `result` would be the string `"2"`.
 
-### IfSuccess
+#### IfSuccess
 ```csharp
 Try.To(() => someFunc())
-   .IfSuccess(value => /* do something with the value */);
+   .IfSuccess(val => /* do something with val */);
 ```
 `IfSuccess` is only executed if `someFunc` does not throw an exception and delegates the produced value to its enclosed callback.
 
-### IfFailure
+#### IfFailure
 ```csharp
 Try.To(() => someFunc())
    .IfFailure(err => /* react to the error */);
@@ -150,241 +200,12 @@ string DoSomethingThatCouldThrow(string arg) { /* ... */ }
 ```
 
 write this:
+
 ```csharp
 Try<string> DoSomethingThatCouldThrow(string arg) { /* ... */ }
 ```
 
-## Creating a Try
-There are several ways to create a `Try<T>`.
 
-### Try.To
-```csharp
-Try<int> @try = Try.To(() => 1 + 1);
-```
-Evaluates a `Func<T>` synchronously and returns a `Success<T>` if no exception is thrown or a `Failure<T>` otherwise.
-
-### FromTryPattern
-```csharp
-Option<double> option = Option.FromTryPattern<string, double>(Double.TryParse, "2.6");
-```
-Evaluates the call to a given method that follows the TryParse pattern and arguments synchronously and returns a `Some` if the method succeeded or `None` otherwise.
-
-Currently the method is overloaded with versions that take up to 16 args.
-
-### None
-```csharp
-Option<int> none = Option.None;
-// same as
-Option<int> none = Option<int>.None;
-```
-Returns `None` that represents the absence of a value.
-
-### ToOption
-```csharp
-Option<int> none = 3.ToOption();
-```
-Converts any value to an `Option<T>` by calling `Option.From` on it.
-
-### Using static imports in C# 6
-C# 6 offers the feature to statically import classes and use the static methods therein without having to prefix them with the class name.
-NiceTry provides a specific module for taking advantage of this feature.
-```csharp
-using static NiceTry.Predef
-
-Option<int> two = Option(2);
-// or
-Option<int> two = Some(2);
-// io for None
-Option<int> none = None;
-```
 
 ## Combinators
-Since `Some` and `None` are simple data structures, a couple of extension methods are provided that make working with both types easier.
-
-### Contains
-```csharp
-bool containsFive = Option.From(5).Contains(5);
-```
-Returns `true` if the `Option` it is applied to is a `Some` containing the desired value otherwise `false`.
-
-### Normalize
-```csharp
-Option<int?> option = Option.From<int?>(5);
-Option<int> normalized = option.Normalize();
-```
-Normalizes an `Option<T?>` into its `Option<T>` representation.
-
-### ToNullable
-```csharp
-Option<DateTime> nowOption = Option.From(DateTime.Now)
-
-DateTime? maybeNow = nowOption.ToNullable();
-```
-Converts an `Option<T>` (where `T` is a value type) to a `Nullable<T>`.
-
-### Get
-```csharp
-int two = Option.From(2).Get();
-```
-`Get` is the most straight forward extension. It returns the value if the result is a `Some` or throws an `InvalidOperationException`, if `None`. In the above example `two` would be `2`.
-
-### GetOrElse
-```csharp
-int two = Option.From(2).GetOrElse(-1);
-// or lazily with a func
-int two = Option.From(2).GetOrElse(() => -1);
-```
-`GetOrElse` either returns the value, if `From` returned a `Some` or the else value, if `From` returned `None`. In the above example `two` would be `2`. It would have been `-1` if `2` was `null`.
-
-### GetOrDefault (Deprecated)
-```csharp
-int two = Option.From(2).GetOrDefault();
-```
-`GetOrDefault` either returns the value, if `From` returned a `Some` or the value of `default(T)`, if `From` returned `None`. In the above example `two` would be `2`. It would have been `0` which is `default(int)` if `2` was `null`.
-
-### OrElse
-```csharp
-Option<int> result = Option.From<int?>(null).OrElse(-1);
-// or lazily with a func
-Option<int> result = Option.From<int?>(null).OrElse(() => -1);
-```
-In the above examples `null` would have been returned and `result` would be `None`. The `OrElse` combinator makes it possible to return a different value in case of `None`. `result` would be a `Some<int>` with the Value `-1`.
-
-### OrElseWith
-```csharp
-Option<int> result = Option.From<int?>(null).OrElseWith(Option.From(-1));
-// or lazily with a func
-Option<int> result = Option.From<int?>(null).OrElseWith(() => Option.From(-1));
-```
-In the above examples `null` would have been returned and `result` would be `None`. The `OrElseWith` combinator makes it possible to return a different `Option` in case of `None`. `result` would be a `Some<int>` with the Value `-1`.
-
-### Select
-```csharp
-Option<string> result = Option.From(2).Select(i => i.ToString());
-```
-`Select` allows to apply a function to the value of a `Some`. In the above example `result` would contain the string value `"5"`.
-
-### SelectMany
-```csharp
-Option<string> result = Option.From(2).SelectMany(i => Option.From(i.ToString()));
-```
-`SelectMany` allows to apply a function to the value of a `Some` that returns another `Option` and avoid the nesting that would occur otherwise. In the above example `result` would be a `Some` with Value `"5"`. If `Some` would have been used, `result` would have been a `Option<Option<string>>`.
-
-### Zip
-```csharp
-Option<int> five = 5;
-Option<int> four = 4;
-
-Option<int> nine = five.Zip(four, (a, b) => a + b);
-```
-Takes another `Option` and allows to apply a `Func` to the values of both options. If one `Option` would be `None` the function would not be applied.
-In the above example `nine` would be a `Some` containing `9`.
-
-### ZipWith
-```csharp
-Option<int> five = 5;
-Option<int> four = 4;
-
-Option<int> nine = five.ZipWith(four, (a, b) => Option.From(a + b));
-```
-Takes another `Option` and allows to apply a `Func` to the values of both options. If one `Option` would be `None` the function would not be applied.
-In the above example `nine` would be a `Some` containing `9`.
-
-### Transform
-```csharp
-Option<string> result = Option.From(2).Transform(
-    Some: i => i.ToString(),
-    None: () => "");
-```
-Can be used to transform the value of an `Option`. The first function parameter transforms the resulting value if it is a `Some`, the second returns a value if it is `None`. In the above example `result` would be a `Some` with value `"5"`.
-
-### Do
-```csharp
-Option<string> result = Option.From(2)
-    .Do(i => Console.Write($"Do executed on {i}"))
-    .Select(i => i.ToString());
-```
-Can be used to execute side effecting behavior without modifying an `Option`. In the above example `result` would be a `Some` containing `"2"`. The given `Action` will be executed in _either case_, regardless if the incoming `Option` is a `Some` or `None`.
-
-### Flatten
-```csharp
-Option<Option<int>> nestedOption = Option.From(Option.From(2));
-Option<int> result = nestedOption.Flatten();
-```
-Flattens a nested `Option`.
-
-### Switch
-```csharp
-Option<int?> two = Option.From(2);
-Option<int?> nil = Option.From<int?>(null);
-Option<int?> three = Option.From(3);
-
-Option<string> result = nil.Switch(three, two);
-```
-Returns the first `Option` that contains a value or `None` if all are `None`.
-
-## Combinators for `IEnumerable<T>`
-NiceTry contains several extensions that integrate `Option<T>` with `IEnumerable<T>`.
-
-### Exchange
-```csharp
-IEnumerable<int?> ints = new [] { 1, 2, default(int?), 4 };
-IEnumerable<Option<int>> optionalInts = Option.From(ints).Exchange();
-```
-If the given `Option<IEnumerable<T>>` is a `Some`, `Option.From` is applied to all values of the enumerable. If it is `None` instead, an empty enumerable is returned.
-
-### SelectValues
-```csharp
-IEnumerable<Option<int?>> ints = new[] {1, 2, default(int?), 4};
-IEnumerable<int> values = ints.SelectValues();
-```
-Select only the values contained in the options of the given enumerable. If it only contains `None`, an empty enumerable is returned.
-
-### AggregateOptional
-```csharp
-IEnumerable<string> strings = new[] {"a", "b", default(string), "d"};
-Option<string> abd = strings.AggregateOptional((a, c) => a + c);
-```
-Like the standard Linq `Aggregate` but automatically handles null elements and results in an option.
-
-### AggregateOptionalNullable
-```csharp
-IEnumerable<int?> ints = new[] {1, 2, default(int?), 4};
-Option<int> seven = ints.AggregateOptional((a, c) => a + c);
-```
-Like `AggregateOptional` but for `Nullable<T>` elements.
-
-### AllOrNone
-```csharp
-IEnumerable<Option<string>> strings = new[] {"a", "b", default(string), "d"};
-Option<IEnumerable<string>> abd = strings.AllOrNone();
-```
-Returns an option containing all values or `None`, if any of the options in the enumerable does not contain a value or the enumerable is empty.
-
-### FirstOptional
-```csharp
-IEnumerable<string> strings = new[] {"a", "b", default(string), "d"};
-Option<string> a = strings.FirstOptional();
-```
-Returns a `Some` containing the first value if the enumerable contains at least one value, else `None`.
-
-### LastOptional
-```csharp
-IEnumerable<string> strings = new[] {"a", "b", default(string), "d"};
-Option<string> d = strings.LastOptional();
-```
-Returns a `Some` containing the last value if the enumerable contains at least one value, else `None`.
-
-### SingleOptional
-```csharp
-IEnumerable<string> strings = new[] {"a"};
-Option<string> a = strings.SingleOptional();
-```
-Like `Single` but returns the only element in the enumerable wrapped in an option. If this enumerable is empty or the single element is NULL, None is returned. Throws an exception if this enumerable contains more than one element.
-
-### SingleOptionalNullable
-```csharp
-IEnumerable<string> strings = new[] {"a"};
-Option<string> a = strings.SingleOptional();
-```
-Like `SingleOptional` but for `Nullable<T>` elements.
+See the docs for a couple of extension methods that make working with `Try<T>` easier.
