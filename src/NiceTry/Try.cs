@@ -5,8 +5,9 @@ using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace NiceTry {
+
     /// <summary>
-    ///     Represents the success or failure of an operation. 
+    /// Represents the success or failure of an operation. 
     /// </summary>
     /// <typeparam name="T"></typeparam>
     [DebuggerDisplay("{ToString(),nq}")]
@@ -14,47 +15,48 @@ namespace NiceTry {
         protected bool _isSuccess;
 
         /// <summary>
-        ///     Indicates if this represents failure. 
+        /// Indicates if this represents failure. 
         /// </summary>
         public bool IsFailure => !_isSuccess;
 
         /// <summary>
-        ///     Indicates if this represents success. 
+        /// Indicates if this represents success. 
         /// </summary>
         public bool IsSuccess => _isSuccess;
 
         /// <summary>
-        ///     Executes the specified <paramref name="sideEffect" /> only if this instance represents failure. 
+        /// Executes the specified <paramref name="sideEffect" /> only if this instance represents failure. 
         /// </summary>
         /// <param name="sideEffect"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="sideEffect" /> is <see langword="null" />. </exception>
         public abstract void IfFailure([NotNull] Action<Exception> sideEffect);
 
         /// <summary>
-        ///     Executes the specified <paramref name="sideEffect" /> only if this instance represents success. 
+        /// Executes the specified <paramref name="sideEffect" /> only if this instance represents success. 
         /// </summary>
         /// <param name="sideEffect"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="sideEffect" /> is <see langword="null" />. </exception>
         public abstract void IfSuccess([NotNull] Action<T> success);
 
         /// <summary>
-        ///     Executes on of the specified side effects, depending on wether this instance represents success or failure. 
+        /// Executes on of the specified side effects, depending on wether this instance represents
+        /// success or failure.
         /// </summary>
         /// <param name="success"></param>
         /// <param name="failure"></param>
         /// <exception cref="ArgumentNullException">
-        ///     <paramref name="success" /> or <paramref name="failure" /> is <see langword="null" />.
+        /// <paramref name="success" /> or <paramref name="failure" /> is <see langword="null" />.
         /// </exception>
         public abstract void Match([NotNull] Action<T> success, [NotNull] Action<Exception> failure);
 
         /// <summary>
-        ///     Executes on of the specified side effects, depending on wether this instance represents success or
-        ///     failure, and returns the produced result.
+        /// Executes on of the specified side effects, depending on wether this instance represents
+        /// success or failure, and returns the produced result.
         /// </summary>
         /// <param name="success"></param>
         /// <param name="failure"></param>
         /// <exception cref="ArgumentNullException">
-        ///     <paramref name="success" /> or <paramref name="failure" /> is <see langword="null" />.
+        /// <paramref name="success" /> or <paramref name="failure" /> is <see langword="null" />.
         /// </exception>
         public abstract B Match<B>([NotNull] Func<T, B> success, [NotNull] Func<Exception, B> failure);
 
@@ -70,12 +72,14 @@ namespace NiceTry {
                     ((IStructuralEquatable)this).GetHashCode(EqualityComparer<object>.Default);
 
         bool IStructuralEquatable.Equals(object other, IEqualityComparer comparer) {
-            if (ReferenceEquals(this, other)) return true;
+            if (ReferenceEquals(this, other))
+                return true;
 
             var @try = other as Try<T>;
-            if (other.IsNull()) return false;
+            if (@try.IsNull())
+                return false;
 
-            return this.Match(
+            return Match(
                 failure: err => @try.Match(
                     failure: otherErr => comparer.Equals(err, otherErr),
                     success: _ => false),
@@ -99,8 +103,10 @@ namespace NiceTry {
             ((IStructuralComparable)this).CompareTo(obj, Comparer<object>.Default);
 
         int IStructuralComparable.CompareTo(object other, IComparer comparer) {
-            if (other.IsNull()) return 1;
-            if (ReferenceEquals(this, other)) return 0;
+            if (other.IsNull())
+                return 1;
+            if (ReferenceEquals(this, other))
+                return 0;
 
             var @try = other as Try<T>;
             if (@try.IsNull())

@@ -1,11 +1,12 @@
 using System;
 
 namespace NiceTry {
+
     /// <summary>
-    ///     Represents the failed outcome of an operation. 
+    /// Represents the failed outcome of an operation. 
     /// </summary>
     public sealed class Failure<T> : Try<T> {
-        Exception _error;
+        private Exception _error;
 
         internal Failure(Exception error) {
             _error = error;

@@ -1,15 +1,18 @@
 ﻿using JetBrains.Annotations;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace NiceTry.Combinators {
+
     /// <summary>
-    ///     Provides extension methods for <see cref="Try{T}" /> to extract values from enumerables of <see cref="Try{T}" />. 
+    /// Provides extension methods for <see cref="Try{T}" /> to extract values from enumerables of <see cref="Try{T}" />. 
     /// </summary>
     public static class SelectValuesExt {
+
         /// <summary>
-        ///     Returns an <see cref="IEnumerable{T}" /> that contains only the values contained in the elements of the
-        ///     specified <paramref name="enumerable" /> that represent success.
+        /// Returns an <see cref="IEnumerable{T}" /> that contains only the values contained in the
+        /// elements of the specified <paramref name="enumerable" /> that represent success.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="enumerable"></param>
