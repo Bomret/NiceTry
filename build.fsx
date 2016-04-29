@@ -322,7 +322,10 @@ Target "All" DoNothing
   ==> "Release"
 
 "Clean"
+#if MONO
+#else
   ==> "GenerateDocs"
+#endif
   ==> "AssemblyInfo"
   ==> "Build"
   ==> "CopyBinaries"
