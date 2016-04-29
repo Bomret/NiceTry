@@ -1,5 +1,5 @@
 # NiceTry
-A type for the classical try/catch statement that allows functional and bloat free error handling. Inspired by the Try type in Scala. Licensed under the [MPL-2.0 License](https://opensource.org/licenses/MPL-2.0).
+A type for the classic try/catch statement that allows functional and bloat free error handling. Inspired by the Try type in Scala. Licensed under the [MPL-2.0 License](https://opensource.org/licenses/MPL-2.0).
 
 [![NuGet Status](http://img.shields.io/nuget/v/NiceTry.svg)](https://www.nuget.org/packages/NiceTry/)
 [![Issue Stats](http://www.issuestats.com/github/bomret/nicetry/badge/pr?style=flat)](http://www.issuestats.com/github/bomret/nicetry)
@@ -204,8 +204,6 @@ write this:
 ```csharp
 Try<string> DoSomethingThatCouldThrow(string arg) { /* ... */ }
 ```
-
-
 
 ## Combinators
 See the docs for a couple of extension methods that make working with `Try<T>` easier.
