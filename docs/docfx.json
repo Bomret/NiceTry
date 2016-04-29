@@ -45,9 +45,6 @@
         "globalMetadata": {
             "_appTitle": "NiceTry Documentation"
         },
-        "dest": "_site",
-        "template": [
-            "default"
-        ]
+        "dest": "_site"
     }
 }
