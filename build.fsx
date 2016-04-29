@@ -323,11 +323,11 @@ Target "All" DoNothing
 
 "Clean"
   ==> "AssemblyInfo"
+  ==> "GenerateDocs"
   ==> "Build"
   ==> "CopyBinaries"
   ==> "RunTests"
-  ==> "All"  
-  ==> "GenerateDocs"
+  ==> "All"    
   =?> ("ReleaseDocs", isLocalBuild)
 
 "All"
