@@ -8,7 +8,8 @@
                     ],
                     "exclude": [
                         "**/bin/**",
-                        "**/obj/**"
+                        "**/obj/**",
+                        "**.vs/**"
                     ],
                     "cwd": "../src"
                 }
@@ -22,17 +23,13 @@
                 "files": [
                     "**/*.yml"
                 ],
-                "src": "obj/api",
+                "cwd": "obj/api",
                 "dest": "api"
             },
             {
                 "files": [
                     "articles/**/*.md",
-                    "articles/toc.yml"
-                ]
-            },
-            {
-                "files": [
+                    "articles/**/toc.yml",
                     "*.md",
                     "toc.yml"
                 ]
@@ -49,6 +46,8 @@
             "_appTitle": "NiceTry Documentation"
         },
         "dest": "_site",
-        "template": [ "default" ]
+        "template": [
+            "default"
+        ]
     }
 }

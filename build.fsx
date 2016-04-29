@@ -308,28 +308,7 @@ Target "BuildPackage" DoNothing
 
 Target "All" DoNothing
 
-"Clean"
-  ==> "AssemblyInfo"
-  ==> "Build"
-  ==> "CopyBinaries"
-  ==> "RunTests"
-#if MONO
-#else
-  ==> "GenerateDocs"
-#endif
-  ==> "GenerateDependenciesDocs"
-  ==> "All"
-  =?> ("ReleaseDocs",isLocalBuild)
-
-"All"
-#if MONO
-#else
-  =?> ("SourceLink", Pdbstr.tryFind().IsSome )
-#endif
-  ==> "NuGet"
-  ==> "BuildPackage"
-
-"CleanDocs"
+"GenerateDependenciesDocs"
   ==> "GenerateDocs"
 
 "CleanDocs"
@@ -341,5 +320,22 @@ Target "All" DoNothing
 "BuildPackage"
   ==> "PublishNuget"
   ==> "Release"
+
+"Clean"
+  ==> "AssemblyInfo"
+  ==> "Build"
+  ==> "CopyBinaries"
+  ==> "RunTests"
+  ==> "All"  
+  ==> "GenerateDocs"
+  =?> ("ReleaseDocs", isLocalBuild)
+
+"All"
+#if MONO
+#else
+  =?> ("SourceLink", Pdbstr.tryFind().IsSome )
+#endif
+  ==> "NuGet"
+  ==> "BuildPackage"
 
 RunTargetOrDefault "All"
