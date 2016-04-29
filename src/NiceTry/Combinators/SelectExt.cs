@@ -3,12 +3,16 @@ using System;
 using static NiceTry.Predef;
 
 namespace NiceTry.Combinators {
+
     /// <summary>
-    ///     Provides extension methods for <see cref="Try{T}" /> to transform the value therein into a new form. 
+    ///     Provides extension methods for <see cref="Try{T}" /> to transform the value therein into
+    ///     a new form.
     /// </summary>
     public static class SelectExt {
+
         /// <summary>
-        ///     Projects the value of the specified <paramref name="try" /> into a new form if it represents success. 
+        ///     Projects the value of the specified <paramref name="try" /> into a new form if it
+        ///     represents success.
         /// </summary>
         /// <typeparam name="A"></typeparam>
         /// <typeparam name="B"></typeparam>

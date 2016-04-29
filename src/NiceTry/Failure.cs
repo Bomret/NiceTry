@@ -2,9 +2,7 @@ using System;
 
 namespace NiceTry {
 
-    /// <summary>
-    /// Represents the failed outcome of an operation. 
-    /// </summary>
+    /// <summary> Represents the failed outcome of an operation. </summary>
     public sealed class Failure<T> : Try<T> {
         private Exception _error;
 

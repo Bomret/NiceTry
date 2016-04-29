@@ -3,14 +3,16 @@ using System;
 using static NiceTry.Predef;
 
 namespace NiceTry.Combinators {
+
     /// <summary>
-    ///     Provides extension methods for <see cref="Try{T}" /> to execute side effects on the value therein. 
+    ///     Provides extension methods for <see cref="Try{T}" /> to execute side effects on the value therein.
     /// </summary>
     public static class DoExt {
+
         /// <summary>
-        ///     Executes the specified <paramref name="action" /> on the contained value if the specified
-        ///     <paramref name="try" /> represents success. If it represents failure or the <paramref name="action" />
-        ///     throws an exception, a <see cref="Failure{T}" /> is returned.
+        ///     Executes the specified <paramref name="action" /> on the contained value if the
+        ///     specified <paramref name="try" /> represents success. If it represents failure or the
+        ///     <paramref name="action" /> throws an exception, a <see cref="Failure{T}" /> is returned.
         /// </summary>
         /// <param name="try"></param>
         /// <param name="action"></param>

@@ -4,12 +4,14 @@ using TheVoid;
 using static NiceTry.Predef;
 
 namespace NiceTry {
+
     public static partial class Try {
+
         /// <summary>
         ///     Creates, uses and properly disposes a <see cref="IDisposable" /> specified by the
-        ///     <paramref name="createDisposable" /> and <paramref name="useDisposable" /> functions and returns a
-        ///     <see cref="NiceTry.Success{T}" /> containing the result or a <see cref="NiceTry.Failure{T}" />, depending
-        ///     on the outcome of the operation.
+        ///     <paramref name="createDisposable" /> and <paramref name="useDisposable" /> functions
+        ///     and returns a <see cref="NiceTry.Success{T}" /> containing the result or a
+        ///     <see cref="NiceTry.Failure{T}" />, depending on the outcome of the operation.
         /// </summary>
         /// <typeparam name="Disposable"></typeparam>
         /// <typeparam name="T"></typeparam>
@@ -33,9 +35,9 @@ namespace NiceTry {
 
         /// <summary>
         ///     Creates, uses and properly disposes a <see cref="IDisposable" /> specified by the
-        ///     <paramref name="createDisposable" /> and <paramref name="useDisposable" /> functions and returns a
-        ///     <see cref="NiceTry.Success{T}" /> containing the result or a <see cref="NiceTry.Failure{T}" />, depending
-        ///     on the outcome of the operation.
+        ///     <paramref name="createDisposable" /> and <paramref name="useDisposable" /> functions
+        ///     and returns a <see cref="NiceTry.Success{T}" /> containing the result or a
+        ///     <see cref="NiceTry.Failure{T}" />, depending on the outcome of the operation.
         /// </summary>
         /// <typeparam name="Disposable"></typeparam>
         /// <param name="createDisposable"></param>
@@ -58,9 +60,9 @@ namespace NiceTry {
 
         /// <summary>
         ///     Creates, uses and properly disposes a <see cref="IDisposable" /> specified by the
-        ///     <paramref name="createDisposable" /> and <paramref name="useDisposable" /> functions and returns a
-        ///     <see cref="NiceTry.Success{T}" /> containing the result or a <see cref="NiceTry.Failure{T}" />, depending
-        ///     on the outcome of the operation.
+        ///     <paramref name="createDisposable" /> and <paramref name="useDisposable" /> functions
+        ///     and returns a <see cref="NiceTry.Success{T}" /> containing the result or a
+        ///     <see cref="NiceTry.Failure{T}" />, depending on the outcome of the operation.
         /// </summary>
         /// <typeparam name="Disposable"></typeparam>
         /// <typeparam name="T"></typeparam>

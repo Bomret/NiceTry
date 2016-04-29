@@ -3,10 +3,12 @@ using System;
 using static NiceTry.Predef;
 
 namespace NiceTry.Combinators {
+
     /// <summary>
-    ///     Provides extension methods for <see cref="Try{T}" /> to provide fallbacks in case of failure. 
+    ///     Provides extension methods for <see cref="Try{T}" /> to provide fallbacks in case of failure.
     /// </summary>
     public static class OrElseExt {
+
         /// <summary>
         ///     Returns the specified <paramref name="try" /> if it represents success or else a
         ///     <see cref="Success{T}" /> containing the <paramref name="fallback" /> value.
@@ -23,8 +25,8 @@ namespace NiceTry.Combinators {
         }
 
         /// <summary>
-        ///     Returns the specified <paramref name="try" /> if it represents success or else tries to evaluate the
-        ///     specified <paramref name="fallback" /> function and its result.
+        ///     Returns the specified <paramref name="try" /> if it represents success or else tries
+        ///     to evaluate the specified <paramref name="fallback" /> function and its result.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="try"></param>
@@ -44,7 +46,8 @@ namespace NiceTry.Combinators {
         }
 
         /// <summary>
-        ///     Returns the specified <paramref name="try" /> if it represents success or else the specified <paramref name="fallback" />. 
+        ///     Returns the specified <paramref name="try" /> if it represents success or else the
+        ///     specified <paramref name="fallback" />.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="try"></param>
@@ -61,8 +64,8 @@ namespace NiceTry.Combinators {
         }
 
         /// <summary>
-        ///     Returns the specified <paramref name="try" /> if it represents success or else tries to evaluate the
-        ///     specified <paramref name="fallback" /> function and its eventual result.
+        ///     Returns the specified <paramref name="try" /> if it represents success or else tries
+        ///     to evaluate the specified <paramref name="fallback" /> function and its eventual result.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="try"></param>

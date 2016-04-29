@@ -3,15 +3,18 @@ using System;
 using static NiceTry.Predef;
 
 namespace NiceTry.Combinators {
+
     /// <summary>
-    ///     Provides extension methods for <see cref="Try{T}" /> to handle catched errors. 
+    ///     Provides extension methods for <see cref="Try{T}" /> to handle catched errors.
     /// </summary>
     public static class CatchExt {
+
         /// <summary>
-        ///     If the specified <paramref name="try" /> represents failure and contains an exception of type
-        ///     <typeparamref name="TErr" />, the specified <paramref name="handleError" /> is executed and its result is
-        ///     returned. If that fails a <see cref="Failure{T}" /> is returned, otherwise or if <paramref name="try" />
-        ///     represents success, a <see cref="Success{T}" /> is returned.
+        ///     If the specified <paramref name="try" /> represents failure and contains an exception
+        ///     of type <typeparamref name="TErr" />, the specified <paramref name="handleError" />
+        ///     is executed and its result is returned. If that fails a <see cref="Failure{T}" /> is
+        ///     returned, otherwise or if <paramref name="try" /> represents success, a
+        ///     <see cref="Success{T}" /> is returned.
         /// </summary>
         /// <typeparam name="TErr"></typeparam>
         /// <typeparam name="T"></typeparam>
@@ -33,10 +36,11 @@ namespace NiceTry.Combinators {
         }
 
         /// <summary>
-        ///     If the specified <paramref name="try" /> represents failure and contains an exception of type
-        ///     <typeparam name="TErr" />, the specified <paramref name="handleError" /> is executed and its result is
-        ///     returned. If that fails a <see cref="Failure{T}" /> is returned, otherwise or if <paramref name="try" />
-        ///     represents success, a <see cref="Success{T}" /> is returned.
+        ///     If the specified <paramref name="try" /> represents failure and contains an exception
+        ///     of type <typeparam name="TErr" />, the specified <paramref name="handleError" /> is
+        ///     executed and its result is returned. If that fails a <see cref="Failure{T}" /> is
+        ///     returned, otherwise or if <paramref name="try" /> represents success, a
+        ///     <see cref="Success{T}" /> is returned.
         /// </summary>
         /// <typeparam name="TErr"></typeparam>
         /// <typeparam name="T"></typeparam>

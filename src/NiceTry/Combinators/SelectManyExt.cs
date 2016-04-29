@@ -3,13 +3,16 @@ using System;
 using static NiceTry.Predef;
 
 namespace NiceTry.Combinators {
+
     /// <summary>
-    ///     Provides extension methods for <see cref="Try{T}" /> to transform the value therein into new instances. 
+    ///     Provides extension methods for <see cref="Try{T}" /> to transform the value therein into
+    ///     new instances.
     /// </summary>
     public static class SelectManyExt {
+
         /// <summary>
-        ///     Projects the value of the specified <paramref name="try" /> into a new <see cref="Try{T}" />, if it
-        ///     represents success.
+        ///     Projects the value of the specified <paramref name="try" /> into a new
+        ///     <see cref="Try{T}" />, if it represents success.
         /// </summary>
         /// <typeparam name="A"></typeparam>
         /// <typeparam name="B"></typeparam>
@@ -31,8 +34,9 @@ namespace NiceTry.Combinators {
         }
 
         /// <summary>
-        ///     Projects the value of the specified <paramref name="try" /> into a new <see cref="Try{T}" />, if it
-        ///     represents success and invokes the specified <paramref name="resultSelect" /> on both values.
+        ///     Projects the value of the specified <paramref name="try" /> into a new
+        ///     <see cref="Try{T}" />, if it represents success and invokes the specified
+        ///     <paramref name="resultSelect" /> on both values.
         /// </summary>
         /// <typeparam name="A"></typeparam>
         /// <typeparam name="B"></typeparam>
@@ -41,7 +45,8 @@ namespace NiceTry.Combinators {
         /// <param name="trySelect"></param>
         /// <param name="resultSelect"></param>
         /// <exception cref="ArgumentNullException">
-        ///     <paramref name="try" />, <paramref name="trySelect" /> or <paramref name="resultSelect" /> is <see langword="null" />.
+        ///     <paramref name="try" />, <paramref name="trySelect" /> or
+        ///     <paramref name="resultSelect" /> is <see langword="null" />.
         /// </exception>
         [NotNull]
         public static Try<C> SelectMany<A, B, C>(

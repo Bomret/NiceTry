@@ -3,9 +3,11 @@ using System;
 using System.Collections.Generic;
 
 namespace NiceTry.Combinators {
+
     public static class ContainsExt {
+
         /// <summary>
-        ///     Returns a value that indicates if the specified <paramref name="try" /> contains the <paramref name="desiredValue" />. 
+        ///     Returns a value that indicates if the specified <paramref name="try" /> contains the <paramref name="desiredValue" />.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="try"></param>
@@ -22,7 +24,8 @@ namespace NiceTry.Combinators {
 
         /// <summary>
         ///     Returns a value that indicates if the specified <paramref name="try" /> contains the
-        ///     <paramref name="desiredValue" />. The specified <paramref name="compare" /> function is used to check for equality.
+        ///     <paramref name="desiredValue" />. The specified <paramref name="compare" /> function
+        ///     is used to check for equality.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="try"></param>

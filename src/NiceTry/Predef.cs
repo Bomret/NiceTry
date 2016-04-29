@@ -3,11 +3,13 @@ using System;
 using TheVoid;
 
 namespace NiceTry {
+
     /// <summary>
-    ///     Provides static methods to create instances of <see cref="NiceTry.Try{T}" />. Meant for using as static
-    ///     import (C# 6 feature).
+    ///     Provides static methods to create instances of <see cref="NiceTry.Try{T}" />. Meant for
+    ///     using as static import (C# 6 feature).
     /// </summary>
-    public static class Predef {        
+    public static class Predef {
+
         [NotNull]
         public static Try<T> Fail<T>([NotNull] Exception err) => NiceTry.Try.Failure<T>(err);
 

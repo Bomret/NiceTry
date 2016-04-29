@@ -5,14 +5,17 @@ using System.Linq;
 using static NiceTry.Predef;
 
 namespace NiceTry.Combinators {
+
     /// <summary>
-    ///     Provides extension methods for <see cref="Try{T}" /> to lookup <see cref="IEnumerable{T}" /> for success. 
+    ///     Provides extension methods for <see cref="Try{T}" /> to lookup
+    ///     <see cref="IEnumerable{T}" /> for success.
     /// </summary>
     public static class SwitchExt {
+
         /// <summary>
-        ///     Returns the specified <paramref name="try" /> if it represents success. Otherwise searches the specified
-        ///     <paramref name="candidates" /> for the first success. If no success can be found, a
-        ///     <see cref="Failure{T}" /> is returned.
+        ///     Returns the specified <paramref name="try" /> if it represents success. Otherwise
+        ///     searches the specified <paramref name="candidates" /> for the first success. If no
+        ///     success can be found, a <see cref="Failure{T}" /> is returned.
         /// </summary>
         /// <param name="try"></param>
         /// <param name="candidates"></param>
@@ -29,9 +32,9 @@ namespace NiceTry.Combinators {
         }
 
         /// <summary>
-        ///     Returns the specified <paramref name="try" /> if it represents success. Otherwise searches the specified
-        ///     <paramref name="candidates" /> for the first success. If no success can be found, a
-        ///     <see cref="Failure{T}" /> is returned.
+        ///     Returns the specified <paramref name="try" /> if it represents success. Otherwise
+        ///     searches the specified <paramref name="candidates" /> for the first success. If no
+        ///     success can be found, a <see cref="Failure{T}" /> is returned.
         /// </summary>
         /// <param name="try"></param>
         /// <param name="candidates"></param>
@@ -48,12 +51,14 @@ namespace NiceTry.Combinators {
         }
 
         /// <summary>
-        ///     Searches the specified <paramref name="candidates" /> for the first success. If no success can be found,
-        ///     a <see cref="Failure{T}" /> is returned.
+        ///     Searches the specified <paramref name="candidates" /> for the first success. If no
+        ///     success can be found, a <see cref="Failure{T}" /> is returned.
         /// </summary>
         /// <param name="candidates"></param>
         /// <typeparam name="T"></typeparam>
-        /// <exception cref="ArgumentNullException"> <paramref name="candidates" /> is <see langword="null" />. </exception>
+        /// <exception cref="ArgumentNullException">
+        ///     <paramref name="candidates" /> is <see langword="null" />.
+        /// </exception>
         [NotNull]
         public static Try<T> Switch<T>([NotNull] this IEnumerable<Try<T>> candidates) {
             candidates.ThrowIfNull(nameof(candidates));

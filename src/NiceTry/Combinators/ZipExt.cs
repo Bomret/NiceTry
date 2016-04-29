@@ -3,15 +3,17 @@ using System;
 using static NiceTry.Predef;
 
 namespace NiceTry.Combinators {
+
     /// <summary>
-    ///     Provides extension methods for <see cref="Try{T}" /> to combine combine instances. 
+    ///     Provides extension methods for <see cref="Try{T}" /> to combine combine instances.
     /// </summary>
     public static class ZipExt {
+
         /// <summary>
         ///     Applies the specified <paramref name="zip" /> function to the values of the specified
         ///     <paramref name="tryA" /> and <paramref name="tryB" /> if both represent success. If
-        ///     <paramref name="tryA" /> or <paramref name="tryB" /> represent failure or <paramref name="zip" /> throws
-        ///     an exception, a <see cref="Failure{T}" /> is returned.
+        ///     <paramref name="tryA" /> or <paramref name="tryB" /> represent failure or
+        ///     <paramref name="zip" /> throws an exception, a <see cref="Failure{T}" /> is returned.
         /// </summary>
         /// <typeparam name="A"></typeparam>
         /// <typeparam name="B"></typeparam>
@@ -39,8 +41,8 @@ namespace NiceTry.Combinators {
         /// <summary>
         ///     Applies the specified <paramref name="zip" /> function to the values of the specified
         ///     <paramref name="tryA" /> and <paramref name="tryB" /> if both represent success. If
-        ///     <paramref name="tryA" /> or <paramref name="tryB" /> represent failure or <paramref name="zip" /> throws
-        ///     an exception, a <see cref="Failure{T}" /> is returned.
+        ///     <paramref name="tryA" /> or <paramref name="tryB" /> represent failure or
+        ///     <paramref name="zip" /> throws an exception, a <see cref="Failure{T}" /> is returned.
         /// </summary>
         /// <typeparam name="A"></typeparam>
         /// <typeparam name="B"></typeparam>

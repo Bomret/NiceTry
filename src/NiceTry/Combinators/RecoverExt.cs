@@ -3,14 +3,16 @@ using System;
 using static NiceTry.Predef;
 
 namespace NiceTry.Combinators {
+
     /// <summary>
-    ///     Provides extension methods for <see cref="Try{T}" /> to recover from failure. 
+    ///     Provides extension methods for <see cref="Try{T}" /> to recover from failure.
     /// </summary>
     public static class RecoverExt {
+
         /// <summary>
-        ///     Tries to recover from failure using the specified <paramref name="handleError" /> if the specified
-        ///     <paramref name="try" /> represents failure. If the specified <paramref name="handleError" /> throws an
-        ///     exception, a <see cref="Failure{T}" /> is returned.
+        ///     Tries to recover from failure using the specified <paramref name="handleError" /> if
+        ///     the specified <paramref name="try" /> represents failure. If the specified
+        ///     <paramref name="handleError" /> throws an exception, a <see cref="Failure{T}" /> is returned.
         /// </summary>
         /// <typeparam name="T" />
         /// <param name="try"></param>
@@ -30,9 +32,9 @@ namespace NiceTry.Combinators {
         }
 
         /// <summary>
-        ///     Tries to recover from failure using the specified <paramref name="handleError" /> if the specified
-        ///     <paramref name="try" /> represents failure. If the specified <paramref name="handleError" /> throws an
-        ///     exception, a <see cref="Failure{T}" /> is returned.
+        ///     Tries to recover from failure using the specified <paramref name="handleError" /> if
+        ///     the specified <paramref name="try" /> represents failure. If the specified
+        ///     <paramref name="handleError" /> throws an exception, a <see cref="Failure{T}" /> is returned.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="try"></param>

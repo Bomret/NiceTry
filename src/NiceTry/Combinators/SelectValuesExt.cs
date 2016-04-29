@@ -6,17 +6,20 @@ using System.Linq;
 namespace NiceTry.Combinators {
 
     /// <summary>
-    /// Provides extension methods for <see cref="IEnumerable{T}" /> to extract values from enumerables of <see cref="Try{T}" />. 
+    ///     Provides extension methods for <see cref="IEnumerable{T}" /> to extract values from
+    ///     enumerables of <see cref="Try{T}" />.
     /// </summary>
     public static class SelectValuesExt {
 
         /// <summary>
-        /// Returns an <see cref="IEnumerable{T}" /> that contains only the values contained in the
-        /// elements of the specified <paramref name="enumerable" /> that represent success.
+        ///     Returns an <see cref="IEnumerable{T}" /> that contains only the values contained in
+        ///     the elements of the specified <paramref name="enumerable" /> that represent success.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="enumerable"></param>
-        /// <exception cref="ArgumentNullException"> <paramref name="enumerable" /> is <see langword="null" />. </exception>
+        /// <exception cref="ArgumentNullException">
+        ///     <paramref name="enumerable" /> is <see langword="null" />.
+        /// </exception>
         [NotNull]
         public static IEnumerable<T> SelectValues<T>([NotNull] this IEnumerable<Try<T>> enumerable) {
             enumerable.ThrowIfNull(nameof(enumerable));

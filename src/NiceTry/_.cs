@@ -1,7 +1,9 @@
 using System;
 
 namespace NiceTry {
-    static class _ {
+
+    internal static class _ {
+
         public static int CombineHashCodes(int h1, int h2) => ((h1 << 5) + h1) ^ h2;
 
         public static T GetOrThrowIfNull<T>(this T obj, string parameterName) {

@@ -3,13 +3,15 @@ using System;
 using static NiceTry.Predef;
 
 namespace NiceTry.Combinators {
+
     /// <summary>
-    ///     Provides extension methods for <see cref="Try{T}" /> to transform instances of it. 
+    ///     Provides extension methods for <see cref="Try{T}" /> to transform instances of it.
     /// </summary>
     public static class TransformExt {
+
         /// <summary>
-        ///     Transform the specified <paramref name="try" /> using one of the specified functions for
-        ///     <paramref name="success" /> and <paramref name="failure" />.
+        ///     Transform the specified <paramref name="try" /> using one of the specified functions
+        ///     for <paramref name="success" /> and <paramref name="failure" />.
         /// </summary>
         /// <param name="try"></param>
         /// <param name="success"></param>
@@ -17,7 +19,8 @@ namespace NiceTry.Combinators {
         /// <typeparam name="A"></typeparam>
         /// <typeparam name="B"></typeparam>
         /// <exception cref="ArgumentNullException">
-        ///     <paramref name="try" />, <paramref name="success" /> or <paramref name="failure" /> is <see langword="null" />.
+        ///     <paramref name="try" />, <paramref name="success" /> or <paramref name="failure" />
+        ///     is <see langword="null" />.
         /// </exception>
         [NotNull]
         public static Try<B> Transform<A, B>(
@@ -41,8 +44,8 @@ namespace NiceTry.Combinators {
         }
 
         /// <summary>
-        ///     Transform the specified <paramref name="try" /> using one of the specified functions for
-        ///     <paramref name="success" /> and <paramref name="failure" />.
+        ///     Transform the specified <paramref name="try" /> using one of the specified functions
+        ///     for <paramref name="success" /> and <paramref name="failure" />.
         /// </summary>
         /// <param name="try"></param>
         /// <param name="success"></param>
@@ -50,7 +53,8 @@ namespace NiceTry.Combinators {
         /// <typeparam name="A"></typeparam>
         /// <typeparam name="B"></typeparam>
         /// <exception cref="ArgumentNullException">
-        ///     <paramref name="try" />, <paramref name="success" /> or <paramref name="failure" /> is <see langword="null" />.
+        ///     <paramref name="try" />, <paramref name="success" /> or <paramref name="failure" />
+        ///     is <see langword="null" />.
         /// </exception>
         [NotNull]
         public static Try<B> Transform<A, B>(

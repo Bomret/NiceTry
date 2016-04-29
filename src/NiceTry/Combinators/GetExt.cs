@@ -3,17 +3,22 @@ using System;
 using static NiceTry._;
 
 namespace NiceTry.Combinators {
+
     /// <summary>
-    ///     Provides extension methods for <see cref="Try{T}" /> to get the value therein. 
+    ///     Provides extension methods for <see cref="Try{T}" /> to get the value therein.
     /// </summary>
     public static class GetExt {
+
         /// <summary>
-        ///     Returns the value of the specified <paramref name="try" /> if it represents success or throws a
-        ///     <see cref="InvalidOperationException" /> containing the encountered exception if it represents failure.
+        ///     Returns the value of the specified <paramref name="try" /> if it represents success
+        ///     or throws a <see cref="InvalidOperationException" /> containing the encountered
+        ///     exception if it represents failure.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="try"></param>
-        /// <exception cref="InvalidOperationException"> <paramref name="try" /> represents failure. </exception>
+        /// <exception cref="InvalidOperationException">
+        ///     <paramref name="try" /> represents failure.
+        /// </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="try" /> is <see langword="null" />. </exception>
         [CanBeNull]
         public static T Get<T>([NotNull] this Try<T> @try) {
@@ -29,8 +34,8 @@ namespace NiceTry.Combinators {
         }
 
         /// <summary>
-        ///     Returns the value of the specified <paramref name="try" /> if it represents success or the
-        ///     <paramref name="fallback" /> if it represents failure.
+        ///     Returns the value of the specified <paramref name="try" /> if it represents success
+        ///     or the <paramref name="fallback" /> if it represents failure.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="try"></param>
@@ -43,8 +48,9 @@ namespace NiceTry.Combinators {
             GetOrElse(@try, () => fallback);
 
         /// <summary>
-        ///     Returns the value of the specified <paramref name="try" /> if it represents success or executes the
-        ///     <paramref name="fallback" /> function and returns the result if it is a failure.
+        ///     Returns the value of the specified <paramref name="try" /> if it represents success
+        ///     or executes the <paramref name="fallback" /> function and returns the result if it is
+        ///     a failure.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="try"></param>

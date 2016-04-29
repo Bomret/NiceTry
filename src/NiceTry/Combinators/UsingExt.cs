@@ -4,15 +4,18 @@ using TheVoid;
 using static NiceTry.Predef;
 
 namespace NiceTry.Combinators {
+
     /// <summary>
-    ///     Provides extension methods for <see cref="Try{T}" /> to handle instances of <see cref="IDisposable" />. 
+    ///     Provides extension methods for <see cref="Try{T}" /> to handle instances of <see cref="IDisposable" />.
     /// </summary>
     public static class UsingExt {
+
         /// <summary>
-        ///     Creates, uses and properly disposes a <see cref="IDisposable" /> if the specified <paramref name="try" />
-        ///     represents success as specified by the <paramref name="createDisposable" /> and
-        ///     <paramref name="useDisposable" /> functions and returns a <see cref="Success{T}" /> or a
-        ///     <see cref="Failure{T}" />, depending on the outcome of the operation.
+        ///     Creates, uses and properly disposes a <see cref="IDisposable" /> if the specified
+        ///     <paramref name="try" /> represents success as specified by the
+        ///     <paramref name="createDisposable" /> and <paramref name="useDisposable" /> functions
+        ///     and returns a <see cref="Success{T}" /> or a <see cref="Failure{T}" />, depending on
+        ///     the outcome of the operation.
         /// </summary>
         /// <typeparam name="Disposable"></typeparam>
         /// <typeparam name="T"></typeparam>
@@ -38,10 +41,11 @@ namespace NiceTry.Combinators {
         }
 
         /// <summary>
-        ///     Creates, uses and properly disposes a <see cref="IDisposable" /> if the specified <paramref name="try" />
-        ///     represents success as specified by the <paramref name="createDisposable" /> and
-        ///     <paramref name="useDisposable" /> functions and returns a <see cref="Success{T}" /> containing the result
-        ///     or a <see cref="Failure{T}" />, depending on the outcome of the operation.
+        ///     Creates, uses and properly disposes a <see cref="IDisposable" /> if the specified
+        ///     <paramref name="try" /> represents success as specified by the
+        ///     <paramref name="createDisposable" /> and <paramref name="useDisposable" /> functions
+        ///     and returns a <see cref="Success{T}" /> containing the result or a
+        ///     <see cref="Failure{T}" />, depending on the outcome of the operation.
         /// </summary>
         /// <typeparam name="Disposable"></typeparam>
         /// <typeparam name="A"></typeparam>
@@ -68,10 +72,11 @@ namespace NiceTry.Combinators {
         }
 
         /// <summary>
-        ///     Creates, uses and properly disposes a <see cref="IDisposable" /> if the specified <paramref name="try" />
-        ///     represents success as specified by the <paramref name="createDisposable" /> and
-        ///     <paramref name="useDisposable" /> functions and returns a <see cref="Success{T}" /> containing the result
-        ///     or a <see cref="Failure{T}" />, depending on the outcome of the operation.
+        ///     Creates, uses and properly disposes a <see cref="IDisposable" /> if the specified
+        ///     <paramref name="try" /> represents success as specified by the
+        ///     <paramref name="createDisposable" /> and <paramref name="useDisposable" /> functions
+        ///     and returns a <see cref="Success{T}" /> containing the result or a
+        ///     <see cref="Failure{T}" />, depending on the outcome of the operation.
         /// </summary>
         /// <typeparam name="Disposable"></typeparam>
         /// <typeparam name="A"></typeparam>
@@ -98,10 +103,11 @@ namespace NiceTry.Combinators {
         }
 
         /// <summary>
-        ///     Creates, uses and properly disposes a <see cref="IDisposable" /> if the specified <paramref name="try" />
-        ///     represents success as specified by the <paramref name="createDisposable" /> and
-        ///     <paramref name="useDisposable" /> functions and returns a <see cref="Success{T}" /> containing the result
-        ///     or a <see cref="Failure{T}" />, depending on the outcome of the operation.
+        ///     Creates, uses and properly disposes a <see cref="IDisposable" /> if the specified
+        ///     <paramref name="try" /> represents success as specified by the
+        ///     <paramref name="createDisposable" /> and <paramref name="useDisposable" /> functions
+        ///     and returns a <see cref="Success{T}" /> containing the result or a
+        ///     <see cref="Failure{T}" />, depending on the outcome of the operation.
         /// </summary>
         /// <typeparam name="Disposable"></typeparam>
         /// <typeparam name="A"></typeparam>
@@ -127,10 +133,11 @@ namespace NiceTry.Combinators {
         }
 
         /// <summary>
-        ///     Creates, uses and properly disposes a <see cref="IDisposable" /> if the specified <paramref name="try" />
-        ///     represents success as specified by the <paramref name="createDisposable" /> and
-        ///     <paramref name="useDisposable" /> functions and returns a <see cref="Success{T}" /> containing the result
-        ///     or a <see cref="Failure{T}" />, depending on the outcome of the operation.
+        ///     Creates, uses and properly disposes a <see cref="IDisposable" /> if the specified
+        ///     <paramref name="try" /> represents success as specified by the
+        ///     <paramref name="createDisposable" /> and <paramref name="useDisposable" /> functions
+        ///     and returns a <see cref="Success{T}" /> containing the result or a
+        ///     <see cref="Failure{T}" />, depending on the outcome of the operation.
         /// </summary>
         /// <typeparam name="Disposable"></typeparam>
         /// <typeparam name="A"></typeparam>

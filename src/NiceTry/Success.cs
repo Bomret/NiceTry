@@ -1,11 +1,10 @@
 using System;
 
 namespace NiceTry {
-    /// <summary>
-    ///     Represents the successful outcome of an operation. 
-    /// </summary>
+
+    /// <summary> Represents the successful outcome of an operation. </summary>
     public sealed class Success<T> : Try<T> {
-        T _value;
+        private T _value;
 
         internal Success(T value) {
             _value = value;

@@ -6,57 +6,57 @@ using System.Diagnostics;
 
 namespace NiceTry {
 
-    /// <summary>
-    /// Represents the success or failure of an operation. 
-    /// </summary>
+    /// <summary> Represents the success or failure of an operation. </summary>
     /// <typeparam name="T"></typeparam>
     [DebuggerDisplay("{ToString(),nq}")]
     public abstract class Try<T> : IComparable<Try<T>>, IEquatable<Try<T>>, IComparable, IStructuralComparable, IStructuralEquatable {
         protected bool _isSuccess;
 
-        /// <summary>
-        /// Indicates if this represents failure. 
-        /// </summary>
+        /// <summary> Indicates if this represents failure. </summary>
         public bool IsFailure => !_isSuccess;
 
-        /// <summary>
-        /// Indicates if this represents success. 
-        /// </summary>
+        /// <summary> Indicates if this represents success. </summary>
         public bool IsSuccess => _isSuccess;
 
         /// <summary>
-        /// Executes the specified <paramref name="sideEffect" /> only if this instance represents failure. 
+        ///     Executes the specified <paramref name="sideEffect" /> only if this instance
+        ///     represents failure.
         /// </summary>
         /// <param name="sideEffect"></param>
-        /// <exception cref="ArgumentNullException"> <paramref name="sideEffect" /> is <see langword="null" />. </exception>
+        /// <exception cref="ArgumentNullException">
+        ///     <paramref name="sideEffect" /> is <see langword="null" />.
+        /// </exception>
         public abstract void IfFailure([NotNull] Action<Exception> sideEffect);
 
         /// <summary>
-        /// Executes the specified <paramref name="sideEffect" /> only if this instance represents success. 
+        ///     Executes the specified <paramref name="sideEffect" /> only if this instance
+        ///     represents success.
         /// </summary>
         /// <param name="sideEffect"></param>
-        /// <exception cref="ArgumentNullException"> <paramref name="sideEffect" /> is <see langword="null" />. </exception>
+        /// <exception cref="ArgumentNullException">
+        ///     <paramref name="sideEffect" /> is <see langword="null" />.
+        /// </exception>
         public abstract void IfSuccess([NotNull] Action<T> success);
 
         /// <summary>
-        /// Executes on of the specified side effects, depending on wether this instance represents
-        /// success or failure.
+        ///     Executes on of the specified side effects, depending on wether this instance
+        ///     represents success or failure.
         /// </summary>
         /// <param name="success"></param>
         /// <param name="failure"></param>
         /// <exception cref="ArgumentNullException">
-        /// <paramref name="success" /> or <paramref name="failure" /> is <see langword="null" />.
+        ///     <paramref name="success" /> or <paramref name="failure" /> is <see langword="null" />.
         /// </exception>
         public abstract void Match([NotNull] Action<T> success, [NotNull] Action<Exception> failure);
 
         /// <summary>
-        /// Executes on of the specified side effects, depending on wether this instance represents
-        /// success or failure, and returns the produced result.
+        ///     Executes on of the specified side effects, depending on wether this instance
+        ///     represents success or failure, and returns the produced result.
         /// </summary>
         /// <param name="success"></param>
         /// <param name="failure"></param>
         /// <exception cref="ArgumentNullException">
-        /// <paramref name="success" /> or <paramref name="failure" /> is <see langword="null" />.
+        ///     <paramref name="success" /> or <paramref name="failure" /> is <see langword="null" />.
         /// </exception>
         public abstract B Match<B>([NotNull] Func<T, B> success, [NotNull] Func<Exception, B> failure);
 

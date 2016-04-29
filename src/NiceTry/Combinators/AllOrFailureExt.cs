@@ -7,19 +7,20 @@ using static NiceTry.Predef;
 namespace NiceTry.Combinators {
 
     /// <summary>
-    /// Provides extensions for working with <see cref="IEnumerable{T}" /> that contain instances of <see cref="Try{T}" />.
+    ///     Provides extensions for working with <see cref="IEnumerable{T}" /> that contain instances
+    ///     of <see cref="Try{T}" />.
     /// </summary>
     public static class AllOrFailureExt {
 
         /// <summary>
-        /// Returns a single <see cref="NiceTry.Success{T}" /> containing all elements if all
-        /// <see cref="Try{T}" /> in the specified <paramref name="candidates" /> represent success,
-        /// or the first <see cref="NiceTry.Failure{T}" /> otherwise.
+        ///     Returns a single <see cref="NiceTry.Success{T}" /> containing all elements if all
+        ///     <see cref="Try{T}" /> in the specified <paramref name="candidates" /> represent
+        ///     success, or the first <see cref="NiceTry.Failure{T}" /> otherwise.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="enumerable"></param>
         /// <exception cref="ArgumentException">
-        /// <paramref name="enumerable" /> contains <see langword="null" /> elements.
+        ///     <paramref name="enumerable" /> contains <see langword="null" /> elements.
         /// </exception>
         [NotNull]
         public static Try<IEnumerable<T>> AllOrFailure<T>([NotNull] this IEnumerable<Try<T>> enumerable) {
