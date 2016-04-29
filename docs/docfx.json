@@ -1,0 +1,50 @@
+{
+    "metadata": [
+        {
+            "src": [
+                {
+                    "files": [
+                        "**/*.csproj"
+                    ],
+                    "exclude": [
+                        "**/bin/**",
+                        "**/obj/**",
+                        "**.vs/**"
+                    ],
+                    "cwd": "../src"
+                }
+            ],
+            "dest": "obj/api"
+        }
+    ],
+    "build": {
+        "content": [
+            {
+                "files": [
+                    "**/*.yml"
+                ],
+                "cwd": "obj/api",
+                "dest": "api"
+            },
+            {
+                "files": [
+                    "articles/**/*.md",
+                    "articles/**/toc.yml",
+                    "*.md",
+                    "toc.yml"
+                ]
+            }
+        ],
+        "resource": [
+            {
+                "files": [
+                    "images/**"
+                ]
+            }
+        ],
+        "globalMetadata": {
+            "_appTitle": "NiceTry Documentation"
+        },
+        "dest": "_site"
+    }
+}

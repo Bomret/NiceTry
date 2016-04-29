@@ -1,0 +1,23 @@
+type project
+owners
+    Stefan Reichel
+authors 
+    Stefan Reichel
+projectUrl
+    http://github.com/bomret/NiceTry
+iconUrl
+    https://raw.githubusercontent.com/bomret/NiceTry/master/docs/files/img/logo.png
+licenseUrl
+    http://github.com/bomret/NiceTry/blob/master/LICENSE.txt
+requireLicenseAcceptance
+    false
+copyright
+    Copyright 2015
+tags
+    try catch error handling exception
+summary
+    A type for the classic try/catch statement, inspired by the Try type in Scala.
+description
+    A type for the classical try/catch statement that allows functional and bloat free error handling. Inspired by the Try type in Scala.
+excludeddependencies
+	Jetbrains.Annotations
