@@ -5,6 +5,9 @@ using System.Linq;
 using static NiceTry.Predef;
 
 namespace NiceTry.Combinators {
+    /// <summary>
+    ///     Provides extension methods for <see cref="IEnumerable{T}" /> to get the first element without having to cope with exceptions. 
+    /// </summary>
     public static class FirstTryExt {
         /// <summary>
         ///     Returns the first element of a sequence wrapped in a <see cref="Success{T}" /> or a

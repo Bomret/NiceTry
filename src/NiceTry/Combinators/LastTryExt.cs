@@ -5,6 +5,9 @@ using System.Linq;
 using static NiceTry.Predef;
 
 namespace NiceTry.Combinators {
+    /// <summary>
+    ///     Provides extension methods for <see cref="IEnumerable{T}" /> to get the last element without having to cope with exceptions. 
+    /// </summary>
     public static class LastTryExt {
         /// <summary>
         ///     Returns the last element of a sequence wrapped in a <see cref="Success{T}" /> or a

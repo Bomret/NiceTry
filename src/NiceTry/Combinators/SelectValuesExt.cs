@@ -6,7 +6,7 @@ using System.Linq;
 namespace NiceTry.Combinators {
 
     /// <summary>
-    /// Provides extension methods for <see cref="Try{T}" /> to extract values from enumerables of <see cref="Try{T}" />. 
+    /// Provides extension methods for <see cref="IEnumerable{T}" /> to extract values from enumerables of <see cref="Try{T}" />. 
     /// </summary>
     public static class SelectValuesExt {
 

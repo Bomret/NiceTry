@@ -6,6 +6,9 @@ using static NiceTry.Predef;
 
 namespace NiceTry.Combinators {
 
+    /// <summary>
+    ///     Provides extension methods for <see cref="Try{T}" /> in conjunction with <see cref="IEnumerable{T}"> to exchange the type positions. 
+    /// </summary>
     public static class ExchangeExt {
 
         /// <summary>

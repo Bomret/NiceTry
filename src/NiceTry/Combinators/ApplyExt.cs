@@ -16,9 +16,6 @@ namespace NiceTry.Combinators {
         /// <typeparam name="T"></typeparam>
         /// <param name="try"></param>
         /// <param name="apply"></param>
-        /// <exception cref="ArgumentException">
-        ///     The property Kind of <paramref name="try" /> is not a valid value of <see cref="TryKind" />.
-        /// </exception>
         /// <exception cref="ArgumentNullException">
         ///     <paramref name="try" /> or <paramref name="apply" /> is <see langword="null" />.
         /// </exception>
@@ -41,9 +38,6 @@ namespace NiceTry.Combinators {
         /// <typeparam name="T"></typeparam>
         /// <param name="try"></param>
         /// <param name="apply"></param>
-        /// <exception cref="ArgumentException">
-        ///     The property Kind of <paramref name="try" /> is not a valid value of <see cref="TryKind" />.
-        /// </exception>
         /// <exception cref="ArgumentNullException">
         ///     <paramref name="try" /> or <paramref name="apply" /> is <see langword="null" />.
         /// </exception>

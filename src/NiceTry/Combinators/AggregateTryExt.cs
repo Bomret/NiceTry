@@ -7,6 +7,9 @@ using static NiceTry.Predef;
 
 namespace NiceTry.Combinators {
 
+    /// <summary>
+    ///     Provides extension methods for <see cref="IEnumerable{T}" /> to aggregate without having to cope with exceptions. 
+    /// </summary>
     public static class AggregateTryExt {
 
         /// <summary>
