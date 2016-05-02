@@ -314,6 +314,9 @@ Target "All" DoNothing
 "CleanDocs"
   ==> "GenerateDependenciesDocs"
 
+"GenerateDocs"
+  ==> "ReleaseDocs"
+
 "ReleaseDocs"
   ==> "Release"
 
