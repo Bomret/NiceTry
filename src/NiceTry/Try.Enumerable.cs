@@ -1,11 +1,14 @@
-﻿using JetBrains.Annotations;
-using NiceTry.Combinators;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using JetBrains.Annotations;
+using NiceTry.Combinators;
 
 namespace NiceTry {
 
-    /// <summary> Provides factory methods to create instances of <see cref="NiceTry.Try{T}" />. </summary>
+    /// <summary> 
+    ///     Provides factory methods to create instances of <see cref="NiceTry.Try{T}" />. 
+    /// </summary>
     public static partial class Try {
 
         /// <summary>
@@ -17,7 +20,7 @@ namespace NiceTry {
         /// <param name="candidates"></param>
         [NotNull]
         public static Try<IEnumerable<T>> AllOrFailure<T>([NotNull] params Try<T>[] candidates) =>
-            candidates.AsEnumerable().AllOrFailure();
+            candidates.AsEnumerable ().AllOrFailure ();
 
         /// <summary>
         ///     Returns a single <see cref="NiceTry.Success{T}" /> containing either the values of
@@ -28,7 +31,7 @@ namespace NiceTry {
         /// <param name="candidates"></param>
         [NotNull]
         public static Try<IEnumerable<T>> AllOrFailure<T>([NotNull] IEnumerable<Try<T>> candidates) =>
-            candidates.AllOrFailure();
+            candidates.AllOrFailure ();
 
         /// <summary>
         ///     Returns an <see cref="IEnumerable{T}" /> that contains only the values contained in
@@ -41,7 +44,7 @@ namespace NiceTry {
         /// </exception>
         [NotNull]
         public static IEnumerable<T> SelectValues<T>([NotNull] params Try<T>[] candidates) =>
-            candidates.SelectValues();
+            candidates.SelectValues ();
 
         /// <summary>
         ///     Returns an <see cref="IEnumerable{T}" /> that contains only the values contained in
@@ -54,7 +57,7 @@ namespace NiceTry {
         /// </exception>
         [NotNull]
         public static IEnumerable<T> SelectValues<T>([NotNull] IEnumerable<Try<T>> candidates) =>
-            candidates.SelectValues();
+            candidates.SelectValues ();
 
         /// <summary>
         ///     Searches the specified <paramref name="candidates" /> for the first success. If no
@@ -67,7 +70,7 @@ namespace NiceTry {
         /// </exception>
         [NotNull]
         public static Try<T> Switch<T>([NotNull] params Try<T>[] candidates) =>
-            candidates.Switch();
+            candidates.Switch ();
 
         /// <summary>
         ///     Searches the specified <paramref name="candidates" /> for the first success. If no
@@ -80,6 +83,6 @@ namespace NiceTry {
         /// </exception>
         [NotNull]
         public static Try<T> Switch<T>([NotNull] IEnumerable<Try<T>> candidates) =>
-            candidates.Switch();
+            candidates.Switch ();
     }
 }

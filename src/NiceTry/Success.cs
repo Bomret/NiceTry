@@ -2,37 +2,37 @@ using System;
 
 namespace NiceTry {
 
-    /// <summary> Represents the successful outcome of an operation. </summary>
+    /// <summary> 
+    ///     Represents the successful outcome of an operation. 
+    /// </summary>
     public sealed class Success<T> : Try<T> {
-        private T _value;
+        readonly T _value;
 
-        internal Success(T value) {
+        internal Success(T value) : base (TryKind.Success) {
             _value = value;
-            _isSuccess = true;
         }
 
-        public override void IfFailure(Action<Exception> failure) {
-            failure.ThrowIfNull(nameof(failure));
-        }
+        public override void IfFailure(Action<Exception> sideEffect) =>
+            sideEffect.ThrowIfNull (nameof (sideEffect));
 
-        public override void IfSuccess(Action<T> success) {
-            success.ThrowIfNull(nameof(success));
+        public override void IfSuccess(Action<T> sideEffect) {
+            sideEffect.ThrowIfNull (nameof (sideEffect));
 
-            success(_value);
+            sideEffect (_value);
         }
 
         public override void Match(Action<T> success, Action<Exception> failure) {
-            success.ThrowIfNull(nameof(success));
-            failure.ThrowIfNull(nameof(failure));
+            success.ThrowIfNull (nameof (success));
+            failure.ThrowIfNull (nameof (failure));
 
-            success(_value);
+            success (_value);
         }
 
         public override B Match<B>(Func<T, B> success, Func<Exception, B> failure) {
-            success.ThrowIfNull(nameof(success));
-            failure.ThrowIfNull(nameof(failure));
+            success.ThrowIfNull (nameof (success));
+            failure.ThrowIfNull (nameof (failure));
 
-            return success(_value);
+            return success (_value);
         }
     }
 }

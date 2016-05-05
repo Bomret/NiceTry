@@ -27,10 +27,10 @@ namespace NiceTry.Combinators {
         public static Try<T> AggregateTry<T>(
             [NotNull] this IEnumerable<T> enumerable,
             [NotNull] Func<T, T, T> aggregate) {
-            enumerable.ThrowIfNull(nameof(enumerable));
-            aggregate.ThrowIfNull(nameof(aggregate));
+            enumerable.ThrowIfNull (nameof (enumerable));
+            aggregate.ThrowIfNull (nameof (aggregate));
 
-            return Try(() => enumerable.Aggregate(aggregate));
+            return Try (() => enumerable.Aggregate (aggregate));
         }
 
         /// <summary>
@@ -51,10 +51,10 @@ namespace NiceTry.Combinators {
             [NotNull] this IEnumerable<A> enumerable,
             [CanBeNull] B seed,
             [NotNull] Func<B, A, B> aggregate) {
-            enumerable.ThrowIfNull(nameof(enumerable));
-            aggregate.ThrowIfNull(nameof(aggregate));
+            enumerable.ThrowIfNull (nameof (enumerable));
+            aggregate.ThrowIfNull (nameof (aggregate));
 
-            return Try(() => enumerable.Aggregate(seed, aggregate));
+            return Try (() => enumerable.Aggregate (seed, aggregate));
         }
 
         /// <summary>
@@ -80,11 +80,11 @@ namespace NiceTry.Combinators {
             [CanBeNull] B seed,
             [NotNull] Func<B, A, B> aggregate,
             [NotNull] Func<B, C> resultSelector) {
-            enumerable.ThrowIfNull(nameof(enumerable));
-            aggregate.ThrowIfNull(nameof(aggregate));
-            resultSelector.ThrowIfNull(nameof(resultSelector));
+            enumerable.ThrowIfNull (nameof (enumerable));
+            aggregate.ThrowIfNull (nameof (aggregate));
+            resultSelector.ThrowIfNull (nameof (resultSelector));
 
-            return Try(() => enumerable.Aggregate(seed, aggregate, resultSelector));
+            return Try (() => enumerable.Aggregate (seed, aggregate, resultSelector));
         }
     }
 }

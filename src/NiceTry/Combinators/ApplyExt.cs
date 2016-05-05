@@ -1,5 +1,5 @@
-using JetBrains.Annotations;
 using System;
+using JetBrains.Annotations;
 using TheVoid;
 using static NiceTry.Predef;
 
@@ -23,12 +23,12 @@ namespace NiceTry.Combinators {
         /// </exception>
         [NotNull]
         public static Try<Unit> Apply<T>([NotNull] this Try<T> @try, [NotNull] Action<T> apply) {
-            @try.ThrowIfNull(nameof(@try));
-            apply.ThrowIfNull(nameof(apply));
+            @try.ThrowIfNull (nameof (@try));
+            apply.ThrowIfNull (nameof (apply));
 
-            return Apply(@try, x => {
-                apply(x);
-                return Ok(Unit.Default);
+            return Apply (@try, x => {
+                apply (x);
+                return Ok (Unit.Default);
             });
         }
 
@@ -45,12 +45,33 @@ namespace NiceTry.Combinators {
         /// </exception>
         [NotNull]
         public static Try<Unit> Apply<T>([NotNull] this Try<T> @try, [NotNull] Func<T, Try<Unit>> apply) {
-            apply.ThrowIfNull(nameof(apply));
-            @try.ThrowIfNull(nameof(@try));
+            apply.ThrowIfNull (nameof (apply));
+            @try.ThrowIfNull (nameof (@try));
 
-            return @try.Match(
+            return @try.Match (
                 failure: Fail<Unit>,
-                success: x => Try(() => apply(x)));
+                success: x => Try (() => apply (x)));
+        }
+
+        /// <summary>
+        ///     Applies the specified <paramref name="apply" /> to the value of the specified
+        ///     <paramref name="try" /> if both represent success. If one represents failure or
+        ///     <paramref name="apply" /> throws an exception, a <see cref="Failure{T}" /> is returned.
+        /// </summary>
+        /// <param name="try"></param>
+        /// <param name="apply"></param>
+        /// <typeparam name="A"></typeparam>
+        /// <typeparam name="B"></typeparam>
+        [NotNull]
+        public static Try<B> Apply<A, B>([NotNull] this Try<A> @try, [NotNull] Try<Func<A, B>> apply) {
+            @try.ThrowIfNull (nameof (@try));
+            apply.ThrowIfNull (nameof (apply));
+
+            return @try.Match (
+                failure: Fail<B>,
+                success: a => apply.Match (
+                    failure: Fail<B>,
+                    success: f => Try (() => f (a))));
         }
     }
 }

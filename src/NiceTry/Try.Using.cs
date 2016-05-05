@@ -5,6 +5,9 @@ using static NiceTry.Predef;
 
 namespace NiceTry {
 
+    /// <summary> 
+    ///     Provides factory methods to create instances of <see cref="NiceTry.Try{T}" />. 
+    /// </summary>
     public static partial class Try {
 
         /// <summary>
@@ -24,12 +27,12 @@ namespace NiceTry {
         public static Try<T> Using<Disposable, T>(
             [NotNull] Func<Disposable> createDisposable,
             [NotNull] Func<Disposable, T> useDisposable) where Disposable : IDisposable {
-            createDisposable.ThrowIfNull(nameof(createDisposable));
-            useDisposable.ThrowIfNull(nameof(useDisposable));
+            createDisposable.ThrowIfNull (nameof (createDisposable));
+            useDisposable.ThrowIfNull (nameof (useDisposable));
 
-            return Using(createDisposable, disp => {
-                var res = useDisposable(disp);
-                return Success(res);
+            return Using (createDisposable, disp => {
+                var res = useDisposable (disp);
+                return Success (res);
             });
         }
 
@@ -49,12 +52,12 @@ namespace NiceTry {
         public static Try<Unit> Using<Disposable>(
             [NotNull] Func<Disposable> createDisposable,
             [NotNull] Action<Disposable> useDisposable) where Disposable : IDisposable {
-            createDisposable.ThrowIfNull(nameof(createDisposable));
-            useDisposable.ThrowIfNull(nameof(useDisposable));
+            createDisposable.ThrowIfNull (nameof (createDisposable));
+            useDisposable.ThrowIfNull (nameof (useDisposable));
 
-            return Using(createDisposable, d => {
-                useDisposable(d);
-                return Success(Unit.Default);
+            return Using (createDisposable, d => {
+                useDisposable (d);
+                return Success (Unit.Default);
             });
         }
 
@@ -75,12 +78,12 @@ namespace NiceTry {
         public static Try<T> Using<Disposable, T>(
             [NotNull] Func<Disposable> createDisposable,
             [NotNull] Func<Disposable, Try<T>> useDisposable) where Disposable : IDisposable {
-            createDisposable.ThrowIfNull(nameof(createDisposable));
-            useDisposable.ThrowIfNull(nameof(useDisposable));
+            createDisposable.ThrowIfNull (nameof (createDisposable));
+            useDisposable.ThrowIfNull (nameof (useDisposable));
 
-            return Try(() => {
-                using (var disp = createDisposable())
-                    return useDisposable(disp);
+            return Try (() => {
+                using (var disp = createDisposable ())
+                    return useDisposable (disp);
             });
         }
     }
