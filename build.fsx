@@ -296,7 +296,7 @@ Target "Release" (fun _ ->
     // release on github
     createClient user pw
     |> createDraft gitOwner gitName release.NugetVersion (release.SemVer.PreRelease <> None) release.Notes
-    |> uploadFile ("bin" @@ "NiceTry.dll")
+    //|> uploadFile ("bin" @@ "NiceTry.dll")
     |> releaseDraft
     |> Async.RunSynchronously
 )
@@ -317,12 +317,9 @@ Target "All" DoNothing
 "GenerateDocs"
   ==> "ReleaseDocs"
 
-"ReleaseDocs"
-  ==> "Release"
-
-"BuildPackage"
-  ==> "PublishNuget"
-  ==> "Release"
+// "BuildPackage"
+//   ==> "PublishNuget"
+//   ==> "Release"
 
 "Clean"
 #if MONO
