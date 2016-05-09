@@ -1,4 +1,4 @@
-## 4.1.0 - Unreleased
+## 4.1.0 - May 9 2016
 * Added new Apply method
 * Added TryKind enum and Kind property to Try<T>
 * Updated xml docs
