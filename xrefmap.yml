@@ -1,0 +1,695 @@
+sorted: true
+references:
+- uid: NiceTry
+  name: NiceTry
+  href: api/NiceTry.html#NiceTry
+  fullName: NiceTry
+- uid: NiceTry.Combinators
+  name: NiceTry.Combinators
+  href: api/NiceTry.Combinators.html#NiceTry_Combinators
+  fullName: NiceTry.Combinators
+- uid: NiceTry.Combinators.AggregateTryExt
+  name: AggregateTryExt
+  href: api/NiceTry.Combinators.AggregateTryExt.html#NiceTry_Combinators_AggregateTryExt
+  fullName: NiceTry.Combinators.AggregateTryExt
+- uid: NiceTry.Combinators.AggregateTryExt.AggregateTry``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``0,``0})
+  name: AggregateTry<T>(IEnumerable<T>, Func<T, T, T>)
+  href: api/NiceTry.Combinators.AggregateTryExt.html#NiceTry_Combinators_AggregateTryExt_AggregateTry__1_System_Collections_Generic_IEnumerable___0__System_Func___0___0___0__
+  name.vb: AggregateTry(Of T)(IEnumerable(Of T), Func(Of T, T, T))
+  fullName: NiceTry.Combinators.AggregateTryExt.AggregateTry<T>(System.Collections.Generic.IEnumerable<T>, System.Func<T, T, T>)
+  fullName.vb: NiceTry.Combinators.AggregateTryExt.AggregateTry(Of T)(System.Collections.Generic.IEnumerable(Of T), System.Func(Of T, T, T))
+- uid: NiceTry.Combinators.AggregateTryExt.AggregateTry``2(System.Collections.Generic.IEnumerable{``0},``1,System.Func{``1,``0,``1})
+  name: AggregateTry<A, B>(IEnumerable<A>, B, Func<B, A, B>)
+  href: api/NiceTry.Combinators.AggregateTryExt.html#NiceTry_Combinators_AggregateTryExt_AggregateTry__2_System_Collections_Generic_IEnumerable___0____1_System_Func___1___0___1__
+  name.vb: AggregateTry(Of A, B)(IEnumerable(Of A), B, Func(Of B, A, B))
+  fullName: NiceTry.Combinators.AggregateTryExt.AggregateTry<A, B>(System.Collections.Generic.IEnumerable<A>, B, System.Func<B, A, B>)
+  fullName.vb: NiceTry.Combinators.AggregateTryExt.AggregateTry(Of A, B)(System.Collections.Generic.IEnumerable(Of A), B, System.Func(Of B, A, B))
+- uid: NiceTry.Combinators.AggregateTryExt.AggregateTry``3(System.Collections.Generic.IEnumerable{``0},``1,System.Func{``1,``0,``1},System.Func{``1,``2})
+  name: AggregateTry<A, B, C>(IEnumerable<A>, B, Func<B, A, B>, Func<B, C>)
+  href: api/NiceTry.Combinators.AggregateTryExt.html#NiceTry_Combinators_AggregateTryExt_AggregateTry__3_System_Collections_Generic_IEnumerable___0____1_System_Func___1___0___1__System_Func___1___2__
+  name.vb: AggregateTry(Of A, B, C)(IEnumerable(Of A), B, Func(Of B, A, B), Func(Of B, C))
+  fullName: NiceTry.Combinators.AggregateTryExt.AggregateTry<A, B, C>(System.Collections.Generic.IEnumerable<A>, B, System.Func<B, A, B>, System.Func<B, C>)
+  fullName.vb: NiceTry.Combinators.AggregateTryExt.AggregateTry(Of A, B, C)(System.Collections.Generic.IEnumerable(Of A), B, System.Func(Of B, A, B), System.Func(Of B, C))
+- uid: NiceTry.Combinators.AllOrFailureExt
+  name: AllOrFailureExt
+  href: api/NiceTry.Combinators.AllOrFailureExt.html#NiceTry_Combinators_AllOrFailureExt
+  fullName: NiceTry.Combinators.AllOrFailureExt
+- uid: NiceTry.Combinators.AllOrFailureExt.AllOrFailure``1(System.Collections.Generic.IEnumerable{NiceTry.Try{``0}})
+  name: AllOrFailure<T>(IEnumerable<Try<T>>)
+  href: api/NiceTry.Combinators.AllOrFailureExt.html#NiceTry_Combinators_AllOrFailureExt_AllOrFailure__1_System_Collections_Generic_IEnumerable_NiceTry_Try___0___
+  name.vb: AllOrFailure(Of T)(IEnumerable(Of Try(Of T)))
+  fullName: NiceTry.Combinators.AllOrFailureExt.AllOrFailure<T>(System.Collections.Generic.IEnumerable<NiceTry.Try<T>>)
+  fullName.vb: NiceTry.Combinators.AllOrFailureExt.AllOrFailure(Of T)(System.Collections.Generic.IEnumerable(Of NiceTry.Try(Of T)))
+- uid: NiceTry.Combinators.ApplyExt
+  name: ApplyExt
+  href: api/NiceTry.Combinators.ApplyExt.html#NiceTry_Combinators_ApplyExt
+  fullName: NiceTry.Combinators.ApplyExt
+- uid: NiceTry.Combinators.ApplyExt.Apply``1(NiceTry.Try{``0},System.Action{``0})
+  name: Apply<T>(Try<T>, Action<T>)
+  href: api/NiceTry.Combinators.ApplyExt.html#NiceTry_Combinators_ApplyExt_Apply__1_NiceTry_Try___0__System_Action___0__
+  name.vb: Apply(Of T)(Try(Of T), Action(Of T))
+  fullName: NiceTry.Combinators.ApplyExt.Apply<T>(NiceTry.Try<T>, System.Action<T>)
+  fullName.vb: NiceTry.Combinators.ApplyExt.Apply(Of T)(NiceTry.Try(Of T), System.Action(Of T))
+- uid: NiceTry.Combinators.ApplyExt.Apply``1(NiceTry.Try{``0},System.Func{``0,NiceTry.Try{TheVoid.Unit}})
+  name: Apply<T>(Try<T>, Func<T, Try<Unit>>)
+  href: api/NiceTry.Combinators.ApplyExt.html#NiceTry_Combinators_ApplyExt_Apply__1_NiceTry_Try___0__System_Func___0_NiceTry_Try_TheVoid_Unit___
+  name.vb: Apply(Of T)(Try(Of T), Func(Of T, Try(Of Unit)))
+  fullName: NiceTry.Combinators.ApplyExt.Apply<T>(NiceTry.Try<T>, System.Func<T, NiceTry.Try<TheVoid.Unit>>)
+  fullName.vb: NiceTry.Combinators.ApplyExt.Apply(Of T)(NiceTry.Try(Of T), System.Func(Of T, NiceTry.Try(Of TheVoid.Unit)))
+- uid: NiceTry.Combinators.ApplyExt.Apply``2(NiceTry.Try{``0},NiceTry.Try{System.Func{``0,``1}})
+  name: Apply<A, B>(Try<A>, Try<Func<A, B>>)
+  href: api/NiceTry.Combinators.ApplyExt.html#NiceTry_Combinators_ApplyExt_Apply__2_NiceTry_Try___0__NiceTry_Try_System_Func___0___1___
+  name.vb: Apply(Of A, B)(Try(Of A), Try(Of Func(Of A, B)))
+  fullName: NiceTry.Combinators.ApplyExt.Apply<A, B>(NiceTry.Try<A>, NiceTry.Try<System.Func<A, B>>)
+  fullName.vb: NiceTry.Combinators.ApplyExt.Apply(Of A, B)(NiceTry.Try(Of A), NiceTry.Try(Of System.Func(Of A, B)))
+- uid: NiceTry.Combinators.CatchExt
+  name: CatchExt
+  href: api/NiceTry.Combinators.CatchExt.html#NiceTry_Combinators_CatchExt
+  fullName: NiceTry.Combinators.CatchExt
+- uid: NiceTry.Combinators.CatchExt.Catch``2(NiceTry.Try{``1},System.Func{``0,``1})
+  name: Catch<TErr, T>(Try<T>, Func<TErr, T>)
+  href: api/NiceTry.Combinators.CatchExt.html#NiceTry_Combinators_CatchExt_Catch__2_NiceTry_Try___1__System_Func___0___1__
+  name.vb: Catch(Of TErr, T)(Try(Of T), Func(Of TErr, T))
+  fullName: NiceTry.Combinators.CatchExt.Catch<TErr, T>(NiceTry.Try<T>, System.Func<TErr, T>)
+  fullName.vb: NiceTry.Combinators.CatchExt.Catch(Of TErr, T)(NiceTry.Try(Of T), System.Func(Of TErr, T))
+- uid: NiceTry.Combinators.CatchExt.Catch``2(NiceTry.Try{``1},System.Func{``0,NiceTry.Try{``1}})
+  name: Catch<TErr, T>(Try<T>, Func<TErr, Try<T>>)
+  href: api/NiceTry.Combinators.CatchExt.html#NiceTry_Combinators_CatchExt_Catch__2_NiceTry_Try___1__System_Func___0_NiceTry_Try___1___
+  name.vb: Catch(Of TErr, T)(Try(Of T), Func(Of TErr, Try(Of T)))
+  fullName: NiceTry.Combinators.CatchExt.Catch<TErr, T>(NiceTry.Try<T>, System.Func<TErr, NiceTry.Try<T>>)
+  fullName.vb: NiceTry.Combinators.CatchExt.Catch(Of TErr, T)(NiceTry.Try(Of T), System.Func(Of TErr, NiceTry.Try(Of T)))
+- uid: NiceTry.Combinators.ContainsExt
+  name: ContainsExt
+  href: api/NiceTry.Combinators.ContainsExt.html#NiceTry_Combinators_ContainsExt
+  fullName: NiceTry.Combinators.ContainsExt
+- uid: NiceTry.Combinators.ContainsExt.Contains``1(NiceTry.Try{``0},``0,System.Collections.Generic.IEqualityComparer{``0})
+  name: Contains<T>(Try<T>, T, IEqualityComparer<T>)
+  href: api/NiceTry.Combinators.ContainsExt.html#NiceTry_Combinators_ContainsExt_Contains__1_NiceTry_Try___0____0_System_Collections_Generic_IEqualityComparer___0__
+  name.vb: Contains(Of T)(Try(Of T), T, IEqualityComparer(Of T))
+  fullName: NiceTry.Combinators.ContainsExt.Contains<T>(NiceTry.Try<T>, T, System.Collections.Generic.IEqualityComparer<T>)
+  fullName.vb: NiceTry.Combinators.ContainsExt.Contains(Of T)(NiceTry.Try(Of T), T, System.Collections.Generic.IEqualityComparer(Of T))
+- uid: NiceTry.Combinators.ContainsExt.Contains``1(NiceTry.Try{``0},``0,System.Func{``0,``0,System.Boolean})
+  name: Contains<T>(Try<T>, T, Func<T, T, Boolean>)
+  href: api/NiceTry.Combinators.ContainsExt.html#NiceTry_Combinators_ContainsExt_Contains__1_NiceTry_Try___0____0_System_Func___0___0_System_Boolean__
+  name.vb: Contains(Of T)(Try(Of T), T, Func(Of T, T, Boolean))
+  fullName: NiceTry.Combinators.ContainsExt.Contains<T>(NiceTry.Try<T>, T, System.Func<T, T, System.Boolean>)
+  fullName.vb: NiceTry.Combinators.ContainsExt.Contains(Of T)(NiceTry.Try(Of T), T, System.Func(Of T, T, System.Boolean))
+- uid: NiceTry.Combinators.DoExt
+  name: DoExt
+  href: api/NiceTry.Combinators.DoExt.html#NiceTry_Combinators_DoExt
+  fullName: NiceTry.Combinators.DoExt
+- uid: NiceTry.Combinators.DoExt.Do``1(NiceTry.Try{``0},System.Action{``0})
+  name: Do<T>(Try<T>, Action<T>)
+  href: api/NiceTry.Combinators.DoExt.html#NiceTry_Combinators_DoExt_Do__1_NiceTry_Try___0__System_Action___0__
+  name.vb: Do(Of T)(Try(Of T), Action(Of T))
+  fullName: NiceTry.Combinators.DoExt.Do<T>(NiceTry.Try<T>, System.Action<T>)
+  fullName.vb: NiceTry.Combinators.DoExt.Do(Of T)(NiceTry.Try(Of T), System.Action(Of T))
+- uid: NiceTry.Combinators.ExchangeExt
+  name: ExchangeExt
+  href: api/NiceTry.Combinators.ExchangeExt.html#NiceTry_Combinators_ExchangeExt
+  fullName: NiceTry.Combinators.ExchangeExt
+- uid: NiceTry.Combinators.ExchangeExt.Exchange``1(NiceTry.Try{System.Collections.Generic.IEnumerable{``0}})
+  name: Exchange<T>(Try<IEnumerable<T>>)
+  href: api/NiceTry.Combinators.ExchangeExt.html#NiceTry_Combinators_ExchangeExt_Exchange__1_NiceTry_Try_System_Collections_Generic_IEnumerable___0___
+  name.vb: Exchange(Of T)(Try(Of IEnumerable(Of T)))
+  fullName: NiceTry.Combinators.ExchangeExt.Exchange<T>(NiceTry.Try<System.Collections.Generic.IEnumerable<T>>)
+  fullName.vb: NiceTry.Combinators.ExchangeExt.Exchange(Of T)(NiceTry.Try(Of System.Collections.Generic.IEnumerable(Of T)))
+- uid: NiceTry.Combinators.FinallyExt
+  name: FinallyExt
+  href: api/NiceTry.Combinators.FinallyExt.html#NiceTry_Combinators_FinallyExt
+  fullName: NiceTry.Combinators.FinallyExt
+- uid: NiceTry.Combinators.FinallyExt.Finally``1(NiceTry.Try{``0},System.Action)
+  name: Finally<T>(Try<T>, Action)
+  href: api/NiceTry.Combinators.FinallyExt.html#NiceTry_Combinators_FinallyExt_Finally__1_NiceTry_Try___0__System_Action_
+  name.vb: Finally(Of T)(Try(Of T), Action)
+  fullName: NiceTry.Combinators.FinallyExt.Finally<T>(NiceTry.Try<T>, System.Action)
+  fullName.vb: NiceTry.Combinators.FinallyExt.Finally(Of T)(NiceTry.Try(Of T), System.Action)
+- uid: NiceTry.Combinators.FirstTryExt
+  name: FirstTryExt
+  href: api/NiceTry.Combinators.FirstTryExt.html#NiceTry_Combinators_FirstTryExt
+  fullName: NiceTry.Combinators.FirstTryExt
+- uid: NiceTry.Combinators.FirstTryExt.FirstTry``1(System.Collections.Generic.IEnumerable{``0})
+  name: FirstTry<T>(IEnumerable<T>)
+  href: api/NiceTry.Combinators.FirstTryExt.html#NiceTry_Combinators_FirstTryExt_FirstTry__1_System_Collections_Generic_IEnumerable___0__
+  name.vb: FirstTry(Of T)(IEnumerable(Of T))
+  fullName: NiceTry.Combinators.FirstTryExt.FirstTry<T>(System.Collections.Generic.IEnumerable<T>)
+  fullName.vb: NiceTry.Combinators.FirstTryExt.FirstTry(Of T)(System.Collections.Generic.IEnumerable(Of T))
+- uid: NiceTry.Combinators.FirstTryExt.FirstTry``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean})
+  name: FirstTry<T>(IEnumerable<T>, Func<T, Boolean>)
+  href: api/NiceTry.Combinators.FirstTryExt.html#NiceTry_Combinators_FirstTryExt_FirstTry__1_System_Collections_Generic_IEnumerable___0__System_Func___0_System_Boolean__
+  name.vb: FirstTry(Of T)(IEnumerable(Of T), Func(Of T, Boolean))
+  fullName: NiceTry.Combinators.FirstTryExt.FirstTry<T>(System.Collections.Generic.IEnumerable<T>, System.Func<T, System.Boolean>)
+  fullName.vb: NiceTry.Combinators.FirstTryExt.FirstTry(Of T)(System.Collections.Generic.IEnumerable(Of T), System.Func(Of T, System.Boolean))
+- uid: NiceTry.Combinators.FlattenExt
+  name: FlattenExt
+  href: api/NiceTry.Combinators.FlattenExt.html#NiceTry_Combinators_FlattenExt
+  fullName: NiceTry.Combinators.FlattenExt
+- uid: NiceTry.Combinators.FlattenExt.Flatten``1(NiceTry.Try{NiceTry.Try{``0}})
+  name: Flatten<T>(Try<Try<T>>)
+  href: api/NiceTry.Combinators.FlattenExt.html#NiceTry_Combinators_FlattenExt_Flatten__1_NiceTry_Try_NiceTry_Try___0___
+  name.vb: Flatten(Of T)(Try(Of Try(Of T)))
+  fullName: NiceTry.Combinators.FlattenExt.Flatten<T>(NiceTry.Try<NiceTry.Try<T>>)
+  fullName.vb: NiceTry.Combinators.FlattenExt.Flatten(Of T)(NiceTry.Try(Of NiceTry.Try(Of T)))
+- uid: NiceTry.Combinators.GetExt
+  name: GetExt
+  href: api/NiceTry.Combinators.GetExt.html#NiceTry_Combinators_GetExt
+  fullName: NiceTry.Combinators.GetExt
+- uid: NiceTry.Combinators.GetExt.Get``1(NiceTry.Try{``0})
+  name: Get<T>(Try<T>)
+  href: api/NiceTry.Combinators.GetExt.html#NiceTry_Combinators_GetExt_Get__1_NiceTry_Try___0__
+  name.vb: Get(Of T)(Try(Of T))
+  fullName: NiceTry.Combinators.GetExt.Get<T>(NiceTry.Try<T>)
+  fullName.vb: NiceTry.Combinators.GetExt.Get(Of T)(NiceTry.Try(Of T))
+- uid: NiceTry.Combinators.GetExt.GetOrElse``1(NiceTry.Try{``0},``0)
+  name: GetOrElse<T>(Try<T>, T)
+  href: api/NiceTry.Combinators.GetExt.html#NiceTry_Combinators_GetExt_GetOrElse__1_NiceTry_Try___0____0_
+  name.vb: GetOrElse(Of T)(Try(Of T), T)
+  fullName: NiceTry.Combinators.GetExt.GetOrElse<T>(NiceTry.Try<T>, T)
+  fullName.vb: NiceTry.Combinators.GetExt.GetOrElse(Of T)(NiceTry.Try(Of T), T)
+- uid: NiceTry.Combinators.GetExt.GetOrElse``1(NiceTry.Try{``0},System.Func{``0})
+  name: GetOrElse<T>(Try<T>, Func<T>)
+  href: api/NiceTry.Combinators.GetExt.html#NiceTry_Combinators_GetExt_GetOrElse__1_NiceTry_Try___0__System_Func___0__
+  name.vb: GetOrElse(Of T)(Try(Of T), Func(Of T))
+  fullName: NiceTry.Combinators.GetExt.GetOrElse<T>(NiceTry.Try<T>, System.Func<T>)
+  fullName.vb: NiceTry.Combinators.GetExt.GetOrElse(Of T)(NiceTry.Try(Of T), System.Func(Of T))
+- uid: NiceTry.Combinators.LastTryExt
+  name: LastTryExt
+  href: api/NiceTry.Combinators.LastTryExt.html#NiceTry_Combinators_LastTryExt
+  fullName: NiceTry.Combinators.LastTryExt
+- uid: NiceTry.Combinators.LastTryExt.LastTry``1(System.Collections.Generic.IEnumerable{``0})
+  name: LastTry<T>(IEnumerable<T>)
+  href: api/NiceTry.Combinators.LastTryExt.html#NiceTry_Combinators_LastTryExt_LastTry__1_System_Collections_Generic_IEnumerable___0__
+  name.vb: LastTry(Of T)(IEnumerable(Of T))
+  fullName: NiceTry.Combinators.LastTryExt.LastTry<T>(System.Collections.Generic.IEnumerable<T>)
+  fullName.vb: NiceTry.Combinators.LastTryExt.LastTry(Of T)(System.Collections.Generic.IEnumerable(Of T))
+- uid: NiceTry.Combinators.LastTryExt.LastTry``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean})
+  name: LastTry<T>(IEnumerable<T>, Func<T, Boolean>)
+  href: api/NiceTry.Combinators.LastTryExt.html#NiceTry_Combinators_LastTryExt_LastTry__1_System_Collections_Generic_IEnumerable___0__System_Func___0_System_Boolean__
+  name.vb: LastTry(Of T)(IEnumerable(Of T), Func(Of T, Boolean))
+  fullName: NiceTry.Combinators.LastTryExt.LastTry<T>(System.Collections.Generic.IEnumerable<T>, System.Func<T, System.Boolean>)
+  fullName.vb: NiceTry.Combinators.LastTryExt.LastTry(Of T)(System.Collections.Generic.IEnumerable(Of T), System.Func(Of T, System.Boolean))
+- uid: NiceTry.Combinators.OrElseExt
+  name: OrElseExt
+  href: api/NiceTry.Combinators.OrElseExt.html#NiceTry_Combinators_OrElseExt
+  fullName: NiceTry.Combinators.OrElseExt
+- uid: NiceTry.Combinators.OrElseExt.OrElse``1(NiceTry.Try{``0},``0)
+  name: OrElse<T>(Try<T>, T)
+  href: api/NiceTry.Combinators.OrElseExt.html#NiceTry_Combinators_OrElseExt_OrElse__1_NiceTry_Try___0____0_
+  name.vb: OrElse(Of T)(Try(Of T), T)
+  fullName: NiceTry.Combinators.OrElseExt.OrElse<T>(NiceTry.Try<T>, T)
+  fullName.vb: NiceTry.Combinators.OrElseExt.OrElse(Of T)(NiceTry.Try(Of T), T)
+- uid: NiceTry.Combinators.OrElseExt.OrElse``1(NiceTry.Try{``0},NiceTry.Try{``0})
+  name: OrElse<T>(Try<T>, Try<T>)
+  href: api/NiceTry.Combinators.OrElseExt.html#NiceTry_Combinators_OrElseExt_OrElse__1_NiceTry_Try___0__NiceTry_Try___0__
+  name.vb: OrElse(Of T)(Try(Of T), Try(Of T))
+  fullName: NiceTry.Combinators.OrElseExt.OrElse<T>(NiceTry.Try<T>, NiceTry.Try<T>)
+  fullName.vb: NiceTry.Combinators.OrElseExt.OrElse(Of T)(NiceTry.Try(Of T), NiceTry.Try(Of T))
+- uid: NiceTry.Combinators.OrElseExt.OrElse``1(NiceTry.Try{``0},System.Func{``0})
+  name: OrElse<T>(Try<T>, Func<T>)
+  href: api/NiceTry.Combinators.OrElseExt.html#NiceTry_Combinators_OrElseExt_OrElse__1_NiceTry_Try___0__System_Func___0__
+  name.vb: OrElse(Of T)(Try(Of T), Func(Of T))
+  fullName: NiceTry.Combinators.OrElseExt.OrElse<T>(NiceTry.Try<T>, System.Func<T>)
+  fullName.vb: NiceTry.Combinators.OrElseExt.OrElse(Of T)(NiceTry.Try(Of T), System.Func(Of T))
+- uid: NiceTry.Combinators.OrElseExt.OrElse``1(NiceTry.Try{``0},System.Func{NiceTry.Try{``0}})
+  name: OrElse<T>(Try<T>, Func<Try<T>>)
+  href: api/NiceTry.Combinators.OrElseExt.html#NiceTry_Combinators_OrElseExt_OrElse__1_NiceTry_Try___0__System_Func_NiceTry_Try___0___
+  name.vb: OrElse(Of T)(Try(Of T), Func(Of Try(Of T)))
+  fullName: NiceTry.Combinators.OrElseExt.OrElse<T>(NiceTry.Try<T>, System.Func<NiceTry.Try<T>>)
+  fullName.vb: NiceTry.Combinators.OrElseExt.OrElse(Of T)(NiceTry.Try(Of T), System.Func(Of NiceTry.Try(Of T)))
+- uid: NiceTry.Combinators.RecoverExt
+  name: RecoverExt
+  href: api/NiceTry.Combinators.RecoverExt.html#NiceTry_Combinators_RecoverExt
+  fullName: NiceTry.Combinators.RecoverExt
+- uid: NiceTry.Combinators.RecoverExt.Recover``1(NiceTry.Try{``0},System.Func{System.Exception,``0})
+  name: Recover<T>(Try<T>, Func<Exception, T>)
+  href: api/NiceTry.Combinators.RecoverExt.html#NiceTry_Combinators_RecoverExt_Recover__1_NiceTry_Try___0__System_Func_System_Exception___0__
+  name.vb: Recover(Of T)(Try(Of T), Func(Of Exception, T))
+  fullName: NiceTry.Combinators.RecoverExt.Recover<T>(NiceTry.Try<T>, System.Func<System.Exception, T>)
+  fullName.vb: NiceTry.Combinators.RecoverExt.Recover(Of T)(NiceTry.Try(Of T), System.Func(Of System.Exception, T))
+- uid: NiceTry.Combinators.RecoverExt.Recover``1(NiceTry.Try{``0},System.Func{System.Exception,NiceTry.Try{``0}})
+  name: Recover<T>(Try<T>, Func<Exception, Try<T>>)
+  href: api/NiceTry.Combinators.RecoverExt.html#NiceTry_Combinators_RecoverExt_Recover__1_NiceTry_Try___0__System_Func_System_Exception_NiceTry_Try___0___
+  name.vb: Recover(Of T)(Try(Of T), Func(Of Exception, Try(Of T)))
+  fullName: NiceTry.Combinators.RecoverExt.Recover<T>(NiceTry.Try<T>, System.Func<System.Exception, NiceTry.Try<T>>)
+  fullName.vb: NiceTry.Combinators.RecoverExt.Recover(Of T)(NiceTry.Try(Of T), System.Func(Of System.Exception, NiceTry.Try(Of T)))
+- uid: NiceTry.Combinators.SelectExt
+  name: SelectExt
+  href: api/NiceTry.Combinators.SelectExt.html#NiceTry_Combinators_SelectExt
+  fullName: NiceTry.Combinators.SelectExt
+- uid: NiceTry.Combinators.SelectExt.Select``2(NiceTry.Try{``0},System.Func{``0,``1})
+  name: Select<A, B>(Try<A>, Func<A, B>)
+  href: api/NiceTry.Combinators.SelectExt.html#NiceTry_Combinators_SelectExt_Select__2_NiceTry_Try___0__System_Func___0___1__
+  name.vb: Select(Of A, B)(Try(Of A), Func(Of A, B))
+  fullName: NiceTry.Combinators.SelectExt.Select<A, B>(NiceTry.Try<A>, System.Func<A, B>)
+  fullName.vb: NiceTry.Combinators.SelectExt.Select(Of A, B)(NiceTry.Try(Of A), System.Func(Of A, B))
+- uid: NiceTry.Combinators.SelectManyExt
+  name: SelectManyExt
+  href: api/NiceTry.Combinators.SelectManyExt.html#NiceTry_Combinators_SelectManyExt
+  fullName: NiceTry.Combinators.SelectManyExt
+- uid: NiceTry.Combinators.SelectManyExt.SelectMany``2(NiceTry.Try{``0},System.Func{``0,NiceTry.Try{``1}})
+  name: SelectMany<A, B>(Try<A>, Func<A, Try<B>>)
+  href: api/NiceTry.Combinators.SelectManyExt.html#NiceTry_Combinators_SelectManyExt_SelectMany__2_NiceTry_Try___0__System_Func___0_NiceTry_Try___1___
+  name.vb: SelectMany(Of A, B)(Try(Of A), Func(Of A, Try(Of B)))
+  fullName: NiceTry.Combinators.SelectManyExt.SelectMany<A, B>(NiceTry.Try<A>, System.Func<A, NiceTry.Try<B>>)
+  fullName.vb: NiceTry.Combinators.SelectManyExt.SelectMany(Of A, B)(NiceTry.Try(Of A), System.Func(Of A, NiceTry.Try(Of B)))
+- uid: NiceTry.Combinators.SelectManyExt.SelectMany``3(NiceTry.Try{``0},System.Func{``0,NiceTry.Try{``1}},System.Func{``0,``1,``2})
+  name: SelectMany<A, B, C>(Try<A>, Func<A, Try<B>>, Func<A, B, C>)
+  href: api/NiceTry.Combinators.SelectManyExt.html#NiceTry_Combinators_SelectManyExt_SelectMany__3_NiceTry_Try___0__System_Func___0_NiceTry_Try___1___System_Func___0___1___2__
+  name.vb: SelectMany(Of A, B, C)(Try(Of A), Func(Of A, Try(Of B)), Func(Of A, B, C))
+  fullName: NiceTry.Combinators.SelectManyExt.SelectMany<A, B, C>(NiceTry.Try<A>, System.Func<A, NiceTry.Try<B>>, System.Func<A, B, C>)
+  fullName.vb: NiceTry.Combinators.SelectManyExt.SelectMany(Of A, B, C)(NiceTry.Try(Of A), System.Func(Of A, NiceTry.Try(Of B)), System.Func(Of A, B, C))
+- uid: NiceTry.Combinators.SelectValuesExt
+  name: SelectValuesExt
+  href: api/NiceTry.Combinators.SelectValuesExt.html#NiceTry_Combinators_SelectValuesExt
+  fullName: NiceTry.Combinators.SelectValuesExt
+- uid: NiceTry.Combinators.SelectValuesExt.SelectValues``1(System.Collections.Generic.IEnumerable{NiceTry.Try{``0}})
+  name: SelectValues<T>(IEnumerable<Try<T>>)
+  href: api/NiceTry.Combinators.SelectValuesExt.html#NiceTry_Combinators_SelectValuesExt_SelectValues__1_System_Collections_Generic_IEnumerable_NiceTry_Try___0___
+  name.vb: SelectValues(Of T)(IEnumerable(Of Try(Of T)))
+  fullName: NiceTry.Combinators.SelectValuesExt.SelectValues<T>(System.Collections.Generic.IEnumerable<NiceTry.Try<T>>)
+  fullName.vb: NiceTry.Combinators.SelectValuesExt.SelectValues(Of T)(System.Collections.Generic.IEnumerable(Of NiceTry.Try(Of T)))
+- uid: NiceTry.Combinators.SingleTryExt
+  name: SingleTryExt
+  href: api/NiceTry.Combinators.SingleTryExt.html#NiceTry_Combinators_SingleTryExt
+  fullName: NiceTry.Combinators.SingleTryExt
+- uid: NiceTry.Combinators.SingleTryExt.SingleTry``1(System.Collections.Generic.IEnumerable{``0})
+  name: SingleTry<T>(IEnumerable<T>)
+  href: api/NiceTry.Combinators.SingleTryExt.html#NiceTry_Combinators_SingleTryExt_SingleTry__1_System_Collections_Generic_IEnumerable___0__
+  name.vb: SingleTry(Of T)(IEnumerable(Of T))
+  fullName: NiceTry.Combinators.SingleTryExt.SingleTry<T>(System.Collections.Generic.IEnumerable<T>)
+  fullName.vb: NiceTry.Combinators.SingleTryExt.SingleTry(Of T)(System.Collections.Generic.IEnumerable(Of T))
+- uid: NiceTry.Combinators.SingleTryExt.SingleTry``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean})
+  name: SingleTry<T>(IEnumerable<T>, Func<T, Boolean>)
+  href: api/NiceTry.Combinators.SingleTryExt.html#NiceTry_Combinators_SingleTryExt_SingleTry__1_System_Collections_Generic_IEnumerable___0__System_Func___0_System_Boolean__
+  name.vb: SingleTry(Of T)(IEnumerable(Of T), Func(Of T, Boolean))
+  fullName: NiceTry.Combinators.SingleTryExt.SingleTry<T>(System.Collections.Generic.IEnumerable<T>, System.Func<T, System.Boolean>)
+  fullName.vb: NiceTry.Combinators.SingleTryExt.SingleTry(Of T)(System.Collections.Generic.IEnumerable(Of T), System.Func(Of T, System.Boolean))
+- uid: NiceTry.Combinators.SwitchExt
+  name: SwitchExt
+  href: api/NiceTry.Combinators.SwitchExt.html#NiceTry_Combinators_SwitchExt
+  fullName: NiceTry.Combinators.SwitchExt
+- uid: NiceTry.Combinators.SwitchExt.Switch``1(NiceTry.Try{``0},NiceTry.Try{``0}[])
+  name: Switch<T>(Try<T>, Try<T>[])
+  href: api/NiceTry.Combinators.SwitchExt.html#NiceTry_Combinators_SwitchExt_Switch__1_NiceTry_Try___0__NiceTry_Try___0____
+  name.vb: Switch(Of T)(Try(Of T), Try(Of T)())
+  fullName: NiceTry.Combinators.SwitchExt.Switch<T>(NiceTry.Try<T>, NiceTry.Try<T>[])
+  fullName.vb: NiceTry.Combinators.SwitchExt.Switch(Of T)(NiceTry.Try(Of T), NiceTry.Try(Of T)())
+- uid: NiceTry.Combinators.SwitchExt.Switch``1(NiceTry.Try{``0},System.Collections.Generic.IEnumerable{NiceTry.Try{``0}})
+  name: Switch<T>(Try<T>, IEnumerable<Try<T>>)
+  href: api/NiceTry.Combinators.SwitchExt.html#NiceTry_Combinators_SwitchExt_Switch__1_NiceTry_Try___0__System_Collections_Generic_IEnumerable_NiceTry_Try___0___
+  name.vb: Switch(Of T)(Try(Of T), IEnumerable(Of Try(Of T)))
+  fullName: NiceTry.Combinators.SwitchExt.Switch<T>(NiceTry.Try<T>, System.Collections.Generic.IEnumerable<NiceTry.Try<T>>)
+  fullName.vb: NiceTry.Combinators.SwitchExt.Switch(Of T)(NiceTry.Try(Of T), System.Collections.Generic.IEnumerable(Of NiceTry.Try(Of T)))
+- uid: NiceTry.Combinators.SwitchExt.Switch``1(System.Collections.Generic.IEnumerable{NiceTry.Try{``0}})
+  name: Switch<T>(IEnumerable<Try<T>>)
+  href: api/NiceTry.Combinators.SwitchExt.html#NiceTry_Combinators_SwitchExt_Switch__1_System_Collections_Generic_IEnumerable_NiceTry_Try___0___
+  name.vb: Switch(Of T)(IEnumerable(Of Try(Of T)))
+  fullName: NiceTry.Combinators.SwitchExt.Switch<T>(System.Collections.Generic.IEnumerable<NiceTry.Try<T>>)
+  fullName.vb: NiceTry.Combinators.SwitchExt.Switch(Of T)(System.Collections.Generic.IEnumerable(Of NiceTry.Try(Of T)))
+- uid: NiceTry.Combinators.TransformExt
+  name: TransformExt
+  href: api/NiceTry.Combinators.TransformExt.html#NiceTry_Combinators_TransformExt
+  fullName: NiceTry.Combinators.TransformExt
+- uid: NiceTry.Combinators.TransformExt.Transform``2(NiceTry.Try{``0},System.Func{``0,``1},System.Func{System.Exception,``1})
+  name: Transform<A, B>(Try<A>, Func<A, B>, Func<Exception, B>)
+  href: api/NiceTry.Combinators.TransformExt.html#NiceTry_Combinators_TransformExt_Transform__2_NiceTry_Try___0__System_Func___0___1__System_Func_System_Exception___1__
+  name.vb: Transform(Of A, B)(Try(Of A), Func(Of A, B), Func(Of Exception, B))
+  fullName: NiceTry.Combinators.TransformExt.Transform<A, B>(NiceTry.Try<A>, System.Func<A, B>, System.Func<System.Exception, B>)
+  fullName.vb: NiceTry.Combinators.TransformExt.Transform(Of A, B)(NiceTry.Try(Of A), System.Func(Of A, B), System.Func(Of System.Exception, B))
+- uid: NiceTry.Combinators.TransformExt.Transform``2(NiceTry.Try{``0},System.Func{``0,NiceTry.Try{``1}},System.Func{System.Exception,NiceTry.Try{``1}})
+  name: Transform<A, B>(Try<A>, Func<A, Try<B>>, Func<Exception, Try<B>>)
+  href: api/NiceTry.Combinators.TransformExt.html#NiceTry_Combinators_TransformExt_Transform__2_NiceTry_Try___0__System_Func___0_NiceTry_Try___1___System_Func_System_Exception_NiceTry_Try___1___
+  name.vb: Transform(Of A, B)(Try(Of A), Func(Of A, Try(Of B)), Func(Of Exception, Try(Of B)))
+  fullName: NiceTry.Combinators.TransformExt.Transform<A, B>(NiceTry.Try<A>, System.Func<A, NiceTry.Try<B>>, System.Func<System.Exception, NiceTry.Try<B>>)
+  fullName.vb: NiceTry.Combinators.TransformExt.Transform(Of A, B)(NiceTry.Try(Of A), System.Func(Of A, NiceTry.Try(Of B)), System.Func(Of System.Exception, NiceTry.Try(Of B)))
+- uid: NiceTry.Combinators.UsingExt
+  name: UsingExt
+  href: api/NiceTry.Combinators.UsingExt.html#NiceTry_Combinators_UsingExt
+  fullName: NiceTry.Combinators.UsingExt
+- uid: NiceTry.Combinators.UsingExt.Using``2(NiceTry.Try{``1},System.Func{``0},System.Action{``0,``1})
+  name: Using<Disposable, T>(Try<T>, Func<Disposable>, Action<Disposable, T>)
+  href: api/NiceTry.Combinators.UsingExt.html#NiceTry_Combinators_UsingExt_Using__2_NiceTry_Try___1__System_Func___0__System_Action___0___1__
+  name.vb: Using(Of Disposable, T)(Try(Of T), Func(Of Disposable), Action(Of Disposable, T))
+  fullName: NiceTry.Combinators.UsingExt.Using<Disposable, T>(NiceTry.Try<T>, System.Func<Disposable>, System.Action<Disposable, T>)
+  fullName.vb: NiceTry.Combinators.UsingExt.Using(Of Disposable, T)(NiceTry.Try(Of T), System.Func(Of Disposable), System.Action(Of Disposable, T))
+- uid: NiceTry.Combinators.UsingExt.Using``3(NiceTry.Try{``1},System.Func{``0},System.Func{``0,``1,``2})
+  name: Using<Disposable, A, B>(Try<A>, Func<Disposable>, Func<Disposable, A, B>)
+  href: api/NiceTry.Combinators.UsingExt.html#NiceTry_Combinators_UsingExt_Using__3_NiceTry_Try___1__System_Func___0__System_Func___0___1___2__
+  name.vb: Using(Of Disposable, A, B)(Try(Of A), Func(Of Disposable), Func(Of Disposable, A, B))
+  fullName: NiceTry.Combinators.UsingExt.Using<Disposable, A, B>(NiceTry.Try<A>, System.Func<Disposable>, System.Func<Disposable, A, B>)
+  fullName.vb: NiceTry.Combinators.UsingExt.Using(Of Disposable, A, B)(NiceTry.Try(Of A), System.Func(Of Disposable), System.Func(Of Disposable, A, B))
+- uid: NiceTry.Combinators.UsingExt.Using``3(NiceTry.Try{``1},System.Func{``0},System.Func{``0,``1,NiceTry.Try{``2}})
+  name: Using<Disposable, A, B>(Try<A>, Func<Disposable>, Func<Disposable, A, Try<B>>)
+  href: api/NiceTry.Combinators.UsingExt.html#NiceTry_Combinators_UsingExt_Using__3_NiceTry_Try___1__System_Func___0__System_Func___0___1_NiceTry_Try___2___
+  name.vb: Using(Of Disposable, A, B)(Try(Of A), Func(Of Disposable), Func(Of Disposable, A, Try(Of B)))
+  fullName: NiceTry.Combinators.UsingExt.Using<Disposable, A, B>(NiceTry.Try<A>, System.Func<Disposable>, System.Func<Disposable, A, NiceTry.Try<B>>)
+  fullName.vb: NiceTry.Combinators.UsingExt.Using(Of Disposable, A, B)(NiceTry.Try(Of A), System.Func(Of Disposable), System.Func(Of Disposable, A, NiceTry.Try(Of B)))
+- uid: NiceTry.Combinators.UsingExt.Using``3(NiceTry.Try{``1},System.Func{``1,``0},System.Func{``0,``2})
+  name: Using<Disposable, A, B>(Try<A>, Func<A, Disposable>, Func<Disposable, B>)
+  href: api/NiceTry.Combinators.UsingExt.html#NiceTry_Combinators_UsingExt_Using__3_NiceTry_Try___1__System_Func___1___0__System_Func___0___2__
+  name.vb: Using(Of Disposable, A, B)(Try(Of A), Func(Of A, Disposable), Func(Of Disposable, B))
+  fullName: NiceTry.Combinators.UsingExt.Using<Disposable, A, B>(NiceTry.Try<A>, System.Func<A, Disposable>, System.Func<Disposable, B>)
+  fullName.vb: NiceTry.Combinators.UsingExt.Using(Of Disposable, A, B)(NiceTry.Try(Of A), System.Func(Of A, Disposable), System.Func(Of Disposable, B))
+- uid: NiceTry.Combinators.UsingExt.Using``3(NiceTry.Try{``1},System.Func{``1,``0},System.Func{``0,NiceTry.Try{``2}})
+  name: Using<Disposable, A, B>(Try<A>, Func<A, Disposable>, Func<Disposable, Try<B>>)
+  href: api/NiceTry.Combinators.UsingExt.html#NiceTry_Combinators_UsingExt_Using__3_NiceTry_Try___1__System_Func___1___0__System_Func___0_NiceTry_Try___2___
+  name.vb: Using(Of Disposable, A, B)(Try(Of A), Func(Of A, Disposable), Func(Of Disposable, Try(Of B)))
+  fullName: NiceTry.Combinators.UsingExt.Using<Disposable, A, B>(NiceTry.Try<A>, System.Func<A, Disposable>, System.Func<Disposable, NiceTry.Try<B>>)
+  fullName.vb: NiceTry.Combinators.UsingExt.Using(Of Disposable, A, B)(NiceTry.Try(Of A), System.Func(Of A, Disposable), System.Func(Of Disposable, NiceTry.Try(Of B)))
+- uid: NiceTry.Combinators.ZipExt
+  name: ZipExt
+  href: api/NiceTry.Combinators.ZipExt.html#NiceTry_Combinators_ZipExt
+  fullName: NiceTry.Combinators.ZipExt
+- uid: NiceTry.Combinators.ZipExt.Zip``3(NiceTry.Try{``0},NiceTry.Try{``1},System.Func{``0,``1,``2})
+  name: Zip<A, B, C>(Try<A>, Try<B>, Func<A, B, C>)
+  href: api/NiceTry.Combinators.ZipExt.html#NiceTry_Combinators_ZipExt_Zip__3_NiceTry_Try___0__NiceTry_Try___1__System_Func___0___1___2__
+  name.vb: Zip(Of A, B, C)(Try(Of A), Try(Of B), Func(Of A, B, C))
+  fullName: NiceTry.Combinators.ZipExt.Zip<A, B, C>(NiceTry.Try<A>, NiceTry.Try<B>, System.Func<A, B, C>)
+  fullName.vb: NiceTry.Combinators.ZipExt.Zip(Of A, B, C)(NiceTry.Try(Of A), NiceTry.Try(Of B), System.Func(Of A, B, C))
+- uid: NiceTry.Combinators.ZipExt.Zip``3(NiceTry.Try{``0},NiceTry.Try{``1},System.Func{``0,``1,NiceTry.Try{``2}})
+  name: Zip<A, B, C>(Try<A>, Try<B>, Func<A, B, Try<C>>)
+  href: api/NiceTry.Combinators.ZipExt.html#NiceTry_Combinators_ZipExt_Zip__3_NiceTry_Try___0__NiceTry_Try___1__System_Func___0___1_NiceTry_Try___2___
+  name.vb: Zip(Of A, B, C)(Try(Of A), Try(Of B), Func(Of A, B, Try(Of C)))
+  fullName: NiceTry.Combinators.ZipExt.Zip<A, B, C>(NiceTry.Try<A>, NiceTry.Try<B>, System.Func<A, B, NiceTry.Try<C>>)
+  fullName.vb: NiceTry.Combinators.ZipExt.Zip(Of A, B, C)(NiceTry.Try(Of A), NiceTry.Try(Of B), System.Func(Of A, B, NiceTry.Try(Of C)))
+- uid: NiceTry.Failure`1
+  name: Failure<T>
+  href: api/NiceTry.Failure`1.html#NiceTry_Failure_1
+  name.vb: Failure(Of T)
+  fullName: NiceTry.Failure<T>
+  fullName.vb: NiceTry.Failure(Of T)
+- uid: NiceTry.Failure`1.IfFailure(System.Action{System.Exception})
+  name: IfFailure(Action<Exception>)
+  href: api/NiceTry.Failure`1.html#NiceTry_Failure_1_IfFailure_System_Action_System_Exception__
+  name.vb: IfFailure(Action(Of Exception))
+  fullName: NiceTry.Failure<T>.IfFailure(System.Action<System.Exception>)
+  fullName.vb: NiceTry.Failure(Of T).IfFailure(System.Action(Of System.Exception))
+- uid: NiceTry.Failure`1.IfSuccess(System.Action{`0})
+  name: IfSuccess(Action<T>)
+  href: api/NiceTry.Failure`1.html#NiceTry_Failure_1_IfSuccess_System_Action__0__
+  name.vb: IfSuccess(Action(Of T))
+  fullName: NiceTry.Failure<T>.IfSuccess(System.Action<T>)
+  fullName.vb: NiceTry.Failure(Of T).IfSuccess(System.Action(Of T))
+- uid: NiceTry.Failure`1.Match(System.Action{`0},System.Action{System.Exception})
+  name: Match(Action<T>, Action<Exception>)
+  href: api/NiceTry.Failure`1.html#NiceTry_Failure_1_Match_System_Action__0__System_Action_System_Exception__
+  name.vb: Match(Action(Of T), Action(Of Exception))
+  fullName: NiceTry.Failure<T>.Match(System.Action<T>, System.Action<System.Exception>)
+  fullName.vb: NiceTry.Failure(Of T).Match(System.Action(Of T), System.Action(Of System.Exception))
+- uid: NiceTry.Failure`1.Match``1(System.Func{`0,``0},System.Func{System.Exception,``0})
+  name: Match<B>(Func<T, B>, Func<Exception, B>)
+  href: api/NiceTry.Failure`1.html#NiceTry_Failure_1_Match__1_System_Func__0___0__System_Func_System_Exception___0__
+  name.vb: Match(Of B)(Func(Of T, B), Func(Of Exception, B))
+  fullName: NiceTry.Failure<T>.Match<B>(System.Func<T, B>, System.Func<System.Exception, B>)
+  fullName.vb: NiceTry.Failure(Of T).Match(Of B)(System.Func(Of T, B), System.Func(Of System.Exception, B))
+- uid: NiceTry.Predef
+  name: Predef
+  href: api/NiceTry.Predef.html#NiceTry_Predef
+  fullName: NiceTry.Predef
+- uid: NiceTry.Predef.Fail``1(System.Exception)
+  name: Fail<T>(Exception)
+  href: api/NiceTry.Predef.html#NiceTry_Predef_Fail__1_System_Exception_
+  name.vb: Fail(Of T)(Exception)
+  fullName: NiceTry.Predef.Fail<T>(System.Exception)
+  fullName.vb: NiceTry.Predef.Fail(Of T)(System.Exception)
+- uid: NiceTry.Predef.Ok``1(``0)
+  name: Ok<T>(T)
+  href: api/NiceTry.Predef.html#NiceTry_Predef_Ok__1___0_
+  name.vb: Ok(Of T)(T)
+  fullName: NiceTry.Predef.Ok<T>(T)
+  fullName.vb: NiceTry.Predef.Ok(Of T)(T)
+- uid: NiceTry.Predef.Try(System.Action)
+  name: Try(Action)
+  href: api/NiceTry.Predef.html#NiceTry_Predef_Try_System_Action_
+  fullName: NiceTry.Predef.Try(System.Action)
+- uid: NiceTry.Predef.Try``1(System.Func{``0})
+  name: Try<T>(Func<T>)
+  href: api/NiceTry.Predef.html#NiceTry_Predef_Try__1_System_Func___0__
+  name.vb: Try(Of T)(Func(Of T))
+  fullName: NiceTry.Predef.Try<T>(System.Func<T>)
+  fullName.vb: NiceTry.Predef.Try(Of T)(System.Func(Of T))
+- uid: NiceTry.Predef.Try``1(System.Func{NiceTry.Try{``0}})
+  name: Try<T>(Func<Try<T>>)
+  href: api/NiceTry.Predef.html#NiceTry_Predef_Try__1_System_Func_NiceTry_Try___0___
+  name.vb: Try(Of T)(Func(Of Try(Of T)))
+  fullName: NiceTry.Predef.Try<T>(System.Func<NiceTry.Try<T>>)
+  fullName.vb: NiceTry.Predef.Try(Of T)(System.Func(Of NiceTry.Try(Of T)))
+- uid: NiceTry.Predef.Using``1(System.Func{``0},System.Action{``0})
+  name: Using<Disposable>(Func<Disposable>, Action<Disposable>)
+  href: api/NiceTry.Predef.html#NiceTry_Predef_Using__1_System_Func___0__System_Action___0__
+  name.vb: Using(Of Disposable)(Func(Of Disposable), Action(Of Disposable))
+  fullName: NiceTry.Predef.Using<Disposable>(System.Func<Disposable>, System.Action<Disposable>)
+  fullName.vb: NiceTry.Predef.Using(Of Disposable)(System.Func(Of Disposable), System.Action(Of Disposable))
+- uid: NiceTry.Predef.Using``2(System.Func{``0},System.Func{``0,``1})
+  name: Using<Disposable, T>(Func<Disposable>, Func<Disposable, T>)
+  href: api/NiceTry.Predef.html#NiceTry_Predef_Using__2_System_Func___0__System_Func___0___1__
+  name.vb: Using(Of Disposable, T)(Func(Of Disposable), Func(Of Disposable, T))
+  fullName: NiceTry.Predef.Using<Disposable, T>(System.Func<Disposable>, System.Func<Disposable, T>)
+  fullName.vb: NiceTry.Predef.Using(Of Disposable, T)(System.Func(Of Disposable), System.Func(Of Disposable, T))
+- uid: NiceTry.Predef.Using``2(System.Func{``0},System.Func{``0,NiceTry.Try{``1}})
+  name: Using<Disposable, T>(Func<Disposable>, Func<Disposable, Try<T>>)
+  href: api/NiceTry.Predef.html#NiceTry_Predef_Using__2_System_Func___0__System_Func___0_NiceTry_Try___1___
+  name.vb: Using(Of Disposable, T)(Func(Of Disposable), Func(Of Disposable, Try(Of T)))
+  fullName: NiceTry.Predef.Using<Disposable, T>(System.Func<Disposable>, System.Func<Disposable, NiceTry.Try<T>>)
+  fullName.vb: NiceTry.Predef.Using(Of Disposable, T)(System.Func(Of Disposable), System.Func(Of Disposable, NiceTry.Try(Of T)))
+- uid: NiceTry.Success`1
+  name: Success<T>
+  href: api/NiceTry.Success`1.html#NiceTry_Success_1
+  name.vb: Success(Of T)
+  fullName: NiceTry.Success<T>
+  fullName.vb: NiceTry.Success(Of T)
+- uid: NiceTry.Success`1.IfFailure(System.Action{System.Exception})
+  name: IfFailure(Action<Exception>)
+  href: api/NiceTry.Success`1.html#NiceTry_Success_1_IfFailure_System_Action_System_Exception__
+  name.vb: IfFailure(Action(Of Exception))
+  fullName: NiceTry.Success<T>.IfFailure(System.Action<System.Exception>)
+  fullName.vb: NiceTry.Success(Of T).IfFailure(System.Action(Of System.Exception))
+- uid: NiceTry.Success`1.IfSuccess(System.Action{`0})
+  name: IfSuccess(Action<T>)
+  href: api/NiceTry.Success`1.html#NiceTry_Success_1_IfSuccess_System_Action__0__
+  name.vb: IfSuccess(Action(Of T))
+  fullName: NiceTry.Success<T>.IfSuccess(System.Action<T>)
+  fullName.vb: NiceTry.Success(Of T).IfSuccess(System.Action(Of T))
+- uid: NiceTry.Success`1.Match(System.Action{`0},System.Action{System.Exception})
+  name: Match(Action<T>, Action<Exception>)
+  href: api/NiceTry.Success`1.html#NiceTry_Success_1_Match_System_Action__0__System_Action_System_Exception__
+  name.vb: Match(Action(Of T), Action(Of Exception))
+  fullName: NiceTry.Success<T>.Match(System.Action<T>, System.Action<System.Exception>)
+  fullName.vb: NiceTry.Success(Of T).Match(System.Action(Of T), System.Action(Of System.Exception))
+- uid: NiceTry.Success`1.Match``1(System.Func{`0,``0},System.Func{System.Exception,``0})
+  name: Match<B>(Func<T, B>, Func<Exception, B>)
+  href: api/NiceTry.Success`1.html#NiceTry_Success_1_Match__1_System_Func__0___0__System_Func_System_Exception___0__
+  name.vb: Match(Of B)(Func(Of T, B), Func(Of Exception, B))
+  fullName: NiceTry.Success<T>.Match<B>(System.Func<T, B>, System.Func<System.Exception, B>)
+  fullName.vb: NiceTry.Success(Of T).Match(Of B)(System.Func(Of T, B), System.Func(Of System.Exception, B))
+- uid: NiceTry.Try
+  name: Try
+  href: api/NiceTry.Try.html#NiceTry_Try
+  fullName: NiceTry.Try
+- uid: NiceTry.Try.AllOrFailure``1(NiceTry.Try{``0}[])
+  name: AllOrFailure<T>(Try<T>[])
+  href: api/NiceTry.Try.html#NiceTry_Try_AllOrFailure__1_NiceTry_Try___0____
+  name.vb: AllOrFailure(Of T)(Try(Of T)())
+  fullName: NiceTry.Try.AllOrFailure<T>(NiceTry.Try<T>[])
+  fullName.vb: NiceTry.Try.AllOrFailure(Of T)(NiceTry.Try(Of T)())
+- uid: NiceTry.Try.AllOrFailure``1(System.Collections.Generic.IEnumerable{NiceTry.Try{``0}})
+  name: AllOrFailure<T>(IEnumerable<Try<T>>)
+  href: api/NiceTry.Try.html#NiceTry_Try_AllOrFailure__1_System_Collections_Generic_IEnumerable_NiceTry_Try___0___
+  name.vb: AllOrFailure(Of T)(IEnumerable(Of Try(Of T)))
+  fullName: NiceTry.Try.AllOrFailure<T>(System.Collections.Generic.IEnumerable<NiceTry.Try<T>>)
+  fullName.vb: NiceTry.Try.AllOrFailure(Of T)(System.Collections.Generic.IEnumerable(Of NiceTry.Try(Of T)))
+- uid: NiceTry.Try.Failure``1(System.Exception)
+  name: Failure<T>(Exception)
+  href: api/NiceTry.Try.html#NiceTry_Try_Failure__1_System_Exception_
+  name.vb: Failure(Of T)(Exception)
+  fullName: NiceTry.Try.Failure<T>(System.Exception)
+  fullName.vb: NiceTry.Try.Failure(Of T)(System.Exception)
+- uid: NiceTry.Try.Lift``2(System.Func{``0,``1})
+  name: Lift<A, B>(Func<A, B>)
+  href: api/NiceTry.Try.html#NiceTry_Try_Lift__2_System_Func___0___1__
+  name.vb: Lift(Of A, B)(Func(Of A, B))
+  fullName: NiceTry.Try.Lift<A, B>(System.Func<A, B>)
+  fullName.vb: NiceTry.Try.Lift(Of A, B)(System.Func(Of A, B))
+- uid: NiceTry.Try.Lift2``3(System.Func{``0,``1,``2})
+  name: Lift2<A, B, C>(Func<A, B, C>)
+  href: api/NiceTry.Try.html#NiceTry_Try_Lift2__3_System_Func___0___1___2__
+  name.vb: Lift2(Of A, B, C)(Func(Of A, B, C))
+  fullName: NiceTry.Try.Lift2<A, B, C>(System.Func<A, B, C>)
+  fullName.vb: NiceTry.Try.Lift2(Of A, B, C)(System.Func(Of A, B, C))
+- uid: NiceTry.Try.SelectValues``1(NiceTry.Try{``0}[])
+  name: SelectValues<T>(Try<T>[])
+  href: api/NiceTry.Try.html#NiceTry_Try_SelectValues__1_NiceTry_Try___0____
+  name.vb: SelectValues(Of T)(Try(Of T)())
+  fullName: NiceTry.Try.SelectValues<T>(NiceTry.Try<T>[])
+  fullName.vb: NiceTry.Try.SelectValues(Of T)(NiceTry.Try(Of T)())
+- uid: NiceTry.Try.SelectValues``1(System.Collections.Generic.IEnumerable{NiceTry.Try{``0}})
+  name: SelectValues<T>(IEnumerable<Try<T>>)
+  href: api/NiceTry.Try.html#NiceTry_Try_SelectValues__1_System_Collections_Generic_IEnumerable_NiceTry_Try___0___
+  name.vb: SelectValues(Of T)(IEnumerable(Of Try(Of T)))
+  fullName: NiceTry.Try.SelectValues<T>(System.Collections.Generic.IEnumerable<NiceTry.Try<T>>)
+  fullName.vb: NiceTry.Try.SelectValues(Of T)(System.Collections.Generic.IEnumerable(Of NiceTry.Try(Of T)))
+- uid: NiceTry.Try.Success``1(``0)
+  name: Success<T>(T)
+  href: api/NiceTry.Try.html#NiceTry_Try_Success__1___0_
+  name.vb: Success(Of T)(T)
+  fullName: NiceTry.Try.Success<T>(T)
+  fullName.vb: NiceTry.Try.Success(Of T)(T)
+- uid: NiceTry.Try.Switch``1(NiceTry.Try{``0}[])
+  name: Switch<T>(Try<T>[])
+  href: api/NiceTry.Try.html#NiceTry_Try_Switch__1_NiceTry_Try___0____
+  name.vb: Switch(Of T)(Try(Of T)())
+  fullName: NiceTry.Try.Switch<T>(NiceTry.Try<T>[])
+  fullName.vb: NiceTry.Try.Switch(Of T)(NiceTry.Try(Of T)())
+- uid: NiceTry.Try.Switch``1(System.Collections.Generic.IEnumerable{NiceTry.Try{``0}})
+  name: Switch<T>(IEnumerable<Try<T>>)
+  href: api/NiceTry.Try.html#NiceTry_Try_Switch__1_System_Collections_Generic_IEnumerable_NiceTry_Try___0___
+  name.vb: Switch(Of T)(IEnumerable(Of Try(Of T)))
+  fullName: NiceTry.Try.Switch<T>(System.Collections.Generic.IEnumerable<NiceTry.Try<T>>)
+  fullName.vb: NiceTry.Try.Switch(Of T)(System.Collections.Generic.IEnumerable(Of NiceTry.Try(Of T)))
+- uid: NiceTry.Try.To(System.Action)
+  name: To(Action)
+  href: api/NiceTry.Try.html#NiceTry_Try_To_System_Action_
+  fullName: NiceTry.Try.To(System.Action)
+- uid: NiceTry.Try.To``1(System.Func{``0})
+  name: To<T>(Func<T>)
+  href: api/NiceTry.Try.html#NiceTry_Try_To__1_System_Func___0__
+  name.vb: To(Of T)(Func(Of T))
+  fullName: NiceTry.Try.To<T>(System.Func<T>)
+  fullName.vb: NiceTry.Try.To(Of T)(System.Func(Of T))
+- uid: NiceTry.Try.To``1(System.Func{NiceTry.Try{``0}})
+  name: To<T>(Func<Try<T>>)
+  href: api/NiceTry.Try.html#NiceTry_Try_To__1_System_Func_NiceTry_Try___0___
+  name.vb: To(Of T)(Func(Of Try(Of T)))
+  fullName: NiceTry.Try.To<T>(System.Func<NiceTry.Try<T>>)
+  fullName.vb: NiceTry.Try.To(Of T)(System.Func(Of NiceTry.Try(Of T)))
+- uid: NiceTry.Try.Using``1(System.Func{``0},System.Action{``0})
+  name: Using<Disposable>(Func<Disposable>, Action<Disposable>)
+  href: api/NiceTry.Try.html#NiceTry_Try_Using__1_System_Func___0__System_Action___0__
+  name.vb: Using(Of Disposable)(Func(Of Disposable), Action(Of Disposable))
+  fullName: NiceTry.Try.Using<Disposable>(System.Func<Disposable>, System.Action<Disposable>)
+  fullName.vb: NiceTry.Try.Using(Of Disposable)(System.Func(Of Disposable), System.Action(Of Disposable))
+- uid: NiceTry.Try.Using``2(System.Func{``0},System.Func{``0,``1})
+  name: Using<Disposable, T>(Func<Disposable>, Func<Disposable, T>)
+  href: api/NiceTry.Try.html#NiceTry_Try_Using__2_System_Func___0__System_Func___0___1__
+  name.vb: Using(Of Disposable, T)(Func(Of Disposable), Func(Of Disposable, T))
+  fullName: NiceTry.Try.Using<Disposable, T>(System.Func<Disposable>, System.Func<Disposable, T>)
+  fullName.vb: NiceTry.Try.Using(Of Disposable, T)(System.Func(Of Disposable), System.Func(Of Disposable, T))
+- uid: NiceTry.Try.Using``2(System.Func{``0},System.Func{``0,NiceTry.Try{``1}})
+  name: Using<Disposable, T>(Func<Disposable>, Func<Disposable, Try<T>>)
+  href: api/NiceTry.Try.html#NiceTry_Try_Using__2_System_Func___0__System_Func___0_NiceTry_Try___1___
+  name.vb: Using(Of Disposable, T)(Func(Of Disposable), Func(Of Disposable, Try(Of T)))
+  fullName: NiceTry.Try.Using<Disposable, T>(System.Func<Disposable>, System.Func<Disposable, NiceTry.Try<T>>)
+  fullName.vb: NiceTry.Try.Using(Of Disposable, T)(System.Func(Of Disposable), System.Func(Of Disposable, NiceTry.Try(Of T)))
+- uid: NiceTry.Try`1
+  name: Try<T>
+  href: api/NiceTry.Try`1.html#NiceTry_Try_1
+  name.vb: Try(Of T)
+  fullName: NiceTry.Try<T>
+  fullName.vb: NiceTry.Try(Of T)
+- uid: NiceTry.Try`1.#ctor(NiceTry.TryKind)
+  name: Try(TryKind)
+  href: api/NiceTry.Try`1.html#NiceTry_Try_1__ctor_NiceTry_TryKind_
+  fullName: NiceTry.Try<T>.Try(NiceTry.TryKind)
+  fullName.vb: NiceTry.Try(Of T).Try(NiceTry.TryKind)
+- uid: NiceTry.Try`1.CompareTo(NiceTry.Try{`0})
+  name: CompareTo(Try<T>)
+  href: api/NiceTry.Try`1.html#NiceTry_Try_1_CompareTo_NiceTry_Try__0__
+  name.vb: CompareTo(Try(Of T))
+  fullName: NiceTry.Try<T>.CompareTo(NiceTry.Try<T>)
+  fullName.vb: NiceTry.Try(Of T).CompareTo(NiceTry.Try(Of T))
+- uid: NiceTry.Try`1.Equals(NiceTry.Try{`0})
+  name: Equals(Try<T>)
+  href: api/NiceTry.Try`1.html#NiceTry_Try_1_Equals_NiceTry_Try__0__
+  name.vb: Equals(Try(Of T))
+  fullName: NiceTry.Try<T>.Equals(NiceTry.Try<T>)
+  fullName.vb: NiceTry.Try(Of T).Equals(NiceTry.Try(Of T))
+- uid: NiceTry.Try`1.Equals(System.Object)
+  name: Equals(Object)
+  href: api/NiceTry.Try`1.html#NiceTry_Try_1_Equals_System_Object_
+  fullName: NiceTry.Try<T>.Equals(System.Object)
+  fullName.vb: NiceTry.Try(Of T).Equals(System.Object)
+- uid: NiceTry.Try`1.GetHashCode
+  name: GetHashCode()
+  href: api/NiceTry.Try`1.html#NiceTry_Try_1_GetHashCode
+  fullName: NiceTry.Try<T>.GetHashCode()
+  fullName.vb: NiceTry.Try(Of T).GetHashCode()
+- uid: NiceTry.Try`1.IfFailure(System.Action{System.Exception})
+  name: IfFailure(Action<Exception>)
+  href: api/NiceTry.Try`1.html#NiceTry_Try_1_IfFailure_System_Action_System_Exception__
+  name.vb: IfFailure(Action(Of Exception))
+  fullName: NiceTry.Try<T>.IfFailure(System.Action<System.Exception>)
+  fullName.vb: NiceTry.Try(Of T).IfFailure(System.Action(Of System.Exception))
+- uid: NiceTry.Try`1.IfSuccess(System.Action{`0})
+  name: IfSuccess(Action<T>)
+  href: api/NiceTry.Try`1.html#NiceTry_Try_1_IfSuccess_System_Action__0__
+  name.vb: IfSuccess(Action(Of T))
+  fullName: NiceTry.Try<T>.IfSuccess(System.Action<T>)
+  fullName.vb: NiceTry.Try(Of T).IfSuccess(System.Action(Of T))
+- uid: NiceTry.Try`1.IsFailure
+  name: IsFailure
+  href: api/NiceTry.Try`1.html#NiceTry_Try_1_IsFailure
+  fullName: NiceTry.Try<T>.IsFailure
+  fullName.vb: NiceTry.Try(Of T).IsFailure
+- uid: NiceTry.Try`1.IsSuccess
+  name: IsSuccess
+  href: api/NiceTry.Try`1.html#NiceTry_Try_1_IsSuccess
+  fullName: NiceTry.Try<T>.IsSuccess
+  fullName.vb: NiceTry.Try(Of T).IsSuccess
+- uid: NiceTry.Try`1.Kind
+  name: Kind
+  href: api/NiceTry.Try`1.html#NiceTry_Try_1_Kind
+  fullName: NiceTry.Try<T>.Kind
+  fullName.vb: NiceTry.Try(Of T).Kind
+- uid: NiceTry.Try`1.Match(System.Action{`0},System.Action{System.Exception})
+  name: Match(Action<T>, Action<Exception>)
+  href: api/NiceTry.Try`1.html#NiceTry_Try_1_Match_System_Action__0__System_Action_System_Exception__
+  name.vb: Match(Action(Of T), Action(Of Exception))
+  fullName: NiceTry.Try<T>.Match(System.Action<T>, System.Action<System.Exception>)
+  fullName.vb: NiceTry.Try(Of T).Match(System.Action(Of T), System.Action(Of System.Exception))
+- uid: NiceTry.Try`1.Match``1(System.Func{`0,``0},System.Func{System.Exception,``0})
+  name: Match<B>(Func<T, B>, Func<Exception, B>)
+  href: api/NiceTry.Try`1.html#NiceTry_Try_1_Match__1_System_Func__0___0__System_Func_System_Exception___0__
+  name.vb: Match(Of B)(Func(Of T, B), Func(Of Exception, B))
+  fullName: NiceTry.Try<T>.Match<B>(System.Func<T, B>, System.Func<System.Exception, B>)
+  fullName.vb: NiceTry.Try(Of T).Match(Of B)(System.Func(Of T, B), System.Func(Of System.Exception, B))
+- uid: NiceTry.Try`1.System#Collections#IStructuralComparable#CompareTo(System.Object,System.Collections.IComparer)
+  name: IStructuralComparable.CompareTo(Object, IComparer)
+  href: api/NiceTry.Try`1.html#NiceTry_Try_1_System_Collections_IStructuralComparable_CompareTo_System_Object_System_Collections_IComparer_
+  name.vb: System.Collections.IStructuralComparable.CompareTo(Object, IComparer)
+  fullName: NiceTry.Try<T>.System.Collections.IStructuralComparable.CompareTo(System.Object, System.Collections.IComparer)
+  fullName.vb: NiceTry.Try(Of T).System.Collections.IStructuralComparable.CompareTo(System.Object, System.Collections.IComparer)
+- uid: NiceTry.Try`1.System#Collections#IStructuralEquatable#Equals(System.Object,System.Collections.IEqualityComparer)
+  name: IStructuralEquatable.Equals(Object, IEqualityComparer)
+  href: api/NiceTry.Try`1.html#NiceTry_Try_1_System_Collections_IStructuralEquatable_Equals_System_Object_System_Collections_IEqualityComparer_
+  name.vb: System.Collections.IStructuralEquatable.Equals(Object, IEqualityComparer)
+  fullName: NiceTry.Try<T>.System.Collections.IStructuralEquatable.Equals(System.Object, System.Collections.IEqualityComparer)
+  fullName.vb: NiceTry.Try(Of T).System.Collections.IStructuralEquatable.Equals(System.Object, System.Collections.IEqualityComparer)
+- uid: NiceTry.Try`1.System#Collections#IStructuralEquatable#GetHashCode(System.Collections.IEqualityComparer)
+  name: IStructuralEquatable.GetHashCode(IEqualityComparer)
+  href: api/NiceTry.Try`1.html#NiceTry_Try_1_System_Collections_IStructuralEquatable_GetHashCode_System_Collections_IEqualityComparer_
+  name.vb: System.Collections.IStructuralEquatable.GetHashCode(IEqualityComparer)
+  fullName: NiceTry.Try<T>.System.Collections.IStructuralEquatable.GetHashCode(System.Collections.IEqualityComparer)
+  fullName.vb: NiceTry.Try(Of T).System.Collections.IStructuralEquatable.GetHashCode(System.Collections.IEqualityComparer)
+- uid: NiceTry.Try`1.System#IComparable#CompareTo(System.Object)
+  name: IComparable.CompareTo(Object)
+  href: api/NiceTry.Try`1.html#NiceTry_Try_1_System_IComparable_CompareTo_System_Object_
+  name.vb: System.IComparable.CompareTo(Object)
+  fullName: NiceTry.Try<T>.System.IComparable.CompareTo(System.Object)
+  fullName.vb: NiceTry.Try(Of T).System.IComparable.CompareTo(System.Object)
+- uid: NiceTry.Try`1.ToString
+  name: ToString()
+  href: api/NiceTry.Try`1.html#NiceTry_Try_1_ToString
+  fullName: NiceTry.Try<T>.ToString()
+  fullName.vb: NiceTry.Try(Of T).ToString()
+- uid: NiceTry.TryKind
+  name: TryKind
+  href: api/NiceTry.TryKind.html#NiceTry_TryKind
+  fullName: NiceTry.TryKind
+- uid: NiceTry.TryKind.Failure
+  name: Failure
+  href: api/NiceTry.TryKind.html#NiceTry_TryKind_Failure
+  fullName: NiceTry.TryKind.Failure
+- uid: NiceTry.TryKind.Success
+  name: Success
+  href: api/NiceTry.TryKind.html#NiceTry_TryKind_Success
+  fullName: NiceTry.TryKind.Success
