@@ -203,4 +203,4 @@ Try<string> DoSomethingThatCouldThrow(string arg) { /* ... */ }
 ```
 
 ## Combinators
-See the docs for a couple of extension methods that make working with `Try<T>` easier.
+See the [docs](http://bomret.github.io/NiceTry/api/NiceTry.html) for a couple of extension methods that make working with `Try<T>` easier.
