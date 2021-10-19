@@ -1,0 +1,59 @@
+name: ci-build
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches:
+      - main
+      - stage
+
+  push:
+    branches:
+      - main
+
+jobs:
+  windows-2019:
+    name: windows-2019
+    runs-on: windows-2019
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Get npm cache directory
+        id: npm-cache-dir
+        run: |
+          echo "::set-output name=dir::$(npm config get cache)"
+      - name: Cache npm
+        uses: actions/cache@v2
+        id: npm-cache # use this to check for `cache-hit` ==> if: steps.npm-cache.outputs.cache-hit != 'true'
+        with:
+          path: ${{ steps.npm-cache-dir.outputs.dir }}
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Cache NuGet
+        uses: actions/cache@v2
+        with:
+          path: ~/.nuget/packages
+          key: ${{ runner.os }}-nuget-withlock-${{ hashFiles('**/packages.lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-nuget-nolock
+
+      - name: Install .Net
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '6.0.x'
+          include-prerelease: true
+
+      - name: Build
+        run: ./build.cmd publish
+        env:
+          NUGET_USERNAME: ${{ secrets.NUGET_USERNAME }}
+          NUGET_TOKEN: ${{ secrets.NUGET_TOKEN }}
+          BRANCH: ${{ github.ref }}
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          path: ./dist/
+          retention-days: 7

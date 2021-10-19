@@ -1,18 +1,6 @@
-@echo off
-cls
+:; set -eo pipefail
+:; ./build.sh "$@"
+:; exit $?
 
-.paket\paket.bootstrapper.exe
-if errorlevel 1 (
-  exit /b %errorlevel%
-)
-
-.paket\paket.exe restore
-if errorlevel 1 (
-  exit /b %errorlevel%
-)
-
-IF NOT EXIST build.fsx (
-  .paket\paket.exe update
-  packages\build\FAKE\tools\FAKE.exe init.fsx
-)
-packages\build\FAKE\tools\FAKE.exe build.fsx %*
+@ECHO OFF
+powershell -ExecutionPolicy ByPass -NoProfile %0\..\build.ps1 %*

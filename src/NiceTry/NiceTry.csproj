@@ -10,7 +10,6 @@
 
     <Version>5.0.0</Version>
     <Authors>Stefan Reichel</Authors>
-    <Company>Auros GmbH</Company>
     <PackageDescription>A type for the classic try/catch statement, inspired by the Try type in Scala.</PackageDescription>
     <RepositoryUrl>https://github.com/Bomret/NiceTry</RepositoryUrl>
   </PropertyGroup>

@@ -4,10 +4,9 @@ A type for the classic try/catch statement that allows functional and bloat free
 [![NuGet Status](http://img.shields.io/nuget/v/NiceTry.svg)](https://www.nuget.org/packages/NiceTry/)
 
 ## Build status
-|  |  Status of last build |
-| :------ | :------: |
-| **Mono** | [![Travis build status](https://img.shields.io/travis/Bomret/NiceTry.svg)](https://travis-ci.org/Bomret/NiceTry) |
-| **Windows** | [![AppVeyor Build status](https://img.shields.io/appveyor/ci/stefanreichel/nicetry.svg)](https://ci.appveyor.com/project/StefanReichel/nicetry) |
+| Status of last build |
+| :------: |
+| [![AppVeyor Build status](https://img.shields.io/appveyor/ci/stefanreichel/nicetry.svg)](https://ci.appveyor.com/project/StefanReichel/nicetry) |
 
 ## Example
 Reading the content type of a url as string and printing it to the console. If any of the lambdas throws an exception the calls to `Select` and `Match` would not execute and *"An error occured: {error details}."* would be printed to the console.
@@ -86,7 +85,7 @@ public bool TryGet(out value) => // ...
 ------
 
 ## Basics
-`Try<T>` represents the successful or failed outcome of an operation. It might contain a value that was produced by said operation.
+`Try` and `Try<T>` represent the successful or failed outcome of an operation. `Try<T>` might contain a value that was produced by said operation.
 
 ```csharp
 Try<int> result = Try.To(() => 1 + 1);
@@ -110,10 +109,10 @@ if(result.IsSuccess)
 ```
 
 ### Creating a Try
-There are several ways to create a `Try<T>`.
+There are several ways to create an instance of `Try` or `Try<T>`.
 
 #### Try.To
-Evaluates a `Func<T>` synchronously and returns a `Success<T>` if no exception is thrown or a `Failure<T>` otherwise.
+Evaluates an `Action` or `Func<T>` synchronously and returns a `Success<T>` if no exception is thrown or a `Failure<T>` otherwise.
 
 ```csharp
 Try<int> @try = Try.To(() => 1 + 1);
